@@ -4,7 +4,7 @@ import sr from "@/content/i18n/sr";
 import en from "@/content/i18n/en";
 import { projects } from "@/content/projects";
 import { locales } from "@/lib/i18n";
-import { localizedProjectPath } from "@/lib/routes";
+import { localizedPath, localizedProjectPath } from "@/lib/routes";
 
 const dictionaries = { sr, en };
 
@@ -94,7 +94,7 @@ for (const locale of locales) {
     await expect(page.locator('a[href="https://nmarkdesigns.com/portfolio/"]')).toHaveCount(0);
     for (const [route, href] of [
       ["services", `/${locale}/#services`],
-      ["about", "https://nmarkdesigns.com/about/"],
+      ["about", localizedPath("about", locale)],
       ["contact", "https://nmarkdesigns.com/contact/"],
       ["pricing", "https://nmarkdesigns.com/cenovnik/"],
     ] as const) {
@@ -147,7 +147,7 @@ for (const width of [375, 1440]) {
 }
 
 test("portfolio rejects invalid locales and does not create other core pages", async ({ request }) => {
-  for (const path of ["/fr/portfolio/", "/SR/portfolio/", "/EN/portfolio/", "/portfolio/", "/sr/portfolio/unknown/", "/sr/o-nama/", "/en/about/", "/sr/kontakt/", "/en/contact/", "/sr/cenovnik/", "/en/pricing/", "/sr/usluge/", "/en/services/"]) {
+  for (const path of ["/fr/portfolio/", "/SR/portfolio/", "/EN/portfolio/", "/portfolio/", "/sr/portfolio/unknown/", "/sr/kontakt/", "/en/contact/", "/sr/cenovnik/", "/en/pricing/", "/sr/usluge/", "/en/services/"]) {
     expect((await request.get(path)).status(), path).toBe(404);
   }
   for (const locale of locales) {

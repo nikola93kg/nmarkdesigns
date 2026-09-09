@@ -11,7 +11,7 @@ This is a focused initial inspection, not a complete crawl or redirect map. Resp
 | `/` | 200 | Local root redirects to `/sr/`; `/en/` is the translated homepage |
 | `/portfolio/` | 200 | Phase 3A replaces index links with `/sr/portfolio/` and `/en/portfolio/`; legacy URL redirect remains a launch decision |
 | `/all-services/` | 200 | Navigation uses localized homepage anchor; future `/sr/usluge/` and `/en/services/` need approved launch mappings |
-| `/about/` | 200 | Link to production until migrated |
+| `/about/` | 200 | Phase 5A replaces navigation with `/sr/o-nama/` and `/en/about/`; legacy redirect deferred to Phase 6 |
 | `/contact/` | 200 | Use existing header destination |
 | `/cenovnik/` | 200 | Keep the existing pricing destination |
 | `/portfolio/coolfridgeguys/` | 200 | Preserve slug unless a replacement and redirect are explicitly agreed |
@@ -26,7 +26,7 @@ No business URL redirects are implemented. Next.js trailing-slash behavior match
 
 - Keep Serbian Latin content. Phase 2 uses the requested `lang="sr"` and `sr` hreflang, plus `sr_RS` for Open Graph. English uses `en` and `en_US`; neither page inherits an incorrect language declaration.
 - Use `info@nmarkdesigns.com` and `+381 64 300 5654`, matching the PDF footer and its live links.
-- Use the existing Instagram account and Serbian-number WhatsApp destination from the footer. Elsewhere, the live site displays `+52 984 137 1132`; confirm the preferred number before launch.
+- Use the existing Instagram account and Serbian-number WhatsApp destination from the footer. On 2026-09-09 the owner confirmed `+381 64 300 5654` as correct and explicitly rejected `+52 984 137 1132`. Keep `tel:+381643005654` and `https://wa.me/381643005654`; the invalid number remains only in historical source findings, not application content.
 - Do not migrate live-markup ratings or customer totals without evidence. The PDF does not establish their authenticity.
 - No testimonials, business results, technologies, locations, legal business details, or client outcomes have been invented.
 - Pricing and some other production pages contain apparent theme-demo content. Review actual intended copy rather than importing their complete DOM.
@@ -66,11 +66,11 @@ The eight projects preserve the production slugs recorded in `content/projects.t
 
 ## Localization and Temporary Destinations
 
-The implemented public pages are `/sr/`, `/en/`, both localized Portfolio indexes, and both locale versions of the eight project details. `/` temporarily redirects to `/sr/` (307). This is the explicitly requested root behavior, not a final WordPress migration redirect decision. Trailing slashes remain consistent. Unsupported locale segments and unpublished project slugs, including uppercase variants, return 404 rather than rendering arbitrary content.
+The implemented public pages are `/sr/`, `/en/`, both localized Portfolio indexes, both locale versions of the eight project details, and the About equivalents `/sr/o-nama/` and `/en/about/`. `/` temporarily redirects to `/sr/` (307). This is the explicitly requested root behavior, not a final WordPress migration redirect decision. Trailing slashes remain consistent. Unsupported locale segments, unpublished slugs, and mismatched About locale/slug combinations return 404 rather than rendering arbitrary content.
 
-`lib/routes.ts` enables the Portfolio index and declares future equivalents for services (`usluge`/`services`), about (`o-nama`/`about`), contact (`kontakt`/`contact`), and pricing (`cenovnik`/`pricing`). Those other core pages do not exist yet. Switch targets use the shared mapping; no browser-language detection, localStorage, or locale cookie is used.
+`lib/routes.ts` enables Portfolio and About (`o-nama`/`about`) and declares future equivalents for services (`usluge`/`services`), contact (`kontakt`/`contact`), and pricing (`cenovnik`/`pricing`). Those remaining core pages do not exist yet. Switch targets use the shared mapping; no browser-language detection, localStorage, or locale cookie is used.
 
-Portfolio navigation and the homepage all-projects action point to the localized Portfolio index. Project links now open localized detail pages; their verified client-site links remain external. Services navigation retains the localized homepage anchor. About/Contact/Pricing retain the Serbian WordPress destinations even from English pages. These remaining fallbacks must be resolved before the domain switch.
+Portfolio navigation and the homepage all-projects action point to the localized Portfolio index. Project links now open localized detail pages; their verified client-site links remain external. Services navigation retains the localized homepage anchor. About navigation is local in both languages. Contact/Pricing retain the Serbian WordPress destinations even from English pages. These remaining fallbacks must be resolved before the domain switch.
 
 Each page/locale has its own production canonical, translated title/description, Open Graph locale, Twitter metadata, and `sr`, `en`, `x-default` alternates. `x-default` points to the equivalent Serbian page. Homepage social metadata uses the migrated montage; Portfolio uses the first verified project image with its localized alt text. Final social cropping and production availability must be checked at launch. Preview and production builds both remain `noindex, nofollow` until launch protection is intentionally redesigned.
 
@@ -91,6 +91,15 @@ Each page/locale has its own production canonical, translated title/description,
 - Unknown and incorrectly cased project paths are rejected before the static cache. This prevents case-insensitive filesystem lookup from serving a differently cased URL as valid.
 - One existing screenshot is preloaded on each detail page. No new project imagery was discovered or invented; optional galleries and challenge/solution/results sections stay absent until verified content is supplied.
 
+### Phase 5A About URL and Content Decision
+
+- Source reviewed on 2026-09-09: `https://nmarkdesigns.com/about/`, HTTP 200. The founder introduction, individual approach, website goals, and four mission statements were migrated with light editorial restructuring and a faithful English translation. See [Phase 5A report](phase-5a-report.md).
+- Published portrait: `https://nmarkdesigns.com/wp-content/uploads/2025/12/ja.webp`, intentionally migrated unchanged to `public/images/nikola-markovic.webp` (832 x 1248, 36,754 bytes). No new stock or generated imagery is used.
+- New routes: `/sr/o-nama/` and `/en/about/`, generated by one translated core-page route. The route currently accepts only the two About equivalents. Future core pages must deliberately extend both static parameters and the proxy allowlist.
+- Required future mapping: `/about/` -> `/sr/o-nama/`. The final redirect decision and implementation belong to Phase 6; no redirect is added now. The legacy route still returns 404 locally.
+- Header, mobile navigation, and Footer use local About links through the existing registry. Contact and Pricing destinations remain unchanged.
+- Localized canonical/alternates, social metadata, and noindex/nofollow remain in place. Blog is deferred; no other phase is started.
+
 ## Launch Work Still Required
 
 - Replace temporary production links with implemented local routes; otherwise they could link back to missing pages after a domain switch.
@@ -99,7 +108,7 @@ Each page/locale has its own production canonical, translated title/description,
 - Review titles, descriptions, canonicals, trailing slashes, Open Graph/social images, and image alt text per public page.
 - Generate sitemap entries only for actual indexable pages. Add robots and structured data using verified business information.
 - Establish redirects from a complete inventory and approved destinations; do not infer mappings merely from similar names.
-- Confirm contact details and social destinations, implement and test the agreed contact delivery method, and migrate relevant privacy/legal content.
+- Phone/WhatsApp number confirmation is resolved above. Review other contact details and social destinations, implement and test the agreed contact delivery method, and migrate relevant privacy/legal content.
 - Preserve the WordPress media backup and the source register above; original downloads used during development live in temporary storage, not the repository. Favicon assets, final social-image treatment, and additional case-study imagery still need review.
 - Review analytics/search verification requirements and existing integrations before replacing WordPress.
 - Measure the completed site with Lighthouse, then evaluate field Core Web Vitals after launch. The foundation alone cannot establish final scores.

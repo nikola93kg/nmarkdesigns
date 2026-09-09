@@ -22,8 +22,7 @@ export const routes: Record<RouteKey, RouteDefinition> = {
   },
   about: {
     paths: { sr: "o-nama", en: "about" },
-    implemented: false,
-    fallback: `${site.url}/about/`,
+    implemented: true,
   },
   contact: {
     paths: { sr: "kontakt", en: "contact" },

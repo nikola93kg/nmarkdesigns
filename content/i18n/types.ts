@@ -51,6 +51,22 @@ export interface Dictionary {
     contactTitle: string;
     visitWebsite: string;
   };
+  about: {
+    metadata: { title: string; description: string };
+    intro: SectionCopy;
+    profile: {
+      eyebrow: string;
+      title: string;
+      paragraphs: readonly string[];
+      imageAlt: string;
+      caption: string;
+    };
+    approach: {
+      title: string;
+      principles: readonly string[];
+      contactTitle: string;
+    };
+  };
   caseStudy: {
     eyebrow: string;
     client: string;

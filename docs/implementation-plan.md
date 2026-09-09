@@ -116,11 +116,17 @@ app/
   [locale]/
     layout.tsx
     page.tsx
+    [page]/
+      page.tsx
     portfolio/
       page.tsx
       [slug]/
         page.tsx
 components/
+  about/
+    AboutIntro.tsx
+    AboutProfile.tsx
+    AboutApproach.tsx
   layout/
     Header.tsx
     Logo.tsx
@@ -149,6 +155,7 @@ components/
     Button.tsx
     GridBackground.module.css
 content/
+  about.ts
   site.ts
   projects.ts
   i18n/
@@ -171,6 +178,7 @@ docs/
   migration-notes.md
   reference/
 tests/
+  about.spec.ts
   foundation.spec.ts
   localization.spec.ts
   portfolio.spec.ts
@@ -190,6 +198,8 @@ No empty core-page routes are created. Future localized paths are declared in `l
 7. Quality and launch: responsive/a11y review, Lighthouse and image tuning, real-world Core Web Vitals follow-up, full link checks, staging protection, and deployment validation.
 
 Phase 5 discovery (2026-09-09): no repository manuscripts or publicly published WordPress articles were found. The Blog page exists, but the posts API and RSS feed are empty. Implementation awaits approved article content; no empty blog pages or speculative content were added. See [Phase 5 discovery report](phase-5-report.md) for sources, the proposed architecture, and required content.
+
+Phase 5A is the separately authorized localized About migration, not Blog implementation. Blog remains deferred. See [Phase 5A report](phase-5a-report.md).
 
 Phase 1 uses one icon library, Lucide, for consistent accessible control icons. Playwright and axe are development-only verification tools. No CMS, database, authentication, backend, state store, or animation library is introduced.
 
@@ -236,3 +246,12 @@ These checks cover the foundation; they do not establish whole-site accessibilit
 - ProjectCard links locally only for entries with case-study content; unpublished entries retain the source fallback. Keep homepage composition unchanged.
 - Extend the metadata helper with a typed optional Portfolio slug, so detail pages get their own canonicals and language equivalents. Retain noindex and strict route validation before static-cache lookup.
 - Keep DM Sans as the primary font, but use a system fallback instead of its automatic metric-adjusted Arial fallback: browser screenshots exposed blank Cyrillic glyphs in the newly verified school client name. A text-width regression assertion covers this case.
+
+## Phase 5A Decisions
+
+- Migrate the published About content into the existing typed dictionaries and translate it naturally into English. Retain the verified founder identity, unquantified experience statement, approach, and four mission principles without invented credentials or outcomes.
+- Use a concise dark intro, a light founder profile with the published portrait, and an editorial mission list with one contact action. Preserve homepage, Portfolio, Header/Footer styling, primitives, and tokens.
+- Generate `/sr/o-nama/` and `/en/about/` through `app/[locale]/[page]/page.tsx`. Only the matching About slug for each locale is published; the resolver and proxy reject unknown, incorrectly cased, and cross-locale slugs.
+- Enable About in the route registry. Shared navigation and equivalent-page language switching require no component changes. Reuse the metadata helper and retain noindex/nofollow.
+- Record the owner's confirmation of the existing Serbian phone/WhatsApp number and rejection of the Mexican number. Runtime contact data already uses the correct number and stays unchanged.
+- Document `/about/` -> `/sr/o-nama/` for Phase 6, without implementing the redirect. Contact/Pricing fallbacks remain unchanged; Services remains a homepage anchor. Blog and Phases 6-7 remain outside scope.

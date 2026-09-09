@@ -41,6 +41,39 @@ const en = {
     contactTitle: "Let's talk about your website.",
     visitWebsite: "Visit website",
   },
+  about: {
+    metadata: {
+      title: "About",
+      description: "Meet NMark Designs and founder Nikola Marković. An individual approach to web design, with a focus on user experience, performance and maintainability.",
+    },
+    intro: {
+      eyebrow: "NMark Designs",
+      title: "About us",
+      description: "We turn ideas into modern, fast and functional websites. Instead of generic solutions, we create thoughtfully designed websites that help your business grow and stand out.",
+    },
+    profile: {
+      eyebrow: "Who we are",
+      title: "Who is behind NMark Designs?",
+      paragraphs: [
+        "NMark Designs was founded by Nikola Marković, a frontend developer with several years of experience building modern, fast and functional websites.",
+        "Whether the project uses WordPress, custom code or an e-commerce platform, the goal is the same: a visually appealing, technically stable website optimized for performance.",
+        "NMark Designs began with the idea of offering practical, high-quality solutions without unnecessary complexity. The focus is on clarity, sound structure and user experience, making each website easy to use, maintain and extend.",
+        "We approach every project individually, taking the time to understand the client's needs and the website's goals: presenting services, strengthening an online presence or increasing sales.",
+      ],
+      imageAlt: "Nikola Marković, founder of NMark Designs.",
+      caption: "Nikola Marković / Founder and frontend developer",
+    },
+    approach: {
+      title: "Our mission",
+      principles: [
+        "Websites that work for you",
+        "User experience comes first",
+        "SEO and performance without compromise",
+        "Long-term support and improvement",
+      ],
+      contactTitle: "Let's talk about your website.",
+    },
+  },
   caseStudy: {
     eyebrow: "Website project",
     client: "Client",

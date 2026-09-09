@@ -41,6 +41,39 @@ const sr = {
     contactTitle: "Razgovarajmo o vašem sajtu.",
     visitWebsite: "Posetite web sajt",
   },
+  about: {
+    metadata: {
+      title: "O nama",
+      description: "Upoznajte NMark Designs i osnivača Nikolu Markovića. Individualan pristup web dizajnu, sa fokusom na korisničko iskustvo, performanse i održavanje.",
+    },
+    intro: {
+      eyebrow: "NMark Designs",
+      title: "O nama",
+      description: "Ideje pretvaramo u funkcionalne, moderne i brze web sajtove. Umesto generičkih rešenja, kreiramo pažljivo osmišljene sajtove koji pomažu vašem biznisu da raste i izdvoji se na tržištu.",
+    },
+    profile: {
+      eyebrow: "Ko smo mi",
+      title: "Ko stoji iza NMark Designs?",
+      paragraphs: [
+        "Osnivač NMark Designs je Nikola Marković, frontend developer sa višegodišnjim iskustvom u kreiranju modernih, brzih i funkcionalnih web sajtova.",
+        "Bilo da je u pitanju WordPress rešenje, custom kod ili e-commerce platforma, cilj je isti: vizuelno privlačan, tehnički stabilan sajt, optimizovan za performanse.",
+        "NMark Designs je nastao iz ideje da klijentima ponudi praktična i kvalitetna rešenja bez nepotrebnih komplikacija. Fokus je na jasnoći, dobroj strukturi i korisničkom iskustvu, kako bi sajt bio jednostavan za korišćenje, održavanje i dalje proširenje.",
+        "Svakom projektu pristupamo individualno, uz razumevanje potreba klijenta i ciljeva sajta: predstavljanje usluga, jačanje online prisustva ili povećanje prodaje.",
+      ],
+      imageAlt: "Nikola Marković, osnivač NMark Designs.",
+      caption: "Nikola Marković / Osnivač i frontend developer",
+    },
+    approach: {
+      title: "Naša misija",
+      principles: [
+        "Web sajtovi koji rade za vas",
+        "Korisničko iskustvo na prvom mestu",
+        "SEO i performanse bez kompromisa",
+        "Dugoročna podrška i unapređenje",
+      ],
+      contactTitle: "Razgovarajmo o vašem sajtu.",
+    },
+  },
   caseStudy: {
     eyebrow: "Web projekat",
     client: "Klijent",
