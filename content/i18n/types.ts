@@ -1,5 +1,6 @@
 import type { Locale } from "@/lib/i18n";
 import type { RouteKey } from "@/lib/routes";
+import type { ContactField, ContactFormState, ContactValidationError } from "@/lib/contact";
 
 export interface FAQItem {
   id: "services" | "timeline" | "payment" | "hosting" | "maintenance";
@@ -65,6 +66,28 @@ export interface Dictionary {
       title: string;
       principles: readonly string[];
       contactTitle: string;
+    };
+  };
+  contact: {
+    metadata: { title: string; description: string };
+    intro: SectionCopy;
+    details: {
+      title: string;
+      description: string;
+      email: string;
+      phone: string;
+      whatsapp: string;
+    };
+    form: {
+      title: string;
+      labels: Record<ContactField, string>;
+      optional: string;
+      required: string;
+      submit: string;
+      pending: string;
+      unavailableNotice: string;
+      validation: Record<ContactValidationError, string>;
+      status: Record<Exclude<ContactFormState["status"], "idle">, string>;
     };
   };
   caseStudy: {

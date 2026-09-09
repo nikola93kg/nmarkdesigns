@@ -118,11 +118,15 @@ app/
     page.tsx
     [page]/
       page.tsx
+      actions.ts
     portfolio/
       page.tsx
       [slug]/
         page.tsx
 components/
+  contact/
+    ContactPage.tsx
+    ContactForm.tsx
   about/
     AboutIntro.tsx
     AboutProfile.tsx
@@ -164,6 +168,9 @@ content/
     sr.ts
     en.ts
 lib/
+  contact.ts
+  contact-validation.ts
+  contact-delivery.ts
   i18n.ts
   routes.ts
   metadata.ts
@@ -178,6 +185,7 @@ docs/
   migration-notes.md
   reference/
 tests/
+  contact.spec.ts
   about.spec.ts
   foundation.spec.ts
   localization.spec.ts
@@ -200,6 +208,8 @@ No empty core-page routes are created. Future localized paths are declared in `l
 Phase 5 discovery (2026-09-09): no repository manuscripts or publicly published WordPress articles were found. The Blog page exists, but the posts API and RSS feed are empty. Implementation awaits approved article content; no empty blog pages or speculative content were added. See [Phase 5 discovery report](phase-5-report.md) for sources, the proposed architecture, and required content.
 
 Phase 5A is the separately authorized localized About migration, not Blog implementation. Blog remains deferred. See [Phase 5A report](phase-5a-report.md).
+
+Phase 5B adds localized Contact and the form foundation. No mail provider exists: validation is implemented, delivery is explicitly unavailable, and no message is reported as sent. See [Phase 5B report](phase-5b-report.md).
 
 Phase 1 uses one icon library, Lucide, for consistent accessible control icons. Playwright and axe are development-only verification tools. No CMS, database, authentication, backend, state store, or animation library is introduced.
 
@@ -255,3 +265,12 @@ These checks cover the foundation; they do not establish whole-site accessibilit
 - Enable About in the route registry. Shared navigation and equivalent-page language switching require no component changes. Reuse the metadata helper and retain noindex/nofollow.
 - Record the owner's confirmation of the existing Serbian phone/WhatsApp number and rejection of the Mexican number. Runtime contact data already uses the correct number and stays unchanged.
 - Document `/about/` -> `/sr/o-nama/` for Phase 6, without implementing the redirect. Contact/Pricing fallbacks remain unchanged; Services remains a homepage anchor. Blog and Phases 6-7 remain outside scope.
+
+## Phase 5B Decisions
+
+- Migrate the published Contact introduction and direct-contact invitation. Use only `content/site.ts` for displayed email, telephone, and WhatsApp destinations. Keep the confirmed Serbian phone number; do not migrate rejected legacy contact data.
+- Extend the shared translated core-page route to publish Contact alongside About. Centralize its allowlist in `corePageRoutes`/`corePageRoute` so static parameters, resolver, and proxy agree. Enable Contact in the existing registry; all shared navigation and CTA destinations update without markup changes.
+- Use a dark intro and an unframed direct-contact/form layout, stacked on mobile. No new imagery, map, extra marketing section, or dependency is needed.
+- Use a small ContactForm client boundary with native form controls, React useActionState, and a Server Action. Validate required name/email/message and optional phone on the server; preserve input and expose localized errors, pending, unavailable, error, and provider-acknowledged success states.
+- The delivery adapter currently returns unavailable and performs no network request, logging, storage, or queue operation. Show an upfront unavailable notice and never display success for validation alone. A real provider, verified sender/recipient, operational spam controls, and delivery tests are required before enabling sending.
+- Keep noindex/nofollow and localized metadata. Document `/contact/` -> `/sr/kontakt/` for Phase 6 without adding the redirect. Pricing remains the only WordPress navigation fallback; Blog and Phases 6-7 remain deferred.

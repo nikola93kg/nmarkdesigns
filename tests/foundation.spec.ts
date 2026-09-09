@@ -134,7 +134,7 @@ test("mobile navigation works without JavaScript", async ({ browser, baseURL }) 
   await page.getByLabel("Glavni meni", { exact: true }).click();
   const menu = page.getByRole("navigation", { name: "Glavna navigacija za mobilne uređaje" });
   await expect(menu).toBeVisible();
-  await expect(menu.getByRole("link", { name: "Kontakt" })).toHaveAttribute("href", "https://nmarkdesigns.com/contact/");
+  await expect(menu.getByRole("link", { name: "Kontakt" })).toHaveAttribute("href", "/sr/kontakt/");
   await context.close();
 });
 

@@ -2,36 +2,41 @@ import { notFound } from "next/navigation";
 import { AboutApproach } from "@/components/about/AboutApproach";
 import { AboutIntro } from "@/components/about/AboutIntro";
 import { AboutProfile } from "@/components/about/AboutProfile";
+import { ContactPage } from "@/components/contact/ContactPage";
 import { founderPortrait } from "@/content/about";
 import { getDictionary } from "@/content/i18n";
 import { isLocale } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
-import { routes } from "@/lib/routes";
+import { corePageRoute, corePageRoutes, routes } from "@/lib/routes";
 
 export const dynamicParams = false;
 
 export function generateStaticParams({ params }: { params: { locale: string } }) {
-  return isLocale(params.locale) ? [{ page: routes.about.paths[params.locale] }] : [];
+  const { locale } = params;
+  return isLocale(locale) ? corePageRoutes.map((route) => ({ page: routes[route].paths[locale] })) : [];
 }
 
-async function resolveAbout(params: PageProps<"/[locale]/[page]">["params"]) {
+async function resolvePage(params: PageProps<"/[locale]/[page]">["params"]) {
   const { locale, page } = await params;
-  if (!isLocale(locale) || page !== routes.about.paths[locale]) notFound();
-  return { locale, copy: await getDictionary(locale) };
+  if (!isLocale(locale)) notFound();
+  const route = corePageRoute(page, locale);
+  if (!route) notFound();
+  return { locale, route, copy: await getDictionary(locale) };
 }
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/[page]">) {
-  const { locale, copy } = await resolveAbout(params);
+  const { locale, route, copy } = await resolvePage(params);
   return createPageMetadata({
-    ...copy.about.metadata,
+    ...copy[route].metadata,
     locale,
-    route: "about",
-    image: { ...founderPortrait, alt: copy.about.profile.imageAlt },
+    route,
+    image: route === "about" ? { ...founderPortrait, alt: copy.about.profile.imageAlt } : undefined,
   });
 }
 
-export default async function AboutPage({ params }: PageProps<"/[locale]/[page]">) {
-  const { locale, copy } = await resolveAbout(params);
+export default async function CorePage({ params }: PageProps<"/[locale]/[page]">) {
+  const { locale, route, copy } = await resolvePage(params);
+  if (route === "contact") return <ContactPage locale={locale} copy={copy.contact} />;
   return (
     <>
       <AboutIntro copy={copy.about.intro} />

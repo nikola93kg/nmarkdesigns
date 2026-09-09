@@ -74,6 +74,46 @@ const sr = {
       contactTitle: "Razgovarajmo o vašem sajtu.",
     },
   },
+  contact: {
+    metadata: {
+      title: "Kontakt",
+      description: "Kontaktirajte NMark Designs za pitanja o izradi sajta, saradnji ili održavanju. Pišite na info@nmarkdesigns.com ili pozovite +381 64 300 5654.",
+    },
+    intro: {
+      eyebrow: "Započnimo priču",
+      title: "Kontaktirajte nas",
+      description: "Imate pitanja o našim uslugama, želite da razgovaramo o saradnji ili vam je potrebna podrška oko održavanja sajta? Tu smo da pomognemo.",
+    },
+    details: {
+      title: "Tu smo za vas",
+      description: "Imate pitanje, ideju ili želite ponudu? Pozovite nas ili nam pišite.",
+      email: "Email",
+      phone: "Telefon",
+      whatsapp: "Pišite na WhatsApp",
+    },
+    form: {
+      title: "Zanima vas saradnja?",
+      labels: { name: "Ime", email: "Email", phone: "Telefon", message: "Poruka" },
+      optional: "opciono",
+      required: "Obavezna polja su označena zvezdicom (*).",
+      submit: "Pošaljite poruku",
+      pending: "Obrada poruke…",
+      unavailableNotice: "Slanje putem formulara trenutno nije dostupno. Kontaktirajte nas direktno putem emaila, telefona ili WhatsApp-a.",
+      validation: {
+        required: "Popunite ovo polje.",
+        tooLong: "Unos prelazi dozvoljenu dužinu. Skratite tekst.",
+        invalidValue: "Unesite ispravnu tekstualnu vrednost.",
+        invalidEmail: "Unesite ispravnu email adresu.",
+        invalidPhone: "Unesite ispravan broj telefona ili ostavite polje prazno.",
+      },
+      status: {
+        invalid: "Proverite označena polja. Poruka nije poslata.",
+        unavailable: "Poruka nije poslata. Slanje putem formulara još nije dostupno. Pišite nam direktno ili nas pozovite.",
+        error: "Poruku nije moguće poslati. Pokušajte ponovo ili nas kontaktirajte direktno.",
+        success: "Vaša poruka je prihvaćena za slanje.",
+      },
+    },
+  },
   caseStudy: {
     eyebrow: "Web projekat",
     client: "Klijent",

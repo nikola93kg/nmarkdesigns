@@ -32,7 +32,7 @@ for (const locale of locales) {
     await expect(nav.getByRole("link", { name: copy.navigation.portfolio, exact: true })).toHaveAttribute("href", `/${locale}/portfolio/`);
     await expect(nav.getByRole("link", { name: copy.navigation.services, exact: true })).toHaveAttribute("href", `/${locale}/#services`);
     await expect(nav.getByRole("link", { name: copy.navigation.about, exact: true })).toHaveAttribute("href", localizedPath("about", locale));
-    await expect(nav.getByRole("link", { name: copy.navigation.contact, exact: true })).toHaveAttribute("href", "https://nmarkdesigns.com/contact/");
+    await expect(nav.getByRole("link", { name: copy.navigation.contact, exact: true })).toHaveAttribute("href", localizedPath("contact", locale));
   });
 
   test(`${locale} FAQ supports keyboard toggling and reduced motion`, async ({ page }) => {

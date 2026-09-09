@@ -1,16 +1,16 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { isLocale } from "@/lib/i18n";
 import { getCaseStudyProject } from "@/content/projects";
-import { routes } from "@/lib/routes";
+import { corePageRoute } from "@/lib/routes";
 
 export function proxy(request: NextRequest) {
   const [locale, section, slug, ...rest] = request.nextUrl.pathname.split("/").filter(Boolean);
   const invalidProjectPath = section?.toLowerCase() === "portfolio" && (
     section !== "portfolio" || (slug !== undefined && (!getCaseStudyProject(slug) || rest.length > 0))
   );
-  // The translated core-page segment currently publishes About only.
+  // Keep unpublished translated pages out of the static fallback/cache lookup.
   const invalidCorePagePath = section !== undefined && section !== "portfolio" && (
-    !isLocale(locale) || section !== routes.about.paths[locale] || slug !== undefined
+    !isLocale(locale) || !corePageRoute(section, locale) || slug !== undefined
   );
 
   // Validate before the static cache, including on case-insensitive hosts.

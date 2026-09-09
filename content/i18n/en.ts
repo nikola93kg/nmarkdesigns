@@ -74,6 +74,46 @@ const en = {
       contactTitle: "Let's talk about your website.",
     },
   },
+  contact: {
+    metadata: {
+      title: "Contact",
+      description: "Contact NMark Designs about website development, working together or maintenance. Email info@nmarkdesigns.com or call +381 64 300 5654.",
+    },
+    intro: {
+      eyebrow: "Let's start a conversation",
+      title: "Contact us",
+      description: "Have a question about our services, want to discuss working together or need help maintaining your website? We're here to help.",
+    },
+    details: {
+      title: "We're here for you",
+      description: "Have a question, an idea or a request for a quote? Give us a call or write to us.",
+      email: "Email",
+      phone: "Phone",
+      whatsapp: "Message us on WhatsApp",
+    },
+    form: {
+      title: "Interested in working together?",
+      labels: { name: "Name", email: "Email", phone: "Phone", message: "Message" },
+      optional: "optional",
+      required: "Required fields are marked with an asterisk (*).",
+      submit: "Send message",
+      pending: "Processing message…",
+      unavailableNotice: "Form delivery is not currently available. Please contact us directly by email, phone or WhatsApp.",
+      validation: {
+        required: "Complete this field.",
+        tooLong: "This entry exceeds the allowed length. Please shorten it.",
+        invalidValue: "Enter a valid text value.",
+        invalidEmail: "Enter a valid email address.",
+        invalidPhone: "Enter a valid phone number or leave this field empty.",
+      },
+      status: {
+        invalid: "Check the marked fields. Your message has not been sent.",
+        unavailable: "Your message has not been sent. Form delivery is not available yet. Please email us directly or give us a call.",
+        error: "Your message could not be sent. Please try again or contact us directly.",
+        success: "Your message has been accepted for sending.",
+      },
+    },
+  },
   caseStudy: {
     eyebrow: "Website project",
     client: "Client",

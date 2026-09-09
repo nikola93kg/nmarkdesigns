@@ -12,7 +12,7 @@ This is a focused initial inspection, not a complete crawl or redirect map. Resp
 | `/portfolio/` | 200 | Phase 3A replaces index links with `/sr/portfolio/` and `/en/portfolio/`; legacy URL redirect remains a launch decision |
 | `/all-services/` | 200 | Navigation uses localized homepage anchor; future `/sr/usluge/` and `/en/services/` need approved launch mappings |
 | `/about/` | 200 | Phase 5A replaces navigation with `/sr/o-nama/` and `/en/about/`; legacy redirect deferred to Phase 6 |
-| `/contact/` | 200 | Use existing header destination |
+| `/contact/` | 200 | Phase 5B replaces links with `/sr/kontakt/` and `/en/contact/`; redirect deferred to Phase 6 |
 | `/cenovnik/` | 200 | Keep the existing pricing destination |
 | `/portfolio/coolfridgeguys/` | 200 | Preserve slug unless a replacement and redirect are explicitly agreed |
 | `/usluge` | 404 | Broken link found in existing footer markup; not copied |
@@ -66,11 +66,11 @@ The eight projects preserve the production slugs recorded in `content/projects.t
 
 ## Localization and Temporary Destinations
 
-The implemented public pages are `/sr/`, `/en/`, both localized Portfolio indexes, both locale versions of the eight project details, and the About equivalents `/sr/o-nama/` and `/en/about/`. `/` temporarily redirects to `/sr/` (307). This is the explicitly requested root behavior, not a final WordPress migration redirect decision. Trailing slashes remain consistent. Unsupported locale segments, unpublished slugs, and mismatched About locale/slug combinations return 404 rather than rendering arbitrary content.
+The implemented public pages are `/sr/`, `/en/`, both localized Portfolio indexes, both locale versions of the eight project details, the About equivalents `/sr/o-nama/` and `/en/about/`, and Contact equivalents `/sr/kontakt/` and `/en/contact/`. `/` temporarily redirects to `/sr/` (307). This is the explicitly requested root behavior, not a final WordPress migration redirect decision. Trailing slashes remain consistent. Unsupported locale segments, unpublished slugs, and mismatched core-page locale/slug combinations return 404 rather than rendering arbitrary content.
 
-`lib/routes.ts` enables Portfolio and About (`o-nama`/`about`) and declares future equivalents for services (`usluge`/`services`), contact (`kontakt`/`contact`), and pricing (`cenovnik`/`pricing`). Those remaining core pages do not exist yet. Switch targets use the shared mapping; no browser-language detection, localStorage, or locale cookie is used.
+`lib/routes.ts` enables Portfolio, About (`o-nama`/`about`), and Contact (`kontakt`/`contact`), and declares future equivalents for services (`usluge`/`services`) and pricing (`cenovnik`/`pricing`). Those remaining core pages do not exist yet. Switch targets use the shared mapping; no browser-language detection, localStorage, or locale cookie is used.
 
-Portfolio navigation and the homepage all-projects action point to the localized Portfolio index. Project links now open localized detail pages; their verified client-site links remain external. Services navigation retains the localized homepage anchor. About navigation is local in both languages. Contact/Pricing retain the Serbian WordPress destinations even from English pages. These remaining fallbacks must be resolved before the domain switch.
+Portfolio navigation and the homepage all-projects action point to the localized Portfolio index. Project links now open localized detail pages; their verified client-site links remain external. Services navigation retains the localized homepage anchor. About and Contact navigation are local in both languages, as are all contact/quote CTAs. Pricing alone retains the Serbian WordPress destination even from English pages. This fallback must be resolved before the domain switch.
 
 Each page/locale has its own production canonical, translated title/description, Open Graph locale, Twitter metadata, and `sr`, `en`, `x-default` alternates. `x-default` points to the equivalent Serbian page. Homepage social metadata uses the migrated montage; Portfolio uses the first verified project image with its localized alt text. Final social cropping and production availability must be checked at launch. Preview and production builds both remain `noindex, nofollow` until launch protection is intentionally redesigned.
 
@@ -99,6 +99,16 @@ Each page/locale has its own production canonical, translated title/description,
 - Required future mapping: `/about/` -> `/sr/o-nama/`. The final redirect decision and implementation belong to Phase 6; no redirect is added now. The legacy route still returns 404 locally.
 - Header, mobile navigation, and Footer use local About links through the existing registry. Contact and Pricing destinations remain unchanged.
 - Localized canonical/alternates, social metadata, and noindex/nofollow remain in place. Blog is deferred; no other phase is started.
+
+### Phase 5B Contact URL and Delivery Decision
+
+- Source: `https://nmarkdesigns.com/contact/`, fetched on 2026-09-09 with HTTP 200. Published copy addresses service questions, collaboration, maintenance support, and quote requests. The public Contact Form 7 markup posts to `/contact/#wpcf7-f7-p62-o1`; it does not verify a recipient or SMTP/provider configuration. No production form was submitted.
+- New localized routes: `/sr/kontakt/` and `/en/contact/`, through the shared translated core-page implementation. Header/mobile/Footer links and all homepage, Portfolio, and About contact CTAs now use these paths.
+- Confirmed email, phone, telephone URI, and WhatsApp URI come from `content/site.ts`, unchanged. No address, hours, response-time promise, alternate number, or new social account was added.
+- The form uses the requested name/email/optional-phone/message fields. The source Subject field was omitted; message is required for a meaningful inquiry rather than optional as in the legacy form. Labels and all response states are localized.
+- The repository contains no mail dependency, provider configuration, SMTP integration, or environment file. Server validation is implemented, but `lib/contact-delivery.ts` explicitly returns unavailable. Messages are not delivered, queued, logged, or stored by application code; successful validation never means sent. The page warns users upfront and offers direct contact links.
+- Sending requires an explicitly chosen provider or SMTP service, server-only credentials, verified sender/domain, confirmed recipient, safe reply-to handling, failure/timeout handling, deployment-appropriate rate limiting/spam controls, and end-to-end delivery tests. Do not silently repurpose WordPress plugin internals or infer mail settings from the public email link.
+- Required future mapping: `/contact/` -> `/sr/kontakt/`. The final redirect is deferred to Phase 6 and is not implemented now. All pages remain noindex/nofollow.
 
 ## Launch Work Still Required
 

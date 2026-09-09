@@ -90,7 +90,7 @@ for (const locale of locales) {
       await expect(page).toHaveURL(new RegExp(`${path}$`));
       const footer = page.getByRole("contentinfo");
       await expect(footer.getByRole("link", { name: copy.navigation.about, exact: true })).toHaveAttribute("href", path);
-      await expect(footer.getByRole("link", { name: copy.navigation.contact, exact: true })).toHaveAttribute("href", "https://nmarkdesigns.com/contact/");
+      await expect(footer.getByRole("link", { name: copy.navigation.contact, exact: true })).toHaveAttribute("href", localizedPath("contact", locale));
       await expect(footer.getByRole("link", { name: copy.navigation.pricing, exact: true })).toHaveAttribute("href", "https://nmarkdesigns.com/cenovnik/");
       await expect(page.locator('a[href="https://nmarkdesigns.com/about/"]')).toHaveCount(0);
     }
@@ -111,7 +111,7 @@ for (const locale of locales) {
     await cta.focus();
     await expect(cta).toBeFocused();
     await expect(cta).toHaveCSS("outline-style", "solid");
-    await expect(cta).toHaveAttribute("href", "https://nmarkdesigns.com/contact/");
+    await expect(cta).toHaveAttribute("href", localizedPath("contact", locale));
   });
 
   test(`${locale} about without JavaScript`, async ({ browser, baseURL }) => {
@@ -156,7 +156,7 @@ for (const width of [375, 1440]) {
 }
 
 test("about rejects wrong locales slugs and unimplemented routes", async ({ request }) => {
-  for (const path of ["/fr/about/", "/SR/o-nama/", "/EN/about/", "/sr/about/", "/en/o-nama/", "/sr/O-NAMA/", "/en/ABOUT/", "/en/about/extra/", "/about/", "/sr/blog/", "/en/blog/", "/sr/kontakt/", "/en/contact/", "/sr/cenovnik/", "/en/pricing/", "/sr/unknown/"]) {
+  for (const path of ["/fr/about/", "/SR/o-nama/", "/EN/about/", "/sr/about/", "/en/o-nama/", "/sr/O-NAMA/", "/en/ABOUT/", "/en/about/extra/", "/about/", "/sr/blog/", "/en/blog/", "/sr/cenovnik/", "/en/pricing/", "/sr/unknown/"]) {
     expect((await request.get(path)).status(), path).toBe(404);
   }
   for (const locale of locales) {
