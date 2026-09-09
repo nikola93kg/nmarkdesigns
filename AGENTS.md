@@ -519,6 +519,75 @@ Respect `prefers-reduced-motion`.
 
 ---
 
+# Internationalization
+
+The website supports two languages:
+
+- Serbian (`sr`)
+- English (`en`)
+
+Serbian is the primary/default language.
+
+Use locale-based URLs.
+
+Examples:
+
+/sr
+/en
+
+/sr/portfolio
+/en/portfolio
+
+Future localized routes may use translated slugs where appropriate, such as:
+
+/sr/usluge
+/en/services
+
+/sr/o-nama
+/en/about
+
+Do not manage the active language only through React state or localStorage.
+
+The selected language must be represented by the URL.
+
+Localized content should be centralized and strongly typed.
+
+Avoid repeated inline conditions such as:
+
+locale === "sr" ? "Kontakt" : "Contact"
+
+throughout components.
+
+Prefer reusable locale dictionaries/content modules.
+
+The language switcher must preserve the equivalent page when possible.
+
+Do not use country flags as the primary representation of language.
+
+Use clear language labels such as:
+
+SR
+EN
+
+All public-facing text, navigation, metadata, accessibility labels, forms,
+validation messages and SEO content should support localization where relevant.
+
+Internationalized pages should eventually support:
+
+- localized title
+- localized description
+- canonical URL
+- hreflang / language alternates
+- localized structured data where relevant
+
+Do not allow Serbian and English pages to accidentally share incorrect
+canonical URLs.
+
+Do not invent different business claims between languages.
+
+English content should be a natural translation of the Serbian source rather
+than a word-for-word translation when that would sound unnatural.
+
 ## SEO
 
 SEO is a first-class requirement.

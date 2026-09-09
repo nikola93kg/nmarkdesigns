@@ -34,10 +34,11 @@ Other changes to make deliberately:
 2. Hero: real business offer and intentionally migrated project imagery.
 3. FeaturedProjects: recognizable project-first emphasis.
 4. Services: design, SEO, responsive implementation, and maintenance.
-5. Process: consultation/planning, design/development/testing, launch/support.
-6. CTA: contact invitation.
-7. FAQ: native accessible disclosures where sufficient.
-8. Footer.
+5. CTA: contact invitation.
+6. FAQ: accessible button-controlled accordion with readable no-JavaScript content.
+7. Footer.
+
+Phase 2 follows the explicitly requested five-section homepage. The standalone Process section from the initial plan is not implemented. Its source content remains a future content decision, not a new or silently invented section.
 
 No distinct AboutPreview or Testimonials section is visible in the PDF. Add either only after suitable business content is supplied. A client-logo strip exists in live markup but is not clearly visible in the PDF; its inclusion remains a content decision.
 
@@ -92,7 +93,12 @@ RootLayout (Server)
       Navigation
       Button
   main
-    HomePage (minimal composition point in Phase 1)
+    HomePage (localized Server Component)
+      Hero
+      FeaturedProjects -> ProjectCard -> next/image
+      Services
+      CTA
+      FAQ -> FAQAccordion (Client)
   Footer (Server)
     Container
     Logo
@@ -100,31 +106,65 @@ RootLayout (Server)
     Contact and social links
 ```
 
-`Navigation` is shared presentational markup. Its module is also included in the mobile client graph because it is imported by `MobileNavigation`; the server header and footer are not converted into client components. Button renders a native action button, Next.js internal link, or ordinary external anchor based on its typed props.
+`Navigation` is shared presentational markup. Its module is also included in the mobile client graph because it is imported by `MobileNavigation`; the server header and footer are not converted into client components. Header additionally renders a small `LanguageSwitcher` client boundary for the current pathname. Button renders a native action button, Next.js internal link, or ordinary external anchor based on its typed props.
 
 ## Project Structure
 
 ```text
 app/
   globals.css
-  layout.tsx
-  page.tsx
+  [locale]/
+    layout.tsx
+    page.tsx
+    portfolio/
+      page.tsx
+      [slug]/
+        page.tsx
 components/
   layout/
     Header.tsx
     Logo.tsx
     Navigation.tsx
     MobileNavigation.tsx
+    LanguageSwitcher.tsx
     Footer.tsx
+  home/
+    Hero.tsx
+    FeaturedProjects.tsx
+    Services.tsx
+    CTA.tsx
+    FAQ.tsx
+    FAQAccordion.tsx
+    Home.module.css
+  portfolio/
+    ProjectCard.tsx
+    ProjectGrid.tsx
+    PortfolioIntro.tsx
+    PortfolioContact.tsx
+    CaseStudyHero.tsx
+    CaseStudyDetails.tsx
+    CaseStudyNavigation.tsx
   ui/
     Container.tsx
     Button.tsx
+    GridBackground.module.css
 content/
   site.ts
+  projects.ts
+  i18n/
+    types.ts
+    index.ts
+    sr.ts
+    en.ts
 lib/
+  i18n.ts
+  routes.ts
   metadata.ts
+proxy.ts
 public/
   logo/
+  images/
+  projects/
 docs/
   frontend-agent.md
   implementation-plan.md
@@ -132,19 +172,24 @@ docs/
   reference/
 tests/
   foundation.spec.ts
+  localization.spec.ts
+  portfolio.spec.ts
+  case-studies.spec.ts
 ```
 
-Add `components/home/`, `components/portfolio/`, structured content files, and actual page folders as their phases begin. Do not prepopulate empty routes or create unused type/helper files. New route names are provisional until checked against the production inventory; `/all-services/` and `/cenovnik/` need explicit consideration beyond the original proposed structure.
+No empty core-page routes are created. Future localized paths are declared in `lib/routes.ts`; they do not create public pages or migration redirects. Existing `/all-services/`, `/about/`, `/contact/`, and portfolio slugs still need a complete URL inventory and approved launch mappings.
 
 ## Implementation Phases
 
 1. Foundation: Next.js App Router, React, strict TypeScript, Tailwind, shared tokens, DM Sans, root layout, Container, Button, header, desktop/mobile navigation, footer, metadata defaults, minimal index, and focused browser checks.
-2. Homepage: real sections in the order above, intentional image migration, and reusable Section/SectionHeading when actual usage establishes their API.
+2. Homepage and localization: real sections in the order above, intentional image migration, typed Serbian/English content, equivalent-route language switching, and localized metadata. Reuse Container and Button; do not add unused Section/SectionHeading abstractions.
 3. Core pages: About, Services, Portfolio, Contact, and existing Pricing content. Preserve verified public URLs or agree replacements. Decide contact submission separately.
 4. Case studies: typed project data, dynamic portfolio route, shared template. Leave unknown challenges, technologies, locations, and results optional.
 5. Blog: repository content and article metadata only when actual content is available.
 6. SEO and migration: complete URL inventory, per-page metadata, canonical review, approved redirects, sitemap, robots, useful structured data, social imagery, and favicon assets.
 7. Quality and launch: responsive/a11y review, Lighthouse and image tuning, real-world Core Web Vitals follow-up, full link checks, staging protection, and deployment validation.
+
+Phase 5 discovery (2026-09-09): no repository manuscripts or publicly published WordPress articles were found. The Blog page exists, but the posts API and RSS feed are empty. Implementation awaits approved article content; no empty blog pages or speculative content were added. See [Phase 5 discovery report](phase-5-report.md) for sources, the proposed architecture, and required content.
 
 Phase 1 uses one icon library, Lucide, for consistent accessible control icons. Playwright and axe are development-only verification tools. No CMS, database, authentication, backend, state store, or animation library is introduced.
 
@@ -158,3 +203,36 @@ Phase 1 uses one icon library, Lucide, for consistent accessible control icons. 
 - Correct Serbian language, production canonical, social metadata, and noindex on the incomplete homepage.
 
 These checks cover the foundation; they do not establish whole-site accessibility or future production Core Web Vitals.
+
+## Phase 2 Decisions
+
+- Static `/sr/` and `/en/` share `app/[locale]/layout.tsx`. Root uses a temporary 307 redirect to Serbian. HTML language and SEO language alternates use `sr` and `en` as requested.
+- A dependency-free server dictionary loader centralizes navigation, homepage text, FAQ, footer, image descriptions, accessibility labels, and metadata. Shared business facts remain outside translations.
+- The language switcher uses equivalent route keys, not a universal homepage fallback. Future translated services/about/contact/pricing slugs and stable portfolio detail slugs are covered by mapping tests.
+- A small native Next.js proxy rejects unsupported locales before static cache lookup. This is required by the observed production-server behavior on this case-insensitive development filesystem: `/SR/` otherwise served cached `/sr/` HTML. No language detection, cookies, redirects, or fetching are performed by the guard.
+- The eight project identities/slugs are verified against the PDF and production homepage. No unknown project technologies, locations, outcomes, descriptions, or statistics are filled in.
+- Preserve large inspectable screenshot frames: paired projects alternate with wide school and Frankultura entries. Screenshots use contain, never cover; hero and service images retain natural proportions.
+- Retain Phase 1 tokens, fonts, Button, Container, and header/footer design. Light and dark grid lines live in the homepage CSS module. No animation dependency or reveal-on-scroll hiding is introduced.
+- Mobile hero copy removes repeated wording, actions fit together at the requested phone widths, and the montage has a deliberate smaller mobile size. Tablet and desktop retain the reference's text/image composition.
+- FAQ uses native buttons, linked panels, visible focus, and explicit expanded state. Server output shows all answers; the small client boundary enhances it to an accordion. There is no duplicated no-JavaScript markup or animated height transition.
+- Both locale pages remain noindex even in production builds. Launch SEO work and all Phase 3 routes remain out of scope.
+
+## Phase 3A Decisions
+
+- Implement only the localized Portfolio indexes. Other core pages and all project detail routes remain unimplemented.
+- Reuse the eight verified project entries and the shared ProjectCard. The index uses alternating 7/5 and 5/7 desktop pairs, equal tablet columns, and a single mobile column, preserving source order and complete screenshots.
+- Keep page-specific intro/contact text and metadata in typed dictionaries. No project metadata is invented; optional fields render only when supplied.
+- Move the existing grid-background CSS unchanged into a shared UI stylesheet. Homepage styling, composition, primitives, and interaction behavior are retained.
+- Enable the Portfolio route in the registry and replace the homepage all-projects fallback. Header, mobile navigation, Footer, and language switching use existing shared APIs.
+- Keep individual WordPress project destinations until actual case studies exist. ProjectCard accepts an explicit destination for that future change; it does not infer or generate detail routes.
+- Use the shared metadata helper, with page-specific canonicals/alternates and unchanged noindex protection. Document the legacy Portfolio URL migration separately; do not implement a speculative redirect.
+
+## Phase 4 Decisions
+
+- Add one localized dynamic project route and statically generate the eight verified projects in both languages. Do not implement the unfinished core pages or begin Blog/launch phases.
+- Extend the existing typed project model with verified client names, website URLs, available tools, and localized case-study overviews. Preserve the eight project names, slugs, and image assets.
+- Record provenance in `docs/reference/project-content-sources.md`. Do not invent challenges, solutions, results, extra images, dates, or delivery scope; optional sections render only when supplied.
+- Use a shared dark screenshot-led hero, light fact/narrative area, and back/next project navigation. Reuse all existing primitives, fonts, and grid/background tokens.
+- ProjectCard links locally only for entries with case-study content; unpublished entries retain the source fallback. Keep homepage composition unchanged.
+- Extend the metadata helper with a typed optional Portfolio slug, so detail pages get their own canonicals and language equivalents. Retain noindex and strict route validation before static-cache lookup.
+- Keep DM Sans as the primary font, but use a system fallback instead of its automatic metric-adjusted Arial fallback: browser screenshots exposed blank Cyrillic glyphs in the newly verified school client name. A text-width regression assertion covers this case.

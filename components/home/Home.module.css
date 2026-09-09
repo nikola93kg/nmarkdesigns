@@ -1,0 +1,4 @@
+.ctaHeading {
+  font-size: calc(var(--text-heading) + 0.25rem);
+  line-height: 1.15;
+}

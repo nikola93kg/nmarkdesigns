@@ -5,9 +5,16 @@ import { useEffect, useRef } from "react";
 import { Navigation } from "@/components/layout/Navigation";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { navigation, pricingLink } from "@/content/site";
+import type { NavigationItem } from "@/content/site";
 
-export function MobileNavigation() {
+interface MobileNavigationProps {
+  items: readonly NavigationItem[];
+  pricing: NavigationItem;
+  label: string;
+  menuLabel: string;
+}
+
+export function MobileNavigation({ items, pricing, label, menuLabel }: MobileNavigationProps) {
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const summaryRef = useRef<HTMLElement>(null);
 
@@ -58,9 +65,9 @@ export function MobileNavigation() {
     >
       <summary
         ref={summaryRef}
-        aria-label="Glavni meni"
+        aria-label={menuLabel}
         aria-controls="mobile-navigation"
-        title="Glavni meni"
+        title={menuLabel}
         className="flex size-12 list-none items-center justify-center rounded-control border border-border text-brand transition-colors hover:bg-accent-soft [&::-webkit-details-marker]:hidden"
       >
         <Menu className="size-5 group-open:hidden" aria-hidden="true" />
@@ -72,18 +79,18 @@ export function MobileNavigation() {
       >
         <Container className="py-4">
           <Navigation
-            items={navigation}
-            label="Glavna navigacija za mobilne uređaje"
+            items={items}
+            label={label}
             variant="mobile"
             onNavigate={closeMenu}
           />
           <Button
-            href={pricingLink.href}
-            external
+            href={pricing.href}
+            external={pricing.external}
             className="mt-4 w-full"
             onClick={closeMenu}
           >
-            {pricingLink.label}
+            {pricing.label}
           </Button>
         </Container>
       </div>
