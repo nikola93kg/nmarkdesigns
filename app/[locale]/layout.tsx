@@ -8,6 +8,7 @@ import { getDictionary } from "@/content/i18n";
 import { isLocale, locales, localeSettings } from "@/lib/i18n";
 import { pageRobots } from "@/lib/seo-config";
 import "../globals.css";
+import {BackToTop} from "@/components/ui/BackToTop";
 
 const dmSans = DM_Sans({
   subsets: ["latin", "latin-ext"],
@@ -49,6 +50,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
           {children}
         </main>
         <Footer locale={locale} copy={copy} />
+      <BackToTop />
       </body>
     </html>
   );
