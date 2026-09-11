@@ -23,15 +23,18 @@ const en = {
     viewProject: "View project",
   },
   footer: {
-    description: "Professional websites for small businesses, freelancers, and local brands. Built around modern design, speed, and a solid SEO foundation.",
+    label: "NMarkDesigns footer",
+    socialLabel: "NMarkDesigns on social media",
+    portfolioLabel: "Portfolio / Projects",
+    description: "Professional websites for small businesses, freelancers, and local brands. A focus on modern design, speed, and essential SEO helps your website truly work for you.",
     quickLinks: "Quick links",
     contact: "Contact",
-    copyright: "All rights reserved.",
+    copyright: "All Rights Reserved",
   },
   portfolio: {
     metadata: {
       title: "Portfolio - selected website projects",
-      description: "Explore NMark Designs website projects for different industries, each tailored to the client's needs. View our work and get in touch about your website.",
+      description: "Explore the NMark Designs website portfolio, with project screenshots, client details, tools used and links to the published client websites.",
     },
     intro: {
       eyebrow: "Selected work",
@@ -43,8 +46,8 @@ const en = {
   },
   about: {
     metadata: {
-      title: "About",
-      description: "Meet NMark Designs and founder Nikola Marković. An individual approach to web design, with a focus on user experience, performance and maintainability.",
+      title: "About - Nikola Marković",
+      description: "Meet Nikola Marković, founder of NMark Designs and frontend developer, and learn about his approach to website design, development and ongoing maintenance.",
     },
     intro: {
       eyebrow: "NMark Designs",
@@ -77,7 +80,7 @@ const en = {
   contact: {
     metadata: {
       title: "Contact",
-      description: "Contact NMark Designs about website development, working together or maintenance. Email info@nmarkdesigns.com or call +381 64 300 5654.",
+      description: "Discuss website development or maintenance with NMark Designs and request a quote. Get in touch by email, phone or WhatsApp.",
     },
     intro: {
       eyebrow: "Let's start a conversation",
@@ -114,6 +117,107 @@ const en = {
       },
     },
   },
+  pricing: {
+    metadata: {
+      title: "Website pricing",
+      description: "View NMark Designs website package pricing for Basic plan, Standard Plan, and Premium plan. Final pricing depends on project complexity and requirements.",
+    },
+    intro: {
+      eyebrow: "Website pricing",
+      title: "Find the plan that fits your project",
+      description: "Prices are indicative and may vary depending on the complexity and specific requirements of your project. Although the plans are grouped by included services, the final price may also be lower for simpler projects, regardless of the selected package.",
+    },
+    packageLabel: "Package",
+    packageFeaturesLabel: "What you get in this package:",
+    packageCta: "Send an inquiry",
+    excludedLabel: "Not included",
+    packages: {
+      basic: {
+        features: [
+          "Build time up to 15 days",
+          "Website optimization",
+          "Up to 5 pages",
+          "Blog creation",
+          "Basic SEO optimization",
+          "Content creation",
+          "Responsive design",
+        ],
+        excluded: ["Online store development"],
+      },
+      standard: {
+        features: [
+          "Build time up to 20 days",
+          "Website optimization",
+          "Multilingual support",
+          "Blog creation",
+          "Image editing: up to 20 images",
+          "Basic SEO optimization",
+          "Content creation",
+          "Responsive design",
+        ],
+        excluded: ["Online store development"],
+      },
+      premium: {
+        features: [
+          "Build period up to 30 days",
+          "Website optimization",
+          "Multilingual support",
+          "Advanced SEO optimization",
+          "Automated payment system (PayPal, Stripe, etc...)",
+          "Website maintenance",
+          "Personalized design with custom functionality",
+          "Responsive design",
+          "Online store development",
+          "Advanced analytics and reports",
+        ],
+      },
+    },
+    notes: {
+      title: "Important notes",
+      items: [
+        "Timelines begin when the client provides all required materials.",
+        "Domain and hosting costs are not included in the website price and are paid separately according to the selected package specification.",
+        "The 50% advance payment is non-refundable if the collaboration is terminated.",
+      ],
+    },
+    cta: {
+      title: "Not sure which package fits your project?",
+      description: "Send us a short message and we can review your website needs together.",
+      label: "Contact us",
+    },
+    faq: {
+      eyebrow: "Help center",
+      title: "Common pricing questions",
+      description: "Answers about indicative prices, timelines, payment, domain and hosting.",
+      items: [
+        {
+          id: "price-flexibility",
+          question: "Are the listed prices fixed?",
+          paragraphs: ["Every project is unique, so prices may change depending on complexity and your needs. If your project is simpler, the final price may be lower than the prices listed in the packages."],
+        },
+        {
+          id: "timeline",
+          question: "How long does it take to build a website?",
+          paragraphs: ["Website build time depends on the scope of work and the site structure. Basic plan includes a timeline of up to 15 days, although depending on complexity the site may be completed earlier. Standard Plan includes a timeline of up to 20 days, while Premium plan includes a period of up to 30 days. Timelines begin when the client provides all required materials."],
+        },
+        {
+          id: "payment",
+          question: "How does payment work?",
+          paragraphs: ["Payment is made in two phases: the client pays 50% in advance before work begins, and the remaining 50% is paid when the project is completed, before the website is handed over. For regular website maintenance, payment can be arranged monthly, quarterly, or annually, by prior agreement."],
+        },
+        {
+          id: "domain-hosting",
+          question: "Does the price include domain and hosting costs?",
+          paragraphs: ["NMark Designs handles the purchase and registration of domain and hosting, making the process easier for clients. These costs are not included in the website price because they depend on the type and purpose of the project. After choosing the right solution together, the client pays them separately, directly according to the selected package specification."],
+        },
+        {
+          id: "cancellation",
+          question: "What happens if I want to stop the project during website development?",
+          paragraphs: ["If the collaboration is terminated, the 50% advance payment is non-refundable. If the client does not pay the remaining agreed amount, NMark Designs reserves the right to stop work or take the website offline until the obligation is fully settled."],
+        },
+      ],
+    },
+  },
   caseStudy: {
     eyebrow: "Website project",
     client: "Client",
@@ -131,7 +235,7 @@ const en = {
   home: {
     metadata: {
       title: "Professional website design and development",
-      description: "NMark Designs builds modern, fast, SEO-friendly websites for small businesses, freelancers, and local brands. Explore our work and request a free quote.",
+      description: "Professional design and development of modern, fast, SEO-friendly websites for small businesses, freelancers and local brands. Explore work by NMark Designs.",
     },
     hero: {
       eyebrow: "A website that works for your business",

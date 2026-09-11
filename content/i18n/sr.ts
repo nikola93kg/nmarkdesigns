@@ -23,15 +23,18 @@ const sr = {
     viewProject: "Pogledajte projekat",
   },
   footer: {
-    description: "Profesionalna izrada web sajtova za male biznise, frilensere i lokalne brendove. Fokus na modernom dizajnu, brzini i osnovnoj SEO optimizaciji.",
+    label: "NMarkDesigns podnožje",
+    socialLabel: "NMarkDesigns na društvenim mrežama",
+    portfolioLabel: "Portfolio / Projekti",
+    description: "Profesionalna izrada web sajtova za male biznise, frilensere i lokalne brendove. Fokus na modernom dizajnu, brzini i osnovnoj SEO optimizaciji kako bi vaš sajt zaista radio za vas.",
     quickLinks: "Brzi linkovi",
     contact: "Kontakt",
-    copyright: "Sva prava zadržana.",
+    copyright: "Sva prava zadržana",
   },
   portfolio: {
     metadata: {
       title: "Portfolio - odabrani web projekti",
-      description: "Pogledajte NMark Designs web projekte za različite delatnosti, prilagođene potrebama klijenata. Istražite naše radove i kontaktirajte nas za vaš sajt.",
+      description: "Istražite web sajtove iz NMark Designs portfolija: prikaze projekata, podatke o klijentima i korišćenim alatima, uz linkove ka njihovim sajtovima.",
     },
     intro: {
       eyebrow: "Odabrani projekti",
@@ -43,8 +46,8 @@ const sr = {
   },
   about: {
     metadata: {
-      title: "O nama",
-      description: "Upoznajte NMark Designs i osnivača Nikolu Markovića. Individualan pristup web dizajnu, sa fokusom na korisničko iskustvo, performanse i održavanje.",
+      title: "O nama - Nikola Marković",
+      description: "Upoznajte Nikolu Markovića, osnivača NMark Designs i frontend developera, i njegov pristup dizajnu, izradi i dugoročnom održavanju web sajtova.",
     },
     intro: {
       eyebrow: "NMark Designs",
@@ -77,7 +80,7 @@ const sr = {
   contact: {
     metadata: {
       title: "Kontakt",
-      description: "Kontaktirajte NMark Designs za pitanja o izradi sajta, saradnji ili održavanju. Pišite na info@nmarkdesigns.com ili pozovite +381 64 300 5654.",
+      description: "Razgovarajte sa NMark Designs o izradi ili održavanju sajta i zatražite ponudu. Kontaktirajte nas putem emaila, telefona ili WhatsApp-a.",
     },
     intro: {
       eyebrow: "Započnimo priču",
@@ -114,6 +117,107 @@ const sr = {
       },
     },
   },
+  pricing: {
+    metadata: {
+      title: "Cenovnik izrade web sajtova",
+      description: "Pogledajte okvirne NMark Designs pakete za izradu web sajta: Basic plan, Standard Plan i Premium plan. Cene zavise od složenosti i zahteva projekta.",
+    },
+    intro: {
+      eyebrow: "Cene izrade sajta",
+      title: "Pronađite plan koji vam odgovara",
+      description: "Cene su okvirne i mogu varirati u zavisnosti od složenosti i specifičnih zahteva vašeg projekta. Iako su planovi podeljeni prema ponuđenim uslugama, konačna cena može biti i niža za jednostavnije projekte, bez obzira na odabrani paket.",
+    },
+    packageLabel: "Paket",
+    packageFeaturesLabel: "Šta dobijate u ovom paketu:",
+    packageCta: "Pošaljite upit",
+    excludedLabel: "Nije uključeno",
+    packages: {
+      basic: {
+        features: [
+          "Vreme izrade do 15 dana",
+          "Optimizacija web sajta",
+          "Izrada do 5 stranica",
+          "Kreiranje bloga",
+          "Osnovna SEO optimizacija",
+          "Kreiranje sadržaja",
+          "Responsive dizajn",
+        ],
+        excluded: ["Razvoj web prodavnice"],
+      },
+      standard: {
+        features: [
+          "Vreme izrade do 20 dana",
+          "Optimizacija web sajta",
+          "Podrška za više jezika",
+          "Kreiranje bloga",
+          "Obrada slika: do 20 slika",
+          "Osnovna SEO optimizacija",
+          "Kreiranje sadržaja",
+          "Responsive dizajn",
+        ],
+        excluded: ["Razvoj web prodavnice"],
+      },
+      premium: {
+        features: [
+          "Period izrade do 30 dana",
+          "Optimizacija web sajta",
+          "Podrška za više jezika",
+          "Napredna SEO optimizacija",
+          "Automatizovan sistem plaćanja (PayPal, Stripe, itd...)",
+          "Održavanje web sajta",
+          "Personalizovani dizajn sa custom funkcionalnostima",
+          "Responsive dizajn",
+          "Razvoj web prodavnice",
+          "Napredna analitika i izveštaji",
+        ],
+      },
+    },
+    notes: {
+      title: "Važne napomene",
+      items: [
+        "Rokovi teku od trenutka kada klijent dostavi sav neophodan materijal.",
+        "Troškovi domena i hostinga nisu uključeni u cenu izrade sajta i plaćaju se posebno prema specifikaciji izabranog paketa.",
+        "Avansno plaćanje od 50% nije refundabilno u slučaju raskida saradnje.",
+      ],
+    },
+    cta: {
+      title: "Niste sigurni koji paket odgovara vašem projektu?",
+      description: "Pošaljite nam kratku poruku i zajedno ćemo proći kroz potrebe sajta.",
+      label: "Kontaktirajte nas",
+    },
+    faq: {
+      eyebrow: "Centar za pomoć",
+      title: "Najčešća pitanja o cenama",
+      description: "Odgovori na pitanja o okvirnim cenama, rokovima, plaćanju, domenu i hostingu.",
+      items: [
+        {
+          id: "price-flexibility",
+          question: "Da li su navedene cene fiksne?",
+          paragraphs: ["Svaki projekat je jedinstven, pa se cene mogu menjati u zavisnosti od složenosti i vaših potreba. Ako je vaš projekat jednostavniji, konačna cena može biti niža od one navedene u paketima."],
+        },
+        {
+          id: "timeline",
+          question: "Koliko traje izrada sajta?",
+          paragraphs: ["Vreme izrade sajta zavisi od obima posla i njegove strukture. Basic plan predviđa izradu u roku do 15 dana, ali u zavisnosti od složenosti, sajt može biti završen i ranije. Standard plan obuhvata rok do 20 dana, dok je za Premium plan predviđen period do 30 dana. Rokovi teku od trenutka kada klijent dostavi sav neophodan materijal."],
+        },
+        {
+          id: "payment",
+          question: "Kako funkcioniše plaćanje?",
+          paragraphs: ["Plaćanje se vrši u dve faze, pri čemu klijent unapred uplaćuje 50% iznosa pre početka rada, dok se preostalih 50% plaća po završetku projekta, pre same predaje sajta. Za redovno održavanje sajta, plaćanje može biti organizovano na mesečnom, kvartalnom ili godišnjem nivou, u skladu s prethodnim dogovorom."],
+        },
+        {
+          id: "domain-hosting",
+          question: "Da li cena uključuje troškove domena i hostinga?",
+          paragraphs: ["Kupovinu i registraciju domena i hostinga obavlja NMark Designs, čime se klijentima olakšava ceo proces. Troškovi ovih usluga nisu uključeni u cenu izrade sajta, jer zavise od tipa i namene projekta. Nakon zajedničkog odabira odgovarajućeg rešenja, klijent ih plaća posebno, direktno prema specifikaciji izabranog paketa."],
+        },
+        {
+          id: "cancellation",
+          question: "Šta se dešava ako želim da prekinem saradnju tokom izrade sajta?",
+          paragraphs: ["U slučaju raskida saradnje, avansno plaćanje od 50% nije refundabilno, a ukoliko klijent ne isplati preostali deo dogovorene sume, NMark Designs zadržava pravo da obustavi rad ili ugasi sajt dok obaveza ne bude u potpunosti izmirena."],
+        },
+      ],
+    },
+  },
   caseStudy: {
     eyebrow: "Web projekat",
     client: "Klijent",
@@ -131,7 +235,7 @@ const sr = {
   home: {
     metadata: {
       title: "Profesionalna izrada web sajtova",
-      description: "NMark Designs kreira moderne, brze i SEO optimizovane web sajtove za male biznise, frilensere i lokalne brendove. Pogledajte projekte i zatražite besplatnu ponudu.",
+      description: "Profesionalni web dizajn i izrada modernih, brzih i SEO optimizovanih sajtova za male biznise, frilensere i lokalne brendove. Pogledajte radove NMark Designs.",
     },
     hero: {
       eyebrow: "Web sajt koji donosi rezultate",

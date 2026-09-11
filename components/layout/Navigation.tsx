@@ -18,7 +18,7 @@ const linkStyles = {
   desktop: "min-h-12 text-brand hover:text-focus",
   mobile: "w-full min-h-12 py-3 text-base text-brand hover:text-focus",
   footer:
-    "min-h-11 text-on-brand-muted hover:text-on-brand focus-visible:outline-accent",
+      "min-h-8 py-1 text-on-brand-muted hover:text-on-brand focus-visible:outline-accent",
 };
 
 export function Navigation({

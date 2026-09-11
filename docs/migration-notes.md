@@ -2,6 +2,23 @@
 
 Inspection date: 2026-09-08. Primary visual reference: `docs/reference/nmarkdesigns-current-homepage.pdf`. Secondary content/URL reference: https://nmarkdesigns.com/.
 
+## Current Phase 6 Decisions
+
+Updated 2026-09-09. This section supersedes the historical temporary-link/noindex/redirect decisions below. Full implementation and validation: [Phase 6 report](phase-6-report.md). Pricing completion and source terms: [Phase 5C report](phase-5c-report.md).
+
+- All 26 localized pages exist: home, Portfolio, eight case studies, About, Contact and Pricing in Serbian/English. Services remains a homepage section; Blog remains deferred.
+- `/`, `/about/`, `/contact/`, `/cenovnik/`, `/portfolio/` and the eight migrated `/portfolio/{slug}/` paths now return direct 308 redirects to their real Serbian equivalents. `/all-services/` redirects to `/sr/#services`, whose visible service content represents the current consolidated offering. Slashless legacy requests take the same single hop. Case variants and unknown URLs are not redirected.
+- The exact map is in `lib/legacy-redirects.ts`. No old WordPress metadata is imported. `content/site.ts` remains the canonical origin/contact source.
+- `/portfolio-2/` is an empty blog template, not an equivalent Portfolio index. It, `/blog/`, `/maintenance-mode/`, and the already broken `/faqs/`, `/usluge/`, `/kontakt/` deliberately remain 404.
+- The public WordPress sitemap advertises seven additional real projects: `casovifrancuskog-rs`, `dh-travell`, `stamenko-milic-photography`, `nest-home-solutions`, `banquetes-castellanos-zoreda`, `madjionicar-bojan`, `anabelabebioprema`. All seven detail pages returned 200 when reviewed. They have no approved application equivalent; retain genuine 404 locally pending an explicit pre-launch content/retention decision. Do not redirect them to unrelated projects or infer that Belle Epoque is Frankultura.
+- Author archive `/author/nikola93kg/`, five `/wdb-template/` entries (header, footer, 404, blog, blog-post), WordPress APIs/admin/login/feed and old sitemap infrastructure are not application content routes. They have no speculative redirects. Archive/system endpoints remain 404; production robots additionally disallows `/wp-admin/`, `/wp-json/` and `/api/`.
+- Public page API and sitemap inventories were reviewed. WordPress serves its sitemap XML bodies with HTTP 404, despite advertising them in robots.txt; the application replaces that inconsistent infrastructure with a real 200 `/sitemap.xml`. This inventory does not establish traffic/backlinks; private Search Console, access logs and backlink exports were not available. Query-ID/attachment/media URLs need that evidence before any additional mappings.
+- All current Header/mobile/Footer/navigation and CTAs are local. Client sites are intentional external same-tab links. Project `sourceUrl`, `pricingSourceUrl`, portrait provenance and source documentation remain historical evidence, not current navigation.
+- Canonicals and sr/en/x-default always use real production equivalents. Sitemap contains 26 canonical entries only, with no guessed dates, priorities or frequencies. Organization/WebSite, Person and project breadcrumbs use verified fields; FAQ/Offer/Product/Article schema is omitted.
+- Indexing defaults off. Enable only with `SITE_LAUNCH=true` plus a production deployment at build time; Vercel preview/development overrides self-host settings. Host protection remains active for aliases/local/preview URLs. See README for exact configuration and rebuild requirement. No production launch or indexing activation was performed.
+
+Before launch, resolve the seven older project URLs, confirm Pricing ambiguities, integrate real Contact delivery, review legal/privacy needs and social assets, configure hosting HTTPS/domain normalization, then perform the separately authorized final polish/Phase 7 checks. Existing media provenance is preserved; do not discard the WordPress backup.
+
 ## Initial URL Findings
 
 This is a focused initial inspection, not a complete crawl or redirect map. Responses were checked with redirects followed.
@@ -34,6 +51,8 @@ No business URL redirects are implemented. Next.js trailing-slash behavior match
 - The initial standalone Process proposal is deferred to preserve the user's explicit Phase 2 section flow. No testimonials, statistics, process cards, or logo strip are added.
 
 ## Asset Register
+
+Footer update (2026-09-11): the owner supplied the shared footer markup and `https://nmarkdesigns.com/wp-content/uploads/2024/11/nmark_logo_2.webp`. The logo is copied unchanged to `public/logo/nmark-footer.webp` (787 x 775) and rendered through `next/image`. The footer now uses the supplied full description, five-link order, new-tab social links and centered copyright strip in both languages. Legacy link strings are resolved to existing localized destinations. The original seal is retained for existing structured data; the header wordmark is unchanged.
 
 | Source | Local destination | Treatment |
 | --- | --- | --- |

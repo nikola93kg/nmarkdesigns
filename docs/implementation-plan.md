@@ -2,6 +2,8 @@
 
 ## Inspection
 
+Current status (2026-09-11): Phase 5C Pricing and Phase 6 technical SEO are implemented and validated. The continuation fixed slashless URL redirect loops and duplicate project navigation landmark labels; all 178 browser tests passed against a Webpack production build. The historical decisions below describe their original phase scope; current routing/indexing decisions and environment limitations are in [Phase 6 report](phase-6-report.md). Visual polish and Phase 7 are not started.
+
 Reviewed on 2026-09-08:
 
 - `docs/frontend-agent.md`.
@@ -113,6 +115,8 @@ RootLayout (Server)
 ```text
 app/
   globals.css
+  robots.ts
+  sitemap.ts
   [locale]/
     layout.tsx
     page.tsx
@@ -124,6 +128,10 @@ app/
       [slug]/
         page.tsx
 components/
+  pricing/
+    PricingPage.tsx
+  seo/
+    JsonLd.tsx
   contact/
     ContactPage.tsx
     ContactForm.tsx
@@ -160,6 +168,7 @@ components/
     GridBackground.module.css
 content/
   about.ts
+  pricing.ts
   site.ts
   projects.ts
   i18n/
@@ -174,6 +183,11 @@ lib/
   i18n.ts
   routes.ts
   metadata.ts
+  public-pages.ts
+  legacy-redirects.ts
+  seo-config.ts
+  crawl.ts
+  schema.ts
 proxy.ts
 public/
   logo/
@@ -185,6 +199,8 @@ docs/
   migration-notes.md
   reference/
 tests/
+  pricing.spec.ts
+  seo.spec.ts
   contact.spec.ts
   about.spec.ts
   foundation.spec.ts
@@ -210,6 +226,10 @@ Phase 5 discovery (2026-09-09): no repository manuscripts or publicly published 
 Phase 5A is the separately authorized localized About migration, not Blog implementation. Blog remains deferred. See [Phase 5A report](phase-5a-report.md).
 
 Phase 5B adds localized Contact and the form foundation. No mail provider exists: validation is implemented, delivery is explicitly unavailable, and no message is reported as sent. See [Phase 5B report](phase-5b-report.md).
+
+Phase 5C completes the localized Pricing migration, including explicit source exclusions and five published commercial questions. The implementation was finished during Phase 6's prerequisite review because only draft dictionaries existed. See [Phase 5C report](phase-5c-report.md).
+
+Phase 6 adds the shared public URL inventory, refreshed metadata, published-only alternates, sitemap, host-aware crawl policy, explicit launch opt-in, safe JSON-LD and exact permanent legacy mappings. Current navigation has no WordPress fallback. Seven newly discovered older project URLs have no equivalent in the approved eight-project application; their retention/migration remains a pre-launch content decision. No visual polishing, Blog, new services route, contact delivery or deployment is included.
 
 Phase 1 uses one icon library, Lucide, for consistent accessible control icons. Playwright and axe are development-only verification tools. No CMS, database, authentication, backend, state store, or animation library is introduced.
 

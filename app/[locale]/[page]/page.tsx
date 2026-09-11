@@ -3,11 +3,14 @@ import { AboutApproach } from "@/components/about/AboutApproach";
 import { AboutIntro } from "@/components/about/AboutIntro";
 import { AboutProfile } from "@/components/about/AboutProfile";
 import { ContactPage } from "@/components/contact/ContactPage";
+import { PricingPage } from "@/components/pricing/PricingPage";
 import { founderPortrait } from "@/content/about";
 import { getDictionary } from "@/content/i18n";
 import { isLocale } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
 import { corePageRoute, corePageRoutes, routes } from "@/lib/routes";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { founderSchema } from "@/lib/schema";
 
 export const dynamicParams = false;
 
@@ -30,15 +33,19 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/[page]">
     ...copy[route].metadata,
     locale,
     route,
-    image: route === "about" ? { ...founderPortrait, alt: copy.about.profile.imageAlt } : undefined,
+    image: route === "about"
+      ? { ...founderPortrait, alt: copy.about.profile.imageAlt }
+      : { src: "/images/hero-montage.webp", width: 1365, height: 1100, alt: copy.home.hero.imageAlt },
   });
 }
 
 export default async function CorePage({ params }: PageProps<"/[locale]/[page]">) {
   const { locale, route, copy } = await resolvePage(params);
   if (route === "contact") return <ContactPage locale={locale} copy={copy.contact} />;
+  if (route === "pricing") return <PricingPage locale={locale} copy={copy.pricing} />;
   return (
     <>
+      <JsonLd data={founderSchema(locale)} />
       <AboutIntro copy={copy.about.intro} />
       <AboutProfile copy={copy.about.profile} />
       <AboutApproach locale={locale} copy={copy} />

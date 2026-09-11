@@ -1,9 +1,10 @@
 import type { Locale } from "@/lib/i18n";
 import type { RouteKey } from "@/lib/routes";
 import type { ContactField, ContactFormState, ContactValidationError } from "@/lib/contact";
+import type { PricingPackageId } from "@/content/pricing";
 
 export interface FAQItem {
-  id: "services" | "timeline" | "payment" | "hosting" | "maintenance";
+  id: string;
   question: string;
   paragraphs: readonly string[];
   list?: readonly string[];
@@ -41,6 +42,9 @@ export interface Dictionary {
     viewProject: string;
   };
   footer: {
+    label: string;
+    socialLabel: string;
+    portfolioLabel: string;
     description: string;
     quickLinks: string;
     contact: string;
@@ -89,6 +93,28 @@ export interface Dictionary {
       validation: Record<ContactValidationError, string>;
       status: Record<Exclude<ContactFormState["status"], "idle">, string>;
     };
+  };
+  pricing: {
+    metadata: { title: string; description: string };
+    intro: SectionCopy;
+    packageLabel: string;
+    packageFeaturesLabel: string;
+    packageCta: string;
+    excludedLabel: string;
+    packages: Record<PricingPackageId, {
+      features: readonly string[];
+      excluded?: readonly string[];
+    }>;
+    notes: {
+      title: string;
+      items: readonly string[];
+    };
+    cta: {
+      title: string;
+      description: string;
+      label: string;
+    };
+    faq: SectionCopy & { items: readonly FAQItem[] };
   };
   caseStudy: {
     eyebrow: string;

@@ -30,8 +30,7 @@ export const routes: Record<RouteKey, RouteDefinition> = {
   },
   pricing: {
     paths: { sr: "cenovnik", en: "pricing" },
-    implemented: false,
-    fallback: `${site.url}/cenovnik/`,
+    implemented: true,
   },
 };
 
@@ -39,7 +38,7 @@ export const navigationOrder: readonly RouteKey[] = [
   "home", "portfolio", "services", "about", "contact",
 ];
 
-export const corePageRoutes = ["about", "contact"] as const;
+export const corePageRoutes = ["about", "contact", "pricing"] as const;
 
 export function corePageRoute(segment: string, locale: Locale) {
   return corePageRoutes.find((route) => routes[route].paths[locale] === segment);

@@ -82,14 +82,14 @@ for (const locale of locales) {
     await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", `${copy.contact.metadata.title} | NMark Designs`);
     await expect(page.locator('meta[property="og:description"]')).toHaveAttribute("content", copy.contact.metadata.description);
     await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute("content", localeSettings[locale].openGraph);
-    await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary");
+    await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
     await expect(page.locator('meta[name="twitter:description"]')).toHaveAttribute("content", copy.contact.metadata.description);
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow");
     for (const target of locales) {
       await expect(page.locator(`link[rel="alternate"][hreflang="${target}"]`)).toHaveAttribute("href", `https://nmarkdesigns.com${localizedPath("contact", target)}`);
     }
     await expect(page.locator('link[hreflang="x-default"]')).toHaveAttribute("href", "https://nmarkdesigns.com/sr/kontakt/");
-    await expect(page.getByRole("contentinfo").getByRole("link", { name: copy.navigation.pricing, exact: true })).toHaveAttribute("href", "https://nmarkdesigns.com/cenovnik/");
+    await expect(page.getByRole("contentinfo").getByRole("link", { name: copy.navigation.pricing, exact: true })).toHaveAttribute("href", localizedPath("pricing", locale));
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto(localizedPath("home", locale));
     await page.getByLabel(copy.accessibility.menu, { exact: true }).click();
@@ -197,7 +197,7 @@ for (const width of [375, 1440]) {
 }
 
 test("contact validates strict locale routes and retains deferred routes", async ({ request }) => {
-  for (const path of ["/fr/contact/", "/SR/kontakt/", "/EN/contact/", "/sr/contact/", "/en/kontakt/", "/sr/KONTAKT/", "/en/CONTACT/", "/sr/kontakt/extra/", "/contact/", "/sr/cenovnik/", "/en/pricing/", "/sr/blog/", "/en/blog/"]) {
+  for (const path of ["/fr/contact/", "/SR/kontakt/", "/EN/contact/", "/sr/contact/", "/en/kontakt/", "/sr/KONTAKT/", "/en/CONTACT/", "/sr/kontakt/extra/", "/sr/blog/", "/en/blog/"]) {
     expect((await request.get(path)).status(), path).toBe(404);
   }
 });

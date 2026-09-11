@@ -21,6 +21,14 @@ for (const { locale, width } of responsiveCases) {
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(dictionaries[locale].home.hero.title);
     await expect(page.getByRole("banner")).toBeVisible();
     await expect(page.getByRole("contentinfo")).toBeVisible();
+    const footer = page.getByRole("contentinfo", { name: dictionaries[locale].footer.label });
+    await expect(footer.getByText(dictionaries[locale].footer.description, { exact: true })).toBeVisible();
+    await expect(footer.getByText(`nmarkdesigns © ${dictionaries[locale].footer.copyright}`, { exact: true })).toBeVisible();
+    for (const name of ["Instagram", "WhatsApp"]) {
+      const link = footer.getByRole("link", { name, exact: true });
+      await expect(link).toHaveAttribute("target", "_blank");
+      await expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    }
     await expect(page.locator("main > section")).toHaveCount(5);
     await expect(page.locator("#portfolio article")).toHaveCount(8);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
@@ -50,7 +58,7 @@ for (const { locale, width } of responsiveCases) {
       }
     }
 
-    const overflowingText = await page.locator("main h1, main h2, main h3, main p, main button").evaluateAll((elements) =>
+    const overflowingText = await page.locator("main h1, main h2, main h3, main p, main button, footer h2, footer p, footer a").evaluateAll((elements) =>
       elements.filter((element) => element.getClientRects().length > 0 && element.scrollWidth > element.clientWidth + 1).map((element) => element.textContent),
     );
     expect(overflowingText).toEqual([]);
@@ -76,6 +84,7 @@ for (const { locale, width } of responsiveCases) {
     await page.screenshot({ path: test.info().outputPath(`home-${locale}-${width}.png`), fullPage: true });
     await page.screenshot({ path: test.info().outputPath(`viewport-${locale}-${width}.png`) });
     await page.getByRole("banner").screenshot({ path: test.info().outputPath(`header-${locale}-${width}.png`) });
+    await footer.screenshot({ path: test.info().outputPath(`footer-${locale}-${width}.png`) });
     for (const section of ["services", "cta", "faq"]) {
       await page.locator(`section[aria-labelledby="${section}-title"]`).evaluate((element) => {
         window.scrollTo(0, window.scrollY + element.getBoundingClientRect().top);
@@ -140,10 +149,10 @@ test("mobile navigation works without JavaScript", async ({ browser, baseURL }) 
 
 test("root redirect, skip link, and unfinished routes stay intentional", async ({ page, request }) => {
   const response = await request.get("/", { maxRedirects: 0 });
-  expect(response.status()).toBe(307);
-  expect(response.headers().location).toBe("/sr/");
+  expect(response.status()).toBe(308);
+  expect(new URL(response.headers().location, "http://127.0.0.1:3100").pathname).toBe("/sr/");
   const englishBrowser = await request.get("/", { maxRedirects: 0, headers: { "Accept-Language": "en-US,en;q=0.9" } });
-  expect(englishBrowser.headers().location).toBe("/sr/");
+  expect(new URL(englishBrowser.headers().location, "http://127.0.0.1:3100").pathname).toBe("/sr/");
   await page.goto("/");
   await expect(page).toHaveURL(/\/sr\/$/);
   await page.keyboard.press("Tab");

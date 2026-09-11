@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/Header";
 import { site } from "@/content/site";
 import { getDictionary } from "@/content/i18n";
 import { isLocale, locales, localeSettings } from "@/lib/i18n";
+import { pageRobots } from "@/lib/seo-config";
 import "../globals.css";
 
 const dmSans = DM_Sans({
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     default: site.name,
     template: `%s | ${site.name}`,
   },
-  robots: { index: false, follow: false },
+  robots: pageRobots,
 };
 
 export function generateStaticParams() {

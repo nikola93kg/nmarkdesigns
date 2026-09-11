@@ -89,9 +89,12 @@ for (const locale of locales) {
       await page.keyboard.press("Enter");
       await expect(page).toHaveURL(new RegExp(`${path}$`));
       const footer = page.getByRole("contentinfo");
-      await expect(footer.getByRole("link", { name: copy.navigation.about, exact: true })).toHaveAttribute("href", path);
+      await expect(footer.getByRole("navigation").getByRole("link")).toHaveText([
+        copy.navigation.home, copy.navigation.services, copy.footer.portfolioLabel,
+        copy.navigation.pricing, copy.navigation.contact,
+      ]);
       await expect(footer.getByRole("link", { name: copy.navigation.contact, exact: true })).toHaveAttribute("href", localizedPath("contact", locale));
-      await expect(footer.getByRole("link", { name: copy.navigation.pricing, exact: true })).toHaveAttribute("href", "https://nmarkdesigns.com/cenovnik/");
+      await expect(footer.getByRole("link", { name: copy.navigation.pricing, exact: true })).toHaveAttribute("href", localizedPath("pricing", locale));
       await expect(page.locator('a[href="https://nmarkdesigns.com/about/"]')).toHaveCount(0);
     }
     await page.setViewportSize({ width: 375, height: 812 });
@@ -156,13 +159,13 @@ for (const width of [375, 1440]) {
 }
 
 test("about rejects wrong locales slugs and unimplemented routes", async ({ request }) => {
-  for (const path of ["/fr/about/", "/SR/o-nama/", "/EN/about/", "/sr/about/", "/en/o-nama/", "/sr/O-NAMA/", "/en/ABOUT/", "/en/about/extra/", "/about/", "/sr/blog/", "/en/blog/", "/sr/cenovnik/", "/en/pricing/", "/sr/unknown/"]) {
+  for (const path of ["/fr/about/", "/SR/o-nama/", "/EN/about/", "/sr/about/", "/en/o-nama/", "/sr/O-NAMA/", "/en/ABOUT/", "/en/about/extra/", "/sr/blog/", "/en/blog/", "/sr/unknown/"]) {
     expect((await request.get(path)).status(), path).toBe(404);
   }
   for (const locale of locales) {
     expect((await request.get(localizedPath("about", locale).slice(0, -1))).status()).toBe(200);
   }
   const root = await request.get("/", { maxRedirects: 0 });
-  expect(root.status()).toBe(307);
-  expect(root.headers().location).toBe("/sr/");
+  expect(root.status()).toBe(308);
+  expect(new URL(root.headers().location, "http://127.0.0.1:3100").pathname).toBe("/sr/");
 });

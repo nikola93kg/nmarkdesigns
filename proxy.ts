@@ -1,26 +1,41 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { isLocale } from "@/lib/i18n";
-import { getCaseStudyProject } from "@/content/projects";
-import { corePageRoute } from "@/lib/routes";
+import { publicPages } from "@/lib/public-pages";
+import { legacyRedirects } from "@/lib/legacy-redirects";
+import { isIndexableHost } from "@/lib/seo-config";
+
+const publicPaths = new Set(publicPages.map(({ path }) => path));
 
 export function proxy(request: NextRequest) {
-  const [locale, section, slug, ...rest] = request.nextUrl.pathname.split("/").filter(Boolean);
-  const invalidProjectPath = section?.toLowerCase() === "portfolio" && (
-    section !== "portfolio" || (slug !== undefined && (!getCaseStudyProject(slug) || rest.length > 0))
-  );
-  // Keep unpublished translated pages out of the static fallback/cache lookup.
-  const invalidCorePagePath = section !== undefined && section !== "portfolio" && (
-    !isLocale(locale) || !corePageRoute(section, locale) || slug !== undefined
-  );
-
-  // Validate before the static cache, including on case-insensitive hosts.
-  if (!isLocale(locale) || invalidProjectPath || invalidCorePagePath) {
-    return NextResponse.rewrite(new URL("/_not-found/", request.url), { status: 404 });
+  const path = request.nextUrl.pathname;
+  const normalized = path.endsWith("/") ? path : `${path}/`;
+  const protect = (response: NextResponse, force = false) => {
+    if (force || !isIndexableHost(request.headers.get("host"))) {
+      response.headers.set("X-Robots-Tag", "noindex, nofollow");
+    }
+    return response;
+  };
+  const legacy = Object.hasOwn(legacyRedirects, normalized) ? legacyRedirects[normalized] : undefined;
+  if (legacy) {
+    const destination = new URL(legacy, request.url);
+    destination.search = request.nextUrl.search;
+    return protect(NextResponse.redirect(destination, 308));
   }
-
-  return NextResponse.next();
+  if (publicPaths.has(normalized)) {
+    if (path !== normalized) {
+      // NextURL preserves the incoming slash policy when serializing redirects.
+      const destination = new URL(request.url);
+      destination.pathname = normalized;
+      return protect(NextResponse.redirect(destination, 308));
+    }
+    return protect(NextResponse.next());
+  }
+  if (path === "/robots.txt" || path === "/sitemap.xml" || /^\/(images|projects|logo)\//.test(path)) {
+    return protect(NextResponse.next());
+  }
+  // Reject unknown and incorrectly cased URLs before case-insensitive static caches.
+  return protect(NextResponse.rewrite(new URL("/_not-found/", request.url), { status: 404 }), true);
 }
 
 export const config = {
-  matcher: ["/((?!_next/|_not-found/|images/|projects/|logo/|.*\\..*).+)"],
+  matcher: ["/((?!_next/|_not-found(?:/|$)).*)"],
 };

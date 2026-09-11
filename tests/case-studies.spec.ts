@@ -43,7 +43,7 @@ for (const locale of locales) {
       }
       await expect(page.locator("#project-gallery")).toHaveCount(0);
       const url = `https://nmarkdesigns.com${localizedProjectPath(project.slug, locale)}`;
-      await expect(page).toHaveTitle(`${project.title} | NMark Designs`);
+      await expect(page).toHaveTitle(`${project.title} - ${copy.caseStudy.eyebrow} | NMark Designs`);
       await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", project.caseStudy.overview[locale]);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", url);
       await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", url);
@@ -152,7 +152,7 @@ for (const width of [375, 1440]) {
 }
 
 test("case studies reject unknown slugs and unsupported locales", async ({ request }) => {
-  for (const path of ["/sr/portfolio/unknown/", "/en/portfolio/cool-fridge-guys/", "/fr/portfolio/coolfridgeguys/", "/SR/portfolio/coolfridgeguys/", "/sr/portfolio/COOLFRIDGEGUYS/", "/sr/PORTFOLIO/coolfridgeguys/", "/sr/portfolio/coolfridgeguys/extra/", "/portfolio/coolfridgeguys/"]) {
+  for (const path of ["/sr/portfolio/unknown/", "/en/portfolio/cool-fridge-guys/", "/fr/portfolio/coolfridgeguys/", "/SR/portfolio/coolfridgeguys/", "/sr/portfolio/COOLFRIDGEGUYS/", "/sr/PORTFOLIO/coolfridgeguys/", "/sr/portfolio/coolfridgeguys/extra/"]) {
     expect((await request.get(path)).status(), path).toBe(404);
   }
 });

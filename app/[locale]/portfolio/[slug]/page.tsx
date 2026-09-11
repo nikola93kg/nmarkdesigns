@@ -6,6 +6,8 @@ import { getDictionary } from "@/content/i18n";
 import { caseStudyProjects, getCaseStudyProject } from "@/content/projects";
 import { isLocale } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { projectBreadcrumbs } from "@/lib/schema";
 
 export const dynamicParams = false;
 
@@ -19,8 +21,9 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/portfoli
   const project = getCaseStudyProject(slug);
   if (!project) notFound();
 
+  const copy = await getDictionary(locale);
   return createPageMetadata({
-    title: project.title,
+    title: `${project.title} - ${copy.caseStudy.eyebrow}`,
     description: project.caseStudy.overview[locale],
     route: "portfolio", slug, locale,
     image: { ...project.featuredImage, alt: project.featuredImage.alt[locale] },
@@ -39,10 +42,11 @@ export default async function CaseStudyPage({ params }: PageProps<"/[locale]/por
     : undefined;
 
   return (
-    <>
+    <article aria-labelledby="case-study-title">
+      <JsonLd data={projectBreadcrumbs(project, locale, copy)} />
       <CaseStudyHero project={project} locale={locale} copy={copy} />
       <CaseStudyDetails project={project} locale={locale} copy={copy.caseStudy} />
       <CaseStudyNavigation nextProject={nextProject} locale={locale} copy={copy} />
-    </>
+    </article>
   );
 }

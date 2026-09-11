@@ -90,13 +90,12 @@ for (const locale of locales) {
       await expect(page.locator(`link[rel="alternate"][hreflang="${language}"]`)).toHaveAttribute("href", `https://nmarkdesigns.com/${language}/portfolio/`);
     }
     await expect(page.locator('link[hreflang="x-default"]')).toHaveAttribute("href", "https://nmarkdesigns.com/sr/portfolio/");
-    await expect(page.getByRole("contentinfo").getByRole("link", { name: copy.navigation.portfolio, exact: true })).toHaveAttribute("href", `/${locale}/portfolio/`);
+    await expect(page.getByRole("contentinfo").getByRole("link", { name: copy.footer.portfolioLabel, exact: true })).toHaveAttribute("href", `/${locale}/portfolio/`);
     await expect(page.locator('a[href="https://nmarkdesigns.com/portfolio/"]')).toHaveCount(0);
     for (const [route, href] of [
       ["services", `/${locale}/#services`],
-      ["about", localizedPath("about", locale)],
       ["contact", localizedPath("contact", locale)],
-      ["pricing", "https://nmarkdesigns.com/cenovnik/"],
+      ["pricing", localizedPath("pricing", locale)],
     ] as const) {
       await expect(page.getByRole("contentinfo").getByRole("link", { name: copy.navigation[route], exact: true })).toHaveAttribute("href", href);
     }
@@ -147,7 +146,7 @@ for (const width of [375, 1440]) {
 }
 
 test("portfolio rejects invalid locales and does not create other core pages", async ({ request }) => {
-  for (const path of ["/fr/portfolio/", "/SR/portfolio/", "/EN/portfolio/", "/portfolio/", "/sr/portfolio/unknown/", "/sr/cenovnik/", "/en/pricing/", "/sr/usluge/", "/en/services/"]) {
+  for (const path of ["/fr/portfolio/", "/SR/portfolio/", "/EN/portfolio/", "/sr/portfolio/unknown/", "/sr/usluge/", "/en/services/"]) {
     expect((await request.get(path)).status(), path).toBe(404);
   }
   for (const locale of locales) {

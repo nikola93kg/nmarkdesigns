@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { site } from "@/content/site";
-import { defaultLocale, locales, localeSettings, type Locale } from "@/lib/i18n";
+import { locales, localeSettings, type Locale } from "@/lib/i18n";
 import { localizedPath, localizedProjectPath, type RouteKey } from "@/lib/routes";
+import { canonicalUrl, pageAlternates } from "@/lib/public-pages";
+import { pageRobots } from "@/lib/seo-config";
 
 interface PageMetadataContent {
   title: string;
@@ -31,11 +33,8 @@ export function createPageMetadata({
   const pagePath = (language: Locale) => route === "portfolio" && slug
     ? localizedProjectPath(slug, language)
     : localizedPath(route, language);
-  const url = new URL(pagePath(locale), site.url).toString();
-  const socialTitle = `${title} | ${site.name}`;
-  const languages = Object.fromEntries(
-    locales.map((language) => [language, new URL(pagePath(language), site.url).toString()]),
-  );
+  const url = canonicalUrl(pagePath(locale));
+  const socialTitle = title === site.name ? title : `${title} | ${site.name}`;
   const images = image ? [{
     url: new URL(image.src, site.url).toString(),
     width: image.width,
@@ -48,10 +47,7 @@ export function createPageMetadata({
     description,
     alternates: {
       canonical: url,
-      languages: {
-        ...languages,
-        "x-default": new URL(pagePath(defaultLocale), site.url).toString(),
-      },
+      languages: pageAlternates(pagePath(locale)),
     },
     openGraph: {
       type: "website",
@@ -69,7 +65,6 @@ export function createPageMetadata({
       description,
       images,
     },
-    // The WordPress migration is not launch-ready; production builds stay protected too.
-    robots: { index: false, follow: false },
+    robots: pageRobots,
   };
 }

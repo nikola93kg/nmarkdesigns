@@ -15,9 +15,11 @@ export function CaseStudyHero({ project, locale, copy }: { project: CaseStudyPro
   return (
     <section aria-labelledby="case-study-title" className={`${background.grid} ${background.inverseGrid} bg-brand pt-6 pb-12 text-on-brand md:pt-8 md:pb-16`}>
       <Container>
-        <Link href={localizedPath("portfolio", locale)} className="inline-flex min-h-11 items-center gap-2 text-small text-on-brand-muted underline underline-offset-4 hover:text-on-brand focus-visible:outline-accent">
-          <ArrowLeft aria-hidden="true" size={18} />{copy.actions.allProjects}
-        </Link>
+        <nav aria-label={copy.navigation.portfolio}>
+          <Link href={localizedPath("portfolio", locale)} className="inline-flex min-h-11 items-center gap-2 text-small text-on-brand-muted underline underline-offset-4 hover:text-on-brand focus-visible:outline-accent">
+            <ArrowLeft aria-hidden="true" size={18} />{copy.actions.allProjects}
+          </Link>
+        </nav>
         <div className="grid gap-6 pt-8 pb-10 md:pt-10 md:pb-12 lg:grid-cols-[1.2fr_1fr] lg:items-end lg:gap-16">
           <div>
             <p className="mb-4 text-small text-on-brand-muted">{copy.caseStudy.eyebrow}</p>
