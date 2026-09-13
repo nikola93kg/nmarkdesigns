@@ -27,6 +27,21 @@ for (const locale of locales) {
       await expect(page.locator(`link[rel="alternate"][hreflang="${language}"]`)).toHaveAttribute("href", `https://nmarkdesigns.com/${language}/`);
     }
     await expect(page.locator('link[hreflang="x-default"]')).toHaveAttribute("href", "https://nmarkdesigns.com/sr/");
+    const hero = page.locator('section[aria-labelledby="hero-title"]');
+    await expect(page.locator("h1")).toHaveCount(1);
+    await expect(hero.getByText(copy.home.hero.eyebrow, { exact: true })).toBeVisible();
+    await expect(hero.getByRole("heading", { level: 1 })).toHaveText(copy.home.hero.title);
+    await expect(hero.getByText(copy.home.hero.subtitle, { exact: true })).toBeVisible();
+    await expect(hero.getByText(copy.home.hero.description, { exact: true })).toBeVisible();
+    await expect(hero.getByRole("link", { name: copy.home.hero.primaryAction, exact: true })).toHaveAttribute("href", localizedPath("contact", locale));
+    await expect(hero.getByRole("link", { name: copy.home.hero.secondaryAction, exact: true })).toHaveAttribute("href", localizedPath("portfolio", locale));
+    await expect(hero.getByRole("link", { name: copy.navigation.pricing, exact: true })).toHaveCount(0);
+    const artwork = hero.locator("[data-hero-artwork]");
+    await expect(artwork).toHaveAttribute("aria-hidden", "true");
+    await expect(artwork.locator("img")).toHaveCount(7);
+    await expect(artwork.locator('[data-hero-artwork-layer="tablet"]')).toHaveAttribute("width", "1536");
+    await expect(artwork.locator('[data-hero-artwork-layer="tablet"]')).toHaveAttribute("height", "1024");
+    expect(await artwork.locator("img").evaluateAll((images) => images.map((image) => image.getAttribute("alt")))).toEqual(Array(7).fill(""));
     const nav = page.getByRole("navigation", { name: copy.accessibility.mainNavigation, exact: true });
     await expect(nav.getByRole("link", { name: copy.navigation.home, exact: true })).toHaveAttribute("href", `/${locale}/`);
     await expect(nav.getByRole("link", { name: copy.navigation.portfolio, exact: true })).toHaveAttribute("href", `/${locale}/portfolio/`);
@@ -65,6 +80,10 @@ for (const locale of locales) {
     const page = await context.newPage();
     await page.goto(`${baseURL}/${locale}/`);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(copy.home.hero.title);
+    const hero = page.locator('section[aria-labelledby="hero-title"]');
+    await expect(hero.getByText(copy.home.hero.subtitle, { exact: true })).toBeVisible();
+    await expect(hero.getByRole("link", { name: copy.home.hero.primaryAction, exact: true })).toHaveAttribute("href", localizedPath("contact", locale));
+    await expect(hero.getByRole("link", { name: copy.home.hero.secondaryAction, exact: true })).toHaveAttribute("href", localizedPath("portfolio", locale));
     for (const item of copy.home.faq.items) {
       await expect(page.locator(`#faq-answer-${item.id}`)).toBeVisible();
     }

@@ -1,9 +1,9 @@
 .grid {
-  --grid-line: color-mix(in srgb, var(--color-border) 35%, transparent);
+  --grid-line: color-mix(in srgb, var(--color-border) 28%, transparent);
   background-image:
     linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 5rem 5rem;
+  background-size: 3.5rem 3.5rem;
   background-position: center top;
 }
 

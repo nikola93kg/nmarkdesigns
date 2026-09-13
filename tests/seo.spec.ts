@@ -6,7 +6,7 @@ import { launchEnabled, isIndexableHost } from "@/lib/seo-config";
 import { robotsForHost } from "@/lib/crawl";
 import { serializeJsonLd } from "@/lib/schema";
 
-const slugs = ["buy-pallet-jacks", "ilic-enterijer", "os-dule-karaklajic", "powder-brows-vienna", "tripolisweets", "frankultura", "coolfridgeguys", "ladekor"];
+const slugs = caseStudyProjects.map((project) => project.slug);
 const pairs = [
   ["/sr/", "/en/"], ["/sr/portfolio/", "/en/portfolio/"],
   ["/sr/o-nama/", "/en/about/"], ["/sr/kontakt/", "/en/contact/"],
@@ -85,8 +85,18 @@ for (const pair of pairs) {
         ] });
         if (pair === pairs[2]) expect(value).toMatchObject({ "@type": "Person", name: "Nikola Marković", jobTitle: "Frontend developer" });
       }
-      const images = await page.locator("main img").evaluateAll((elements) => elements.map((image) => ({ alt: image.getAttribute("alt"), width: image.getAttribute("width"), height: image.getAttribute("height") })));
-      for (const image of images) { expect(image.alt).toBeTruthy(); expect(Number(image.width)).toBeGreaterThan(0); expect(Number(image.height)).toBeGreaterThan(0); }
+      const images = await page.locator("main img").evaluateAll((elements) => elements.map((image) => ({
+        alt: image.getAttribute("alt"),
+        width: image.getAttribute("width"),
+        height: image.getAttribute("height"),
+        decorativeHeroLayer: Boolean(image.closest("[data-hero-artwork]")),
+      })));
+      for (const image of images) {
+        if (image.decorativeHeroLayer) expect(image.alt).toBe("");
+        else expect(image.alt).toBeTruthy();
+        expect(Number(image.width)).toBeGreaterThan(0);
+        expect(Number(image.height)).toBeGreaterThan(0);
+      }
       await context.close();
     });
   }
@@ -123,7 +133,7 @@ test("exact permanent legacy redirects have one hop and preserve queries", async
   const mappings = [
     ["/", "/sr/"], ["/about/", "/sr/o-nama/"], ["/contact/", "/sr/kontakt/"],
     ["/cenovnik/", "/sr/cenovnik/"], ["/portfolio/", "/sr/portfolio/"], ["/all-services/", "/sr/#services"],
-    ...slugs.map((slug) => [`/portfolio/${slug}/`, `/sr/portfolio/${slug}/`]),
+    ...caseStudyProjects.map((project) => [new URL(project.sourceUrl).pathname, `/sr/portfolio/${project.slug}/`]),
   ];
   for (const [legacy, target] of mappings) {
     for (const path of new Set([legacy, legacy === "/" ? legacy : legacy.slice(0, -1)])) {

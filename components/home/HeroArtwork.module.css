@@ -1,0 +1,126 @@
+.artwork {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 41rem);
+  aspect-ratio: 1.24;
+  margin-inline: auto;
+  overflow: visible;
+}
+
+.layer {
+  position: absolute;
+  display: block;
+  width: auto;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  transform: translate3d(var(--start-x), var(--start-y), 0) scale(var(--start-scale, 1)) rotate(var(--start-rotate, 0deg));
+  opacity: 0;
+  animation: assemble 2400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--delay);
+  will-change: transform, opacity;
+}
+
+.backPanel {
+  z-index: 1;
+  top: 3%;
+  left: 9%;
+  width: 72%;
+  --start-x: 0;
+  --start-y: -118px;
+  --start-scale: 0.97;
+  --delay: 0ms;
+}
+
+.darkPanel {
+  z-index: 2;
+  top: 34%;
+  left: 4%;
+  width: 49%;
+  --start-x: -10px;
+  --start-y: -148px;
+  --start-scale: 0.985;
+  --delay: 240ms;
+}
+
+.tablet {
+  z-index: 5;
+  top: 4%;
+  right: 0;
+  width: 73%;
+  --start-x: 0;
+  --start-y: -178px;
+  --start-scale: 0.985;
+  --start-rotate: -1deg;
+  --delay: 500ms;
+}
+
+.phone {
+  z-index: 4;
+  bottom: 14%;
+  left: 0;
+  width: 29%;
+  --start-x: -8px;
+  --start-y: -164px;
+  --start-scale: 0.985;
+  --delay: 760ms;
+}
+
+.brandCard {
+  z-index: 3;
+  bottom: 2%;
+  left: 38%;
+  width: 28%;
+  --start-x: 4px;
+  --start-y: -136px;
+  --start-scale: 0.99;
+  --delay: 980ms;
+}
+
+.whiteCard {
+  z-index: 3;
+  right: 21%;
+  bottom: 7%;
+  width: 31%;
+  --start-x: 10px;
+  --start-y: -154px;
+  --start-scale: 0.99;
+  --delay: 1200ms;
+}
+
+.pencil {
+  z-index: 6;
+  right: 6%;
+  bottom: 0;
+  width: 31%;
+  --start-x: 18px;
+  --start-y: -126px;
+  --start-scale: 0.99;
+  --delay: 1420ms;
+}
+
+@keyframes assemble {
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .artwork {
+    width: min(100%, 23.5rem);
+  }
+
+  .pencil {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer {
+    transform: none;
+    opacity: 1;
+    animation: none;
+    will-change: auto;
+  }
+}

@@ -6,7 +6,7 @@ import { locales } from "@/lib/i18n";
 
 const dictionaries = { sr, en };
 const responsiveCases = locales.flatMap((locale) =>
-  [320, 375, 430, 768, 1024, 1440, 1920].map((width) => ({ locale, width })),
+  [320, 375, 430, 768, 1024, 1280, 1440, 1920].map((width) => ({ locale, width })),
 );
 
 for (const { locale, width } of responsiveCases) {
@@ -31,6 +31,8 @@ for (const { locale, width } of responsiveCases) {
     }
     await expect(page.locator("main > section")).toHaveCount(5);
     await expect(page.locator("#portfolio article")).toHaveCount(8);
+    await expect(page.locator("#portfolio article").first().getByRole("heading", { name: "Casovi Francuskog", exact: true })).toBeVisible();
+    await expect(page.locator("#portfolio").getByText("Frankultura", { exact: true })).toHaveCount(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
 
     const languageNavigation = page.getByRole("navigation", { name: dictionaries[locale].accessibility.languageNavigation });
@@ -62,6 +64,23 @@ for (const { locale, width } of responsiveCases) {
       elements.filter((element) => element.getClientRects().length > 0 && element.scrollWidth > element.clientWidth + 1).map((element) => element.textContent),
     );
     expect(overflowingText).toEqual([]);
+
+    const heroArtwork = page.locator("[data-hero-artwork]");
+    await expect(heroArtwork).toBeVisible();
+    const heroArtworkBox = await heroArtwork.boundingBox();
+    expect(heroArtworkBox!.x).toBeGreaterThanOrEqual(-1);
+    expect(heroArtworkBox!.x + heroArtworkBox!.width).toBeLessThanOrEqual(width + 1);
+    await expect(heroArtwork.locator("img")).toHaveCount(7);
+    await expect(heroArtwork.locator("img:visible")).toHaveCount(width < 768 ? 6 : 7);
+    for (const image of await heroArtwork.locator("img:visible").all()) {
+      await expect(image).toHaveAttribute("alt", "");
+      await expect(image).toHaveJSProperty("complete", true);
+      await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.naturalWidth)).toBeGreaterThan(0);
+      const box = await image.boundingBox();
+      expect(box?.width).toBeGreaterThan(0);
+      expect(box!.x).toBeGreaterThanOrEqual(-1);
+      expect(box!.x + box!.width).toBeLessThanOrEqual(width + 1);
+    }
 
     for (const image of await page.getByRole("img").all()) {
       await image.scrollIntoViewIfNeeded();
@@ -100,6 +119,61 @@ for (const { locale, width } of responsiveCases) {
     expect(errors).toEqual([]);
   });
 }
+
+test("hero artwork respects reduced motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 1440, height: 800 });
+  await page.goto("/sr/");
+  const layers = page.locator("[data-hero-artwork] img");
+  await expect(layers).toHaveCount(7);
+  const states = await layers.evaluateAll((images) =>
+    images.map((image) => {
+      const style = getComputedStyle(image);
+      return { animationName: style.animationName, opacity: style.opacity, transform: style.transform };
+    }),
+  );
+  expect(states).toEqual(states.map(() => ({ animationName: "none", opacity: "1", transform: "none" })));
+});
+
+test("desktop hero owns the first viewport without clipping", async ({ page }) => {
+  for (const locale of locales) {
+    for (const viewport of [
+      { width: 1024, height: 800 },
+      { width: 1280, height: 800 },
+      { width: 1440, height: 700 },
+      { width: 1440, height: 800 },
+      { width: 1920, height: 900 },
+    ]) {
+      await page.setViewportSize(viewport);
+      await page.goto(`/${locale}/`);
+      await page.evaluate(() => document.fonts.ready);
+      const measurements = await page.evaluate(() => {
+        const header = document.querySelector("header")?.getBoundingClientRect();
+        const hero = document.querySelector('section[aria-labelledby="hero-title"]')?.getBoundingClientRect();
+        const portfolio = document.querySelector("#portfolio")?.getBoundingClientRect();
+        const heroChildren = Array.from(document.querySelectorAll('section[aria-labelledby="hero-title"] *'));
+
+        return {
+          viewportHeight: window.innerHeight,
+          headerHeight: header?.height ?? 0,
+          heroBottom: hero?.bottom ?? 0,
+          heroHeight: hero?.height ?? 0,
+          portfolioTop: portfolio?.top ?? 0,
+          clippedChildren: heroChildren.filter((element) => {
+            const rect = element.getBoundingClientRect();
+            return rect.bottom > (hero?.bottom ?? 0) + 1 || rect.top < (hero?.top ?? 0) - 1;
+          }).map((element) => element.textContent),
+        };
+      });
+
+      expect(measurements.headerHeight).toBeGreaterThanOrEqual(96);
+      expect(measurements.heroHeight).toBeGreaterThanOrEqual(viewport.height - measurements.headerHeight - 2);
+      expect(measurements.portfolioTop).toBeGreaterThanOrEqual(measurements.viewportHeight - 1);
+      expect(measurements.heroBottom).toBeGreaterThanOrEqual(measurements.viewportHeight - 1);
+      expect(measurements.clippedChildren).toEqual([]);
+    }
+  }
+});
 
 test("mobile navigation supports keyboard, dismissal, and viewport changes", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });

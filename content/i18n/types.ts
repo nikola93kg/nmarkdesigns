@@ -132,7 +132,12 @@ export interface Dictionary {
   };
   home: {
     metadata: { title: string; description: string };
-    hero: SectionCopy & { subtitle: string; imageAlt: string };
+    hero: SectionCopy & {
+      subtitle: string;
+      primaryAction: string;
+      secondaryAction: string;
+      imageAlt: string;
+    };
     projects: SectionCopy;
     services: SectionCopy & {
       imageAlt: string;

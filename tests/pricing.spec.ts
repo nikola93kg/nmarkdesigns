@@ -37,8 +37,8 @@ for (const locale of ["sr", "en"] as const) {
     for (const width of [375, 1440]) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto(localizedPath("home", locale));
-      await expect(page.locator("main").getByRole("link", { name: dictionary.navigation.pricing, exact: true })).toHaveAttribute("href", path);
       await expect(page.getByRole("contentinfo").getByRole("link", { name: dictionary.navigation.pricing, exact: true })).toHaveAttribute("href", path);
+      await expect(page.locator("main").getByRole("link", { name: dictionary.navigation.pricing, exact: true })).toHaveCount(0);
       if (width < 1024) await page.getByLabel(dictionary.accessibility.menu, { exact: true }).click();
       const headerLink = page.getByRole("banner").getByRole("link", { name: dictionary.navigation.pricing, exact: true }).filter({ visible: true });
       await expect(headerLink).toHaveAttribute("href", path);

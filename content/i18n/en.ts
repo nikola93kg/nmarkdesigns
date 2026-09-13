@@ -234,20 +234,22 @@ const en = {
   },
   home: {
     metadata: {
-      title: "Professional website design and development",
-      description: "Professional design and development of modern, fast, SEO-friendly websites for small businesses, freelancers and local brands. Explore work by NMark Designs.",
+      title: "Web Design and Website Development",
+      description: "NMark Designs creates modern, fast, responsive websites for small businesses, freelancers, and brands, with web design, development, SEO, and maintenance support.",
     },
     hero: {
-      eyebrow: "A website that works for your business",
-      title: "Professional website design and development",
-      subtitle: "Modern, fast, and built for search.",
-      description: "Websites for small businesses, freelancers, and local brands. Explore our pricing or request a free quote.",
-      imageAlt: "NMark Designs website design montage featuring a tablet, phone, and printed mockups.",
+      eyebrow: "WEB DESIGN · DEVELOPMENT · SEO",
+      title: "Modern websites, thoughtfully built",
+      subtitle: "Design. Performance. SEO.",
+      description: "We create fast, responsive, SEO-friendly websites with a focus on modern design, user experience, and a strong technical foundation.",
+      primaryAction: "Request a quote",
+      secondaryAction: "View projects",
+      imageAlt: "NMark Designs website project montage on a phone, tablet, and printed mockups.",
     },
     projects: {
       eyebrow: "Selected work",
-      title: "Web design that makes a difference.",
-      description: "Every website we create is tailored to our client's needs. Explore a selection of our latest projects.",
+      title: "Projects that shape our approach to design and development",
+      description: "Real websites for different industries, selected for the way they bring structure, visual identity, and technical foundations together.",
     },
     services: {
       eyebrow: "Your online presence deserves more",

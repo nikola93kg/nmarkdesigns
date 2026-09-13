@@ -234,20 +234,22 @@ const sr = {
   },
   home: {
     metadata: {
-      title: "Profesionalna izrada web sajtova",
-      description: "Profesionalni web dizajn i izrada modernih, brzih i SEO optimizovanih sajtova za male biznise, frilensere i lokalne brendove. Pogledajte radove NMark Designs.",
+      title: "Izrada web sajtova i web dizajn",
+      description: "NMark Designs kreira moderne, brze i responsive web sajtove za male biznise, preduzetnike i brendove, uz web dizajn, razvoj, SEO optimizaciju i održavanje.",
     },
     hero: {
-      eyebrow: "Web sajt koji donosi rezultate",
-      title: "Profesionalna izrada web sajtova",
-      subtitle: "Moderni, brzi i SEO optimizovani.",
-      description: "Kreiramo sajtove za male biznise, frilensere i lokalne brendove. Pogledajte cene ili zatražite besplatnu ponudu.",
-      imageAlt: "NMark Designs prikaz web dizajna na tabletu, telefonu i štampanim maketama.",
+      eyebrow: "WEB DIZAJN · RAZVOJ · SEO",
+      title: "Izrada modernih web sajtova",
+      subtitle: "Dizajn. Performanse. SEO.",
+      description: "Kreiramo brze, responzivne i SEO optimizovane web sajtove sa fokusom na moderan dizajn, korisničko iskustvo i kvalitetnu tehničku osnovu.",
+      primaryAction: "Zatražite ponudu",
+      secondaryAction: "Pogledajte projekte",
+      imageAlt: "Vizuelna montaža NMark Designs web projekta na telefonu, tabletu i štampanim maketama.",
     },
     projects: {
-      eyebrow: "Naši uspešni projekti",
-      title: "Web dizajn koji pravi razliku.",
-      description: "Svaki web sajt koji kreiramo prilagođen je potrebama klijenta. Pogledajte neke od naših najnovijih projekata.",
+      eyebrow: "Odabrani projekti",
+      title: "Projekti koji oblikuju naš pristup dizajnu i razvoju",
+      description: "Stvarni web sajtovi za različite delatnosti, izabrani zbog načina na koji spajaju jasnu strukturu, vizuelni identitet i tehničku osnovu.",
     },
     services: {
       eyebrow: "Vaša online prisutnost zaslužuje više",

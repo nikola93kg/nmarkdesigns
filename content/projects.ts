@@ -123,21 +123,21 @@ export const projects: readonly Project[] = [
     },
   },
   {
-    slug: "frankultura",
-    title: "Frankultura",
-    client: "Frankultura",
-    websiteUrl: "https://www.frankultura.rs",
+    slug: "casovi-francuskog",
+    title: "Časovi Francuskog",
+    client: "Jelena Marković - Časovi Francuskog",
+    websiteUrl: "https://casovifrancuskog.rs",
     technologies: ["WordPress", "HTML", "CSS", "JavaScript"],
     caseStudy: {
       overview: {
-        sr: "Web sajt za Frankulturu sa predstavljanjem online časova francuskog jezika.",
-        en: "A website for Frankultura presenting online French lessons.",
+        sr: "Web sajt za online učenje francuskog jezika, kao i srpskog jezika za frankofone polaznike.",
+        en: "A website for learning French online, and Serbian for French-speaking learners.",
       },
     },
-    sourceUrl: "https://nmarkdesigns.com/portfolio/frankultura/",
+    sourceUrl: "https://nmarkdesigns.com/portfolio/casovifrancuskog-rs/",
     featuredImage: {
-      src: "/projects/frankultura.webp", width: 1351, height: 827,
-      alt: { sr: "Prikaz početne stranice web sajta Frankultura.", en: "Frankultura website homepage." },
+      src: "/projects/casovi-francuskog.webp", width: 1351, height: 827,
+      alt: { sr: "Prikaz početne stranice web sajta Casovi Francuskog.", en: "Casovi Francuskog website homepage." },
     },
   },
   {
