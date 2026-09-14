@@ -46,7 +46,7 @@ export default async function CorePage({ params }: PageProps<"/[locale]/[page]">
   const { locale, route, copy } = await resolvePage(params);
   if (route === "services") return <ServicesPage locale={locale} copy={copy} />;
   if (route === "contact") return <ContactPage locale={locale} copy={copy.contact} />;
-  if (route === "pricing") return <PricingPage locale={locale} copy={copy.pricing} />;
+  if (route === "pricing") return <PricingPage locale={locale} copy={copy.pricing} navigation={copy.navigation} />;
   return (
     <>
       <JsonLd data={founderSchema(locale)} />

@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import type { Project } from "@/content/projects";
+import type { ProjectWithImage } from "@/content/projects";
 import type { Locale } from "@/lib/i18n";
 import { localizedProjectPath } from "@/lib/routes";
 
 interface ProjectCardProps {
-  project: Project;
+  project: ProjectWithImage;
   locale: Locale;
   linkLabel: string;
   wide?: boolean;

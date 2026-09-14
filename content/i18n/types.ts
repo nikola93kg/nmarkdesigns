@@ -64,6 +64,14 @@ export interface Dictionary {
   portfolio: {
     metadata: { title: string; description: string };
     intro: SectionCopy;
+    allProjects: string;
+    defaultCategory: string;
+    contentNeeded: {
+      category: string;
+      description: string;
+      screenshot: string;
+      website: string;
+    };
     contactTitle: string;
     visitWebsite: string;
   };

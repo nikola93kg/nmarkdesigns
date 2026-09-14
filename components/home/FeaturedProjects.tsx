@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import grid from "@/components/ui/GridBackground.module.css";
 import type { Dictionary } from "@/content/i18n/types";
-import { type Project, projects } from "@/content/projects";
+import { type ProjectWithImage, projectsWithImages } from "@/content/projects";
 import type { Locale } from "@/lib/i18n";
 import { localizedPath, localizedProjectPath } from "@/lib/routes";
 import styles from "./FeaturedProjects.module.css";
@@ -12,7 +12,7 @@ import styles from "./FeaturedProjects.module.css";
 const primaryProjectSlug = "casovi-francuskog";
 
 interface ProjectView {
-  project: Project;
+  project: ProjectWithImage;
   title: string;
   description?: string;
   websiteHost?: string;
@@ -20,17 +20,18 @@ interface ProjectView {
 }
 
 function orderedHomepageProjects() {
-  const primary = projects.find((project) => project.slug === primaryProjectSlug);
-  if (!primary) return projects;
+  const homepageProjects = projectsWithImages.filter((project) => project.featured !== false);
+  const primary = homepageProjects.find((project) => project.slug === primaryProjectSlug);
+  if (!primary) return homepageProjects;
 
-  return [primary, ...projects.filter((project) => project.slug !== primaryProjectSlug)];
+  return [primary, ...homepageProjects.filter((project) => project.slug !== primaryProjectSlug)];
 }
 
 function cleanHostname(url: string) {
   return new URL(url).hostname.replace(/^www\./, "");
 }
 
-function projectView(project: Project, locale: Locale): ProjectView {
+function projectView(project: ProjectWithImage, locale: Locale): ProjectView {
   return {
     project,
     title: project.title,

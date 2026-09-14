@@ -1,0 +1,363 @@
+.showcase {
+  scroll-behavior: smooth;
+}
+
+.introSection {
+  min-height: calc(56svh - var(--spacing-header));
+  padding-block: 3rem 1.5rem;
+}
+
+.introInner {
+  display: grid;
+  min-height: calc(56svh - var(--spacing-header) - 4.5rem);
+  gap: 2rem;
+  align-items: end;
+}
+
+.introCopy,
+.introAside {
+  min-width: 0;
+}
+
+.introAside {
+  max-width: 34rem;
+}
+
+.projectCount {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border-inverse);
+}
+
+.projectCount span:first-child {
+  color: var(--color-on-brand);
+  font-size: clamp(3.5rem, 13vw, 5.5rem);
+  font-weight: 700;
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+
+.projectCount span:last-child {
+  padding-bottom: 0.35rem;
+  color: var(--color-on-brand-muted);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.projectGrid {
+  display: grid;
+  width: min(100%, 108rem);
+  margin-inline: auto;
+  padding: 1rem var(--spacing-gutter) 4rem;
+  gap: 1rem;
+}
+
+.projectSection {
+  min-width: 0;
+  scroll-margin-top: calc(var(--spacing-header) + 1rem);
+}
+
+.projectTile,
+.archiveTile {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-border-inverse) 82%, transparent);
+  border-radius: var(--radius-card);
+  background: var(--color-brand-hover);
+}
+
+.projectTile {
+  min-height: min(78svh, 54rem);
+  box-shadow: 0 2rem 5.5rem color-mix(in srgb, #000000 34%, transparent);
+  isolation: isolate;
+}
+
+.splitProject .projectTile {
+  min-height: min(68svh, 43rem);
+}
+
+.imageLink {
+  position: absolute;
+  inset: 0;
+  display: block;
+  color: inherit;
+}
+
+.imageLink:focus-visible {
+  z-index: 3;
+}
+
+.imageLink::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  background:
+    linear-gradient(180deg, color-mix(in srgb, #110024 12%, transparent) 0%, transparent 34%),
+    linear-gradient(0deg, color-mix(in srgb, #110024 92%, transparent) 0%, color-mix(in srgb, #110024 58%, transparent) 31%, transparent 68%),
+    linear-gradient(90deg, color-mix(in srgb, #110024 72%, transparent) 0%, transparent 42%);
+  opacity: 0.96;
+  pointer-events: none;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 700ms ease, filter 700ms ease;
+}
+
+.imageLink:hover .image,
+.imageLink:focus-visible .image,
+.projectTile:focus-within .image {
+  filter: saturate(1.06) contrast(1.03);
+  transform: scale(1.035);
+}
+
+.projectOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 1.5rem;
+  padding: clamp(1rem, 3.2vw, 2.5rem);
+  pointer-events: none;
+}
+
+.projectMeta,
+.archiveMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  color: var(--color-on-brand-muted);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+.projectMeta span + span::before,
+.archiveMeta span + span::before {
+  margin-right: 1rem;
+  color: var(--color-accent);
+  content: "/";
+}
+
+.projectCopy {
+  align-self: end;
+  max-width: min(38rem, 100%);
+}
+
+.projectTitle,
+.archiveTitle {
+  color: var(--color-on-brand);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.projectTitle {
+  max-width: 12ch;
+  font-size: clamp(2.25rem, 8vw, 5.25rem);
+  line-height: 0.96;
+}
+
+.splitProject .projectTitle,
+.supportProject .projectTitle {
+  font-size: clamp(2rem, 5vw, 3.75rem);
+}
+
+.projectDescription {
+  max-width: 35rem;
+  margin-top: 1rem;
+  color: var(--color-on-brand-muted);
+  text-wrap: pretty;
+}
+
+.projectActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--color-border-inverse) 78%, transparent);
+  padding-top: 1rem;
+  pointer-events: auto;
+}
+
+.projectHost {
+  max-width: min(22rem, 100%);
+  overflow-wrap: anywhere;
+  color: var(--color-on-brand-muted);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
+}
+
+.projectButton {
+  min-width: min(100%, 12rem);
+  background: color-mix(in srgb, var(--color-on-brand) 94%, transparent);
+}
+
+.archiveTile {
+  display: grid;
+  align-content: end;
+  min-height: 22rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.archiveTitle {
+  max-width: 13ch;
+  margin-top: 4rem;
+  font-size: var(--text-heading);
+  line-height: var(--text-heading--line-height);
+}
+
+.archiveDescription {
+  max-width: 32rem;
+  margin-top: 1rem;
+  color: var(--color-on-brand-muted);
+  text-wrap: pretty;
+}
+
+.archivePlaceholder {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border-inverse);
+  color: var(--color-on-brand-muted);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
+}
+
+@media (min-width: 48rem) {
+  .introSection {
+    padding-block: 3.5rem 2rem;
+  }
+
+  .introInner {
+    grid-template-columns: minmax(0, 1.1fr) minmax(19rem, 0.9fr);
+    gap: 3rem;
+  }
+
+  .projectGrid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1.25rem;
+    padding-bottom: 5rem;
+  }
+
+  .fullProject,
+  .featureProject,
+  .archiveProject {
+    grid-column: 1 / -1;
+  }
+
+  .splitProject {
+    grid-column: span 6;
+  }
+
+  .supportProject {
+    grid-column: span 6;
+  }
+
+  .archiveProject .archiveTile {
+    min-height: 19rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .projectGrid {
+    gap: 1.5rem;
+    padding-inline: 3rem;
+    padding-bottom: 6rem;
+  }
+
+  .fullProject {
+    grid-column: 1 / -1;
+  }
+
+  .featureProject {
+    grid-column: span 7;
+  }
+
+  .supportProject {
+    grid-column: span 5;
+  }
+
+  .splitProject {
+    grid-column: span 6;
+  }
+
+  .featureProject .projectTile,
+  .supportProject .projectTile {
+    min-height: min(74svh, 49rem);
+  }
+
+  .archiveProject {
+    grid-column: span 4;
+  }
+
+  .archiveProject .archiveTile {
+    min-height: 24rem;
+  }
+}
+
+@media (min-width: 96rem) {
+  .projectGrid {
+    padding-inline: 4rem;
+  }
+}
+
+@media (max-width: 47.999rem) {
+  .projectTile {
+    min-height: min(76svh, 42rem);
+  }
+
+  .imageLink::after {
+    background:
+      linear-gradient(180deg, color-mix(in srgb, #110024 18%, transparent) 0%, transparent 30%),
+      linear-gradient(0deg, color-mix(in srgb, #110024 94%, transparent) 0%, color-mix(in srgb, #110024 64%, transparent) 42%, transparent 78%);
+  }
+
+  .projectOverlay {
+    gap: 1rem;
+  }
+
+  .projectTitle {
+    max-width: 10ch;
+  }
+
+  .projectActions {
+    align-items: stretch;
+  }
+
+  .projectButton {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .projectSection {
+    animation: reveal-project linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 24%;
+  }
+
+  @keyframes reveal-project {
+    from {
+      opacity: 0.76;
+      transform: translateY(1.25rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

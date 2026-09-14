@@ -1,10 +1,10 @@
 import { ProjectCard } from "@/components/portfolio/ProjectCard";
 import type { Dictionary } from "@/content/i18n/types";
-import type { Project } from "@/content/projects";
+import type { ProjectWithImage } from "@/content/projects";
 import type { Locale } from "@/lib/i18n";
 
 interface ProjectGridProps {
-  projects: readonly Project[];
+  projects: readonly ProjectWithImage[];
   locale: Locale;
   copy: Dictionary;
 }

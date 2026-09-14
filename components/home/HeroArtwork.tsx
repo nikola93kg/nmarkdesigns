@@ -42,22 +42,6 @@ const layers = [
     className: styles.brandCard,
     preload: false,
   },
-  {
-    id: "white-card",
-    src: "/images/hero-assets/white-card.webp",
-    width: 1536,
-    height: 1024,
-    className: styles.whiteCard,
-    preload: false,
-  },
-  {
-    id: "pencil",
-    src: "/images/hero-assets/pencil.webp",
-    width: 1536,
-    height: 1024,
-    className: styles.pencil,
-    preload: false,
-  },
 ] as const;
 
 export function HeroArtwork() {

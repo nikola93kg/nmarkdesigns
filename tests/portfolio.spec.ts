@@ -2,9 +2,9 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import sr from "@/content/i18n/sr";
 import en from "@/content/i18n/en";
-import { projects } from "@/content/projects";
+import { portfolioProjects } from "@/content/projects";
 import { locales } from "@/lib/i18n";
-import { localizedPath, localizedProjectPath } from "@/lib/routes";
+import { localizedPath } from "@/lib/routes";
 
 const dictionaries = { sr, en };
 
@@ -20,25 +20,36 @@ for (const locale of locales) {
       await page.goto(`/${locale}/portfolio/`);
       await page.evaluate(() => document.fonts.ready);
       await expect(page.getByRole("heading", { level: 1 })).toHaveText(copy.portfolio.intro.title);
-      await expect(page.locator("main article")).toHaveCount(projects.length);
-      await expect(page.locator("main article h2")).toHaveText(projects.map((project) => project.title));
+      const projectEntries = page.locator('main section[id^="project-"] article');
+      await expect(projectEntries).toHaveCount(portfolioProjects.length);
+      await expect(projectEntries.locator("h2")).toHaveText(portfolioProjects.map((project) => project.title));
+      await expect(page.locator('section[aria-labelledby="portfolio-title"] span').filter({ hasText: String(portfolioProjects.length).padStart(2, "0") }).first()).toBeVisible();
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
 
-      for (const project of projects) {
-        const link = page.getByRole("link", { name: `${copy.actions.viewProject}: ${project.title}`, exact: true });
-        await expect(link).toHaveAttribute("href", localizedProjectPath(project.slug, locale));
-        const image = link.getByRole("img");
-        await image.scrollIntoViewIfNeeded();
-        await expect(image).toHaveAttribute("alt", project.featuredImage.alt[locale]);
-        await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.complete && element.naturalWidth > 0)).toBe(true);
-        await expect(image).toHaveCSS("object-fit", "contain");
-        const bounds = await image.boundingBox();
-        expect(bounds!.x).toBeGreaterThanOrEqual(0);
-        expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(width);
-        expect(bounds!.width).toBeGreaterThan(200);
-        const heading = await link.getByRole("heading").boundingBox();
-        const arrow = await link.locator("svg").boundingBox();
-        expect(heading!.x + heading!.width).toBeLessThanOrEqual(arrow!.x);
+      for (const project of portfolioProjects) {
+        const section = page.locator(`#project-${project.slug}`);
+        await expect(section).toHaveCount(1);
+        await expect(section.getByRole("heading", { name: project.title, exact: true })).toBeVisible();
+
+        if (project.featuredImage) {
+          const image = section.getByRole("img");
+          await image.scrollIntoViewIfNeeded();
+          await expect(image).toHaveAttribute("alt", project.featuredImage.alt[locale]);
+          await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.complete && element.naturalWidth > 0)).toBe(true);
+          await expect(image).toHaveCSS("object-fit", "cover");
+          const bounds = await image.boundingBox();
+          expect(bounds!.x).toBeGreaterThanOrEqual(0);
+          expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(width);
+          expect(bounds!.width).toBeGreaterThan(200);
+        } else {
+          await expect(section.getByText(copy.portfolio.contentNeeded.screenshot, { exact: true })).toBeVisible();
+        }
+
+        if (project.websiteUrl) {
+          await expect(section.locator(`a[href="${project.websiteUrl}"]`)).toHaveCount(project.featuredImage ? 2 : 1);
+        } else {
+          await expect(section.getByText(copy.portfolio.contentNeeded.website, { exact: true })).toBeVisible();
+        }
       }
 
       const clippedText = await page.locator("main h1, main h2, main p, header a:visible").evaluateAll((elements) =>
@@ -83,7 +94,7 @@ for (const locale of locales) {
     await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", `${copy.portfolio.metadata.title} | NMark Designs`);
     await expect(page.locator('meta[property="og:description"]')).toHaveAttribute("content", copy.portfolio.metadata.description);
     await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute("content", locale === "sr" ? "sr_RS" : "en_US");
-    await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute("content", projects[0].featuredImage.alt[locale]);
+    await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute("content", portfolioProjects[0].featuredImage!.alt[locale]);
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow");
     for (const language of locales) {
@@ -99,7 +110,8 @@ for (const locale of locales) {
     ] as const) {
       await expect(page.getByRole("contentinfo").getByRole("link", { name: copy.navigation[route], exact: true })).toHaveAttribute("href", href);
     }
-    const projectLink = page.getByRole("link", { name: `${copy.actions.viewProject}: ${projects[0].title}`, exact: true });
+    const firstWebsite = portfolioProjects[0].websiteUrl!;
+    const projectLink = page.locator(`main a[href="${firstWebsite}"]`).first();
     await projectLink.focus();
     await expect(projectLink).toBeFocused();
     await expect(projectLink).toHaveCSS("outline-style", "solid");
@@ -116,7 +128,7 @@ for (const locale of locales) {
     const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 375, height: 812 } });
     const page = await context.newPage();
     await page.goto(`${baseURL}/${locale}/portfolio/`);
-    await expect(page.locator("main article")).toHaveCount(projects.length);
+    await expect(page.locator('main section[id^="project-"] article')).toHaveCount(portfolioProjects.length);
     await page.getByLabel(copy.accessibility.menu, { exact: true }).click();
     await expect(page.getByRole("navigation", { name: copy.accessibility.mobileNavigation }).getByRole("link", { name: copy.navigation.portfolio, exact: true })).toHaveAttribute("href", `/${locale}/portfolio/`);
     const target = locale === "sr" ? "en" : "sr";
@@ -156,17 +168,20 @@ test("portfolio rejects invalid locales and does not create other core pages", a
 
 test("project index uses local details and only verified optional metadata", async ({ page }) => {
   for (const locale of locales) {
+    const copy = dictionaries[locale];
     await page.goto(`/${locale}/portfolio/`);
-    for (const [index, project] of projects.entries()) {
-      const entry = page.locator("main article").nth(index);
+    for (const [index, project] of portfolioProjects.entries()) {
+      const entry = page.locator('main section[id^="project-"] article').nth(index);
       await expect(entry.getByRole("heading")).toHaveText(project.title);
-      await expect(entry.locator("p")).toHaveCount(0);
-      await expect(entry.getByRole("link")).toHaveCount(project.websiteUrl ? 2 : 1);
-      await expect(entry.getByRole("link").first()).toHaveAttribute("href", localizedProjectPath(project.slug, locale));
+      await expect(entry.getByText(project.category?.[locale] ?? copy.portfolio.defaultCategory, { exact: true })).toBeVisible();
+      const description = project.shortDescription?.[locale] ?? project.caseStudy?.overview[locale] ?? copy.portfolio.contentNeeded.description;
+      await expect(entry.getByText(description, { exact: true })).toBeVisible();
       if (project.websiteUrl) {
-        await expect(entry.getByRole("link").last()).toHaveAttribute("href", project.websiteUrl);
+        await expect(entry.getByRole("link", { name: `${copy.portfolio.visitWebsite}: ${project.title}`, exact: true }).last()).toHaveAttribute("href", project.websiteUrl);
+      } else {
+        await expect(entry.getByText(copy.portfolio.contentNeeded.website, { exact: true })).toBeVisible();
       }
     }
-    await expect(page.locator(`main a[href^="/${locale}/portfolio/"]`)).toHaveCount(projects.length);
+    await expect(page.locator(`main a[href^="/${locale}/portfolio/"]`)).toHaveCount(0);
   }
 });

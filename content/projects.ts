@@ -20,7 +20,7 @@ export interface Project {
   title: string;
   category?: Localized<string>;
   shortDescription?: Localized<string>;
-  featuredImage: ProjectImage;
+  featuredImage?: ProjectImage;
   sourceUrl: `https://${string}`;
   client?: string;
   location?: string;
@@ -28,6 +28,7 @@ export interface Project {
   services?: Localized<readonly string[]>;
   technologies?: readonly string[];
   caseStudy?: ProjectCaseStudy;
+  featured?: boolean;
 }
 
 // Names, slugs, and screenshots are from the production homepage. See migration notes.
@@ -69,24 +70,6 @@ export const projects: readonly Project[] = [
     },
   },
   {
-    slug: "os-dule-karaklajic",
-    title: "OŠ Dule Karaklajić",
-    client: "ОШ „Дуле Караклајић“ – Лазаревац",
-    websiteUrl: "https://dulovaskola.edu.rs/",
-    technologies: ["WordPress", "HTML", "CSS", "JavaScript"],
-    caseStudy: {
-      overview: {
-        sr: "Web prezentacija Osnovne škole „Dule Karaklajić“ iz Lazarevca.",
-        en: "A website for Dule Karaklajić primary school in Lazarevac.",
-      },
-    },
-    sourceUrl: "https://nmarkdesigns.com/portfolio/os-dule-karaklajic/",
-    featuredImage: {
-      src: "/projects/os-dule-karaklajic.webp", width: 1877, height: 868,
-      alt: { sr: "Početna stranica OŠ Dule Karaklajić sa fotografijom škole.", en: "OŠ Dule Karaklajić homepage featuring a photograph of the school." },
-    },
-  },
-  {
     slug: "powder-brows-vienna",
     title: "Powder Brows Vienna",
     client: "Jovana Ristic Makeup",
@@ -102,6 +85,24 @@ export const projects: readonly Project[] = [
     featuredImage: {
       src: "/projects/powder-brows-vienna.webp", width: 1883, height: 867,
       alt: { sr: "Početna stranica Powder Brows Vienna sa ponudom tretmana obrva.", en: "Powder Brows Vienna homepage presenting eyebrow treatments." },
+    },
+  },
+  {
+    slug: "coolfridgeguys",
+    title: "CoolFridgeGuys",
+    client: "CoolFridgeGuys",
+    websiteUrl: "https://www.coolfridgeguys.com/",
+    technologies: ["Next.js"],
+    caseStudy: {
+      overview: {
+        sr: "Web prezentacija kompanije CoolFridgeGuys.",
+        en: "A website presenting CoolFridgeGuys.",
+      },
+    },
+    sourceUrl: "https://nmarkdesigns.com/portfolio/coolfridgeguys/",
+    featuredImage: {
+      src: "/projects/coolfridgeguys.webp", width: 1436, height: 850,
+      alt: { sr: "Prikaz početne stranice web sajta CoolFridgeGuys.", en: "CoolFridgeGuys website homepage." },
     },
   },
   {
@@ -141,24 +142,6 @@ export const projects: readonly Project[] = [
     },
   },
   {
-    slug: "coolfridgeguys",
-    title: "CoolFridgeGuys",
-    client: "CoolFridgeGuys",
-    websiteUrl: "https://www.coolfridgeguys.com/",
-    technologies: ["Next.js"],
-    caseStudy: {
-      overview: {
-        sr: "Web prezentacija kompanije CoolFridgeGuys.",
-        en: "A website presenting CoolFridgeGuys.",
-      },
-    },
-    sourceUrl: "https://nmarkdesigns.com/portfolio/coolfridgeguys/",
-    featuredImage: {
-      src: "/projects/coolfridgeguys.webp", width: 1436, height: 850,
-      alt: { sr: "Prikaz početne stranice web sajta CoolFridgeGuys.", en: "CoolFridgeGuys website homepage." },
-    },
-  },
-  {
     slug: "ladekor",
     title: "LaDekor",
     client: "LaDekor",
@@ -175,13 +158,159 @@ export const projects: readonly Project[] = [
       alt: { sr: "Prikaz početne stranice web sajta LaDekor.", en: "LaDekor website homepage." },
     },
   },
+  {
+    slug: "os-dule-karaklajic",
+    title: "OŠ Dule Karaklajić",
+    client: "ОШ „Дуле Караклајић“ – Лазаревац",
+    websiteUrl: "https://dulovaskola.edu.rs/",
+    technologies: ["WordPress", "HTML", "CSS", "JavaScript"],
+    caseStudy: {
+      overview: {
+        sr: "Web prezentacija Osnovne škole „Dule Karaklajić“ iz Lazarevca.",
+        en: "A website for Dule Karaklajić primary school in Lazarevac.",
+      },
+    },
+    sourceUrl: "https://nmarkdesigns.com/portfolio/os-dule-karaklajic/",
+    featuredImage: {
+      src: "/projects/os-dule-karaklajic.webp", width: 1877, height: 868,
+      alt: { sr: "Početna stranica OŠ Dule Karaklajić sa fotografijom škole.", en: "OŠ Dule Karaklajić homepage featuring a photograph of the school." },
+    },
+  },
+  {
+    slug: "anabelabebioprema",
+    title: "Anabela Bebi Oprema",
+    websiteUrl: "https://anabelashop.rs/",
+    sourceUrl: "https://nmarkdesigns.com/portfolio/anabelabebioprema/",
+    featuredImage: {
+      src: "/projects/anabela-bebi-oprema.webp", width: 1757, height: 931,
+      alt: { sr: "Prikaz početne stranice web sajta Anabela Bebi Oprema.", en: "Anabela Bebi Oprema website homepage." },
+    },
+    featured: false,
+  },
+  {
+    slug: "frankultura",
+    title: "Frankultura",
+    client: "Frankultura",
+    websiteUrl: "https://www.frankultura.rs",
+    technologies: ["WordPress", "HTML", "CSS", "JavaScript"],
+    shortDescription: {
+      sr: "Web sajt za Frankulturu.",
+      en: "A website for Frankultura.",
+    },
+    sourceUrl: "https://nmarkdesigns.com/portfolio/frankultura/",
+    featuredImage: {
+      src: "/projects/frankultura.webp", width: 1351, height: 827,
+      alt: { sr: "Prikaz početne stranice web sajta Frankultura.", en: "Frankultura website homepage." },
+    },
+    featured: false,
+  },
+  {
+    slug: "madjionicar-bojan",
+    title: "Mađioničar Bojan",
+    websiteUrl: "https://madjionicarbokac.com/",
+    sourceUrl: "https://nmarkdesigns.com/portfolio/madjionicar-bojan/",
+    featuredImage: {
+      src: "/projects/madjionicar-bojan.webp", width: 1757, height: 923,
+      alt: { sr: "Prikaz početne stranice web sajta Mađioničar Bojan.", en: "Mađioničar Bojan website homepage." },
+    },
+    featured: false,
+  },
+  {
+    slug: "banquetes-castellanos-zoreda",
+    title: "Banquetes Castellanos Zoreda",
+    websiteUrl: "https://precious-marigold-0deefc.netlify.app/",
+    sourceUrl: "https://nmarkdesigns.com/portfolio/banquetes-castellanos-zoreda/",
+    featuredImage: {
+      src: "/projects/banquetes-castellanos-zoreda.webp", width: 1757, height: 926,
+      alt: { sr: "Prikaz početne stranice web sajta Banquetes Castellanos Zoreda.", en: "Banquetes Castellanos Zoreda website homepage." },
+    },
+    featured: false,
+  },
+  {
+    slug: "nest-home-solutions",
+    title: "Nest Home Solutions",
+    websiteUrl: "https://nikola93kg.github.io/nest-home/",
+    sourceUrl: "https://nmarkdesigns.com/portfolio/nest-home-solutions/",
+    featuredImage: {
+      src: "/projects/nesthome.webp", width: 1757, height: 926,
+      alt: { sr: "Prikaz početne stranice web sajta Nest Home Solutions.", en: "Nest Home Solutions website homepage." },
+    },
+    featured: false,
+  },
+  {
+    slug: "stamenko-milic-photography",
+    title: "Stamenko Milić Photography",
+    websiteUrl: "https://www.milicweddings.com/",
+    sourceUrl: "https://nmarkdesigns.com/portfolio/stamenko-milic-photography/",
+    featuredImage: {
+      src: "/projects/milic-weddings.webp", width: 1757, height: 926,
+      alt: { sr: "Prikaz početne stranice web sajta Stamenko Milić Photography.", en: "Stamenko Milić Photography website homepage." },
+    },
+    featured: false,
+  },
+  {
+    slug: "dh-travell",
+    title: "DH Travel",
+    websiteUrl: "https://dhtravell.rs/",
+    sourceUrl: "https://nmarkdesigns.com/portfolio/dh-travell/",
+    featuredImage: {
+      src: "/projects/dhtravel.webp", width: 1900, height: 876,
+      alt: { sr: "Prikaz početne stranice web sajta DH Travel.", en: "DH Travel website homepage." },
+    },
+    featured: false,
+  },
 ];
 
-export type CaseStudyProject = Project & { caseStudy: ProjectCaseStudy };
+const portfolioOrder = [
+  "casovi-francuskog",
+  "ilic-enterijer",
+  "powder-brows-vienna",
+  "coolfridgeguys",
+  "tripolisweets",
+  "buy-pallet-jacks",
+  "ladekor",
+  "anabelabebioprema",
+  "os-dule-karaklajic",
+  "frankultura",
+  "madjionicar-bojan",
+  "banquetes-castellanos-zoreda",
+  "nest-home-solutions",
+  "stamenko-milic-photography",
+  "dh-travell",
+] as const;
 
-export const caseStudyProjects = projects.filter(
-  (project): project is CaseStudyProject => Boolean(project.caseStudy),
-);
+const caseStudyOrder = [
+  "buy-pallet-jacks",
+  "ilic-enterijer",
+  "os-dule-karaklajic",
+  "powder-brows-vienna",
+  "tripolisweets",
+  "casovi-francuskog",
+  "coolfridgeguys",
+  "ladekor",
+] as const;
+
+export type ProjectWithImage = Project & { featuredImage: ProjectImage };
+
+export function hasProjectImage(project: Project): project is ProjectWithImage {
+  return Boolean(project.featuredImage);
+}
+
+export const projectsWithImages = projects.filter(hasProjectImage);
+
+const projectsBySlug = new Map(projects.map((project) => [project.slug, project]));
+
+export const portfolioProjects: readonly Project[] = portfolioOrder.map((slug) => {
+  const project = projectsBySlug.get(slug);
+  if (!project) throw new Error(`Missing portfolio project: ${slug}`);
+  return project;
+});
+
+export type CaseStudyProject = ProjectWithImage & { caseStudy: ProjectCaseStudy };
+
+export const caseStudyProjects = projects
+  .filter((project): project is CaseStudyProject => Boolean(project.caseStudy && project.featuredImage))
+  .toSorted((a, b) => caseStudyOrder.indexOf(a.slug as (typeof caseStudyOrder)[number]) - caseStudyOrder.indexOf(b.slug as (typeof caseStudyOrder)[number]));
 
 export function getCaseStudyProject(slug: string): CaseStudyProject | undefined {
   return caseStudyProjects.find((project) => project.slug === slug);

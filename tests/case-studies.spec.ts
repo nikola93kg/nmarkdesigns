@@ -99,16 +99,22 @@ for (const locale of locales) {
     });
   }
 
-  test(`${locale} homepage and index link to local case studies`, async ({ page }) => {
-    for (const path of [`/${locale}/`, `/${locale}/portfolio/`]) {
-      await page.goto(path);
-      for (const project of caseStudyProjects) {
-        await expect(page.getByRole("link", { name: `${copy.actions.viewProject}: ${project.title}`, exact: true })).toHaveAttribute("href", localizedProjectPath(project.slug, locale));
+  test(`${locale} homepage links to local case studies and index links to client sites`, async ({ page }) => {
+    await page.goto(`/${locale}/`);
+    for (const project of caseStudyProjects) {
+      await expect(page.getByRole("link", { name: `${copy.actions.viewProject}: ${project.title}`, exact: true })).toHaveAttribute("href", localizedProjectPath(project.slug, locale));
+    }
+    await page.getByRole("link", { name: `${copy.actions.viewProject}: ${caseStudyProjects[0].title}`, exact: true }).click();
+    await expect(page).toHaveURL(new RegExp(`${localizedProjectPath(caseStudyProjects[0].slug, locale)}$`));
+    await page.getByRole("navigation", { name: copy.caseStudy.navigation }).getByRole("link", { name: copy.actions.allProjects, exact: true }).click();
+    await expect(page).toHaveURL(new RegExp(`/${locale}/portfolio/$`));
+
+    await page.goto(`/${locale}/portfolio/`);
+    for (const project of caseStudyProjects) {
+      await expect(page.locator(`main a[href="${localizedProjectPath(project.slug, locale)}"]`)).toHaveCount(0);
+      if (project.websiteUrl) {
+        await expect(page.locator(`#project-${project.slug} a[href="${project.websiteUrl}"]`)).toHaveCount(2);
       }
-      await page.getByRole("link", { name: `${copy.actions.viewProject}: ${caseStudyProjects[0].title}`, exact: true }).click();
-      await expect(page).toHaveURL(new RegExp(`${localizedProjectPath(caseStudyProjects[0].slug, locale)}$`));
-      await page.getByRole("navigation", { name: copy.caseStudy.navigation }).getByRole("link", { name: copy.actions.allProjects, exact: true }).click();
-      await expect(page).toHaveURL(new RegExp(`/${locale}/portfolio/$`));
     }
   });
 
