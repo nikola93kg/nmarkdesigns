@@ -38,7 +38,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <JsonLd data={siteSchema()} />
       <Hero locale={locale} copy={copy} />
       <FeaturedProjects locale={locale} copy={copy} />
-      <Services copy={copy.home.services} />
+      <Services locale={locale} copy={copy.home.services} />
       <CTA locale={locale} copy={copy} />
       <FAQ locale={locale} copy={copy} />
     </>

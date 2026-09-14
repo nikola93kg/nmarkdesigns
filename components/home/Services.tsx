@@ -1,8 +1,12 @@
+import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import type { Dictionary } from "@/content/i18n/types";
+import type { Locale } from "@/lib/i18n";
+import { localizedPath } from "@/lib/routes";
 
-export function Services({ copy }: { copy: Dictionary["home"]["services"] }) {
+export function Services({ locale, copy }: { locale: Locale; copy: Dictionary["home"]["services"] }) {
   return (
     <section id="services" aria-labelledby="services-title" className="scroll-mt-8 bg-surface-muted py-section lg:py-24">
       <Container>
@@ -11,7 +15,13 @@ export function Services({ copy }: { copy: Dictionary["home"]["services"] }) {
             <p className="mb-4 text-small font-medium text-brand">{copy.eyebrow}</p>
             <h2 id="services-title" className="max-w-xl text-heading font-bold whitespace-pre-line text-ink">{copy.title}</h2>
           </div>
-          <p className="max-w-lg text-pretty text-muted">{copy.description}</p>
+          <div className="max-w-lg">
+            <p className="text-pretty text-muted">{copy.description}</p>
+            <Link href={localizedPath("services", locale)} className="mt-4 inline-flex min-h-11 items-center gap-2 font-semibold text-brand underline underline-offset-4 hover:text-focus">
+              {copy.detailsAction}
+              <ArrowUpRight aria-hidden="true" size={18} />
+            </Link>
+          </div>
         </div>
         <div className="grid gap-8 md:grid-cols-2 md:gap-12 lg:gap-20">
           <div>

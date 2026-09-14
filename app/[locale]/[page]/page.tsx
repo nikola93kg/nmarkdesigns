@@ -4,6 +4,7 @@ import { AboutIntro } from "@/components/about/AboutIntro";
 import { AboutProfile } from "@/components/about/AboutProfile";
 import { ContactPage } from "@/components/contact/ContactPage";
 import { PricingPage } from "@/components/pricing/PricingPage";
+import { ServicesPage } from "@/components/services/ServicesPage";
 import { founderPortrait } from "@/content/about";
 import { getDictionary } from "@/content/i18n";
 import { isLocale } from "@/lib/i18n";
@@ -33,7 +34,9 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/[page]">
     ...copy[route].metadata,
     locale,
     route,
-    image: route === "about"
+    image: route === "services"
+      ? undefined
+      : route === "about"
       ? { ...founderPortrait, alt: copy.about.profile.imageAlt }
       : { src: "/images/hero-montage.webp", width: 1365, height: 1100, alt: copy.home.hero.imageAlt },
   });
@@ -41,6 +44,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/[page]">
 
 export default async function CorePage({ params }: PageProps<"/[locale]/[page]">) {
   const { locale, route, copy } = await resolvePage(params);
+  if (route === "services") return <ServicesPage locale={locale} copy={copy} />;
   if (route === "contact") return <ContactPage locale={locale} copy={copy.contact} />;
   if (route === "pricing") return <PricingPage locale={locale} copy={copy.pricing} />;
   return (

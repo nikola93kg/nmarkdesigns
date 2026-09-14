@@ -16,6 +16,17 @@ export interface ServiceItem {
   description: string;
 }
 
+export interface ServiceDetail extends ServiceItem {
+  when: string;
+  includes: readonly string[];
+}
+
+export interface ProcessStep {
+  id: string;
+  title: string;
+  description: string;
+}
+
 export interface SectionCopy {
   eyebrow: string;
   title: string;
@@ -55,6 +66,18 @@ export interface Dictionary {
     intro: SectionCopy;
     contactTitle: string;
     visitWebsite: string;
+  };
+  services: {
+    metadata: { title: string; description: string };
+    intro: SectionCopy;
+    overview: SectionCopy & { items: readonly ServiceItem[] };
+    details: SectionCopy & { includeLabel: string; items: readonly ServiceDetail[] };
+    audience: SectionCopy & { items: readonly string[] };
+    process: SectionCopy & { items: readonly ProcessStep[] };
+    principles: SectionCopy & { items: readonly ServiceItem[] };
+    proof: SectionCopy;
+    pricing: SectionCopy & { label: string };
+    cta: SectionCopy & { label: string };
   };
   about: {
     metadata: { title: string; description: string };
@@ -141,6 +164,7 @@ export interface Dictionary {
     projects: SectionCopy;
     services: SectionCopy & {
       imageAlt: string;
+      detailsAction: string;
       items: readonly ServiceItem[];
       maintenance: ServiceItem;
     };

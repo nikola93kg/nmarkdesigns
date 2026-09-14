@@ -45,7 +45,7 @@ for (const locale of locales) {
     const nav = page.getByRole("navigation", { name: copy.accessibility.mainNavigation, exact: true });
     await expect(nav.getByRole("link", { name: copy.navigation.home, exact: true })).toHaveAttribute("href", `/${locale}/`);
     await expect(nav.getByRole("link", { name: copy.navigation.portfolio, exact: true })).toHaveAttribute("href", `/${locale}/portfolio/`);
-    await expect(nav.getByRole("link", { name: copy.navigation.services, exact: true })).toHaveAttribute("href", `/${locale}/#services`);
+    await expect(nav.getByRole("link", { name: copy.navigation.services, exact: true })).toHaveAttribute("href", localizedPath("services", locale));
     await expect(nav.getByRole("link", { name: copy.navigation.about, exact: true })).toHaveAttribute("href", localizedPath("about", locale));
     await expect(nav.getByRole("link", { name: copy.navigation.contact, exact: true })).toHaveAttribute("href", localizedPath("contact", locale));
   });
@@ -118,7 +118,7 @@ for (const width of [375, 1440]) {
   });
 }
 
-test("shared route mapping supports future equivalent pages without creating routes", () => {
+test("shared route mapping supports localized equivalent pages", () => {
   for (const [serbian, english] of [
     ["/sr/", "/en/"],
     ["/sr/portfolio/", "/en/portfolio/"],
@@ -138,5 +138,5 @@ test("shared route mapping supports future equivalent pages without creating rou
   expect(equivalentPath("/sr/services/", "en")).toBeNull();
   expect(equivalentPath("/sr/portfolio/one/two/", "en")).toBeNull();
   expect(localizedPath("services", "sr")).toBe("/sr/usluge/");
-  expect(navigationItem("services", "en", "Services").href).toBe("/en/#services");
+  expect(navigationItem("services", "en", "Services").href).toBe("/en/services/");
 });

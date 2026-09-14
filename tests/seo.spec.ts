@@ -9,7 +9,7 @@ import { serializeJsonLd } from "@/lib/schema";
 const slugs = caseStudyProjects.map((project) => project.slug);
 const pairs = [
   ["/sr/", "/en/"], ["/sr/portfolio/", "/en/portfolio/"],
-  ["/sr/o-nama/", "/en/about/"], ["/sr/kontakt/", "/en/contact/"],
+  ["/sr/usluge/", "/en/services/"], ["/sr/o-nama/", "/en/about/"], ["/sr/kontakt/", "/en/contact/"],
   ["/sr/cenovnik/", "/en/pricing/"],
   ...slugs.map((slug) => [`/sr/portfolio/${slug}/`, `/en/portfolio/${slug}/`]),
 ];
@@ -39,9 +39,17 @@ for (const pair of pairs) {
       await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute("content", title);
       await expect(page.locator('meta[name="twitter:description"]')).toHaveAttribute("content", description!);
       const image = await page.locator('meta[property="og:image"]').getAttribute("content");
-      expect(image).toMatch(/^https:\/\/nmarkdesigns\.com\/(images|projects)\//);
-      await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute("content", image!);
-      expect((await page.locator('meta[property="og:image:alt"]').getAttribute("content"))?.length).toBeGreaterThan(10);
+      const isServicesPage = path === "/sr/usluge/" || path === "/en/services/";
+      if (isServicesPage) {
+        expect(image).toBeNull();
+        await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary");
+        await expect(page.locator('meta[name="twitter:image"]')).toHaveCount(0);
+        await expect(page.locator('meta[property="og:image:alt"]')).toHaveCount(0);
+      } else {
+        expect(image).toMatch(/^https:\/\/nmarkdesigns\.com\/(images|projects)\//);
+        await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute("content", image!);
+        expect((await page.locator('meta[property="og:image:alt"]').getAttribute("content"))?.length).toBeGreaterThan(10);
+      }
       await expect(page.locator("h1")).toHaveCount(1);
       await expect(page.locator("main")).toHaveCount(1);
       await expect(page.getByRole("contentinfo")).toHaveCount(1);
@@ -69,7 +77,7 @@ for (const pair of pairs) {
       }
       if (path === "/sr/kontakt/" || path === "/en/contact/") await expect(page.locator("main address")).toHaveCount(1);
       const schema = await page.locator('script[type="application/ld+json"]').allTextContents();
-      const expectedCount = pair === pairs[0] || pair === pairs[2] || Boolean(project) ? 1 : 0;
+      const expectedCount = path === "/sr/" || path === "/en/" || path === "/sr/o-nama/" || path === "/en/about/" || Boolean(project) ? 1 : 0;
       expect(schema).toHaveLength(expectedCount);
       for (const source of schema) {
         const value: unknown = JSON.parse(source);
@@ -79,11 +87,11 @@ for (const pair of pairs) {
           { position: 1, item: `${site.url}/${index === 0 ? "sr" : "en"}/portfolio/` },
           { position: 2, name: project.title, item: site.url + path },
         ] });
-        if (pair === pairs[0]) expect(value).toMatchObject({ "@graph": [
+        if (path === "/sr/" || path === "/en/") expect(value).toMatchObject({ "@graph": [
           { "@type": "Organization", name: "NMark Designs", email: "info@nmarkdesigns.com", telephone: "+381643005654", sameAs: [site.instagramUrl] },
           { "@type": "WebSite", name: "NMark Designs" },
         ] });
-        if (pair === pairs[2]) expect(value).toMatchObject({ "@type": "Person", name: "Nikola Marković", jobTitle: "Frontend developer" });
+        if (path === "/sr/o-nama/" || path === "/en/about/") expect(value).toMatchObject({ "@type": "Person", name: "Nikola Marković", jobTitle: "Frontend developer" });
       }
       const images = await page.locator("main img").evaluateAll((elements) => elements.map((image) => ({
         alt: image.getAttribute("alt"),
@@ -132,7 +140,7 @@ test("complete sitemap, unique metadata and preview robots", async ({ page, requ
 test("exact permanent legacy redirects have one hop and preserve queries", async ({ request }) => {
   const mappings = [
     ["/", "/sr/"], ["/about/", "/sr/o-nama/"], ["/contact/", "/sr/kontakt/"],
-    ["/cenovnik/", "/sr/cenovnik/"], ["/portfolio/", "/sr/portfolio/"], ["/all-services/", "/sr/#services"],
+    ["/cenovnik/", "/sr/cenovnik/"], ["/portfolio/", "/sr/portfolio/"], ["/all-services/", "/sr/usluge/"],
     ...caseStudyProjects.map((project) => [new URL(project.sourceUrl).pathname, `/sr/portfolio/${project.slug}/`]),
   ];
   for (const [legacy, target] of mappings) {

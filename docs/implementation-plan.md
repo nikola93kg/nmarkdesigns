@@ -209,7 +209,7 @@ tests/
   case-studies.spec.ts
 ```
 
-No empty core-page routes are created. Future localized paths are declared in `lib/routes.ts`; they do not create public pages or migration redirects. Existing `/all-services/`, `/about/`, `/contact/`, and portfolio slugs still need a complete URL inventory and approved launch mappings.
+No empty core-page routes are created. Implemented localized paths are declared in `lib/routes.ts`; unsupported locale/slug combinations still return 404. Services, About, Contact, Pricing, Portfolio, and the migrated portfolio slugs now have approved localized routes and legacy mappings where verified.
 
 ## Implementation Phases
 

@@ -44,6 +44,215 @@ const sr = {
     contactTitle: "Razgovarajmo o vašem sajtu.",
     visitWebsite: "Posetite web sajt",
   },
+  services: {
+    metadata: {
+      title: "Usluge izrade web sajtova i web dizajna",
+      description: "NMark Designs usluge obuhvataju izradu web sajtova, web dizajn, razvoj, SEO osnovu, optimizaciju performansi, web prodavnice i održavanje.",
+    },
+    intro: {
+      eyebrow: "Usluge",
+      title: "Izrada web sajtova, dizajn i optimizacija",
+      description: "Pomažemo malim biznisima, preduzetnicima, frilenserima i lokalnim brendovima da dobiju moderan, jasan i tehnički stabilan web sajt.",
+    },
+    overview: {
+      eyebrow: "Šta radimo",
+      title: "Usluge organizovane oko stvarnih potreba projekta",
+      description: "Svaki projekat počinje pitanjem šta sajt treba da postigne, a zatim se oko toga oblikuju struktura, dizajn, razvoj i podrška.",
+      items: [
+        {
+          id: "websites",
+          title: "Izrada web sajtova",
+          description: "Prezentacioni, poslovni i portfolio sajtovi koji jasno predstavljaju usluge, sadržaj i brend.",
+        },
+        {
+          id: "design",
+          title: "Web dizajn i korisničko iskustvo",
+          description: "Vizuelna hijerarhija, raspored sadržaja i responsive dizajn koji posetiocima olakšavaju snalaženje.",
+        },
+        {
+          id: "development",
+          title: "Razvoj i tehnička implementacija",
+          description: "Custom kod ili WordPress rešenja, u zavisnosti od strukture, sadržaja i načina održavanja sajta.",
+        },
+        {
+          id: "optimization",
+          title: "SEO osnova i performanse",
+          description: "Semantička struktura, metadata, brzina, crawlability i tehnička osnova za bolju vidljivost bez lažnih obećanja.",
+        },
+        {
+          id: "commerce",
+          title: "Web prodavnice",
+          description: "Online prodaja i e-commerce funkcionalnosti kada projekat zahteva katalog, proizvode ili plaćanje.",
+        },
+        {
+          id: "maintenance",
+          title: "Održavanje i podrška",
+          description: "Ažuriranje sadržaja, tehnička podrška, sigurnosne provere i unapređenja nakon objave.",
+        },
+      ],
+    },
+    details: {
+      eyebrow: "Detaljnije",
+      title: "Šta svaka usluga znači u praksi",
+      description: "Bez nepotrebnog žargona: najvažnije je da znate šta dobijate, kada vam je potrebno i kako pomaže vašem sajtu.",
+      includeLabel: "Može da uključuje",
+      items: [
+        {
+          id: "website-build",
+          title: "Izrada web sajtova",
+          description: "Kreiramo web sajtove koji predstavljaju usluge, radove, organizaciju ili proizvode na pregledan i profesionalan način.",
+          when: "Ovo je pravi izbor kada vam je potreban novi sajt ili postojeći sajt više ne predstavlja dobro vaš biznis.",
+          includes: [
+            "strukturu stranica i sadržaja",
+            "responsive prikaz za telefon, tablet i računar",
+            "tehnički stabilnu implementaciju",
+            "jasne kontakt i quote putanje",
+          ],
+        },
+        {
+          id: "design-ux",
+          title: "Web dizajn i UX",
+          description: "Dizajn ne posmatramo kao dekoraciju, već kao način da posetilac brzo razume ponudu i zna koji je sledeći korak.",
+          when: "Posebno je važno kada imate sadržaj, ali stranica deluje nejasno, zastarelo ili ne vodi korisnika dovoljno dobro.",
+          includes: [
+            "vizuelnu hijerarhiju",
+            "čist raspored sekcija",
+            "usklađivanje sa identitetom brenda",
+            "čitljivost i upotrebljivost na manjim ekranima",
+          ],
+        },
+        {
+          id: "development-options",
+          title: "Razvoj web sajta",
+          description: "Tehničko rešenje biramo prema projektu. Nekada je najbolji izbor WordPress, a nekada custom implementacija sa modernim frontend pristupom.",
+          when: "Ovo je važno kada sajt treba da bude lak za održavanje, brz, proširiv ili prilagođen specifičnom načinu rada.",
+          includes: [
+            "WordPress ili custom pristup kada je opravdan",
+            "čistu strukturu komponenti i stranica",
+            "lokalizovane stranice gde su potrebne",
+            "osnovu za dalje proširenje",
+          ],
+        },
+        {
+          id: "seo-performance",
+          title: "SEO i optimizacija performansi",
+          description: "Postavljamo tehničku osnovu koja pomaže pretraživačima i korisnicima: jasne stranice, metadata, interne linkove, brzinu i dobru strukturu.",
+          when: "Potrebno je kada želite da sajt bude razumljiv, indeksabilan nakon launch-a i prijatan za korišćenje na različitim uređajima.",
+          includes: [
+            "localized title i description metadata",
+            "canonical i hreflang osnovu",
+            "sitemap i crawlability proveru",
+            "optimizovane slike i performanse",
+          ],
+        },
+        {
+          id: "maintenance-support",
+          title: "Održavanje i podrška",
+          description: "Nakon objave, sajt često treba dopuniti, tehnički proveravati i postepeno unapređivati kako se menjaju potrebe biznisa.",
+          when: "Korisno je ako želite dugoročnu stabilnost, redovna ažuriranja i podršku bez nepotrebnih komplikacija.",
+          includes: [
+            "ažuriranje sadržaja",
+            "tehničku podršku",
+            "sigurnosne provere",
+            "postepena poboljšanja i optimizaciju",
+          ],
+        },
+      ],
+    },
+    audience: {
+      eyebrow: "Za koga je",
+      title: "Za biznise kojima treba jasan i pouzdan online nastup",
+      description: "Najčešće radimo sa klijentima kojima sajt treba da objasni uslugu, predstavi rad, olakša kontakt ili podrži prodaju.",
+      items: [
+        "mali biznisi i lokalni brendovi",
+        "preduzetnici i frilenseri",
+        "organizacije i škole",
+        "uslužne delatnosti",
+        "brendovi kojima treba redizajn ili modernizacija",
+      ],
+    },
+    process: {
+      eyebrow: "Proces",
+      title: "Kako izgleda saradnja",
+      description: "Proces ostaje jednostavan i razumljiv, ali dovoljno detaljan da se od početka zna šta pravimo i zašto.",
+      items: [
+        {
+          id: "goals",
+          title: "Upoznavanje i ciljevi",
+          description: "Razumemo kome je sajt namenjen, šta treba da predstavi i koji su prioriteti projekta.",
+        },
+        {
+          id: "content",
+          title: "Struktura i sadržaj",
+          description: "Organizujemo stranice, poruke i potrebne materijale tako da posetilac lako pronađe najvažnije informacije.",
+        },
+        {
+          id: "design",
+          title: "Dizajn",
+          description: "Oblikujemo vizuelni pravac, hijerarhiju i responsive raspored u skladu sa brendom i ciljem sajta.",
+        },
+        {
+          id: "build",
+          title: "Razvoj",
+          description: "Implementiramo sajt, povezujemo stranice i vodimo računa o stabilnoj tehničkoj osnovi.",
+        },
+        {
+          id: "review",
+          title: "Testiranje i optimizacija",
+          description: "Proveravamo prikaz, linkove, osnovnu pristupačnost, metadata, performanse i ponašanje na različitim ekranima.",
+        },
+        {
+          id: "launch",
+          title: "Objava i podrška",
+          description: "Pripremamo sajt za objavu i definišemo šta se održava ili unapređuje nakon launch-a.",
+        },
+      ],
+    },
+    principles: {
+      eyebrow: "Standard rada",
+      title: "Šta razmatramo tokom svakog projekta",
+      description: "Ovo nisu dekorativne stavke, već praktični kriterijumi koji utiču na to koliko je sajt koristan, brz i održiv.",
+      items: [
+        {
+          id: "responsive",
+          title: "Responsive dizajn",
+          description: "Sajt mora biti čitljiv i upotrebljiv na telefonu, tabletu, laptopu i većim ekranima.",
+        },
+        {
+          id: "structure",
+          title: "Jasna struktura",
+          description: "Navigacija, naslovi, sekcije i interne veze treba da pomognu korisnicima i pretraživačima.",
+        },
+        {
+          id: "performance",
+          title: "Performanse",
+          description: "Slike, kod i layout planiraju se tako da stranice ostanu brze i stabilne.",
+        },
+        {
+          id: "maintainability",
+          title: "Održavanje",
+          description: "Sajt treba da može da se dopunjava i unapređuje bez nepotrebnog tehničkog haosa.",
+        },
+      ],
+    },
+    proof: {
+      eyebrow: "Portfolio",
+      title: "Pogledajte kako to izgleda u praksi",
+      description: "Izabrani projekti pokazuju različite tipove sajtova, od poslovnih prezentacija do specifičnih uslužnih i prodajnih stranica.",
+    },
+    pricing: {
+      eyebrow: "Budžet",
+      title: "Želite okvirnu predstavu o ceni?",
+      description: "Cenovnik daje početni okvir, a konačna procena zavisi od obima, sadržaja i funkcionalnosti projekta.",
+      label: "Pogledajte cenovnik",
+    },
+    cta: {
+      eyebrow: "Sledeći korak",
+      title: "Imate projekat na umu?",
+      description: "Kratko nam opišite šta vam je potrebno i možemo da razgovaramo o najboljem pristupu za vaš sajt.",
+      label: "Zatražite ponudu",
+    },
+  },
   about: {
     metadata: {
       title: "O nama - Nikola Marković",
@@ -256,6 +465,7 @@ const sr = {
       title: "Moderni sajtovi.\nPromišljen pristup.",
       description: "Od dizajna i SEO optimizacije do prilagođavanja različitim uređajima i redovnog održavanja.",
       imageAlt: "Web sajt Mađioničar Bojan prikazan na laptopu, uz šolju kafe na radnom stolu.",
+      detailsAction: "Pogledajte sve usluge",
       items: [
         {
           id: "design",

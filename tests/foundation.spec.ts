@@ -234,7 +234,7 @@ test("root redirect, skip link, and unfinished routes stay intentional", async (
   await expect(page.getByRole("link", { name: "Pređi na sadržaj" })).toBeInViewport();
   await page.keyboard.press("Enter");
   await expect(page.getByRole("main")).toBeFocused();
-  for (const path of ["/fr/", "/SR/", "/services/", "/sr/usluge/", "/en/services/", "/sr/unknown/"]) {
+  for (const path of ["/fr/", "/SR/", "/services/", "/sr/services/", "/en/usluge/", "/sr/unknown/"]) {
     expect((await request.get(path)).status(), path).toBe(404);
   }
 });

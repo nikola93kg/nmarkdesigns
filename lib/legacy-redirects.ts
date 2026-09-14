@@ -8,7 +8,7 @@ export const legacyRedirects: Readonly<Record<string, string>> = {
   "/contact/": localizedPath("contact", "sr"),
   "/cenovnik/": localizedPath("pricing", "sr"),
   "/portfolio/": localizedPath("portfolio", "sr"),
-  "/all-services/": `${localizedPath("home", "sr")}#services`,
+  "/all-services/": localizedPath("services", "sr"),
   ...Object.fromEntries(caseStudyProjects.map(({ sourceUrl, slug }) => [
     new URL(sourceUrl).pathname, localizedProjectPath(slug, "sr"),
   ])),

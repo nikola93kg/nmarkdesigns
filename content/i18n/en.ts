@@ -44,6 +44,215 @@ const en = {
     contactTitle: "Let's talk about your website.",
     visitWebsite: "Visit website",
   },
+  services: {
+    metadata: {
+      title: "Web Design and Website Development Services",
+      description: "NMark Designs services include website design, development, responsive websites, SEO foundations, performance optimization, online stores and maintenance.",
+    },
+    intro: {
+      eyebrow: "Services",
+      title: "Website design, development, and optimization",
+      description: "We help small businesses, entrepreneurs, freelancers, and local brands get a modern, clear, technically stable website.",
+    },
+    overview: {
+      eyebrow: "What we do",
+      title: "Services shaped around real project needs",
+      description: "Each project starts with what the website needs to achieve. Structure, design, development, and support are then planned around that goal.",
+      items: [
+        {
+          id: "websites",
+          title: "Website creation",
+          description: "Presentation, business, and portfolio websites that clearly explain services, content, and brand identity.",
+        },
+        {
+          id: "design",
+          title: "Web design and user experience",
+          description: "Visual hierarchy, content layout, and responsive design that make the website easier to understand and use.",
+        },
+        {
+          id: "development",
+          title: "Development and implementation",
+          description: "Custom code or WordPress solutions, depending on the structure, content, and maintenance needs of the website.",
+        },
+        {
+          id: "optimization",
+          title: "SEO foundations and performance",
+          description: "Semantic structure, metadata, speed, crawlability, and a technical foundation for visibility without false promises.",
+        },
+        {
+          id: "commerce",
+          title: "Online stores",
+          description: "E-commerce functionality when a project needs products, a catalog, checkout, or online payments.",
+        },
+        {
+          id: "maintenance",
+          title: "Maintenance and support",
+          description: "Content updates, technical support, security checks, and improvements after launch.",
+        },
+      ],
+    },
+    details: {
+      eyebrow: "In detail",
+      title: "What each service means in practice",
+      description: "No unnecessary jargon: the goal is to understand what is included, when you need it, and how it helps your website.",
+      includeLabel: "Can include",
+      items: [
+        {
+          id: "website-build",
+          title: "Website creation",
+          description: "We build websites that present services, work, organizations, or products in a clear and professional way.",
+          when: "This is the right fit when you need a new website, or when your current site no longer represents your business well.",
+          includes: [
+            "page and content structure",
+            "responsive layouts for phones, tablets, and computers",
+            "a stable technical implementation",
+            "clear contact and quote paths",
+          ],
+        },
+        {
+          id: "design-ux",
+          title: "Web design and UX",
+          description: "We treat design as a practical tool, not decoration: it should help visitors understand the offer and know what to do next.",
+          when: "It matters when you have content, but the page feels unclear, outdated, or does not guide visitors well enough.",
+          includes: [
+            "visual hierarchy",
+            "clean section layouts",
+            "brand consistency",
+            "readability and usability on smaller screens",
+          ],
+        },
+        {
+          id: "development-options",
+          title: "Website development",
+          description: "The technical approach depends on the project. Sometimes WordPress is the best fit; sometimes a custom modern frontend is more appropriate.",
+          when: "This matters when the website needs to be easy to maintain, fast, extensible, or adapted to a specific workflow.",
+          includes: [
+            "WordPress or custom implementation when justified",
+            "clear component and page structure",
+            "localized pages where needed",
+            "a foundation for future expansion",
+          ],
+        },
+        {
+          id: "seo-performance",
+          title: "SEO and performance optimization",
+          description: "We put the technical foundations in place for users and search engines: clear pages, metadata, internal links, speed, and sound structure.",
+          when: "It is needed when you want a website that can be understood, indexed after launch, and used comfortably across devices.",
+          includes: [
+            "localized title and description metadata",
+            "canonical and hreflang foundations",
+            "sitemap and crawlability checks",
+            "optimized images and performance",
+          ],
+        },
+        {
+          id: "maintenance-support",
+          title: "Maintenance and support",
+          description: "After launch, a website often needs content updates, technical checks, and gradual improvements as the business changes.",
+          when: "This is useful when you want long-term stability, regular updates, and support without unnecessary complexity.",
+          includes: [
+            "content updates",
+            "technical support",
+            "security checks",
+            "gradual improvements and optimization",
+          ],
+        },
+      ],
+    },
+    audience: {
+      eyebrow: "Who it is for",
+      title: "For businesses that need a clear, reliable online presence",
+      description: "We usually work with clients whose website needs to explain a service, present work, make contact easier, or support sales.",
+      items: [
+        "small businesses and local brands",
+        "entrepreneurs and freelancers",
+        "organizations and schools",
+        "service-based businesses",
+        "brands that need a redesign or modernization",
+      ],
+    },
+    process: {
+      eyebrow: "Process",
+      title: "How collaboration works",
+      description: "The process stays simple and understandable, but detailed enough for everyone to know what is being built and why.",
+      items: [
+        {
+          id: "goals",
+          title: "Discovery and goals",
+          description: "We clarify who the website is for, what it needs to present, and which project priorities matter most.",
+        },
+        {
+          id: "content",
+          title: "Structure and content",
+          description: "We organize pages, messages, and materials so visitors can find the important information quickly.",
+        },
+        {
+          id: "design",
+          title: "Design",
+          description: "We shape the visual direction, hierarchy, and responsive layout around the brand and the website goal.",
+        },
+        {
+          id: "build",
+          title: "Development",
+          description: "We implement the website, connect pages, and keep the technical foundation stable.",
+        },
+        {
+          id: "review",
+          title: "Testing and optimization",
+          description: "We check layouts, links, basic accessibility, metadata, performance, and behavior across screen sizes.",
+        },
+        {
+          id: "launch",
+          title: "Launch and support",
+          description: "We prepare the website for launch and define what should be maintained or improved afterward.",
+        },
+      ],
+    },
+    principles: {
+      eyebrow: "Working standard",
+      title: "What we consider on every project",
+      description: "These are not decorative promises. They are practical criteria that affect how useful, fast, and maintainable the website is.",
+      items: [
+        {
+          id: "responsive",
+          title: "Responsive design",
+          description: "The website should be readable and usable on phones, tablets, laptops, and larger screens.",
+        },
+        {
+          id: "structure",
+          title: "Clear structure",
+          description: "Navigation, headings, sections, and internal links should help both users and search engines.",
+        },
+        {
+          id: "performance",
+          title: "Performance",
+          description: "Images, code, and layout are planned so pages stay fast and stable.",
+        },
+        {
+          id: "maintainability",
+          title: "Maintainability",
+          description: "The website should be possible to update and improve without unnecessary technical clutter.",
+        },
+      ],
+    },
+    proof: {
+      eyebrow: "Portfolio",
+      title: "See how this works in practice",
+      description: "Selected projects show different kinds of websites, from business presentations to service-focused and sales-oriented pages.",
+    },
+    pricing: {
+      eyebrow: "Budget",
+      title: "Want a rough idea of pricing?",
+      description: "The pricing page gives an initial frame. The final estimate depends on scope, content, and functionality.",
+      label: "View pricing",
+    },
+    cta: {
+      eyebrow: "Next step",
+      title: "Have a project in mind?",
+      description: "Briefly describe what you need, and we can talk through the best approach for your website.",
+      label: "Request a quote",
+    },
+  },
   about: {
     metadata: {
       title: "About - Nikola Marković",
@@ -256,6 +465,7 @@ const en = {
       title: "Modern websites.\nA thoughtful approach.",
       description: "From design and SEO to a responsive experience across devices and ongoing maintenance.",
       imageAlt: "The Mađioničar Bojan website displayed on a laptop beside a coffee cup on a desk.",
+      detailsAction: "Explore all services",
       items: [
         {
           id: "design",

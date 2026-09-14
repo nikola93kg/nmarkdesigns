@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   skipTrailingSlashRedirect: true,
   env: { NMARK_INDEXING_ALLOWED: String(launchEnabled(process.env)) },
   images: {
-    qualities: [75, 85],
+    qualities: [75, 82, 84, 85, 88],
   },
 };
 
