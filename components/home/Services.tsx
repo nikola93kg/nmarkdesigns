@@ -9,13 +9,13 @@ import { localizedPath } from "@/lib/routes";
 export function Services({ locale, copy }: { locale: Locale; copy: Dictionary["home"]["services"] }) {
   return (
     <section id="services" aria-labelledby="services-title" className="scroll-mt-8 bg-surface-muted py-section lg:py-24">
-      <Container>
+      <Container className="text-center lg:text-left">
         <div className="mb-8 grid gap-4 md:mb-10 lg:grid-cols-2 lg:items-end lg:gap-20">
           <div>
             <p className="mb-4 text-small font-medium text-brand">{copy.eyebrow}</p>
-            <h2 id="services-title" className="max-w-xl text-heading font-bold whitespace-pre-line text-ink">{copy.title}</h2>
+            <h2 id="services-title" className="mx-auto max-w-xl text-heading font-bold whitespace-pre-line text-ink lg:mx-0">{copy.title}</h2>
           </div>
-          <div className="max-w-lg">
+          <div className="mx-auto max-w-lg lg:mx-0">
             <p className="text-pretty text-muted">{copy.description}</p>
             <Link href={localizedPath("services", locale)} className="mt-4 inline-flex min-h-11 items-center gap-2 font-semibold text-brand underline underline-offset-4 hover:text-focus">
               {copy.detailsAction}
@@ -23,7 +23,7 @@ export function Services({ locale, copy }: { locale: Locale; copy: Dictionary["h
             </Link>
           </div>
         </div>
-        <div className="grid gap-8 md:grid-cols-2 md:gap-12 lg:gap-20">
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-20">
           <div>
             <Image
               src="/images/website-maintenance.webp"
@@ -35,7 +35,7 @@ export function Services({ locale, copy }: { locale: Locale; copy: Dictionary["h
             />
             <div className="mt-5 border-t border-border pt-5">
               <h3 className="text-subheading font-semibold text-ink">{copy.maintenance.title}</h3>
-              <p className="mt-3 max-w-lg text-pretty text-muted">{copy.maintenance.description}</p>
+              <p className="mx-auto mt-3 max-w-lg text-pretty text-muted lg:mx-0">{copy.maintenance.description}</p>
             </div>
           </div>
           <ol className="flex flex-col divide-y divide-border border-t border-border">
@@ -44,7 +44,7 @@ export function Services({ locale, copy }: { locale: Locale; copy: Dictionary["h
                 <span aria-hidden="true" className="mb-2 block text-small font-medium text-muted tabular-nums lg:mb-0 lg:pt-1">{String(index + 1).padStart(2, "0")}</span>
                 <div>
                   <h3 className="text-subheading font-semibold text-brand">{item.title}</h3>
-                  <p className="mt-3 max-w-lg text-pretty text-muted">{item.description}</p>
+                  <p className="mx-auto mt-3 max-w-lg text-pretty text-muted lg:mx-0">{item.description}</p>
                 </div>
               </li>
             ))}

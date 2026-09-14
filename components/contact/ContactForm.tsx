@@ -28,10 +28,10 @@ export function ContactForm({ copy, action, permalink, deliveryAvailable }: Cont
   }, [state]);
 
   return (
-    <form ref={formRef} action={formAction} noValidate aria-labelledby="contact-form-title" aria-describedby="contact-required contact-availability">
-      <h2 id="contact-form-title" className="max-w-xl text-heading font-bold">{copy.title}</h2>
+    <form ref={formRef} action={formAction} noValidate aria-labelledby="contact-form-title" aria-describedby="contact-required contact-availability" className="mx-auto w-full max-w-2xl lg:max-w-none">
+      <h2 id="contact-form-title" className="mx-auto max-w-xl text-heading font-bold lg:mx-0">{copy.title}</h2>
       <p id="contact-required" className="mt-4 text-small text-muted">{copy.required}</p>
-      <p id="contact-availability" className="mt-5 border-l-2 border-brand pl-4 text-small text-muted">
+      <p id="contact-availability" className="mx-auto mt-5 max-w-xl border-t-2 border-brand pt-4 text-small text-muted lg:mx-0 lg:border-l-2 lg:border-t-0 lg:pl-4 lg:pt-0">
         {!deliveryAvailable && copy.unavailableNotice}
       </p>
       <p ref={feedbackRef} tabIndex={-1} role="status" aria-live="polite" aria-atomic="true" className="mt-5 text-small font-medium text-brand empty:mt-0">
@@ -53,7 +53,7 @@ export function ContactForm({ copy, action, permalink, deliveryAvailable }: Cont
           };
           return (
             <div key={field} className="min-w-0">
-              <label htmlFor={shared.id} className="mb-2 block text-small font-medium text-ink">
+              <label htmlFor={shared.id} className="mb-2 block text-center text-small font-medium text-ink lg:text-left">
                 {copy.labels[field]} {field === "phone" ? <span className="font-normal text-muted">({copy.optional})</span> : <span aria-hidden="true">*</span>}
               </label>
               {field === "message" ? <textarea {...shared} rows={6} className={`${inputClass} resize-y`} /> : (
@@ -63,7 +63,7 @@ export function ContactForm({ copy, action, permalink, deliveryAvailable }: Cont
             </div>
           );
         })}
-        <Button type="submit" disabled={pending} className="mt-1 justify-self-start">
+        <Button type="submit" disabled={pending} className="mt-1 justify-self-center lg:justify-self-start">
           {pending ? copy.pending : copy.submit}<ArrowUpRight aria-hidden="true" size={18} className="shrink-0" />
         </Button>
       </fieldset>

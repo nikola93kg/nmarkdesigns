@@ -16,6 +16,7 @@ interface MobileNavigationProps {
 
 export function MobileNavigation({ items, pricing, label, menuLabel }: MobileNavigationProps) {
   const detailsRef = useRef<HTMLDetailsElement>(null);
+  const menuListRef = useRef<HTMLDivElement>(null);
   const summaryRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -41,17 +42,24 @@ export function MobileNavigation({ items, pricing, label, menuLabel }: MobileNav
     return () => {
       desktop.removeEventListener("change", closeOnDesktop);
       document.removeEventListener("pointerdown", closeOnOutsideClick);
+      document.body.style.overflow = "";
     };
   }, []);
 
   function closeMenu() {
     if (detailsRef.current) detailsRef.current.open = false;
+    document.body.style.overflow = "";
+  }
+
+  function syncBodyScroll() {
+    document.body.style.overflow = detailsRef.current?.open ? "hidden" : "";
   }
 
   return (
     <details
       ref={detailsRef}
-      className="group lg:hidden"
+      className="mobile-navigation group lg:hidden"
+      onToggle={syncBodyScroll}
       onKeyDown={(event) => {
         if (event.key === "Escape" && detailsRef.current?.open) {
           event.preventDefault();
@@ -68,30 +76,38 @@ export function MobileNavigation({ items, pricing, label, menuLabel }: MobileNav
         aria-label={menuLabel}
         aria-controls="mobile-navigation"
         title={menuLabel}
-        className="flex size-12 list-none items-center justify-center rounded-control border border-border text-brand transition-colors hover:bg-accent-soft [&::-webkit-details-marker]:hidden"
+        className="relative z-50 flex size-12 list-none items-center justify-center rounded-control border border-border bg-surface text-brand transition-colors hover:bg-accent-soft group-open:fixed group-open:right-gutter group-open:top-[calc((var(--spacing-header)-3rem)/2)] group-open:border-on-brand-muted group-open:bg-on-brand group-open:text-brand [&::-webkit-details-marker]:hidden"
       >
         <Menu className="size-5 group-open:hidden" aria-hidden="true" />
         <X className="hidden size-5 group-open:block" aria-hidden="true" />
       </summary>
       <div
         id="mobile-navigation"
-        className="absolute inset-x-0 top-full max-h-[calc(100dvh-var(--spacing-header))] overflow-y-auto overscroll-contain border-b border-border bg-surface shadow-sm"
+        className="mobile-navigation-panel fixed inset-0 z-40 min-h-dvh overflow-y-auto overscroll-contain bg-brand text-on-brand"
+        onClick={(event) => {
+          if (event.target instanceof Node && !menuListRef.current?.contains(event.target)) {
+            window.setTimeout(closeMenu, 0);
+          }
+        }}
       >
-        <Container className="py-4">
-          <Navigation
-            items={items}
-            label={label}
-            variant="mobile"
-            onNavigate={closeMenu}
-          />
-          <Button
-            href={pricing.href}
-            external={pricing.external}
-            className="mt-4 w-full"
-            onClick={closeMenu}
-          >
-            {pricing.label}
-          </Button>
+        <Container className="flex min-h-dvh items-center justify-center py-24">
+          <div ref={menuListRef} className="mobile-navigation-list w-full max-w-sm text-center">
+            <Navigation
+              items={items}
+              label={label}
+              variant="mobile"
+              onNavigate={closeMenu}
+            />
+            <Button
+              href={pricing.href}
+              external={pricing.external}
+              variant="secondary"
+              className="mt-8 w-full justify-center focus-visible:outline-accent"
+              onClick={closeMenu}
+            >
+              {pricing.label}
+            </Button>
+          </div>
         </Container>
       </div>
     </details>

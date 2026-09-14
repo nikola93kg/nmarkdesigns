@@ -27,7 +27,7 @@ export function ProjectCard({
   const ProjectLink = href.startsWith("/") ? Link : "a";
 
   return (
-    <article className={wide ? "min-w-0 md:col-span-2" : "min-w-0"}>
+    <article className={wide ? "min-w-0 text-center lg:col-span-2 lg:text-left" : "min-w-0 text-center lg:text-left"}>
       <ProjectLink href={href} aria-label={`${linkLabel}: ${project.title}`} className="group block rounded-card focus-visible:outline-accent">
         <div className={`aspect-[3/2] ${wide ? "md:aspect-[2/1]" : ""} flex items-center overflow-hidden rounded-card border border-border-inverse bg-surface-muted p-3 md:p-5`}>
           <Image
@@ -43,7 +43,7 @@ export function ProjectCard({
             className="h-full w-full object-contain"
           />
         </div>
-        <div className="flex min-h-16 items-center justify-between gap-4 border-b border-border-inverse py-4">
+        <div className="flex min-h-16 flex-col items-center justify-center gap-3 border-b border-border-inverse py-4 lg:flex-row lg:justify-between lg:gap-4">
           <Heading className="text-xl font-medium text-on-brand group-hover:underline group-hover:underline-offset-4" translate="no">{project.title}</Heading>
           <ArrowUpRight aria-hidden="true" size={22} className="shrink-0 text-on-brand-muted transition-transform motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5" />
         </div>
@@ -51,12 +51,12 @@ export function ProjectCard({
       {details && (project.category || project.location || project.shortDescription || project.websiteUrl) && (
         <div className="space-y-3 pt-4 text-small text-on-brand-muted">
           {(project.category || project.location) && (
-            <p className="flex flex-wrap gap-x-4 gap-y-1">
+            <p className="flex flex-wrap justify-center gap-x-4 gap-y-1 lg:justify-start">
               {project.category && <span>{project.category[locale]}</span>}
               {project.location && <span>{project.location}</span>}
             </p>
           )}
-          {project.shortDescription && <p className="max-w-lg text-pretty">{project.shortDescription[locale]}</p>}
+          {project.shortDescription && <p className="mx-auto max-w-lg text-pretty lg:mx-0">{project.shortDescription[locale]}</p>}
           {project.websiteUrl && (
             <a href={project.websiteUrl} aria-label={`${details.visitWebsite}: ${project.title}`} className="inline-flex min-h-11 items-center gap-2 underline underline-offset-4 hover:text-on-brand focus-visible:outline-accent">
               {details.visitWebsite}<ArrowUpRight aria-hidden="true" size={18} />

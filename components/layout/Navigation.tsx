@@ -10,15 +10,15 @@ interface NavigationProps {
 
 const listStyles = {
   desktop: "flex items-center gap-5 xl:gap-7",
-  mobile: "flex flex-col divide-y divide-border",
-  footer: "flex flex-col items-start",
+  mobile: "flex flex-col items-center gap-2",
+  footer: "flex flex-col items-center lg:items-start",
 };
 
 const linkStyles = {
   desktop: "min-h-12 text-brand hover:text-focus",
-  mobile: "w-full min-h-12 py-3 text-base text-brand hover:text-focus",
+  mobile: "min-h-16 justify-center px-3 py-3 text-3xl font-bold uppercase text-on-brand hover:text-accent focus-visible:outline-accent",
   footer:
-      "min-h-8 py-1 text-on-brand-muted hover:text-on-brand focus-visible:outline-accent",
+      "min-h-8 justify-center py-1 text-center text-on-brand-muted hover:text-on-brand focus-visible:outline-accent lg:justify-start lg:text-left",
 };
 
 export function Navigation({
@@ -27,7 +27,8 @@ export function Navigation({
   variant = "desktop",
   onNavigate,
 }: NavigationProps) {
-  const className = `inline-flex items-center text-small font-medium transition-colors ${linkStyles[variant]}`;
+  const sizeClass = variant === "mobile" ? "" : "text-small font-medium";
+  const className = `inline-flex items-center transition-colors ${sizeClass} ${linkStyles[variant]}`;
 
   return (
     <nav aria-label={label}>

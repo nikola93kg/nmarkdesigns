@@ -30,13 +30,13 @@ export function FAQAccordion({ items }: { items: readonly FAQItem[] }) {
                 aria-expanded={expanded}
                 aria-controls={panelId}
                 onClick={() => setOpenId(expanded ? null : item.id)}
-                className="flex min-h-16 w-full items-center justify-between gap-5 py-5 text-left text-body font-semibold text-ink hover:text-brand disabled:cursor-default"
+                className="flex min-h-16 w-full flex-col items-center justify-center gap-3 py-5 text-center text-body font-semibold text-ink hover:text-brand disabled:cursor-default lg:flex-row lg:justify-between lg:gap-5 lg:text-left"
               >
                 {item.question}
                 {expanded ? <Minus aria-hidden="true" size={18} className="shrink-0" /> : <Plus aria-hidden="true" size={18} className="shrink-0" />}
               </button>
             </h3>
-            <div id={panelId} role="region" aria-labelledby={buttonId} hidden={!expanded} className="space-y-3 pb-6 pr-6 text-muted">
+            <div id={panelId} role="region" aria-labelledby={buttonId} hidden={!expanded} className="space-y-3 pb-6 text-center text-muted lg:pr-6 lg:text-left">
               {item.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               {item.list && <ul className="list-disc space-y-2 pl-5">{item.list.map((point) => <li key={point}>{point}</li>)}</ul>}
             </div>

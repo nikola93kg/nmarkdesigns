@@ -108,6 +108,7 @@ for (const locale of locales) {
       await expect(page.getByText(copy.services.process.items[0].description, { exact: true })).toBeVisible();
       await page.getByLabel(copy.accessibility.menu, { exact: true }).click();
       await expect(page.getByRole("navigation", { name: copy.accessibility.mobileNavigation }).getByRole("link", { name: copy.navigation.services, exact: true })).toHaveAttribute("href", path);
+      await page.getByLabel(copy.accessibility.menu, { exact: true }).click();
       const target = locale === "sr" ? "en" : "sr";
       await page.locator(`header a[hreflang="${target}"]`).click();
       await expect(page).toHaveURL(new RegExp(`${localizedPath("services", target)}$`));

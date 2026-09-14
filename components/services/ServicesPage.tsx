@@ -74,11 +74,11 @@ const serviceDetailVisuals: Record<string, ServiceVisual> = {
 
 function NumberedService({ item, index }: { item: ServiceItem; index: number }) {
   return (
-    <li className="grid gap-3 border-t border-border py-6 md:grid-cols-[3rem_minmax(0,1fr)] md:gap-6 md:py-8">
+    <li className="grid gap-3 border-t border-border py-6 text-center md:py-8 lg:grid-cols-[3rem_minmax(0,1fr)] lg:gap-6 lg:text-left">
       <span aria-hidden="true" className="text-small font-semibold tabular-nums text-muted">{String(index + 1).padStart(2, "0")}</span>
       <div>
         <h3 className="text-subheading font-semibold text-brand">{item.title}</h3>
-        <p className="mt-3 max-w-2xl text-pretty text-muted">{item.description}</p>
+        <p className="mx-auto mt-3 max-w-2xl text-pretty text-muted lg:mx-0">{item.description}</p>
       </div>
     </li>
   );
@@ -89,8 +89,8 @@ function ServiceDetailCard({ item, index, locale }: { item: ServiceDetail; index
   const featured = index === 0;
 
   return (
-    <article className={`overflow-hidden rounded-card border border-border bg-surface ${featured ? "md:col-span-2 md:grid md:grid-cols-[1.15fr_0.85fr]" : ""}`}>
-      <div className={`relative bg-surface-muted ${featured ? "min-h-72 md:min-h-full" : "aspect-[16/10]"}`}>
+    <article className={`overflow-hidden rounded-card border border-border bg-surface text-center lg:text-left ${featured ? "lg:col-span-2 lg:grid lg:grid-cols-[1.15fr_0.85fr]" : ""}`}>
+      <div className={`relative bg-surface-muted ${featured ? "min-h-72 lg:min-h-full" : "aspect-[16/10]"}`}>
         <Image
           src={visual.src}
           alt={visual.alt[locale]}
@@ -121,22 +121,22 @@ export function ServicesPage({ locale, copy }: { locale: Locale; copy: Dictionar
   return (
     <>
       <section aria-labelledby="services-page-title" className={`${background.grid} ${background.inverseGrid} bg-brand py-12 text-on-brand md:py-16 lg:py-20`}>
-        <Container className="grid gap-6 md:grid-cols-2 md:items-end md:gap-12">
+        <Container className="grid gap-6 text-center lg:grid-cols-2 lg:items-end lg:gap-12 lg:text-left">
           <div>
             <p className="mb-4 text-small font-medium text-on-brand-muted">{services.intro.eyebrow}</p>
             <h1 id="services-page-title" className="text-display font-bold">{services.intro.title}</h1>
           </div>
-          <p className="max-w-lg text-pretty text-on-brand-muted">{services.intro.description}</p>
+          <p className="mx-auto max-w-lg text-pretty text-on-brand-muted lg:mx-0">{services.intro.description}</p>
         </Container>
       </section>
 
       <section aria-labelledby="services-overview-title" className="py-section">
-        <Container className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+        <Container className="grid gap-10 text-center lg:grid-cols-[0.72fr_1.28fr] lg:gap-20 lg:text-left">
           <div>
             <p className="mb-4 text-small font-semibold uppercase text-brand">{services.overview.eyebrow}</p>
             <h2 id="services-overview-title" className="text-heading font-bold text-ink">{services.overview.title}</h2>
-            <p className="mt-5 max-w-md text-pretty text-muted">{services.overview.description}</p>
-            <div className="relative mt-8 aspect-[6/5] overflow-hidden rounded-card bg-surface-muted md:max-w-md">
+            <p className="mx-auto mt-5 max-w-md text-pretty text-muted lg:mx-0">{services.overview.description}</p>
+            <div className="relative mx-auto mt-8 aspect-[6/5] overflow-hidden rounded-card bg-surface-muted md:max-w-md lg:mx-0">
               <Image
                 src={overviewVisual.src}
                 alt={overviewVisual.alt[locale]}
@@ -155,24 +155,24 @@ export function ServicesPage({ locale, copy }: { locale: Locale; copy: Dictionar
       </section>
 
       <section aria-labelledby="services-details-title" className="bg-surface-muted py-section">
-        <Container>
-          <div className="mb-8 max-w-3xl md:mb-12">
+        <Container className="text-center lg:text-left">
+          <div className="mx-auto mb-8 max-w-3xl md:mb-12 lg:mx-0">
             <p className="mb-4 text-small font-semibold uppercase text-brand">{services.details.eyebrow}</p>
             <h2 id="services-details-title" className="text-heading font-bold text-ink">{services.details.title}</h2>
-            <p className="mt-5 max-w-2xl text-pretty text-muted">{services.details.description}</p>
+            <p className="mx-auto mt-5 max-w-2xl text-pretty text-muted lg:mx-0">{services.details.description}</p>
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 lg:grid-cols-2">
             {services.details.items.map((item, index) => <ServiceDetailCard key={item.id} item={item} index={index} locale={locale} />)}
           </div>
         </Container>
       </section>
 
       <section aria-labelledby="services-audience-title" className="py-section">
-        <Container className="grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-start md:gap-12 lg:gap-20">
+        <Container className="grid gap-8 text-center lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-20 lg:text-left">
           <div>
             <p className="mb-4 text-small font-semibold uppercase text-brand">{services.audience.eyebrow}</p>
             <h2 id="services-audience-title" className="text-heading font-bold text-ink">{services.audience.title}</h2>
-            <p className="mt-5 max-w-xl text-pretty text-muted">{services.audience.description}</p>
+            <p className="mx-auto mt-5 max-w-xl text-pretty text-muted lg:mx-0">{services.audience.description}</p>
           </div>
           <ul className="divide-y divide-border border-y border-border">
             {services.audience.items.map((item) => (
@@ -183,15 +183,15 @@ export function ServicesPage({ locale, copy }: { locale: Locale; copy: Dictionar
       </section>
 
       <section aria-labelledby="services-process-title" className={`${background.grid} ${background.inverseGrid} bg-brand py-section text-on-brand`}>
-        <Container>
-          <div className="mb-10 grid gap-6 md:grid-cols-[0.9fr_1.1fr] md:items-end md:gap-12">
+        <Container className="text-center lg:text-left">
+          <div className="mb-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-12">
             <div>
               <p className="mb-4 text-small font-semibold uppercase text-on-brand-muted">{services.process.eyebrow}</p>
               <h2 id="services-process-title" className="text-heading font-bold">{services.process.title}</h2>
             </div>
-            <p className="max-w-xl text-pretty text-on-brand-muted">{services.process.description}</p>
+            <p className="mx-auto max-w-xl text-pretty text-on-brand-muted lg:mx-0">{services.process.description}</p>
           </div>
-          <ol className="grid gap-px overflow-hidden rounded-card border border-border-inverse bg-border-inverse md:grid-cols-2 lg:grid-cols-3">
+          <ol className="grid gap-px overflow-hidden rounded-card border border-border-inverse bg-border-inverse lg:grid-cols-3">
             {services.process.items.map((item, index) => (
               <li key={item.id} className="min-h-52 bg-brand p-6 md:p-8">
                 <span aria-hidden="true" className="text-small font-semibold tabular-nums text-on-brand-muted">{String(index + 1).padStart(2, "0")}</span>
@@ -204,13 +204,13 @@ export function ServicesPage({ locale, copy }: { locale: Locale; copy: Dictionar
       </section>
 
       <section aria-labelledby="services-principles-title" className="py-section">
-        <Container>
-          <div className="mb-10 max-w-3xl">
+        <Container className="text-center lg:text-left">
+          <div className="mx-auto mb-10 max-w-3xl lg:mx-0">
             <p className="mb-4 text-small font-semibold uppercase text-brand">{services.principles.eyebrow}</p>
             <h2 id="services-principles-title" className="text-heading font-bold text-ink">{services.principles.title}</h2>
-            <p className="mt-5 max-w-2xl text-pretty text-muted">{services.principles.description}</p>
+            <p className="mx-auto mt-5 max-w-2xl text-pretty text-muted lg:mx-0">{services.principles.description}</p>
           </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 lg:grid-cols-4">
             {services.principles.items.map((item) => (
               <section key={item.id} aria-labelledby={`principle-${item.id}`} className="border-t border-border pt-5">
                 <h3 id={`principle-${item.id}`} className="text-lg font-semibold text-brand">{item.title}</h3>
@@ -222,11 +222,11 @@ export function ServicesPage({ locale, copy }: { locale: Locale; copy: Dictionar
       </section>
 
       <section aria-labelledby="services-proof-title" className="bg-surface-muted py-12 md:py-16">
-        <Container className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
+        <Container className="grid gap-10 text-center lg:grid-cols-[0.7fr_1.3fr] lg:gap-20 lg:text-left">
           <div>
             <p className="mb-4 text-small font-semibold uppercase text-brand">{services.proof.eyebrow}</p>
             <h2 id="services-proof-title" className="text-heading font-bold text-ink">{services.proof.title}</h2>
-            <p className="mt-5 max-w-md text-pretty text-muted">{services.proof.description}</p>
+            <p className="mx-auto mt-5 max-w-md text-pretty text-muted lg:mx-0">{services.proof.description}</p>
             <Link href={portfolio} className="mt-5 inline-flex min-h-11 items-center gap-2 font-semibold text-brand underline underline-offset-4 hover:text-focus">
               {copy.actions.allProjects}
               <ArrowUpRight aria-hidden="true" size={18} />
@@ -234,10 +234,10 @@ export function ServicesPage({ locale, copy }: { locale: Locale; copy: Dictionar
           </div>
           <div className="divide-y divide-border border-y border-border">
             {proofProjects.map((project) => (
-              <article key={project.slug} className="grid gap-3 py-6 md:grid-cols-[0.8fr_1.2fr] md:gap-8">
+              <article key={project.slug} className="grid gap-3 py-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-8">
                 <h3 className="text-subheading font-semibold text-brand" translate="no">{project.title}</h3>
                 <div>
-                  <p className="max-w-xl text-pretty text-muted">{project.caseStudy?.overview[locale]}</p>
+                  <p className="mx-auto max-w-xl text-pretty text-muted lg:mx-0">{project.caseStudy?.overview[locale]}</p>
                   <Link href={localizedProjectPath(project.slug, locale)} className="mt-3 inline-flex min-h-11 items-center gap-2 font-semibold text-brand underline underline-offset-4 hover:text-focus">
                     {copy.actions.viewProject}
                     <ArrowUpRight aria-hidden="true" size={18} />
@@ -250,22 +250,22 @@ export function ServicesPage({ locale, copy }: { locale: Locale; copy: Dictionar
       </section>
 
       <section aria-labelledby="services-pricing-title" className="py-12 md:py-16">
-        <Container className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center md:gap-12">
-          <div className="max-w-2xl">
+        <Container className="grid gap-8 text-center lg:grid-cols-[1fr_auto] lg:items-center lg:gap-12 lg:text-left">
+          <div className="mx-auto max-w-2xl lg:mx-0">
             <p className="mb-3 text-small font-semibold uppercase text-brand">{services.pricing.eyebrow}</p>
             <h2 id="services-pricing-title" className="text-subheading font-bold text-ink">{services.pricing.title}</h2>
             <p className="mt-3 text-pretty text-muted">{services.pricing.description}</p>
           </div>
-          <Button href={pricing} variant="secondary" className="shrink-0">{services.pricing.label}</Button>
+          <Button href={pricing} variant="secondary" className="justify-self-center lg:justify-self-start">{services.pricing.label}</Button>
         </Container>
       </section>
 
       <section aria-labelledby="services-contact-title" className={`${background.grid} ${background.inverseGrid} bg-brand py-12 text-on-brand md:py-16 lg:py-20`}>
-        <Container className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between md:gap-12">
+        <Container className="flex flex-col items-center gap-6 text-center lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:text-left">
           <div className="max-w-2xl">
             <p className="mb-3 text-small font-semibold uppercase text-on-brand-muted">{services.cta.eyebrow}</p>
             <h2 id="services-contact-title" className="text-heading font-bold">{services.cta.title}</h2>
-            <p className="mt-4 max-w-xl text-pretty text-on-brand-muted">{services.cta.description}</p>
+            <p className="mx-auto mt-4 max-w-xl text-pretty text-on-brand-muted lg:mx-0">{services.cta.description}</p>
           </div>
           <Button href={contact} variant="secondary" className="shrink-0">
             {services.cta.label}

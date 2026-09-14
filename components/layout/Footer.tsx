@@ -8,10 +8,10 @@ import type { Locale } from "@/lib/i18n";
 import { navigationItem } from "@/lib/routes";
 
 const contactLinkClass =
-    "inline-flex min-h-9 items-center gap-3 text-small text-on-brand-muted transition-colors hover:text-on-brand focus-visible:outline-accent";
+    "inline-flex min-h-9 items-center justify-center gap-3 text-center text-small text-on-brand-muted transition-colors hover:text-on-brand focus-visible:outline-accent lg:justify-start lg:text-left";
 
 const socialLinkClass =
-    "inline-flex min-h-10 w-full items-center gap-3 rounded-full border border-border-inverse px-4 text-small text-on-brand-muted transition-colors hover:border-on-brand-muted hover:text-on-brand focus-visible:outline-accent";
+    "inline-flex min-h-10 w-full items-center justify-center gap-3 rounded-full border border-border-inverse px-4 text-center text-small text-on-brand-muted transition-colors hover:border-on-brand-muted hover:text-on-brand focus-visible:outline-accent lg:justify-start lg:text-left";
 
 export function Footer({
                          locale,
@@ -39,15 +39,16 @@ export function Footer({
       >
         <Container
             className="
-          grid gap-10 py-14
-          sm:grid-cols-2
+          grid justify-items-center gap-10 py-14 text-center
           lg:grid-cols-[230px_1.35fr_0.8fr_1fr]
           lg:items-start
           lg:gap-14
+          lg:justify-items-stretch
+          lg:text-left
         "
         >
           {/* Logo */}
-          <div className="flex lg:justify-start">
+          <div className="flex justify-center lg:justify-start">
             <Logo
                 variant="seal"
                 locale={locale}
@@ -88,7 +89,7 @@ export function Footer({
               {copy.footer.contact}
             </h2>
 
-            <address className="flex flex-col items-start gap-1 not-italic">
+            <address className="flex flex-col items-center gap-1 not-italic lg:items-start">
               <a
                   href={site.phone.href}
                   className={contactLinkClass}

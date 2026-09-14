@@ -21,9 +21,9 @@ export function CaseStudyDetails({ project, locale, copy }: { project: CaseStudy
 
   return (
     <div className="bg-surface py-12 md:py-16">
-      <Container>
+      <Container className="text-center lg:text-left">
         {facts.length > 0 && (
-          <dl className="grid gap-8 md:grid-cols-2 md:gap-12">
+          <dl className="grid gap-8 lg:grid-cols-2 lg:gap-12">
             {facts.map((fact) => (
               <div key={fact.label} className="min-w-0 border-t border-border pt-5">
                 <dt className="text-small text-muted">{fact.label}</dt>
@@ -35,9 +35,9 @@ export function CaseStudyDetails({ project, locale, copy }: { project: CaseStudy
         {narratives.length > 0 && (
           <div className="mt-12 space-y-10 md:mt-16 md:space-y-16">
             {narratives.map((section) => (
-              <section key={section.key} aria-labelledby={`project-${section.key}`} className="grid gap-6 md:grid-cols-[1fr_1.4fr] md:gap-12">
+              <section key={section.key} aria-labelledby={`project-${section.key}`} className="grid gap-6 lg:grid-cols-[1fr_1.4fr] lg:gap-12">
                 <h2 id={`project-${section.key}`} className="text-heading font-bold">{section.title}</h2>
-                <div className="max-w-2xl space-y-4 text-pretty text-muted">
+                <div className="mx-auto max-w-2xl space-y-4 text-pretty text-muted lg:mx-0">
                   {section.paragraphs?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                 </div>
               </section>

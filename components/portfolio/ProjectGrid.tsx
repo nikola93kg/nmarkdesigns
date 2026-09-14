@@ -11,7 +11,7 @@ interface ProjectGridProps {
 
 export function ProjectGrid({ projects, locale, copy }: ProjectGridProps) {
   return (
-    <div className="grid items-end gap-x-8 gap-y-10 md:grid-cols-2 md:gap-y-16 lg:grid-cols-12 lg:gap-x-12 lg:gap-y-20">
+    <div className="grid items-end gap-x-8 gap-y-10 md:gap-y-16 lg:grid-cols-12 lg:gap-x-12 lg:gap-y-20">
       {projects.map((project, index) => {
         // Alternate 7/5 and 5/7 pairs without changing source or keyboard order.
         const large = index % 4 === 0 || index % 4 === 3;

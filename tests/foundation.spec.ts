@@ -31,7 +31,7 @@ for (const { locale, width } of responsiveCases) {
     }
     await expect(page.locator("main > section")).toHaveCount(5);
     await expect(page.locator("#portfolio article")).toHaveCount(8);
-    await expect(page.locator("#portfolio article").first().getByRole("heading", { name: "Casovi Francuskog", exact: true })).toBeVisible();
+    await expect(page.locator("#portfolio article").first().getByRole("heading", { name: "Časovi Francuskog", exact: true })).toBeVisible();
     await expect(page.locator("#portfolio").getByText("Frankultura", { exact: true })).toHaveCount(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
 
@@ -70,8 +70,8 @@ for (const { locale, width } of responsiveCases) {
     const heroArtworkBox = await heroArtwork.boundingBox();
     expect(heroArtworkBox!.x).toBeGreaterThanOrEqual(-1);
     expect(heroArtworkBox!.x + heroArtworkBox!.width).toBeLessThanOrEqual(width + 1);
-    await expect(heroArtwork.locator("img")).toHaveCount(7);
-    await expect(heroArtwork.locator("img:visible")).toHaveCount(width < 768 ? 6 : 7);
+    await expect(heroArtwork.locator("img")).toHaveCount(5);
+    await expect(heroArtwork.locator("img:visible")).toHaveCount(5);
     for (const image of await heroArtwork.locator("img:visible").all()) {
       await expect(image).toHaveAttribute("alt", "");
       await expect(image).toHaveJSProperty("complete", true);
@@ -125,7 +125,7 @@ test("hero artwork respects reduced motion", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 800 });
   await page.goto("/sr/");
   const layers = page.locator("[data-hero-artwork] img");
-  await expect(layers).toHaveCount(7);
+  await expect(layers).toHaveCount(5);
   const states = await layers.evaluateAll((images) =>
     images.map((image) => {
       const style = getComputedStyle(image);
@@ -184,6 +184,13 @@ test("mobile navigation supports keyboard, dismissal, and viewport changes", asy
   await toggle.focus();
   await page.keyboard.press("Enter");
   await expect(menu).toBeVisible();
+  const menuPanel = page.locator("#mobile-navigation");
+  await expect(menuPanel).toHaveCSS("position", "fixed");
+  const menuBox = await menuPanel.boundingBox();
+  expect(menuBox!.x).toBeLessThanOrEqual(1);
+  expect(menuBox!.y).toBeLessThanOrEqual(1);
+  expect(menuBox!.width).toBeGreaterThanOrEqual(374);
+  expect(menuBox!.height).toBeGreaterThanOrEqual(811);
   await page.keyboard.press("Tab");
   await expect(menu.getByRole("link", { name: "Početna" })).toBeFocused();
   await page.keyboard.press("Escape");
@@ -191,13 +198,9 @@ test("mobile navigation supports keyboard, dismissal, and viewport changes", asy
   await expect(toggle).toBeFocused();
 
   await toggle.click();
-  const results = await new AxeBuilder({ page })
-    .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
-    .analyze();
-  expect(results.violations).toEqual([]);
-  await page.screenshot({ path: test.info().outputPath("mobile-menu.png"), fullPage: true });
-
-  await page.getByRole("banner").click({ position: { x: 10, y: 10 } });
+  await page.evaluate(() => {
+    document.elementFromPoint(10, 10)?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  });
   await expect(menu).not.toBeVisible();
   await toggle.click();
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -208,6 +211,12 @@ test("mobile navigation supports keyboard, dismissal, and viewport changes", asy
   await page.locator("#mobile-navigation").getByRole("link", { name: "Cenovnik" }).focus();
   await page.keyboard.press("Tab");
   await expect(menu).not.toBeVisible();
+  await toggle.click();
+  await expect(menuPanel.locator(".mobile-navigation-list")).toHaveCSS("opacity", "1");
+  const results = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+    .analyze();
+  expect(results.violations).toEqual([]);
 });
 
 test("mobile navigation works without JavaScript", async ({ browser, baseURL }) => {

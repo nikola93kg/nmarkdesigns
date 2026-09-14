@@ -19,24 +19,24 @@ export function ContactPage({ locale, copy }: { locale: Locale; copy: Dictionary
   return (
     <>
       <section aria-labelledby="contact-title" className={`${background.grid} ${background.inverseGrid} bg-brand py-12 text-on-brand md:py-16 lg:py-20`}>
-        <Container className="grid gap-6 md:grid-cols-2 md:items-end md:gap-12">
+        <Container className="grid gap-6 text-center lg:grid-cols-2 lg:items-end lg:gap-12 lg:text-left">
           <div>
             <p className="mb-4 text-small font-medium text-on-brand-muted">{copy.intro.eyebrow}</p>
             <h1 id="contact-title" className="text-display font-bold">{copy.intro.title}</h1>
           </div>
-          <p className="max-w-lg text-pretty text-on-brand-muted">{copy.intro.description}</p>
+          <p className="mx-auto max-w-lg text-pretty text-on-brand-muted lg:mx-0">{copy.intro.description}</p>
         </Container>
       </section>
-      <Container className="grid gap-12 py-section md:grid-cols-[1fr_1.4fr] md:gap-12 lg:gap-24">
+      <Container className="grid gap-12 py-section text-center lg:grid-cols-[1fr_1.4fr] lg:gap-24 lg:text-left">
         <section aria-labelledby="contact-details-title">
           <h2 id="contact-details-title" className="text-subheading font-bold">{copy.details.title}</h2>
-          <p className="mt-4 max-w-sm text-pretty text-muted">{copy.details.description}</p>
+          <p className="mx-auto mt-4 max-w-sm text-pretty text-muted lg:mx-0">{copy.details.description}</p>
           <address className="mt-8 not-italic">
             <ul className="divide-y divide-border border-y border-border">
               {methods.map(({ label, value, href, icon: Icon }) => (
                 <li key={href}>
-                  <a href={href} className="group flex min-h-12 items-start gap-4 py-5 text-brand">
-                    <Icon size={20} className="mt-1 shrink-0" aria-hidden="true" />
+                  <a href={href} className="group flex min-h-12 flex-col items-center gap-2 py-5 text-center text-brand lg:flex-row lg:items-start lg:gap-4 lg:text-left">
+                    <Icon size={20} className="shrink-0 lg:mt-1" aria-hidden="true" />
                     <span className="min-w-0">
                       <span className="block text-small text-muted">{label}</span>
                       <span className="mt-1 block break-words font-medium underline-offset-4 group-hover:underline">{value}</span>

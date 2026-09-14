@@ -6,15 +6,15 @@ import type { Dictionary } from "@/content/i18n/types";
 export function AboutProfile({ copy }: { copy: Dictionary["about"]["profile"] }) {
   return (
     <section aria-labelledby="about-profile-title" className="py-section">
-      <Container className="grid items-start gap-10 md:grid-cols-[1.3fr_1fr] md:gap-12 lg:gap-20">
+      <Container className="grid items-start gap-10 text-center lg:grid-cols-[1.3fr_1fr] lg:gap-20 lg:text-left">
         <div>
           <p className="mb-4 text-small font-medium text-brand">{copy.eyebrow}</p>
-          <h2 id="about-profile-title" className="max-w-xl text-heading font-bold">{copy.title}</h2>
-          <div className="mt-6 max-w-prose space-y-5 text-pretty text-muted">
+          <h2 id="about-profile-title" className="mx-auto max-w-xl text-heading font-bold lg:mx-0">{copy.title}</h2>
+          <div className="mx-auto mt-6 max-w-prose space-y-5 text-pretty text-muted lg:mx-0">
             {copy.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
         </div>
-        <figure className="mx-auto w-full max-w-80 md:mx-0 md:ml-auto md:max-w-100">
+        <figure className="mx-auto w-full max-w-80 lg:mx-0 lg:ml-auto lg:max-w-100">
           <Image
             {...founderPortrait}
             alt={copy.imageAlt}

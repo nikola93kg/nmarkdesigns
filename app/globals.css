@@ -108,3 +108,36 @@
     }
   }
 }
+
+@layer components {
+  .mobile-navigation-panel {
+    width: 100vw;
+    min-height: 100dvh;
+    opacity: 0;
+    transition: opacity 260ms ease;
+  }
+
+  .mobile-navigation[open] .mobile-navigation-panel {
+    opacity: 1;
+  }
+
+  .mobile-navigation-list {
+    opacity: 0;
+    transform: translateY(0.75rem);
+    transition:
+      opacity 340ms ease 80ms,
+      transform 420ms cubic-bezier(0.16, 1, 0.3, 1) 80ms;
+  }
+
+  .mobile-navigation[open] .mobile-navigation-list {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-navigation-list {
+      transform: none;
+      transition: none;
+    }
+  }
+}

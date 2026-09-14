@@ -14,7 +14,7 @@ export function CaseStudyHero({ project, locale, copy }: { project: CaseStudyPro
 
   return (
     <section aria-labelledby="case-study-title" className={`${background.grid} ${background.inverseGrid} bg-brand pt-6 pb-12 text-on-brand md:pt-8 md:pb-16`}>
-      <Container>
+      <Container className="text-center lg:text-left">
         <nav aria-label={copy.navigation.portfolio}>
           <Link href={localizedPath("portfolio", locale)} className="inline-flex min-h-11 items-center gap-2 text-small text-on-brand-muted underline underline-offset-4 hover:text-on-brand focus-visible:outline-accent">
             <ArrowLeft aria-hidden="true" size={18} />{copy.actions.allProjects}
@@ -26,7 +26,7 @@ export function CaseStudyHero({ project, locale, copy }: { project: CaseStudyPro
             <h1 id="case-study-title" className="text-display font-bold" translate="no">{project.title}</h1>
           </div>
           <div>
-            <p className="max-w-xl text-pretty text-on-brand-muted">{project.caseStudy.overview[locale]}</p>
+            <p className="mx-auto max-w-xl text-pretty text-on-brand-muted lg:mx-0">{project.caseStudy.overview[locale]}</p>
             {project.websiteUrl && (
               <Button href={project.websiteUrl} external variant="secondary" className="mt-6 focus-visible:outline-accent">
                 {copy.portfolio.visitWebsite}<ArrowUpRight aria-hidden="true" size={18} />
