@@ -38,10 +38,10 @@ for (const locale of locales) {
     await expect(hero.getByRole("link", { name: copy.navigation.pricing, exact: true })).toHaveCount(0);
     const artwork = hero.locator("[data-hero-artwork]");
     await expect(artwork).toHaveAttribute("aria-hidden", "true");
-    await expect(artwork.locator("img")).toHaveCount(7);
+    await expect(artwork.locator("img")).toHaveCount(5);
     await expect(artwork.locator('[data-hero-artwork-layer="tablet"]')).toHaveAttribute("width", "1536");
     await expect(artwork.locator('[data-hero-artwork-layer="tablet"]')).toHaveAttribute("height", "1024");
-    expect(await artwork.locator("img").evaluateAll((images) => images.map((image) => image.getAttribute("alt")))).toEqual(Array(7).fill(""));
+    expect(await artwork.locator("img").evaluateAll((images) => images.map((image) => image.getAttribute("alt")))).toEqual(Array(5).fill(""));
     const nav = page.getByRole("navigation", { name: copy.accessibility.mainNavigation, exact: true });
     await expect(nav.getByRole("link", { name: copy.navigation.home, exact: true })).toHaveAttribute("href", `/${locale}/`);
     await expect(nav.getByRole("link", { name: copy.navigation.portfolio, exact: true })).toHaveAttribute("href", `/${locale}/portfolio/`);
@@ -89,6 +89,7 @@ for (const locale of locales) {
     }
     await page.getByLabel(copy.accessibility.menu, { exact: true }).click();
     await expect(page.getByRole("navigation", { name: copy.accessibility.mobileNavigation })).toBeVisible();
+    await page.getByLabel(copy.accessibility.menu, { exact: true }).click();
     const target = locale === "sr" ? "en" : "sr";
     await page.getByRole("navigation", { name: copy.accessibility.languageNavigation }).getByRole("link", { name: copy.accessibility.languageLabels[target], exact: true }).click();
     await expect(page.locator("html")).toHaveAttribute("lang", target);
