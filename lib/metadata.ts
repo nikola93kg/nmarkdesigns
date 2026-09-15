@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { site } from "@/content/site";
 import { locales, localeSettings, type Locale } from "@/lib/i18n";
-import { localizedPath, localizedProjectPath, type RouteKey } from "@/lib/routes";
+import { localizedBlogPostPath, localizedPath, localizedProjectPath, type RouteKey } from "@/lib/routes";
 import { canonicalUrl, pageAlternates } from "@/lib/public-pages";
 import { pageRobots } from "@/lib/seo-config";
 
@@ -19,7 +19,8 @@ interface PageMetadataContent {
 
 type PageMetadataOptions = PageMetadataContent & (
   | { route: "portfolio"; slug?: string }
-  | { route: Exclude<RouteKey, "portfolio">; slug?: never }
+  | { route: "blog"; slug?: string }
+  | { route: Exclude<RouteKey, "portfolio" | "blog">; slug?: never }
 );
 
 export function createPageMetadata({
@@ -32,7 +33,9 @@ export function createPageMetadata({
 }: PageMetadataOptions): Metadata {
   const pagePath = (language: Locale) => route === "portfolio" && slug
     ? localizedProjectPath(slug, language)
-    : localizedPath(route, language);
+    : route === "blog" && slug
+      ? localizedBlogPostPath(slug, language)
+      : localizedPath(route, language);
   const url = canonicalUrl(pagePath(locale));
   const socialTitle = title === site.name ? title : `${title} | ${site.name}`;
   const images = image ? [{

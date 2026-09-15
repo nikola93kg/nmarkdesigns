@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { blogPosts } from "@/content/blog";
 import { site } from "@/content/site";
 import { caseStudyProjects } from "@/content/projects";
 import { publicPages } from "@/lib/public-pages";
@@ -7,10 +8,13 @@ import { robotsForHost } from "@/lib/crawl";
 import { serializeJsonLd } from "@/lib/schema";
 
 const slugs = caseStudyProjects.map((project) => project.slug);
+const blogSlugs = blogPosts.map((post) => post.slug);
 const pairs = [
   ["/sr/", "/en/"], ["/sr/portfolio/", "/en/portfolio/"],
+  ["/sr/blog/", "/en/blog/"],
   ["/sr/usluge/", "/en/services/"], ["/sr/o-nama/", "/en/about/"], ["/sr/kontakt/", "/en/contact/"],
   ["/sr/cenovnik/", "/en/pricing/"],
+  ...blogSlugs.map((slug) => [`/sr/blog/${slug}/`, `/en/blog/${slug}/`]),
   ...slugs.map((slug) => [`/sr/portfolio/${slug}/`, `/en/portfolio/${slug}/`]),
 ];
 const paths = pairs.flat();
@@ -38,7 +42,7 @@ for (const pair of pairs) {
       await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", site.url + path);
       await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute("content", title);
       await expect(page.locator('meta[name="twitter:description"]')).toHaveAttribute("content", description!);
-      const image = await page.locator('meta[property="og:image"]').getAttribute("content");
+      const image = await page.locator('meta[property="og:image"]').evaluateAll((elements) => elements[0]?.getAttribute("content") ?? null);
       const isServicesPage = path === "/sr/usluge/" || path === "/en/services/";
       if (isServicesPage) {
         expect(image).toBeNull();
@@ -46,7 +50,7 @@ for (const pair of pairs) {
         await expect(page.locator('meta[name="twitter:image"]')).toHaveCount(0);
         await expect(page.locator('meta[property="og:image:alt"]')).toHaveCount(0);
       } else {
-        expect(image).toMatch(/^https:\/\/nmarkdesigns\.com\/(images|projects)\//);
+        expect(image).toMatch(/^https:\/\/nmarkdesigns\.com\/(images|projects|blog)\//);
         await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute("content", image!);
         expect((await page.locator('meta[property="og:image:alt"]').getAttribute("content"))?.length).toBeGreaterThan(10);
       }
@@ -77,11 +81,16 @@ for (const pair of pairs) {
       }
       if (path === "/sr/kontakt/" || path === "/en/contact/") await expect(page.locator("main address")).toHaveCount(1);
       const schema = await page.locator('script[type="application/ld+json"]').allTextContents();
-      const expectedCount = path === "/sr/" || path === "/en/" || path === "/sr/o-nama/" || path === "/en/about/" || Boolean(project) ? 1 : 0;
+      const blogPost = blogPosts.find((entry) => path.endsWith(`/blog/${entry.slug}/`));
+      const expectedCount = path === "/sr/" || path === "/en/" || path === "/sr/o-nama/" || path === "/en/about/" || Boolean(project) || Boolean(blogPost) ? 1 : 0;
       expect(schema).toHaveLength(expectedCount);
       for (const source of schema) {
         const value: unknown = JSON.parse(source);
         expect(value).toMatchObject({ "@context": "https://schema.org" });
+        if (blogPost) expect(value).toMatchObject({ "@graph": [
+          { "@type": "BlogPosting", headline: blogPost.title[index === 0 ? "sr" : "en"], url: site.url + path },
+          { "@type": "BreadcrumbList" },
+        ] });
         expect(source).not.toMatch(/"(address|openingHours|priceRange|legalName|numberOfEmployees|foundingDate|aggregateRating|review|areaServed|SearchAction|FAQPage|Offer|Product|Article)"/);
         if (project) expect(value).toMatchObject({ "@type": "BreadcrumbList", itemListElement: [
           { position: 1, item: `${site.url}/${index === 0 ? "sr" : "en"}/portfolio/` },
@@ -118,7 +127,7 @@ test("complete sitemap, unique metadata and preview robots", async ({ page, requ
   await page.setContent("<main></main>");
   const urls = await page.evaluate((xml) => Array.from(new DOMParser().parseFromString(xml, "application/xml").getElementsByTagName("url")).map((entry) => entry.getElementsByTagName("loc")[0].textContent), source);
   expect(urls.sort()).toEqual(paths.map((path) => site.url + path).sort());
-  expect(source).not.toMatch(/lastmod|changefreq|priority|localhost|blog/);
+  expect(source).not.toMatch(/lastmod|changefreq|priority|localhost/);
   const titles = new Set<string>();
   const descriptions = new Set<string>();
   for (const path of paths) {
@@ -137,7 +146,7 @@ test("complete sitemap, unique metadata and preview robots", async ({ page, requ
   }
 });
 
-test("exact permanent legacy redirects have one hop and preserve queries", async ({ request }) => {
+test("exact permanent legacy redirects have one hop and preserve queries", async ({ request, baseURL }) => {
   const mappings = [
     ["/", "/sr/"], ["/about/", "/sr/o-nama/"], ["/contact/", "/sr/kontakt/"],
     ["/cenovnik/", "/sr/cenovnik/"], ["/portfolio/", "/sr/portfolio/"], ["/all-services/", "/sr/usluge/"],
@@ -147,7 +156,7 @@ test("exact permanent legacy redirects have one hop and preserve queries", async
     for (const path of new Set([legacy, legacy === "/" ? legacy : legacy.slice(0, -1)])) {
       const response = await request.get(`${path}?utm_source=migration`, { maxRedirects: 0 });
       expect(response.status(), path).toBe(308);
-      const location = new URL(response.headers().location, "http://127.0.0.1:3100");
+      const location = new URL(response.headers().location, baseURL);
       expect(location.pathname + location.hash).toBe(target);
       expect(location.search).toBe("?utm_source=migration");
       expect((await request.get(location.toString(), { maxRedirects: 0 })).status()).toBe(200);
@@ -156,7 +165,7 @@ test("exact permanent legacy redirects have one hop and preserve queries", async
   for (const path of paths) {
     const response = await request.get(`${path.slice(0, -1)}?utm_source=canonical`, { maxRedirects: 0 });
     expect(response.status()).toBe(308);
-    const location = new URL(response.headers().location, "http://127.0.0.1:3100");
+    const location = new URL(response.headers().location, baseURL);
     expect(location.pathname).toBe(path);
     expect(location.search).toBe("?utm_source=canonical");
     expect((await request.get(location.toString(), { maxRedirects: 0 })).status()).toBe(200);
@@ -164,7 +173,7 @@ test("exact permanent legacy redirects have one hop and preserve queries", async
 });
 
 test("unknown legacy, locales and case variants are genuine 404s", async ({ request }) => {
-  for (const path of ["/unknown/", "/fr/", "/SR/", "/About/", "/portfolio/UNKNOWN/", "/sr/about/", "/en/o-nama/", "/sr/pricing/", "/en/cenovnik/", "/sr/portfolio/COOLFRIDGEGUYS/", "/en/contact/extra/", "/sr/cenovnik/extra/", "/blog/", "/portfolio-2/", "/maintenance-mode/", "/faqs/", "/usluge/", "/kontakt/", "/wp-admin/", "/wp-json/", "/sr/blog/", "/en/blog/", "/random.php", "/sr/unknown.html"]) {
+  for (const path of ["/unknown/", "/fr/", "/SR/", "/About/", "/portfolio/UNKNOWN/", "/sr/about/", "/en/o-nama/", "/sr/pricing/", "/en/cenovnik/", "/sr/portfolio/COOLFRIDGEGUYS/", "/en/contact/extra/", "/sr/cenovnik/extra/", "/blog/", "/portfolio-2/", "/maintenance-mode/", "/faqs/", "/usluge/", "/kontakt/", "/wp-admin/", "/wp-json/", "/sr/blog/UNKNOWN/", "/en/blog/UNKNOWN/", "/random.php", "/sr/unknown.html"]) {
     const response = await request.get(path, { maxRedirects: 0 });
     expect(response.status(), path).toBe(404);
     expect(response.headers()["x-robots-tag"]).toBe("noindex, nofollow");

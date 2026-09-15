@@ -1,6 +1,7 @@
+import { blogPosts } from "@/content/blog";
 import { caseStudyProjects } from "@/content/projects";
 import { locales, type Locale } from "@/lib/i18n";
-import { localizedPath, localizedProjectPath, routes, type RouteKey } from "@/lib/routes";
+import { localizedBlogPostPath, localizedPath, localizedProjectPath, routes, type RouteKey } from "@/lib/routes";
 import { site } from "@/content/site";
 
 export interface PublicPage {
@@ -14,6 +15,9 @@ export const publicPages: readonly PublicPage[] = locales.flatMap((locale) => [
   ...(Object.keys(routes) as RouteKey[])
     .filter((route) => routes[route].implemented)
     .map((route) => ({ locale, route, path: localizedPath(route, locale) })),
+  ...blogPosts.map(({ slug }) => ({
+    locale, route: "blog" as const, slug, path: localizedBlogPostPath(slug, locale),
+  })),
   ...caseStudyProjects.map(({ slug }) => ({
     locale, route: "portfolio" as const, slug, path: localizedProjectPath(slug, locale),
   })),

@@ -1,7 +1,7 @@
 import { site, type NavigationItem } from "@/content/site";
 import { defaultLocale, isLocale, type Locale, type Localized } from "@/lib/i18n";
 
-export type RouteKey = "home" | "portfolio" | "services" | "about" | "contact" | "pricing";
+export type RouteKey = "home" | "portfolio" | "blog" | "services" | "about" | "contact" | "pricing";
 
 interface RouteDefinition {
   paths: Localized<string>;
@@ -13,6 +13,10 @@ export const routes: Record<RouteKey, RouteDefinition> = {
   home: { paths: { sr: "", en: "" }, implemented: true },
   portfolio: {
     paths: { sr: "portfolio", en: "portfolio" },
+    implemented: true,
+  },
+  blog: {
+    paths: { sr: "blog", en: "blog" },
     implemented: true,
   },
   services: {
@@ -34,7 +38,7 @@ export const routes: Record<RouteKey, RouteDefinition> = {
 };
 
 export const navigationOrder: readonly RouteKey[] = [
-  "home", "portfolio", "services", "about", "contact",
+  "home", "portfolio", "blog", "services", "about", "contact",
 ];
 
 export const corePageRoutes = ["services", "about", "contact", "pricing"] as const;
@@ -50,6 +54,10 @@ export function localizedPath(route: RouteKey, locale: Locale): string {
 
 export function localizedProjectPath(slug: string, locale: Locale): string {
   return `${localizedPath("portfolio", locale)}${encodeURIComponent(slug)}/`;
+}
+
+export function localizedBlogPostPath(slug: string, locale: Locale): string {
+  return `${localizedPath("blog", locale)}${encodeURIComponent(slug)}/`;
 }
 
 export function navigationItem(
@@ -77,7 +85,7 @@ export function equivalentPath(path: string, targetLocale: Locale): string | nul
   const route = (Object.keys(routes) as RouteKey[]).find(
     (key) => routes[key].paths[locale] === segment,
   );
-  if (!route || (rest.length > 0 && (route !== "portfolio" || rest.length !== 1))) {
+  if (!route || (rest.length > 0 && ((route !== "portfolio" && route !== "blog") || rest.length !== 1))) {
     return null;
   }
 

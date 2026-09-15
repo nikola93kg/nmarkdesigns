@@ -75,6 +75,15 @@ export interface Dictionary {
     contactTitle: string;
     visitWebsite: string;
   };
+  blog: {
+    metadata: { title: string; description: string };
+    intro: SectionCopy;
+    readArticle: string;
+    readTime: string;
+    publishedOn: string;
+    empty: string;
+    cta: SectionCopy & { label: string };
+  };
   services: {
     metadata: { title: string; description: string };
     intro: SectionCopy;

@@ -8,6 +8,7 @@ const layers = [
     width: 1536,
     height: 1024,
     className: styles.backPanel,
+    fraction: 0.72,
     preload: false,
   },
   {
@@ -16,6 +17,7 @@ const layers = [
     width: 1536,
     height: 1024,
     className: styles.darkPanel,
+    fraction: 0.49,
     preload: false,
   },
   {
@@ -24,6 +26,7 @@ const layers = [
     width: 1536,
     height: 1024,
     className: styles.tablet,
+    fraction: 0.73,
     preload: true,
   },
   {
@@ -32,6 +35,7 @@ const layers = [
     width: 1199,
     height: 1312,
     className: styles.phone,
+    fraction: 0.29,
     preload: false,
   },
   {
@@ -40,6 +44,7 @@ const layers = [
     width: 1536,
     height: 1024,
     className: styles.brandCard,
+    fraction: 0.28,
     preload: false,
   },
 ] as const;
@@ -54,8 +59,8 @@ export function HeroArtwork() {
           alt=""
           width={layer.width}
           height={layer.height}
-          sizes="(min-width: 1280px) 656px, (min-width: 768px) 48vw, 94vw"
-          quality={82}
+          sizes={`(min-width: 1280px) ${576 * layer.fraction}px, (min-width: 1024px) calc((100vw - 128px) * ${0.4792 * layer.fraction}), (min-width: 768px) ${656 * layer.fraction}px, (min-width: 416px) ${376 * layer.fraction}px, calc((100vw - 40px) * ${layer.fraction})`}
+          quality={75}
           preload={layer.preload}
           className={`${styles.layer} ${layer.className}`}
           data-hero-artwork-layer={layer.id}

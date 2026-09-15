@@ -3,7 +3,7 @@ import type { Dictionary } from "./types";
 const sr = {
   navigation: {
     home: "Početna", portfolio: "Portfolio", services: "Usluge",
-    about: "O nama", contact: "Kontakt", pricing: "Cenovnik",
+    blog: "Blog", about: "O nama", contact: "Kontakt", pricing: "Cenovnik",
   },
   accessibility: {
     skipLink: "Pređi na sadržaj",
@@ -51,6 +51,27 @@ const sr = {
     },
     contactTitle: "Razgovarajmo o vašem sajtu.",
     visitWebsite: "Posetite web sajt",
+  },
+  blog: {
+    metadata: {
+      title: "Blog - saveti za web sajtove lokalnih biznisa",
+      description: "Korisni članci o tome kako lokalni biznisi mogu da unaprede web sajt, mobilno iskustvo, SEO osnovu i broj upita bez nerealnih obećanja.",
+    },
+    intro: {
+      eyebrow: "Blog",
+      title: "Praktični saveti za web sajt koji donosi više upita",
+      description: "Članci su namenjeni malim i lokalnim biznisima koji žele jasniji sajt, bolji mobilni prikaz i više poruka, poziva ili rezervacija.",
+    },
+    readArticle: "Pročitaj članak",
+    readTime: "min čitanja",
+    publishedOn: "Objavljeno",
+    empty: "Novi članci uskoro.",
+    cta: {
+      eyebrow: "Besplatna procena sajta",
+      title: "Pošaljite sajt i dobićete 3 konkretna predloga",
+      description: "Ako želite brz i jasan sledeći korak, pošaljite URL sajta i javićemo šta prvo ima najveći uticaj na upite.",
+      label: "Zatražite besplatnu procenu sajta",
+    },
   },
   services: {
     metadata: {

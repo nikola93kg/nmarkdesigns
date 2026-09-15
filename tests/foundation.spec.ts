@@ -48,7 +48,7 @@ for (const { locale, width } of responsiveCases) {
         };
       }),
     );
-    expect(headerControls).toHaveLength(width >= 1024 ? 9 : 4);
+    expect(headerControls).toHaveLength(width >= 1024 ? 10 : 4);
     for (const [index, control] of headerControls.entries()) {
       expect(control.left, control.label).toBeGreaterThanOrEqual(0);
       expect(control.right, control.label).toBeLessThanOrEqual(width);

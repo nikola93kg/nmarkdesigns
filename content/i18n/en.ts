@@ -3,7 +3,7 @@ import type { Dictionary } from "./types";
 const en = {
   navigation: {
     home: "Home", portfolio: "Portfolio", services: "Services",
-    about: "About", contact: "Contact", pricing: "Pricing",
+    blog: "Blog", about: "About", contact: "Contact", pricing: "Pricing",
   },
   accessibility: {
     skipLink: "Skip to content",
@@ -51,6 +51,27 @@ const en = {
     },
     contactTitle: "Let's talk about your website.",
     visitWebsite: "Visit website",
+  },
+  blog: {
+    metadata: {
+      title: "Blog - practical website advice for local businesses",
+      description: "Useful articles on improving website structure, mobile usability, SEO foundations, and enquiries for local businesses.",
+    },
+    intro: {
+      eyebrow: "Blog",
+      title: "Practical website advice that supports more enquiries",
+      description: "Articles for small and local businesses that want a clearer website, stronger mobile experience, and more calls, messages, or bookings.",
+    },
+    readArticle: "Read article",
+    readTime: "min read",
+    publishedOn: "Published",
+    empty: "More articles coming soon.",
+    cta: {
+      eyebrow: "Free website check",
+      title: "Send your website and get 3 practical improvements",
+      description: "If you want a fast, actionable next step, send your URL and we will point out what can improve mobile usability, trust, and enquiries first.",
+      label: "Request a free website review",
+    },
   },
   services: {
     metadata: {
