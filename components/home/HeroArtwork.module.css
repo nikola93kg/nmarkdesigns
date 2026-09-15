@@ -14,7 +14,11 @@
   height: auto;
   pointer-events: none;
   user-select: none;
-  opacity: 1;
+  transform: translate3d(var(--start-x), var(--start-y), 0) scale(var(--start-scale, 1)) rotate(var(--start-rotate, 0deg));
+  opacity: 0;
+  animation: assemble 2400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--delay);
+  will-change: transform, opacity;
 }
 
 .backPanel {
@@ -105,13 +109,6 @@
 @media (max-width: 47.9375rem) {
   .artwork {
     width: min(100%, 23.5rem);
-  }
-
-  .layer {
-    transform: none;
-    opacity: 1;
-    animation: none;
-    will-change: auto;
   }
 
   .pencil {

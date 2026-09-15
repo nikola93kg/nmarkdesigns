@@ -33,6 +33,9 @@ export const metadata: Metadata = {
     shortcut: "/web-app-manifest-192x192.png",
     apple: [{ url: "/web-app-manifest-192x192.png", sizes: "192x192", type: "image/png" }],
   },
+  verification: {
+    google: "6Xv8e2FJ-f85FWS7ql7WzFIFeZDTlLawCJ2LNP475s8",
+  },
   robots: pageRobots,
 };
 
