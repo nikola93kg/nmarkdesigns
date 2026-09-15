@@ -51,7 +51,9 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
 
   return (
     <html lang={localeSettings[locale].language} className={dmSans.variable}>
-      <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+      <head>
+        <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+      </head>
       <body className="flex min-h-dvh flex-col">
         <a
           href="#main-content"

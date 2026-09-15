@@ -1,5 +1,3 @@
-import Script from "next/script";
-
 interface GoogleAnalyticsProps {
   measurementId?: string;
 }
@@ -7,26 +5,24 @@ interface GoogleAnalyticsProps {
 export function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps) {
   const id = measurementId?.trim();
   if (!id) return null;
-
-  const serializedId = JSON.stringify(id);
+  if (!/^G-[A-Z0-9]+$/.test(id)) return null;
 
   return (
     <>
-      {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
-      <Script
-        id="google-analytics-gtag"
+      <script
+        async
         src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`}
-        strategy="beforeInteractive"
       />
-      {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
-      <Script id="google-analytics-init" strategy="beforeInteractive">
-        {`
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
 window.dataLayer = window.dataLayer || [];
-function gtag(){window.dataLayer.push(arguments);}
+function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', ${serializedId});
-        `}
-      </Script>
+gtag('config', '${id}');
+          `,
+        }}
+      />
     </>
   );
 }
