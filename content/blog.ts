@@ -5,6 +5,15 @@ export interface BlogSection {
   heading: string;
   paragraphs: readonly string[];
   list?: readonly string[];
+  media?: readonly BlogMedia[];
+}
+
+export interface BlogMedia {
+  image: string;
+  width: number;
+  height: number;
+  alt: string;
+  caption: string;
 }
 
 export interface BlogPost {
@@ -12,6 +21,7 @@ export interface BlogPost {
   slug: string;
   publishedOn: string;
   title: Localized<string>;
+  seoTitle?: Localized<string>;
   description: Localized<string>;
   excerpt: Localized<string>;
 }
@@ -29,6 +39,7 @@ export interface LocalizedBlogPost {
   publishedOn: string;
   readTimeMinutes: number;
   title: string;
+  seoTitle: string;
   description: string;
   excerpt: string;
   coverAlt: string;
@@ -36,6 +47,27 @@ export interface LocalizedBlogPost {
 }
 
 export const blogPosts: readonly BlogPost[] = [
+  {
+    id: "iphone-duo-responsive-design",
+    slug: "iphone-duo-responsive-web-dizajn",
+    publishedOn: "2026-09-15",
+    title: {
+      sr: "iPhone Duo menja responsive web dizajn — da li je vaš sajt spreman za foldable telefone?",
+      en: "iPhone Duo changes responsive web design — is your website ready for foldable phones?",
+    },
+    seoTitle: {
+      sr: "iPhone Duo i budućnost responsive web dizajna",
+      en: "iPhone Duo and the future of responsive web design",
+    },
+    description: {
+      sr: "Appleov foldable iPhone Duo pokazuje zašto mobilna verzija sajta više ne može da se proverava samo na jednom telefonu i par breakpointova.",
+      en: "Apple's foldable iPhone Duo shows why a mobile website can no longer be checked on one phone and a few breakpoints.",
+    },
+    excerpt: {
+      sr: "Foldable telefoni pomeraju granicu između telefona i tableta. Zato responsive web dizajn mora da bude fluidan, testiran i spreman za više stanja ekrana.",
+      en: "Foldable phones blur the line between phone and tablet. Responsive web design now needs to be fluid, tested, and ready for more screen states.",
+    },
+  },
   {
     id: "local-business-homepage-check",
     slug: "homepage-checklist-za-lokalni-biznis",
@@ -96,6 +128,7 @@ export function getBlogPosts(locale: Locale): readonly LocalizedBlogPost[] {
     publishedOn: post.publishedOn,
     readTimeMinutes: Math.max(1, Math.ceil([blogEditorial[post.id].answer[locale], ...blogEditorial[post.id].sections[locale].flatMap((section) => [section.heading, ...section.paragraphs, ...(section.list ?? [])])].join(" ").split(/\s+/).length / 200)),
     title: post.title[locale],
+    seoTitle: (post.seoTitle ?? post.title)[locale],
     description: post.description[locale],
     excerpt: post.excerpt[locale],
     coverAlt: blogEditorial[post.id].alt[locale],

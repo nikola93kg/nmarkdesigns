@@ -27,7 +27,7 @@ async function resolveArticle(params: PageProps<"/[locale]/blog/[slug]">["params
 export async function generateMetadata({ params }: PageProps<"/[locale]/blog/[slug]">) {
   const { locale, post } = await resolveArticle(params);
   const metadata = createPageMetadata({
-    title: post.title,
+    title: post.seoTitle,
     description: post.description,
     locale,
     route: "blog",

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { getBlogPosts, type LocalizedBlogPost } from "@/content/blog";
 import { blogLabels } from "@/content/blog-editorial";
 import type { Dictionary } from "@/content/i18n/types";
-import type { Locale } from "@/lib/i18n";
+import { localeSettings, type Locale } from "@/lib/i18n";
 import { localizedPath } from "@/lib/routes";
 import { BlogCard } from "./BlogCard";
 import styles from "./Blog.module.css";
@@ -21,7 +21,7 @@ export function BlogArticlePage({ post, copy, locale }: { post: LocalizedBlogPos
             <p className="mt-6 text-small font-semibold text-accent">{post.topic}</p>
             <h1 className="mt-4 text-balance text-display font-semibold">{post.title}</h1>
             <p className="mt-5 text-pretty text-inverse/85">{post.description}</p>
-            <p className="mt-6 text-small">{labels.publisher} · <time dateTime={post.publishedOn}>{new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC" }).format(new Date(post.publishedOn))}</time> · {post.readTimeMinutes} {copy.readTime}</p>
+            <p className="mt-6 text-small">{labels.publisher} · <time dateTime={post.publishedOn}>{new Intl.DateTimeFormat(localeSettings[locale].dateTime, { dateStyle: "long", timeZone: "UTC" }).format(new Date(post.publishedOn))}</time> · {post.readTimeMinutes} {copy.readTime}</p>
           </Container>
         </header>
         <Container className={styles.reading}>
@@ -40,6 +40,12 @@ export function BlogArticlePage({ post, copy, locale }: { post: LocalizedBlogPos
                 <h2 className="text-heading font-semibold text-ink">{section.heading}</h2>
                 {section.paragraphs.map((paragraph) => <p key={paragraph} className="text-muted">{paragraph}</p>)}
                 {section.list && <ul>{section.list.map((item) => <li key={item}>{item}</li>)}</ul>}
+                {section.media?.map((media) => (
+                  <figure key={media.image} className={styles.figure}>
+                    <div className={styles.image}><Image src={media.image} alt={media.alt} width={media.width} height={media.height} sizes="(max-width: 767px) 100vw, 65vw" loading="eager" /></div>
+                    <figcaption>{media.caption}</figcaption>
+                  </figure>
+                ))}
               </section>
             ))}
             <section className={styles.sources}><h2 className="text-subheading font-semibold">{labels.sources}</h2><ul>{post.sources.map((source) => <li key={source.href}><a href={source.href}>{source.label}</a></li>)}</ul></section>

@@ -7,14 +7,21 @@ for (const locale of ["sr", "en"] as const) {
   test(`${locale} blog guides, images, navigation and schema`, async ({ page }) => {
     await page.goto(`/${locale}/blog/`);
     await expect(page.locator("h1")).toHaveCount(1);
-    await expect(page.locator("main article")).toHaveCount(3);
+    await expect(page.locator("main article")).toHaveCount(getBlogPosts(locale).length);
     for (const post of getBlogPosts(locale)) {
       await page.goto(`/${locale}/blog/${post.slug}/`);
       await expect(page.locator("h1")).toHaveText(post.title);
       expect(post.sections.length).toBeGreaterThanOrEqual(5);
       await expect(page.getByRole("navigation", { name: blogLabels[locale].contents }).locator("a")).toHaveCount(post.sections.length);
-      await expect(page.locator("figure img")).toBeVisible();
-      await expect.poll(() => page.locator("figure img").evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+      const expectedImageCount = 1 + post.sections.reduce((count, section) => count + (section.media?.length ?? 0), 0);
+      const images = page.locator("figure img");
+      await expect(images).toHaveCount(expectedImageCount);
+      for (let index = 0; index < expectedImageCount; index++) {
+        const image = images.nth(index);
+        await image.scrollIntoViewIfNeeded();
+        await expect(image).toBeVisible();
+        await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.naturalWidth)).toBeGreaterThan(0);
+      }
       await page.getByRole("navigation", { name: blogLabels[locale].contents }).locator("a").last().click();
       await expect(page).toHaveURL(new RegExp(`#section-${post.sections.length}$`));
       const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();

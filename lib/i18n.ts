@@ -8,6 +8,6 @@ export function isLocale(value: string): value is Locale {
 }
 
 export const localeSettings = {
-  sr: { language: "sr", openGraph: "sr_RS" },
-  en: { language: "en", openGraph: "en_US" },
-} as const satisfies Localized<{ language: string; openGraph: string }>;
+  sr: { language: "sr", openGraph: "sr_RS", dateTime: "sr-Latn" },
+  en: { language: "en", openGraph: "en_US", dateTime: "en" },
+} as const satisfies Localized<{ language: string; openGraph: string; dateTime: string }>;
