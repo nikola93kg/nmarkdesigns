@@ -3,6 +3,7 @@ import { DM_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { GoogleAnalytics } from "@/components/seo/GoogleAnalytics";
 import { site } from "@/content/site";
 import { getDictionary } from "@/content/i18n";
 import { isLocale, locales, localeSettings } from "@/lib/i18n";
@@ -50,6 +51,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
 
   return (
     <html lang={localeSettings[locale].language} className={dmSans.variable}>
+      <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
       <body className="flex min-h-dvh flex-col">
         <a
           href="#main-content"
