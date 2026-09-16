@@ -29,7 +29,7 @@ export function proxy(request: NextRequest) {
     }
     return protect(NextResponse.next());
   }
-  if (path === "/robots.txt" || path === "/sitemap.xml" || /^\/(images|projects|logo)\//.test(path) || /^\/blog\/[^/]+\.webp$/.test(path)) {
+  if (path === "/robots.txt" || path === "/sitemap.xml" || /^\/(images|projects|logo)\//.test(path) || /^\/blog\/.+\.(?:jpg|png|webp)$/.test(path)) {
     return protect(NextResponse.next());
   }
   // Reject unknown and incorrectly cased URLs before case-insensitive static caches.

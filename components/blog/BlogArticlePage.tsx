@@ -16,8 +16,18 @@ export function BlogArticlePage({ post, copy, locale, url }: { post: LocalizedBl
   return (
     <>
       <article>
-        <header className={styles.intro}>
-          <Container>
+        <header className={`${styles.intro} ${styles.articleIntro}`}>
+          <div className={styles.introMedia} aria-hidden="true">
+            <Image
+              src={post.heroBackground.image}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              style={{ objectPosition: post.heroBackground.position ?? "center" }}
+            />
+          </div>
+          <Container className={styles.introContent}>
             <Link href={localizedPath("blog", locale)} className="inline-block py-2 text-small underline underline-offset-4">← {labels.back}</Link>
             <p className="mt-6 text-small font-semibold text-accent">{post.topic}</p>
             <h1 className="mt-4 text-balance text-display font-semibold">{post.title}</h1>

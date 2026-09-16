@@ -3,6 +3,12 @@ import type { Localized } from "@/lib/i18n";
 
 interface Editorial {
   image: string;
+  heroBackground: {
+    image: string;
+    width: number;
+    height: number;
+    position?: string;
+  };
   width: number;
   height: number;
   alt: Localized<string>;
@@ -65,6 +71,12 @@ export const blogLabels = {
 export const blogEditorial: Record<string, Editorial> = {
   "iphone-duo-responsive-design": {
     image: "/blog/apple-iphone-duo-opening.webp",
+    heroBackground: {
+      image: "/blog/hero/iphone-duo-responsive-design-bg.webp",
+      width: 1916,
+      height: 821,
+      position: "70% center",
+    },
     width: 1312, height: 738,
     alt: { sr: "Apple iPhone Duo otvoren u rukama sa velikim unutrašnjim ekranom.", en: "Apple iPhone Duo open in hands with the large inner display visible." },
     caption: { sr: "Otvoreni unutrašnji ekran iPhone Duo telefona pomera očekivanja od mobilnog prikaza sajta. Izvor fotografije: Apple Newsroom.", en: "The open inner display of iPhone Duo changes what visitors expect from a mobile website. Image source: Apple Newsroom." },
@@ -94,6 +106,12 @@ export const blogEditorial: Record<string, Editorial> = {
   },
   "local-business-homepage-check": {
     image: "/blog/lokalni-biznis-treba-da-popravi-na-pocetnoj-stranici.webp",
+    heroBackground: {
+      image: "/blog/hero/local-business-homepage-check-bg.webp",
+      width: 1916,
+      height: 821,
+      position: "72% center",
+    },
     width: 1536, height: 1024,
     alt: { sr: "Ilustracija sajta lokalnog biznisa na laptopu i telefonu, uz ikone kontakta, poverenja i sledećeg koraka.", en: "Illustration of a local business website on a laptop and phone, with icons for contact, trust and the next step." },
     caption: { sr: "Jasna ponuda, mobilni prikaz i lak kontakt — ključne tačke za proveru početne stranice.", en: "A clear offer, mobile usability and easy contact — key checkpoints for a homepage review." },
@@ -119,6 +137,12 @@ export const blogEditorial: Record<string, Editorial> = {
   },
   "website-audit-framework": {
     image: "/blog/10-minutni-audit-sajta.webp",
+    heroBackground: {
+      image: "/blog/hero/website-audit-framework-bg.webp",
+      width: 1672,
+      height: 941,
+      position: "72% center",
+    },
     width: 1536, height: 1024,
     alt: { sr: "Ilustracija osobe koja proverava listu za audit sajta uz poređenje dva web prikaza na laptopu.", en: "Illustration of a person reviewing a website audit checklist beside two website layouts on a laptop." },
     caption: { sr: "Kratak pregled sajta pretvara uočene prepreke u konkretnu listu za proveru i popravku.", en: "A short website review turns visible obstacles into a practical checklist for testing and fixing." },
@@ -146,6 +170,12 @@ export const blogEditorial: Record<string, Editorial> = {
   },
   "portfolio-storytelling": {
     image: "/blog/da-portfolio-ne-bude-galerija.webp",
+    heroBackground: {
+      image: "/blog/hero/portfolio-storytelling-bg.webp",
+      width: 1942,
+      height: 809,
+      position: "72% center",
+    },
     width: 1536, height: 1024,
     alt: { sr: "Ilustracija portfolija web sajtova na laptopu i skice puta od posetioca do upita u beležnici.", en: "Illustration of a website portfolio on a laptop and a notebook sketch of the journey from visitor to enquiry." },
     caption: { sr: "Portfolio treba da poveže prikaz rada sa kontekstom i jasnim sledećim korakom.", en: "A portfolio should connect project imagery with context and a clear next step." },
