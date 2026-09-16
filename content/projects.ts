@@ -93,10 +93,14 @@ export const projects: readonly Project[] = [
     client: "CoolFridgeGuys",
     websiteUrl: "https://www.coolfridgeguys.com/",
     technologies: ["Next.js"],
+    shortDescription: {
+      sr: "Headless Next.js e-commerce frontend za prodaju rashladnih vitrina, frižidera i zamrzivača, sa secure checkout-om na Squarespace domenu coolfridgeguys.shop.",
+      en: "A headless Next.js e-commerce frontend for refrigerated display cases, refrigerators and freezers, with secure checkout handled on the Squarespace domain coolfridgeguys.shop.",
+    },
     caseStudy: {
       overview: {
-        sr: "Web prezentacija kompanije CoolFridgeGuys.",
-        en: "A website presenting CoolFridgeGuys.",
+        sr: "Headless Next.js e-commerce frontend za prodaju rashladnih vitrina, frižidera i zamrzivača, dok je backend ostao na Squarespace-u kao secure checkout na domenu coolfridgeguys.shop.",
+        en: "A headless Next.js e-commerce frontend for selling refrigerated display cases, refrigerators and freezers, while the backend remained on Squarespace as a secure checkout on coolfridgeguys.shop.",
       },
     },
     sourceUrl: "https://nmarkdesigns.com/portfolio/coolfridgeguys/",
@@ -180,6 +184,10 @@ export const projects: readonly Project[] = [
     slug: "anabelabebioprema",
     title: "Anabela Bebi Oprema",
     websiteUrl: "https://anabelashop.rs/",
+    shortDescription: {
+      sr: "E-commerce WooCommerce web sajt za prodaju bebi opreme.",
+      en: "A WooCommerce e-commerce website for selling baby equipment.",
+    },
     sourceUrl: "https://nmarkdesigns.com/portfolio/anabelabebioprema/",
     featuredImage: {
       src: "/projects/anabela-bebi-oprema.webp", width: 1757, height: 931,
@@ -194,8 +202,8 @@ export const projects: readonly Project[] = [
     websiteUrl: "https://www.frankultura.rs",
     technologies: ["WordPress", "HTML", "CSS", "JavaScript"],
     shortDescription: {
-      sr: "Web sajt za Frankulturu.",
-      en: "A website for Frankultura.",
+      sr: "Web prezentacija za Frankulturu i online grupne časove francuskog jezika.",
+      en: "A presentation website for Frankultura and its online group French classes.",
     },
     sourceUrl: "https://nmarkdesigns.com/portfolio/frankultura/",
     featuredImage: {
@@ -208,6 +216,10 @@ export const projects: readonly Project[] = [
     slug: "madjionicar-bojan",
     title: "Mađioničar Bojan",
     websiteUrl: "https://madjionicarbokac.com/",
+    shortDescription: {
+      sr: "Web prezentacija poznatog mađioničara Bojana Bogdanovića.",
+      en: "A presentation website for the well-known magician Bojan Bogdanović.",
+    },
     sourceUrl: "https://nmarkdesigns.com/portfolio/madjionicar-bojan/",
     featuredImage: {
       src: "/projects/madjionicar-bojan.webp", width: 1757, height: 923,
@@ -219,6 +231,10 @@ export const projects: readonly Project[] = [
     slug: "banquetes-castellanos-zoreda",
     title: "Banquetes Castellanos Zoreda",
     websiteUrl: "https://precious-marigold-0deefc.netlify.app/",
+    shortDescription: {
+      sr: "Prezentacioni website za klijenta iz Meksika koji iznajmljuje svadbene stolice, stolove i prateću opremu.",
+      en: "A presentation website for a client in Mexico that rents wedding chairs, tables and related event equipment.",
+    },
     sourceUrl: "https://nmarkdesigns.com/portfolio/banquetes-castellanos-zoreda/",
     featuredImage: {
       src: "/projects/banquetes-castellanos-zoreda.webp", width: 1757, height: 926,
@@ -230,6 +246,10 @@ export const projects: readonly Project[] = [
     slug: "nest-home-solutions",
     title: "Nest Home Solutions",
     websiteUrl: "https://nikola93kg.github.io/nest-home/",
+    shortDescription: {
+      sr: "Web prezentacija građevinske firme koja gradi apartmane na Divčibarama.",
+      en: "A presentation website for a construction company building apartments in Divčibare.",
+    },
     sourceUrl: "https://nmarkdesigns.com/portfolio/nest-home-solutions/",
     featuredImage: {
       src: "/projects/nesthome.webp", width: 1757, height: 926,
@@ -241,6 +261,10 @@ export const projects: readonly Project[] = [
     slug: "stamenko-milic-photography",
     title: "Stamenko Milić Photography",
     websiteUrl: "https://www.milicweddings.com/",
+    shortDescription: {
+      sr: "Web prezentacija za fotografa Stamenka Milića.",
+      en: "A presentation website for photographer Stamenko Milić.",
+    },
     sourceUrl: "https://nmarkdesigns.com/portfolio/stamenko-milic-photography/",
     featuredImage: {
       src: "/projects/milic-weddings.webp", width: 1757, height: 926,
@@ -252,6 +276,10 @@ export const projects: readonly Project[] = [
     slug: "dh-travell",
     title: "DH Travel",
     websiteUrl: "https://dhtravell.rs/",
+    shortDescription: {
+      sr: "Web prezentacija za biznis koji organizuje prevoz putnika od adrese do aerodroma i nazad.",
+      en: "A presentation website for a business that provides passenger transport from an address to the airport and back.",
+    },
     sourceUrl: "https://nmarkdesigns.com/portfolio/dh-travell/",
     featuredImage: {
       src: "/projects/dhtravel.webp", width: 1900, height: 876,

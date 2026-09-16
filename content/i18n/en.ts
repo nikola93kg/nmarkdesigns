@@ -3,7 +3,7 @@ import type { Dictionary } from "./types";
 const en = {
   navigation: {
     home: "Home", portfolio: "Portfolio", services: "Services",
-    blog: "Blog", about: "About", contact: "Contact", pricing: "Pricing",
+    blog: "Blog", about: "About me", contact: "Contact", pricing: "Pricing",
   },
   accessibility: {
     skipLink: "Skip to content",
@@ -284,35 +284,38 @@ const en = {
   },
   about: {
     metadata: {
-      title: "About - Nikola Marković",
-      description: "Meet Nikola Marković, founder of NMark Designs and frontend developer, and learn about his approach to website design, development and ongoing maintenance.",
+      title: "About me - NMark Designs",
+      description: "NMark Designs is the work of Nikola Marković: website design, development and maintenance for small businesses, services and projects that need a clear online presence.",
     },
     intro: {
-      eyebrow: "NMark Designs",
-      title: "About us",
-      description: "We turn ideas into modern, fast and functional websites. Instead of generic solutions, we create thoughtfully designed websites that help your business grow and stand out.",
+      eyebrow: "NMark Designs / Nikola Marković",
+      title: "A website that feels professional, built through a clear and grounded process.",
+      description: "NMark Designs is the name I use for website design, development and maintenance work for small businesses, service providers and projects that need a clean, fast and clear online presence.",
+      imageAlt: "NMark Designs visual identity shown on a facade mockup.",
+      imageCaption: "Visual direction: clean, modern and distinctive enough to be remembered.",
     },
     profile: {
-      eyebrow: "Who we are",
-      title: "Who is behind NMark Designs?",
+      eyebrow: "Working Approach",
+      title: "No big-agency theatre. The focus is a website that actually makes sense for your work.",
       paragraphs: [
-        "NMark Designs was founded by Nikola Marković, a frontend developer with several years of experience building modern, fast and functional websites.",
-        "Whether the project uses WordPress, custom code or an e-commerce platform, the goal is the same: a visually appealing, technically stable website optimized for performance.",
-        "NMark Designs began with the idea of offering practical, high-quality solutions without unnecessary complexity. The focus is on clarity, sound structure and user experience, making each website easy to use, maintain and extend.",
-        "We approach every project individually, taking the time to understand the client's needs and the website's goals: presenting services, strengthening an online presence or increasing sales.",
+        "I am Nikola Marković, a frontend developer who brings design, content structure and technical implementation together into one usable website.",
+        "I usually work with people who do not want a generic page, but also do not need a complicated process with layers of middlemen. The important part is to understand each other quickly, make good decisions and build something that can serve for a long time.",
+        "In practice, that means clear content hierarchy, careful visual rhythm, loading speed, SEO fundamentals and a structure that can grow later without rebuilding the entire site.",
+        "NMark Designs is therefore not presented as a large company, but as a recognizable frame for my work: direct communication, thoughtful design and technical execution without unnecessary complexity.",
       ],
-      imageAlt: "Nikola Marković, founder of NMark Designs.",
-      caption: "Nikola Marković / Founder and frontend developer",
+      imageAlt: "NMark Designs logo on a dark textured surface.",
+      caption: "NMark Designs as a visual signature for the work, not a large agency story.",
     },
     approach: {
-      title: "Our mission",
+      title: "How Collaboration Works",
+      description: "A good website does not start with effects. It starts with understanding who it speaks to, what it needs to explain and which next step the visitor should take.",
       principles: [
-        "Websites that work for you",
-        "User experience comes first",
-        "SEO and performance without compromise",
-        "Long-term support and improvement",
+        "First we clarify the website goal, audience and most important content.",
+        "Then we shape a structure that guides visitors without friction.",
+        "The design stays clean, professional and connected to the project's identity.",
+        "The build is handled so the website is fast, responsive and easier to maintain.",
       ],
-      contactTitle: "Let's talk about your website.",
+      contactTitle: "If you want a website that feels serious rather than template-made, we can talk.",
     },
   },
   contact: {

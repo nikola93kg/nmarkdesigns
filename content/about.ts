@@ -4,3 +4,15 @@ export const founderPortrait = {
   width: 832,
   height: 1248,
 } as const;
+
+export const aboutHeroImage = {
+  src: "/about/about2.webp",
+  width: 1370,
+  height: 1148,
+} as const;
+
+export const aboutIdentityImage = {
+  src: "/about/about1.webp",
+  width: 1254,
+  height: 1254,
+} as const;

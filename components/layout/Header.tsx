@@ -13,7 +13,7 @@ export function Header({ locale, copy }: { locale: Locale; copy: Dictionary }) {
   const pricing = navigationItem("pricing", locale, copy.navigation.pricing);
 
   return (
-    <header id="top" className="relative z-20 border-b border-border bg-surface">
+    <header id="top" className="sticky top-0 z-40 border-b border-border bg-surface">
       <Container className="flex min-h-header items-center justify-between gap-3 lg:gap-6">
         <Logo locale={locale} label={copy.accessibility.homeLink} />
         <div className="hidden lg:block">

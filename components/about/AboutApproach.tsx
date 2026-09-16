@@ -13,10 +13,16 @@ export function AboutApproach({ locale, copy }: { locale: Locale; copy: Dictiona
     <section aria-labelledby="about-mission-title" className="border-t border-border bg-surface-muted py-12 md:py-16 lg:py-20">
       <Container>
         <div className="grid gap-8 text-center lg:grid-cols-[1fr_1.5fr] lg:gap-20 lg:text-left">
-          <h2 id="about-mission-title" className="text-heading font-bold">{approach.title}</h2>
+          <div>
+            <h2 id="about-mission-title" className="text-heading font-bold">{approach.title}</h2>
+            <p className="mx-auto mt-5 max-w-md text-pretty text-muted lg:mx-0">{approach.description}</p>
+          </div>
           <ul className="divide-y divide-border border-y border-border">
-            {approach.principles.map((principle) => (
-              <li key={principle} className="py-5 text-subheading font-medium text-brand">{principle}</li>
+            {approach.principles.map((principle, index) => (
+              <li key={principle} className="grid gap-3 py-5 text-left sm:grid-cols-[3rem_1fr] sm:items-start">
+                <span className="font-mono text-small text-muted">{String(index + 1).padStart(2, "0")}</span>
+                <span className="text-subheading font-medium text-brand">{principle}</span>
+              </li>
             ))}
           </ul>
         </div>

@@ -98,7 +98,10 @@ export interface Dictionary {
   };
   about: {
     metadata: { title: string; description: string };
-    intro: SectionCopy;
+    intro: SectionCopy & {
+      imageAlt: string;
+      imageCaption: string;
+    };
     profile: {
       eyebrow: string;
       title: string;
@@ -108,6 +111,7 @@ export interface Dictionary {
     };
     approach: {
       title: string;
+      description: string;
       principles: readonly string[];
       contactTitle: string;
     };

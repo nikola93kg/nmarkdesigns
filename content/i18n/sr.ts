@@ -3,7 +3,7 @@ import type { Dictionary } from "./types";
 const sr = {
   navigation: {
     home: "Početna", portfolio: "Portfolio", services: "Usluge",
-    blog: "Blog", about: "O nama", contact: "Kontakt", pricing: "Cenovnik",
+    blog: "Blog", about: "O meni", contact: "Kontakt", pricing: "Cenovnik",
   },
   accessibility: {
     skipLink: "Pređi na sadržaj",
@@ -284,35 +284,38 @@ const sr = {
   },
   about: {
     metadata: {
-      title: "O nama - Nikola Marković",
-      description: "Upoznajte Nikolu Markovića, osnivača NMark Designs i frontend developera, i njegov pristup dizajnu, izradi i dugoročnom održavanju web sajtova.",
+      title: "O meni - NMark Designs",
+      description: "NMark Designs je rad Nikole Markovića na dizajnu, izradi i održavanju modernih web sajtova za male biznise, usluge i projekte kojima treba jasno online prisustvo.",
     },
     intro: {
-      eyebrow: "NMark Designs",
-      title: "O nama",
-      description: "Ideje pretvaramo u funkcionalne, moderne i brze web sajtove. Umesto generičkih rešenja, kreiramo pažljivo osmišljene sajtove koji pomažu vašem biznisu da raste i izdvoji se na tržištu.",
+      eyebrow: "NMark Designs / Nikola Marković",
+      title: "Web sajt koji izgleda ozbiljno, a nastaje kroz jasan i normalan proces.",
+      description: "NMark Designs je ime pod kojim radim web dizajn, izradu i održavanje sajtova za male biznise, usluge i projekte kojima treba uredno, brzo i jasno online prisustvo.",
+      imageAlt: "NMark Designs vizuelni identitet prikazan na fasadnom mockupu.",
+      imageCaption: "Vizuelni pravac: čisto, moderno i dovoljno upečatljivo da ostane prepoznatljivo.",
     },
     profile: {
-      eyebrow: "Ko smo mi",
-      title: "Ko stoji iza NMark Designs?",
+      eyebrow: "Pristup radu",
+      title: "Bez velikih agencijskih priča. Fokus je na sajtu koji stvarno ima smisla za vaš posao.",
       paragraphs: [
-        "Osnivač NMark Designs je Nikola Marković, frontend developer sa višegodišnjim iskustvom u kreiranju modernih, brzih i funkcionalnih web sajtova.",
-        "Bilo da je u pitanju WordPress rešenje, custom kod ili e-commerce platforma, cilj je isti: vizuelno privlačan, tehnički stabilan sajt, optimizovan za performanse.",
-        "NMark Designs je nastao iz ideje da klijentima ponudi praktična i kvalitetna rešenja bez nepotrebnih komplikacija. Fokus je na jasnoći, dobroj strukturi i korisničkom iskustvu, kako bi sajt bio jednostavan za korišćenje, održavanje i dalje proširenje.",
-        "Svakom projektu pristupamo individualno, uz razumevanje potreba klijenta i ciljeva sajta: predstavljanje usluga, jačanje online prisustva ili povećanje prodaje.",
+        "Ja sam Nikola Marković, frontend developer koji kroz NMark Designs spaja dizajn, strukturu sadržaja i tehničku izradu u jedan upotrebljiv sajt.",
+        "Najčešće radim sa ljudima koji ne žele šablonsku stranicu, ali im ne treba ni komplikovan proces sa gomilom posrednika. Važno je da se brzo razumemo, donesemo dobre odluke i napravimo nešto što može dugo da služi.",
+        "U praksi to znači jasnu hijerarhiju sadržaja, pažljiv vizuelni ritam, brzinu učitavanja, SEO osnove i strukturu koja kasnije može da se proširi bez potpunog rušenja sajta.",
+        "NMark Designs zato nije predstavljen kao velika firma, već kao prepoznatljiv okvir za moj rad: direktna komunikacija, promišljen dizajn i tehnička izvedba bez nepotrebnih komplikacija.",
       ],
-      imageAlt: "Nikola Marković, osnivač NMark Designs.",
-      caption: "Nikola Marković / Osnivač i frontend developer",
+      imageAlt: "NMark Designs logo na tamnoj teksturisanoj površini.",
+      caption: "NMark Designs kao vizuelni potpis rada, ne kao velika agencijska priča.",
     },
     approach: {
-      title: "Naša misija",
+      title: "Kako izgleda saradnja",
+      description: "Dobar sajt ne počinje efektima, nego razumevanjem: kome se obraća, šta treba da objasni i koji sledeći korak posetilac treba da napravi.",
       principles: [
-        "Web sajtovi koji rade za vas",
-        "Korisničko iskustvo na prvom mestu",
-        "SEO i performanse bez kompromisa",
-        "Dugoročna podrška i unapređenje",
+        "Prvo se raščisti cilj sajta, publika i najvažniji sadržaj.",
+        "Zatim se pravi struktura koja vodi posetioca bez lutanja.",
+        "Dizajn ostaje čist, profesionalan i vezan za identitet projekta.",
+        "Izrada se radi tako da sajt bude brz, responzivan i lakši za održavanje.",
       ],
-      contactTitle: "Razgovarajmo o vašem sajtu.",
+      contactTitle: "Ako želite sajt koji deluje ozbiljno, a ne kao gotov template, možemo da pričamo.",
     },
   },
   contact: {

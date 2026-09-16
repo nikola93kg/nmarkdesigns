@@ -38,7 +38,7 @@ export function founderSchema(locale: Locale): JsonValue {
     name: "Nikola Marković", jobTitle: "Frontend developer",
     url: canonicalUrl(localizedPath("about", locale)),
     image: canonicalUrl(founderPortrait.src),
-    worksFor: { "@type": "Organization", "@id": organizationId, name: site.name },
+    brand: { "@type": "Brand", name: site.name },
   };
 }
 

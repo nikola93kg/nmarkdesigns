@@ -102,9 +102,10 @@
   z-index: 1;
   content: "";
   background:
-    linear-gradient(180deg, color-mix(in srgb, #110024 12%, transparent) 0%, transparent 34%),
-    linear-gradient(0deg, color-mix(in srgb, #110024 92%, transparent) 0%, color-mix(in srgb, #110024 58%, transparent) 31%, transparent 68%),
-    linear-gradient(90deg, color-mix(in srgb, #110024 72%, transparent) 0%, transparent 42%);
+          linear-gradient(rgba(17, 0, 36, 0.55), rgba(17, 0, 36, 0.55)),  /* jači overlay */
+          linear-gradient(180deg, color-mix(in srgb, #110024 12%, transparent) 0%, transparent 34%),
+          linear-gradient(0deg, color-mix(in srgb, #110024 92%, transparent) 0%, color-mix(in srgb, #110024 58%, transparent) 31%, transparent 68%),
+          linear-gradient(90deg, color-mix(in srgb, #110024 72%, transparent) 0%, transparent 42%);
   opacity: 0.96;
   pointer-events: none;
 }
@@ -172,7 +173,7 @@
 
 .projectTitle {
   max-width: 12ch;
-  font-size: clamp(2.25rem, 8vw, 5.25rem);
+  font-size: clamp(2.25rem, 8vw, 4.8rem);
   line-height: 0.96;
 }
 
@@ -354,14 +355,51 @@
 
   .projectOverlay {
     gap: 1rem;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    justify-items: center;
+    padding: clamp(1.25rem, 6vw, 1.75rem);
+  }
+
+  .projectMeta {
+    grid-row: 1;
+    align-self: start;
+  }
+
+  .projectCopy {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(23rem, calc(100% - 2.5rem));
+    max-width: none;
+    transform: translate(-50%, -50%);
   }
 
   .projectTitle {
-    max-width: 10ch;
+    max-width: 100%;
+    margin-inline: auto;
+    font-size: clamp(1.85rem, 8vw, 2.9rem);
+    line-height: 1.02;
+    overflow-wrap: break-word;
+  }
+
+  .splitProject .projectTitle,
+  .supportProject .projectTitle {
+    font-size: clamp(1.85rem, 8vw, 2.9rem);
+  }
+
+  .projectDescription {
+    margin-inline: auto;
+    font-size: 0.98rem;
+    line-height: 1.55;
   }
 
   .projectActions {
+    grid-row: 3;
+    width: 100%;
     align-items: stretch;
+    align-self: end;
+    justify-content: center;
+    text-align: center;
   }
 
   .projectButton {

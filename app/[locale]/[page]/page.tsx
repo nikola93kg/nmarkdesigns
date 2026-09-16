@@ -5,7 +5,7 @@ import { AboutProfile } from "@/components/about/AboutProfile";
 import { ContactPage } from "@/components/contact/ContactPage";
 import { PricingPage } from "@/components/pricing/PricingPage";
 import { ServicesPage } from "@/components/services/ServicesPage";
-import { founderPortrait } from "@/content/about";
+import { aboutHeroImage } from "@/content/about";
 import { getDictionary } from "@/content/i18n";
 import { isLocale } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/[page]">
     image: route === "services"
       ? undefined
       : route === "about"
-      ? { ...founderPortrait, alt: copy.about.profile.imageAlt }
+      ? { ...aboutHeroImage, alt: copy.about.intro.imageAlt }
       : { src: "/images/hero-montage.webp", width: 1365, height: 1100, alt: copy.home.hero.imageAlt },
   });
 }

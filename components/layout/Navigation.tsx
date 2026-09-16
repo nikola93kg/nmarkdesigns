@@ -16,7 +16,7 @@ const listStyles = {
 
 const linkStyles = {
   desktop: "min-h-12 text-brand hover:text-focus",
-  mobile: "min-h-16 justify-center px-3 py-3 text-3xl font-bold uppercase text-on-brand hover:text-accent focus-visible:outline-accent",
+  mobile: "min-h-14 justify-center px-3 py-2 text-2xl font-bold uppercase text-on-brand hover:text-accent focus-visible:outline-accent",
   footer:
       "min-h-8 justify-center py-1 text-center text-on-brand-muted hover:text-on-brand focus-visible:outline-accent lg:justify-start lg:text-left",
 };
