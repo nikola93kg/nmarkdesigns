@@ -28,6 +28,7 @@ export interface BlogPost {
 
 export interface LocalizedBlogPost {
   image: string;
+  socialImage: string;
   width: number;
   height: number;
   caption: string;
@@ -134,6 +135,7 @@ export function getBlogPosts(locale: Locale): readonly LocalizedBlogPost[] {
     coverAlt: blogEditorial[post.id].alt[locale],
     sections: blogEditorial[post.id].sections[locale],
     image: blogEditorial[post.id].image,
+    socialImage: blogEditorial[post.id].image.replace(/\.webp$/, ".jpg"),
     width: blogEditorial[post.id].width,
     height: blogEditorial[post.id].height,
     caption: blogEditorial[post.id].caption[locale],

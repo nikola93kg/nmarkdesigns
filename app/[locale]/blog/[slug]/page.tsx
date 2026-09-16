@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/blog/[sl
     locale,
     route: "blog",
     slug: post.slug,
-    image: { src: post.image, width: post.width, height: post.height, alt: post.coverAlt },
+    image: { src: post.socialImage, width: post.width, height: post.height, alt: post.coverAlt, type: "image/jpeg" },
   });
   return { ...metadata, openGraph: { ...metadata.openGraph, type: "article", publishedTime: post.publishedOn } };
 }
@@ -47,7 +47,7 @@ export default async function BlogArticleRoute({ params }: PageProps<"/[locale]/
         "@type": "BlogPosting", "@id": `${url}#article`, url,
         headline: post.title, description: post.description, abstract: post.answer,
         inLanguage: locale, datePublished: post.publishedOn,
-        image: canonicalUrl(post.image), mainEntityOfPage: url,
+        image: canonicalUrl(post.socialImage), mainEntityOfPage: url,
         publisher: { "@id": `${site.url}/#organization` },
         articleSection: post.topic, citation: post.sources.map((source) => source.href),
       },
@@ -60,5 +60,5 @@ export default async function BlogArticleRoute({ params }: PageProps<"/[locale]/
       },
     ],
   };
-  return <><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }} /><BlogArticlePage post={post} copy={copy.blog} locale={locale} /></>;
+  return <><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }} /><BlogArticlePage post={post} copy={copy.blog} locale={locale} url={url} /></>;
 }

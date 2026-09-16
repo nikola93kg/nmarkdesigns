@@ -14,8 +14,52 @@ interface Editorial {
 }
 
 export const blogLabels = {
-  sr: { featured: "U fokusu", guides: "Ideje koje možete da primenite", contents: "U ovom vodiču", answer: "Ukratko", sources: "Izvori i dalje čitanje", related: "Nastavite da istražujete", back: "Svi tekstovi", example: "Primer iz portfolija NMark Designs", publisher: "Objavljuje NMark Designs" },
-  en: { featured: "In focus", guides: "Ideas you can put to work", contents: "In this guide", answer: "The short answer", sources: "Sources & further reading", related: "Keep exploring", back: "All articles", example: "From the NMark Designs portfolio", publisher: "Published by NMark Designs" },
+  sr: {
+    featured: "U fokusu",
+    guides: "Ideje koje možete da primenite",
+    contents: "U ovom vodiču",
+    answer: "Ukratko",
+    sources: "Izvori i dalje čitanje",
+    related: "Nastavite da istražujete",
+    back: "Svi tekstovi",
+    example: "Primer iz portfolija NMark Designs",
+    publisher: "Objavljuje NMark Designs",
+    share: {
+      title: "Podelite tekst",
+      intro: "Pošaljite članak nekome kome može da koristi.",
+      facebook: "Facebook",
+      linkedin: "LinkedIn",
+      x: "X",
+      instagram: "Instagram",
+      copy: "Kopiraj link",
+      copied: "Link je kopiran.",
+      instagramLabel: "Kopirajte link za deljenje na Instagramu",
+      copyLabel: "Kopirajte link članka",
+    },
+  },
+  en: {
+    featured: "In focus",
+    guides: "Ideas you can put to work",
+    contents: "In this guide",
+    answer: "The short answer",
+    sources: "Sources & further reading",
+    related: "Keep exploring",
+    back: "All articles",
+    example: "From the NMark Designs portfolio",
+    publisher: "Published by NMark Designs",
+    share: {
+      title: "Share this article",
+      intro: "Send the article to someone who may find it useful.",
+      facebook: "Facebook",
+      linkedin: "LinkedIn",
+      x: "X",
+      instagram: "Instagram",
+      copy: "Copy link",
+      copied: "Link copied.",
+      instagramLabel: "Copy the link for sharing on Instagram",
+      copyLabel: "Copy article link",
+    },
+  },
 } as const;
 
 export const blogEditorial: Record<string, Editorial> = {

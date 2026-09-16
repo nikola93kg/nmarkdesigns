@@ -8,9 +8,10 @@ import type { Dictionary } from "@/content/i18n/types";
 import { localeSettings, type Locale } from "@/lib/i18n";
 import { localizedPath } from "@/lib/routes";
 import { BlogCard } from "./BlogCard";
+import { BlogShare } from "./BlogShare";
 import styles from "./Blog.module.css";
 
-export function BlogArticlePage({ post, copy, locale }: { post: LocalizedBlogPost; copy: Dictionary["blog"]; locale: Locale }) {
+export function BlogArticlePage({ post, copy, locale, url }: { post: LocalizedBlogPost; copy: Dictionary["blog"]; locale: Locale; url: string }) {
   const labels = blogLabels[locale];
   return (
     <>
@@ -25,10 +26,13 @@ export function BlogArticlePage({ post, copy, locale }: { post: LocalizedBlogPos
           </Container>
         </header>
         <Container className={styles.reading}>
-          <nav className={styles.toc} aria-label={labels.contents}>
-            <p className="mb-3 font-semibold text-brand">{labels.contents}</p>
-            {post.sections.map((section, index) => <a key={section.heading} href={`#section-${index + 1}`}>{section.heading}</a>)}
-          </nav>
+          <aside className={styles.articleTools}>
+            <nav className={styles.toc} aria-label={labels.contents}>
+              <p className="mb-3 font-semibold text-brand">{labels.contents}</p>
+              {post.sections.map((section, index) => <a key={section.heading} href={`#section-${index + 1}`}>{section.heading}</a>)}
+            </nav>
+            <BlogShare url={url} title={post.title} labels={labels.share} />
+          </aside>
           <div className={styles.body}>
             <aside className={styles.answer} aria-label={labels.answer}><h2 className="text-subheading font-semibold">{labels.answer}</h2><p>{post.answer}</p></aside>
             <figure className={styles.figure}>

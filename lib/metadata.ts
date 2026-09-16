@@ -14,6 +14,7 @@ interface PageMetadataContent {
     width: number;
     height: number;
     alt: string;
+    type?: string;
   };
 }
 
@@ -43,6 +44,7 @@ export function createPageMetadata({
     width: image.width,
     height: image.height,
     alt: image.alt,
+    type: image.type,
   }] : undefined;
 
   return {
