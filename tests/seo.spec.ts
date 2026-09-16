@@ -3,7 +3,7 @@ import { blogPosts } from "@/content/blog";
 import { site } from "@/content/site";
 import { caseStudyProjects } from "@/content/projects";
 import { publicPages } from "@/lib/public-pages";
-import { launchEnabled, isIndexableHost } from "@/lib/seo-config";
+import { isIndexableHost } from "@/lib/seo-config";
 import { robotsForHost } from "@/lib/crawl";
 import { serializeJsonLd } from "@/lib/schema";
 
@@ -27,7 +27,7 @@ for (const pair of pairs) {
       const response = await page.goto(path);
       expect(response?.status()).toBe(200);
       expect(response?.headers()["x-robots-tag"]).toBe("noindex, nofollow");
-      await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow");
+      await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "index, follow");
       await expect(page.locator("html")).toHaveAttribute("lang", index === 0 ? "sr" : "en");
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", site.url + path);
       for (const [language, target] of [["sr", pair[0]], ["en", pair[1]], ["x-default", pair[0]]]) {
@@ -137,13 +137,20 @@ test("complete sitemap, unique metadata and preview robots", async ({ page, requ
     expect(descriptions.has(result.description!), path).toBe(false);
     titles.add(result.title); descriptions.add(result.description!);
   }
-  for (const host of ["127.0.0.1:3100", "preview.vercel.app", "nmarkdesigns.com"]) {
+  for (const host of ["127.0.0.1:3100", "preview.vercel.app"]) {
     const robots = await request.get("/robots.txt", { headers: { host } });
     expect(robots.status()).toBe(200);
     expect(await robots.text()).toContain("Disallow: /");
     expect(await robots.text()).not.toContain("Sitemap:");
     expect(robots.headers()["x-robots-tag"]).toBe("noindex, nofollow");
   }
+  const productionRobots = await request.get("/robots.txt", { headers: { host: "nmarkdesigns.com" } });
+  const productionRobotsSource = await productionRobots.text();
+  expect(productionRobots.status()).toBe(200);
+  expect(productionRobotsSource).toContain("Allow: /");
+  expect(productionRobotsSource).toContain("Sitemap: https://nmarkdesigns.com/sitemap.xml");
+  expect(productionRobotsSource).not.toContain("Disallow:");
+  expect(productionRobots.headers()["x-robots-tag"]).toBeUndefined();
 });
 
 test("exact permanent legacy redirects have one hop and preserve queries", async ({ request, baseURL }) => {
@@ -181,18 +188,13 @@ test("unknown legacy, locales and case variants are genuine 404s", async ({ requ
   }
 });
 
-test("launch policy fails closed and structured data serialization is safe", () => {
-  const production = { NODE_ENV: "production", SITE_LAUNCH: "true", DEPLOYMENT_ENV: "production" };
-  expect(launchEnabled(production)).toBe(true);
-  expect(launchEnabled({ ...production, VERCEL_ENV: "production" })).toBe(true);
-  for (const environment of [{}, { NODE_ENV: "production" }, { ...production, NODE_ENV: "development" }, { ...production, SITE_LAUNCH: "false" }, { ...production, SITE_LAUNCH: "TRUE" }, { ...production, DEPLOYMENT_ENV: "preview" }, { ...production, VERCEL_ENV: "preview" }, { ...production, VERCEL_ENV: "development" }]) expect(launchEnabled(environment)).toBe(false);
+test("crawl policy is canonical-host scoped and structured data serialization is safe", () => {
   for (const host of [null, "localhost", "127.0.0.1:3100", "preview.vercel.app", "nmarkdesigns.com.evil.test", "nmarkdesigns.com:3100", "www.nmarkdesigns.com"]) {
-    expect(isIndexableHost(host, true)).toBe(false);
-    expect(robotsForHost(host, true)).toEqual({ rules: { userAgent: "*", disallow: "/" } });
+    expect(isIndexableHost(host)).toBe(false);
+    expect(robotsForHost(host)).toEqual({ rules: { userAgent: "*", disallow: "/" } });
   }
-  expect(isIndexableHost("nmarkdesigns.com", true)).toBe(true);
-  expect(isIndexableHost("nmarkdesigns.com", false)).toBe(false);
-  expect(robotsForHost("nmarkdesigns.com", true)).toEqual({ rules: { userAgent: "*", allow: "/", disallow: ["/wp-admin/", "/wp-json/", "/api/"] }, sitemap: "https://nmarkdesigns.com/sitemap.xml" });
+  expect(isIndexableHost("nmarkdesigns.com")).toBe(true);
+  expect(robotsForHost("nmarkdesigns.com")).toEqual({ rules: { userAgent: "*", allow: "/" }, sitemap: "https://nmarkdesigns.com/sitemap.xml" });
   const value = { name: '</script><script>alert("x")</script>\u2028\u2029' };
   const serialized = serializeJsonLd(value);
   expect(serialized).not.toContain("<");

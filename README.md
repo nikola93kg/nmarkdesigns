@@ -66,7 +66,7 @@ Add shared fields to `content/i18n/types.ts` and provide both dictionaries. Reso
 
 ## Migration State
 
-There are 26 public localized pages: `/sr/`, `/en/`, `/sr/o-nama/`, `/en/about/`, `/sr/kontakt/`, `/en/contact/`, `/sr/cenovnik/`, `/en/pricing/`, both Portfolio indexes and both locale versions of eight project details. `/` permanently redirects to `/sr/` (308). Exact legacy paths redirect directly to their Serbian equivalents, including slashless requests. Valid localized pages normalize to trailing slashes. Unknown locales, slugs, case variants and extra segments return 404. No browser-language detection is used.
+There are 46 public localized pages: `/sr/`, `/en/`, `/sr/o-nama/`, `/en/about/`, `/sr/kontakt/`, `/en/contact/`, `/sr/cenovnik/`, `/en/pricing/`, both Portfolio and Blog indexes, and both locale versions of eight project details and eight blog articles. `/` permanently redirects to `/sr/` (308). Exact legacy paths redirect directly to their Serbian equivalents, including slashless requests. Valid localized pages normalize to trailing slashes. Unknown locales, slugs, case variants and extra segments return 404. No browser-language detection is used.
 
 All primary navigation and CTAs use localized internal URLs. Showcase links open local project details; verified client sites remain external same-tab links. About, Contact and Pricing share `app/[locale]/[page]/page.tsx`, restricted by `corePageRoutes`. Services points to the localized homepage section. No current WordPress navigation fallback remains.
 
@@ -76,12 +76,12 @@ Project content lives in `content/projects.ts`. A populated `caseStudy` enables 
 
 ## SEO Configuration
 
-`content/site.ts` owns the canonical production origin. Every localized page self-canonicalizes; `sr`, `en` and Serbian `x-default` refer only to real equivalents. `/sitemap.xml` lists the 26 canonical pages, without fabricated modification dates or ranking hints. Organization/WebSite, About Person and case-study BreadcrumbList data use verified content only.
+`content/site.ts` owns the canonical production origin. Every localized page self-canonicalizes; `sr`, `en` and Serbian `x-default` refer only to real equivalents. `/sitemap.xml` lists the 46 canonical pages, without fabricated modification dates or ranking hints. Organization/WebSite, About Person and case-study BreadcrumbList data use verified content only.
 
-Indexing is **off by default**. A launch build requires `SITE_LAUNCH=true`, `NODE_ENV=production` (set by Next's production build), and either Vercel's `VERCEL_ENV=production` or an explicit self-hosted `DEPLOYMENT_ENV=production`. If `VERCEL_ENV` exists it takes precedence, so preview/development always remain blocked. These inputs are captured in the build; rebuild when changing mode. Do not manually set the derived `NMARK_INDEXING_ALLOWED` variable.
+Canonical production pages emit `index, follow` metadata. No build-time launch flag is required for indexing.
 
-The proxy additionally allows indexing only on the exact configured production host. Other hosts receive `X-Robots-Tag: noindex, nofollow`, even when serving a launch artifact. Dynamic `/robots.txt` disallows everything on those hosts; only the launch production host allows public crawling and advertises the sitemap. A launch artifact's static HTML may contain index/follow on an alias, but the more restrictive response header applies. Keep hosting-level deployment protection enabled for private previews; robots rules are not access control.
+The proxy allows indexing only on the exact configured production host. Other hosts receive `X-Robots-Tag: noindex, nofollow`. Dynamic `/robots.txt` disallows everything on those hosts; the production host allows public crawling and advertises the sitemap. Static HTML may contain index/follow on an alias, but the more restrictive response header applies. Keep hosting-level deployment protection enabled for private previews; robots rules are not access control.
 
-Keep `SITE_LAUNCH=false` until the separately authorized launch. Configure HTTPS and redirect `www`/HTTP aliases at the hosting layer. Do not reuse a launch artifact on an unprotected preview host that bypasses the Next.js proxy. See `.env.example` and [Phase 6 report](docs/phase-6-report.md) for migration decisions, remaining content decisions and validation.
+Configure HTTPS and redirect `www`/HTTP aliases at the hosting layer. Do not reuse a production artifact on an unprotected preview host that bypasses the Next.js proxy. See `.env.example` and [Phase 6 report](docs/phase-6-report.md) for migration decisions, remaining content decisions and validation.
 
 See [the implementation plan](docs/implementation-plan.md), [migration notes](docs/migration-notes.md), and [frontend guidelines](docs/frontend-agent.md).

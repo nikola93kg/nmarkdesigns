@@ -71,7 +71,7 @@ for (const locale of locales) {
     await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute("content", copy.about.profile.imageAlt);
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
     await expect(page.locator('meta[name="twitter:description"]')).toHaveAttribute("content", copy.about.metadata.description);
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow");
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "index, follow");
     for (const target of locales) {
       await expect(page.locator(`link[rel="alternate"][hreflang="${target}"]`)).toHaveAttribute("href", `https://nmarkdesigns.com${localizedPath("about", target)}`);
     }
@@ -160,7 +160,7 @@ for (const width of [375, 1440]) {
 }
 
 test("about rejects wrong locales slugs and unimplemented routes", async ({ request }) => {
-  for (const path of ["/fr/about/", "/SR/o-nama/", "/EN/about/", "/sr/about/", "/en/o-nama/", "/sr/O-NAMA/", "/en/ABOUT/", "/en/about/extra/", "/sr/blog/", "/en/blog/", "/sr/unknown/"]) {
+  for (const path of ["/fr/about/", "/SR/o-nama/", "/EN/about/", "/sr/about/", "/en/o-nama/", "/sr/O-NAMA/", "/en/ABOUT/", "/en/about/extra/", "/sr/unknown/"]) {
     expect((await request.get(path)).status(), path).toBe(404);
   }
   for (const locale of locales) {

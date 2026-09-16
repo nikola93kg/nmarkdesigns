@@ -78,7 +78,7 @@ for (const locale of locales) {
     await expect(page.locator('meta[property="og:description"]')).toHaveAttribute("content", copy.services.metadata.description);
     await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute("content", localeSettings[locale].openGraph);
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary");
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow");
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "index, follow");
     for (const target of locales) {
       await expect(page.locator(`link[rel="alternate"][hreflang="${target}"]`)).toHaveAttribute("href", `https://nmarkdesigns.com${localizedPath("services", target)}`);
       await expect(page.locator(`header a[hreflang="${target}"]`)).toHaveAttribute("href", localizedPath("services", target));

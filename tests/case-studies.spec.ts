@@ -50,7 +50,7 @@ for (const locale of locales) {
       await expect(page.locator('meta[property="og:description"]')).toHaveAttribute("content", project.caseStudy.overview[locale]);
       await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute("content", project.featuredImage.alt[locale]);
       await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
-      await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow");
+      await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "index, follow");
       for (const language of locales) {
         await expect(page.locator(`link[rel="alternate"][hreflang="${language}"]`)).toHaveAttribute("href", `https://nmarkdesigns.com${localizedProjectPath(project.slug, language)}`);
       }
