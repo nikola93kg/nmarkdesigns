@@ -1,14 +1,58 @@
+```
+# Dependencies
 node_modules/
-.next/
-out/
-coverage/
-playwright-report/
-test-results/
-*.tsbuildinfo
-next-env.d.ts
-.env*
-!.env.example
-.DS_Store
-.idea/
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Logs
 *.log
-.vercel/
+
+# Build artifacts
+dist/
+build/
+target/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-selfcheck.json
+
+# Compiled and binary files
+*.o
+*.obj
+*.so
+*.a
+*.dll
+*.exe
+*.out
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# Cache
+.mypy_cache/
+.pytest_cache/
+.gradle/
+```
