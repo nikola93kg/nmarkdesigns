@@ -1,0 +1,1 @@
+self.__NEXT_FONT_MANIFEST='{"pages":{},"app":{"/workspace/app/[locale]/layout":["static/media/7ab938503e4547a1.p.woff2","static/media/13971731025ec697.p.woff2"]},"appUsingSizeAdjust":false,"pagesUsingSizeAdjust":false}';
