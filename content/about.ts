@@ -6,7 +6,7 @@ export const founderPortrait = {
 } as const;
 
 export const aboutHeroImage = {
-  src: "/about/about2.webp",
+  src: "/images/about2.webp",
   width: 1370,
   height: 1148,
 } as const;

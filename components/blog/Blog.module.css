@@ -38,6 +38,8 @@
 }
 
 .introMedia img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -71,7 +73,7 @@
 .body { min-width: 0; }
 .body section { margin-top: 3rem; scroll-margin-top: calc(var(--spacing-header) + 2rem); }
 .body p { margin-top: 1.25rem; line-height: 1.85; }
-.body ul { margin-top: 1.5rem; padding: 1.5rem 1.5rem 1.5rem 2.75rem; list-style: disc; background: var(--color-surface); border-left: 2px solid var(--color-brand); }
+.body ul { margin-top: 1.5rem; padding: 1.5rem 1.5rem 1.5rem 2.75rem; list-style: disc; background: var(--color-surface-muted); border: 1px solid var(--color-border); border-radius: var(--radius-card); }
 .body li + li { margin-top: .75rem; }
 .answer { padding: clamp(1.5rem, 3vw, 2.5rem); background: var(--color-brand); color: var(--color-on-brand); border-radius: var(--radius-card); }
 .intro a:focus-visible { outline-color: var(--color-accent); }
@@ -80,6 +82,255 @@
 .figure figcaption { margin-top: .75rem; font-size: var(--text-small); color: var(--color-muted); }
 .sources a { text-decoration: underline; text-underline-offset: .25em; overflow-wrap: anywhere; }
 .related { padding-block: 3rem; border-top: 1px solid var(--color-border); }
+
+.responsiveTable {
+  margin-top: 2rem;
+}
+
+.responsiveTable figcaption {
+  margin-bottom: .85rem;
+  color: var(--color-muted);
+  font-size: var(--text-small);
+}
+
+.responsiveTable table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+}
+
+.responsiveTable th,
+.responsiveTable td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.responsiveTable thead th {
+  background: var(--color-brand);
+  color: var(--color-on-brand);
+  font-size: var(--text-small);
+}
+
+.responsiveTable tbody th {
+  color: var(--color-brand);
+  font-weight: 700;
+}
+
+.responsiveTable tr:last-child th,
+.responsiveTable tr:last-child td {
+  border-bottom: 0;
+}
+
+.subsections {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2.25rem;
+}
+
+.subsection,
+.articleCard,
+.comparison article,
+.inlineCta,
+.contextLinks,
+.faqBlock details {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+}
+
+.subsection,
+.articleCard,
+.comparison article {
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.subsection h3,
+.articleCard h3,
+.comparison h3,
+.inlineCta h3,
+.faqBlock h3 {
+  color: var(--color-ink);
+  font-size: var(--text-subheading);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.subsection p,
+.articleCard p,
+.comparison p,
+.inlineCta p,
+.faqBlock p {
+  color: var(--color-muted);
+}
+
+.articleCards,
+.comparison {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.articleCard,
+.comparison article {
+  min-width: 0;
+}
+
+.cardEyebrow {
+  margin-top: 0 !important;
+  color: var(--color-brand) !important;
+  font-size: var(--text-small);
+  font-weight: 700;
+}
+
+.articleCard ul,
+.comparison ul {
+  background: transparent;
+}
+
+.checklist {
+  display: grid;
+  gap: .85rem;
+  padding: 0 !important;
+  list-style: none !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.checklist li {
+  position: relative;
+  margin-top: 0 !important;
+  padding: 1rem 1rem 1rem 2.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+}
+
+.checklist li::before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  top: 1.45rem;
+  width: .55rem;
+  height: .55rem;
+  border-radius: 999px;
+  background: var(--color-accent);
+}
+
+.faqBlock {
+  display: grid;
+  gap: .85rem;
+  margin-top: 2rem;
+}
+
+.faqBlock details {
+  padding: 0 1.25rem;
+}
+
+.faqBlock summary {
+  display: flex;
+  list-style: none;
+  padding-block: 1.15rem;
+}
+
+.faqBlock summary::-webkit-details-marker {
+  display: none;
+}
+
+.faqBlock summary h3 {
+  font-size: 1.05rem;
+}
+
+.faqBlock details p {
+  margin-top: 0;
+  padding-bottom: 1.25rem;
+}
+
+.contextLinks {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  background: var(--color-surface-muted);
+}
+
+.contextLinks p {
+  margin-top: 0;
+  color: var(--color-brand);
+  font-weight: 700;
+}
+
+.contextLinks ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .7rem;
+  margin-top: 1rem;
+  padding: 0;
+  list-style: none;
+  border: 0;
+  background: transparent;
+}
+
+.contextLinks li {
+  margin-top: 0 !important;
+}
+
+.contextLinks a {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  padding: .55rem .8rem;
+  color: var(--color-brand);
+  font-size: var(--text-small);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.contextLinks a:hover {
+  border-color: var(--color-brand);
+  background: var(--color-accent-soft);
+}
+
+.inlineCta {
+  margin-top: 2rem;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  background: var(--color-brand);
+  color: var(--color-on-brand);
+}
+
+.inlineCta h3,
+.inlineCta p {
+  color: inherit;
+}
+
+.inlineCta p {
+  color: var(--color-on-brand-muted);
+}
+
+.inlineCta a {
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 48rem) {
+  .articleCards,
+  .comparison {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .comparison {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .checklist {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 767px) {
   .articleIntro::before {
     background:
@@ -94,4 +345,57 @@
   .grid, .featured, .reading { grid-template-columns: minmax(0, 1fr); }
   .featured { gap: 1.5rem; }
   .articleTools { position: static; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .reading {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .articleTools {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .responsiveTable table,
+  .responsiveTable thead,
+  .responsiveTable tbody,
+  .responsiveTable tr,
+  .responsiveTable th,
+  .responsiveTable td {
+    display: block;
+  }
+
+  .responsiveTable thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .responsiveTable tr {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .responsiveTable tr:last-child {
+    border-bottom: 0;
+  }
+
+  .responsiveTable th,
+  .responsiveTable td {
+    border-bottom: 0;
+    padding: .85rem 1rem;
+  }
+
+  .responsiveTable td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: .25rem;
+    color: var(--color-muted);
+    font-size: var(--text-small);
+    font-weight: 700;
+  }
 }

@@ -5,8 +5,68 @@ export interface BlogSection {
   heading: string;
   paragraphs: readonly string[];
   list?: readonly string[];
+  blocks?: readonly BlogBlock[];
   media?: readonly BlogMedia[];
 }
+
+export type BlogBlock =
+  | {
+      type: "table";
+      caption?: string;
+      columns: readonly string[];
+      rows: readonly (readonly string[])[];
+    }
+  | {
+      type: "subsections";
+      items: readonly {
+        heading: string;
+        paragraphs: readonly string[];
+        list?: readonly string[];
+      }[];
+    }
+  | {
+      type: "cards";
+      items: readonly {
+        title: string;
+        eyebrow?: string;
+        body: string;
+        list?: readonly string[];
+      }[];
+    }
+  | {
+      type: "comparison";
+      items: readonly {
+        title: string;
+        body: string;
+        list: readonly string[];
+      }[];
+    }
+  | {
+      type: "checklist";
+      items: readonly string[];
+    }
+  | {
+      type: "faq";
+      items: readonly {
+        question: string;
+        answer: string;
+      }[];
+    }
+  | {
+      type: "linkList";
+      title: string;
+      items: readonly {
+        label: string;
+        href: string;
+      }[];
+    }
+  | {
+      type: "cta";
+      title: string;
+      body: string;
+      label: string;
+      href: string;
+    };
 
 export interface BlogMedia {
   image: string;
@@ -20,6 +80,7 @@ export interface BlogPost {
   id: string;
   slug: string;
   publishedOn: string;
+  updatedOn?: string;
   title: Localized<string>;
   seoTitle?: Localized<string>;
   description: Localized<string>;
@@ -41,9 +102,15 @@ export interface LocalizedBlogPost {
   topic: string;
   answer: string;
   sources: readonly { label: string; href: string }[];
+  cta?: {
+    title: string;
+    description: string;
+    label: string;
+  };
   id: string;
   slug: string;
   publishedOn: string;
+  updatedOn: string;
   readTimeMinutes: number;
   title: string;
   seoTitle: string;
@@ -54,6 +121,28 @@ export interface LocalizedBlogPost {
 }
 
 export const blogPosts: readonly BlogPost[] = [
+  {
+    id: "website-pricing-serbia-2026",
+    slug: "koliko-kosta-izrada-web-sajta-u-srbiji-2026",
+    publishedOn: "2026-09-22",
+    updatedOn: "2026-09-22",
+    title: {
+      sr: "Koliko košta izrada web sajta u Srbiji 2026?",
+      en: "How much does website development cost in Serbia in 2026?",
+    },
+    seoTitle: {
+      sr: "Koliko košta izrada web sajta u Srbiji 2026? Cene i vodič",
+      en: "Website development cost in Serbia 2026: prices and guide",
+    },
+    description: {
+      sr: "Saznajte koliko košta izrada web sajta u Srbiji 2026. Uporedili smo cene poslovnih sajtova, WordPress rešenja, web shopova i custom razvoja.",
+      en: "See how much website development costs in Serbia in 2026, with ranges for business sites, WordPress builds, online stores, and custom development.",
+    },
+    excerpt: {
+      sr: "Jasan vodič kroz cene landing stranica, poslovnih sajtova, web shopova i custom aplikacija, uz pitanja koja treba postaviti pre ponude.",
+      en: "A practical guide to landing page, business website, web shop, and custom application pricing, with questions to ask before accepting a quote.",
+    },
+  },
   {
     id: "iphone-duo-responsive-design",
     slug: "iphone-duo-responsive-web-dizajn",
@@ -133,7 +222,8 @@ export function getBlogPosts(locale: Locale): readonly LocalizedBlogPost[] {
     id: post.id,
     slug: post.slug,
     publishedOn: post.publishedOn,
-    readTimeMinutes: Math.max(1, Math.ceil([blogEditorial[post.id].answer[locale], ...blogEditorial[post.id].sections[locale].flatMap((section) => [section.heading, ...section.paragraphs, ...(section.list ?? [])])].join(" ").split(/\s+/).length / 200)),
+    updatedOn: post.updatedOn ?? post.publishedOn,
+    readTimeMinutes: Math.max(1, Math.ceil([blogEditorial[post.id].answer[locale], ...blogEditorial[post.id].sections[locale].flatMap((section) => [section.heading, ...section.paragraphs, ...(section.list ?? []), ...(section.blocks ?? []).flatMap((block) => blockText(block))])].join(" ").split(/\s+/).length / 200)),
     title: post.title[locale],
     seoTitle: (post.seoTitle ?? post.title)[locale],
     description: post.description[locale],
@@ -149,9 +239,31 @@ export function getBlogPosts(locale: Locale): readonly LocalizedBlogPost[] {
     topic: blogEditorial[post.id].topic[locale],
     answer: blogEditorial[post.id].answer[locale],
     sources: blogEditorial[post.id].sources,
+    cta: blogEditorial[post.id].cta?.[locale],
   }));
 }
 
 export function getBlogPost(locale: Locale, slug: string): LocalizedBlogPost | null {
   return getBlogPosts(locale).find((post) => post.slug === slug) ?? null;
+}
+
+function blockText(block: BlogBlock): readonly string[] {
+  switch (block.type) {
+    case "table":
+      return [block.caption ?? "", ...block.columns, ...block.rows.flat()];
+    case "subsections":
+      return block.items.flatMap((item) => [item.heading, ...item.paragraphs, ...(item.list ?? [])]);
+    case "cards":
+      return block.items.flatMap((item) => [item.eyebrow ?? "", item.title, item.body, ...(item.list ?? [])]);
+    case "comparison":
+      return block.items.flatMap((item) => [item.title, item.body, ...item.list]);
+    case "checklist":
+      return block.items;
+    case "faq":
+      return block.items.flatMap((item) => [item.question, item.answer]);
+    case "linkList":
+      return [block.title, ...block.items.map((item) => item.label)];
+    case "cta":
+      return [block.title, block.body, block.label];
+  }
 }

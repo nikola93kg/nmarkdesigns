@@ -1,7 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import background from "@/components/ui/GridBackground.module.css";
 import type { Dictionary } from "@/content/i18n/types";
 import type { Locale } from "@/lib/i18n";
 import { navigationItem } from "@/lib/routes";

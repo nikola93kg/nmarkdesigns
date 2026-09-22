@@ -1,7 +1,8 @@
 import type { BlogSection } from "@/content/blog";
 import type { Localized } from "@/lib/i18n";
+import { websitePricingSerbia2026 } from "@/content/blog-pricing-guide";
 
-interface Editorial {
+export interface Editorial {
   image: string;
   heroBackground: {
     image: string;
@@ -17,6 +18,11 @@ interface Editorial {
   answer: Localized<string>;
   sections: Localized<readonly BlogSection[]>;
   sources: readonly { label: string; href: string }[];
+  cta?: Localized<{
+    title: string;
+    description: string;
+    label: string;
+  }>;
 }
 
 export const blogLabels = {
@@ -69,6 +75,7 @@ export const blogLabels = {
 } as const;
 
 export const blogEditorial: Record<string, Editorial> = {
+  "website-pricing-serbia-2026": websitePricingSerbia2026,
   "iphone-duo-responsive-design": {
     image: "/blog/apple-iphone-duo-opening.webp",
     heroBackground: {

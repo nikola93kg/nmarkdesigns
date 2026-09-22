@@ -46,8 +46,9 @@ export default async function BlogArticleRoute({ params }: PageProps<"/[locale]/
       {
         "@type": "BlogPosting", "@id": `${url}#article`, url,
         headline: post.title, description: post.description, abstract: post.answer,
-        inLanguage: locale, datePublished: post.publishedOn,
+        inLanguage: locale, datePublished: post.publishedOn, dateModified: post.updatedOn,
         image: canonicalUrl(post.socialImage), mainEntityOfPage: url,
+        author: { "@type": "Person", name: "Nikola Marković", "@id": `${site.url}/#nikola-markovic` },
         publisher: { "@id": `${site.url}/#organization` },
         articleSection: post.topic, citation: post.sources.map((source) => source.href),
       },

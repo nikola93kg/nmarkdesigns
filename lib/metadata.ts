@@ -38,7 +38,7 @@ export function createPageMetadata({
       ? localizedBlogPostPath(slug, language)
       : localizedPath(route, language);
   const url = canonicalUrl(pagePath(locale));
-  const socialTitle = title === site.name ? title : `${title} | ${site.name}`;
+  const socialTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
   const images = image ? [{
     url: new URL(image.src, site.url).toString(),
     width: image.width,
