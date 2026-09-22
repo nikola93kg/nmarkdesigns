@@ -110,7 +110,12 @@ export function proxy(request: NextRequest) {
     }
     return protect(addSecurityHeaders(NextResponse.next()));
   }
-  if (path === "/robots.txt" || path === "/sitemap.xml" || /^\/(about|images|projects|logo)\//.test(path) || /^\/blog\/.+\\.(?:jpg|png|webp)$/.test(path)) {
+  if (
+    path === "/robots.txt" ||
+    path === "/sitemap.xml" ||
+    /^\/(?:about|blog|images|projects|logo)\//.test(path) ||
+    /^\/(?:apple-icon\.png|icon\.png|favicon\.ico|manifest\.webmanifest|web-app-manifest-\d+x\d+\.png)$/.test(path)
+  ) {
     return protect(addSecurityHeaders(NextResponse.next()));
   }
   // Reject unknown and incorrectly cased URLs before case-insensitive static caches.

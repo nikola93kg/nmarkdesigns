@@ -1,19 +1,30 @@
-```
 # Dependencies
 node_modules/
+
+# Next.js / build output
+.next/
+out/
+dist/
+build/
+target/
+next-env.d.ts
+*.tsbuildinfo
 
 # Environment
 .env
 .env.local
 .env.*
+!.env.example
 
 # Logs
 *.log
 
-# Build artifacts
-dist/
-build/
-target/
+# Test and coverage artifacts
+coverage/
+htmlcov/
+.coverage
+playwright-report/
+test-results/
 
 # Python
 __pycache__/
@@ -46,13 +57,7 @@ pip-selfcheck.json
 .DS_Store
 Thumbs.db
 
-# Coverage
-coverage/
-htmlcov/
-.coverage
-
 # Cache
 .mypy_cache/
 .pytest_cache/
 .gradle/
-```
