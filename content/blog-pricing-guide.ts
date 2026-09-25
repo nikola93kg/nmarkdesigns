@@ -47,16 +47,16 @@ const faqEn = [
 export const websitePricingSerbia2026 = {
   image: "/blog/koliko-kosta-izrada-web-sajta-u-srbiji-2026.webp",
   heroBackground: {
-    image: "/blog/hero/koliko-kosta-izrada-web-sajta-u-srbiji-2026-bg.webp",
-    width: 1774,
-    height: 887,
-    position: "72% center",
+    image: "/blog/koliko-kosta-izrada-web-sajta-u-srbiji-2026.webp",
+    width: 1672,
+    height: 941,
+    position: "center",
   },
-  width: 1774,
-  height: 887,
+  width: 1672,
+  height: 941,
   alt: {
-    sr: "Moderan radni sto sa laptopom, kalkulatorom i dokumentom sa okvirnim cenama za izradu web sajta.",
-    en: "Modern desk with a laptop, calculator, and website pricing proposal document.",
+    sr: "Laptop na radnom stolu sa prikazom web sajta, pogledom na Beograd i novcem pored računara.",
+    en: "Laptop displaying a website on a desk overlooking Belgrade, with money beside the computer.",
   },
   caption: {
     sr: "Cena sajta zavisi od obima: landing stranica, poslovni sajt, web shop i custom aplikacija nisu isti proizvod.",

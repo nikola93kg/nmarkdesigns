@@ -232,7 +232,7 @@ export function getBlogPosts(locale: Locale): readonly LocalizedBlogPost[] {
     sections: blogEditorial[post.id].sections[locale],
     image: blogEditorial[post.id].image,
     heroBackground: blogEditorial[post.id].heroBackground,
-    socialImage: blogEditorial[post.id].image.replace(/\.webp$/, ".jpg"),
+    socialImage: blogEditorial[post.id].image,
     width: blogEditorial[post.id].width,
     height: blogEditorial[post.id].height,
     caption: blogEditorial[post.id].caption[locale],
