@@ -11,7 +11,7 @@ export function BlogCard({ post, locale, copy, featured = false }: { post: Local
   return (
     <article className={`${styles.card} ${featured ? styles.featured : ""}`}>
       <Link href={localizedBlogPostPath(post.slug, locale)} className={styles.image} tabIndex={-1} aria-hidden="true">
-        <Image src={post.image} alt={post.coverAlt} width={post.width} height={post.height} sizes="(max-width: 767px) 100vw, 50vw" preload={featured} />
+        <Image src={post.image} alt={post.coverAlt} width={post.width} height={post.height} unoptimized={post.imageType === "image/svg+xml"} sizes="(max-width: 767px) 100vw, 50vw" preload={featured} />
       </Link>
       <div className={styles.cardBody}>
         <p className="text-small font-semibold text-brand">{featured ? `${blogLabels[locale].featured} / ` : ""}{post.topic}</p>

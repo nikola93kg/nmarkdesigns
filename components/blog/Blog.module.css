@@ -175,6 +175,119 @@
   margin-top: 2rem;
 }
 
+.metricGrid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.metricCard {
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-brand);
+  color: var(--color-on-brand);
+}
+
+.metricLabel,
+.verdictLabel {
+  margin-top: 0 !important;
+  color: var(--color-brand);
+  font-size: var(--text-small);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.metricCard h3 {
+  margin-top: .65rem;
+  color: inherit;
+  font-size: var(--text-subheading);
+  font-weight: 700;
+}
+
+.metricValue {
+  margin-top: 1rem !important;
+  color: var(--color-on-brand);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.metricCard > p:last-child {
+  margin-top: 1rem;
+  color: var(--color-on-brand-muted);
+  line-height: 1.65;
+}
+
+.verdict {
+  display: grid;
+  gap: .75rem;
+  margin-top: 2rem;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border: 1px solid var(--color-brand);
+  border-radius: var(--radius-card);
+  background: var(--color-accent-soft);
+}
+
+.verdictStatement,
+.verdictNote {
+  margin-top: 0 !important;
+}
+
+.verdictStatement {
+  color: var(--color-brand);
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.verdictNote {
+  color: var(--color-muted);
+  font-size: var(--text-small);
+}
+
+.flow {
+  display: grid;
+  gap: .75rem;
+  margin-top: 2rem;
+  padding: 0;
+  list-style: none;
+  background: transparent;
+  border: 0;
+}
+
+.flowItem {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  column-gap: .75rem;
+  align-items: center;
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface-muted);
+}
+
+.flowNumber {
+  grid-row: span 2;
+  color: var(--color-brand);
+  font-size: var(--text-small);
+  font-weight: 700;
+}
+
+.flowLabel {
+  color: var(--color-muted);
+  font-size: var(--text-small);
+}
+
+.flowItem strong {
+  color: var(--color-brand);
+  font-size: var(--text-subheading);
+  line-height: 1.2;
+}
+
 .articleCard,
 .comparison article {
   min-width: 0;
@@ -319,6 +432,10 @@
 @media (min-width: 48rem) {
   .articleCards,
   .comparison {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .metricGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 

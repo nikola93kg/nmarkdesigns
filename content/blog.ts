@@ -34,6 +34,28 @@ export type BlogBlock =
       }[];
     }
   | {
+      type: "metrics";
+      items: readonly {
+        label: string;
+        title: string;
+        value: string;
+        body: string;
+      }[];
+    }
+  | {
+      type: "verdict";
+      title: string;
+      statement: string;
+      note: string;
+    }
+  | {
+      type: "flow";
+      items: readonly {
+        label: string;
+        title: string;
+      }[];
+    }
+  | {
       type: "comparison";
       items: readonly {
         title: string;
@@ -96,6 +118,7 @@ export interface LocalizedBlogPost {
     position?: string;
   };
   socialImage: string;
+  imageType?: string;
   width: number;
   height: number;
   caption: string;
@@ -106,6 +129,8 @@ export interface LocalizedBlogPost {
     title: string;
     description: string;
     label: string;
+    secondaryLabel?: string;
+    secondaryHref?: string;
   };
   id: string;
   slug: string;
@@ -121,6 +146,28 @@ export interface LocalizedBlogPost {
 }
 
 export const blogPosts: readonly BlogPost[] = [
+  {
+    id: "gta-vi-website-web-dizajn-core-web-vitals",
+    slug: "gta-vi-website-web-dizajn-core-web-vitals",
+    publishedOn: "2026-09-29",
+    updatedOn: "2026-09-29",
+    title: {
+      sr: "GTA VI ima jedan od najzanimljivijih sajtova 2026. — šta web dizajneri mogu da nauče od Rockstara?",
+      en: "GTA VI has one of the most interesting websites of 2026 — what can web designers learn from Rockstar?",
+    },
+    seoTitle: {
+      sr: "GTA VI Website: Web Dizajn, UX i Core Web Vitals Analiza",
+      en: "GTA VI Website: Web Design, UX and Core Web Vitals Analysis",
+    },
+    description: {
+      sr: "Analiziramo GTA VI website: storytelling, UX, hero sekciju, performanse i Core Web Vitals — i šta običan biznis može da nauči od Rockstara.",
+      en: "We analyse the GTA VI website: storytelling, UX, the hero section, performance and Core Web Vitals — and what an ordinary business can learn from Rockstar.",
+    },
+    excerpt: {
+      sr: "Rockstar pokazuje koliko daleko mogu da idu brend, vizuelno pripovedanje i atmosfera. Ali zašto isti pristup nije automatski dobar izbor za lokalni biznis?",
+      en: "Rockstar shows how far branding, visual storytelling and atmosphere can go. But why is the same approach not automatically right for a local business?",
+    },
+  },
   {
     id: "website-pricing-serbia-2026",
     slug: "koliko-kosta-izrada-web-sajta-u-srbiji-2026",
@@ -233,6 +280,7 @@ export function getBlogPosts(locale: Locale): readonly LocalizedBlogPost[] {
     image: blogEditorial[post.id].image,
     heroBackground: blogEditorial[post.id].heroBackground,
     socialImage: blogEditorial[post.id].image,
+    imageType: blogEditorial[post.id].imageType,
     width: blogEditorial[post.id].width,
     height: blogEditorial[post.id].height,
     caption: blogEditorial[post.id].caption[locale],
@@ -255,6 +303,12 @@ function blockText(block: BlogBlock): readonly string[] {
       return block.items.flatMap((item) => [item.heading, ...item.paragraphs, ...(item.list ?? [])]);
     case "cards":
       return block.items.flatMap((item) => [item.eyebrow ?? "", item.title, item.body, ...(item.list ?? [])]);
+    case "metrics":
+      return block.items.flatMap((item) => [item.label, item.title, item.value, item.body]);
+    case "verdict":
+      return [block.title, block.statement, block.note];
+    case "flow":
+      return block.items.flatMap((item) => [item.label, item.title]);
     case "comparison":
       return block.items.flatMap((item) => [item.title, item.body, ...item.list]);
     case "checklist":

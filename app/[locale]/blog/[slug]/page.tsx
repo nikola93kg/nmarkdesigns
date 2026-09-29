@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/blog/[sl
     locale,
     route: "blog",
     slug: post.slug,
-    image: { src: post.socialImage, width: post.width, height: post.height, alt: post.coverAlt, type: "image/webp" },
+    image: { src: post.socialImage, width: post.width, height: post.height, alt: post.coverAlt, type: post.imageType ?? "image/webp" },
   });
   return { ...metadata, openGraph: { ...metadata.openGraph, type: "article", publishedTime: post.publishedOn } };
 }

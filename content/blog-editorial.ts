@@ -1,9 +1,11 @@
 import type { BlogSection } from "@/content/blog";
 import type { Localized } from "@/lib/i18n";
+import { gtaViWebsiteAnalysis } from "@/content/blog-gta-vi";
 import { websitePricingSerbia2026 } from "@/content/blog-pricing-guide";
 
 export interface Editorial {
   image: string;
+  imageType?: string;
   heroBackground: {
     image: string;
     width: number;
@@ -22,6 +24,8 @@ export interface Editorial {
     title: string;
     description: string;
     label: string;
+    secondaryLabel?: string;
+    secondaryHref?: string;
   }>;
 }
 
@@ -76,6 +80,7 @@ export const blogLabels = {
 
 export const blogEditorial: Record<string, Editorial> = {
   "website-pricing-serbia-2026": websitePricingSerbia2026,
+  "gta-vi-website-web-dizajn-core-web-vitals": gtaViWebsiteAnalysis,
   "iphone-duo-responsive-design": {
     image: "/blog/apple-iphone-duo-opening.webp",
     heroBackground: {

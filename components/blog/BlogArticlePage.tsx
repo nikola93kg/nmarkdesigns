@@ -26,6 +26,7 @@ export function BlogArticlePage({ post, copy, locale, url }: { post: LocalizedBl
               width={post.heroBackground.width}
               height={post.heroBackground.height}
               priority
+              unoptimized={post.imageType === "image/svg+xml"}
               sizes="100vw"
               style={{ objectPosition: post.heroBackground.position ?? "center" }}
             />
@@ -49,7 +50,7 @@ export function BlogArticlePage({ post, copy, locale, url }: { post: LocalizedBl
           <div className={styles.body}>
             <aside className={styles.answer} aria-label={labels.answer}><h2 className="text-subheading font-semibold">{labels.answer}</h2><p>{post.answer}</p></aside>
             <figure className={styles.figure}>
-              <div className={styles.image}><Image src={post.image} alt={post.coverAlt} width={post.width} height={post.height} sizes="(max-width: 767px) 100vw, 65vw" /></div>
+              <div className={styles.image}><Image src={post.image} alt={post.coverAlt} width={post.width} height={post.height} unoptimized={post.imageType === "image/svg+xml"} sizes="(max-width: 767px) 100vw, 65vw" /></div>
               <figcaption>{post.caption}</figcaption>
             </figure>
             {post.sections.map((section, index) => (
@@ -60,14 +61,14 @@ export function BlogArticlePage({ post, copy, locale, url }: { post: LocalizedBl
                 {section.blocks?.map((block, blockIndex) => <BlogBlockRenderer key={`${section.heading}-${blockIndex}`} block={block} />)}
                 {section.media?.map((media) => (
                   <figure key={media.image} className={styles.figure}>
-                    <div className={styles.image}><Image src={media.image} alt={media.alt} width={media.width} height={media.height} sizes="(max-width: 767px) 100vw, 65vw" loading="eager" /></div>
+                    <div className={styles.image}><Image src={media.image} alt={media.alt} width={media.width} height={media.height} unoptimized={post.imageType === "image/svg+xml"} sizes="(max-width: 767px) 100vw, 65vw" loading="eager" /></div>
                     <figcaption>{media.caption}</figcaption>
                   </figure>
                 ))}
               </section>
             ))}
             <section className={styles.sources}><h2 className="text-subheading font-semibold">{labels.sources}</h2><ul>{post.sources.map((source) => <li key={source.href}><a href={source.href}>{source.label}</a></li>)}</ul></section>
-            <section><h2 className="text-heading font-semibold">{finalCta.title}</h2><p className="text-muted">{finalCta.description}</p><div className="mt-6"><Button href={localizedPath("contact", locale)}>{finalCta.label}</Button></div></section>
+            <section><h2 className="text-heading font-semibold">{finalCta.title}</h2><p className="text-muted">{finalCta.description}</p><div className="mt-6 flex flex-wrap gap-3"><Button href={localizedPath("contact", locale)}>{finalCta.label}</Button>{post.cta?.secondaryHref && post.cta.secondaryLabel ? <Button href={post.cta.secondaryHref} variant="secondary">{post.cta.secondaryLabel}</Button> : null}</div></section>
           </div>
         </Container>
       </article>
@@ -122,6 +123,39 @@ function BlogBlockRenderer({ block }: { block: BlogBlock }) {
             </article>
           ))}
         </div>
+      );
+    case "metrics":
+      return (
+        <div className={styles.metricGrid}>
+          {block.items.map((item) => (
+            <article key={item.label} className={styles.metricCard}>
+              <p className={styles.metricLabel}>{item.label}</p>
+              <h3>{item.title}</h3>
+              <p className={styles.metricValue}>{item.value}</p>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+      );
+    case "verdict":
+      return (
+        <aside className={styles.verdict} aria-label={block.title}>
+          <p className={styles.verdictLabel}>{block.title}</p>
+          <p className={styles.verdictStatement}>{block.statement}</p>
+          <p className={styles.verdictNote}>{block.note}</p>
+        </aside>
+      );
+    case "flow":
+      return (
+        <ol className={styles.flow}>
+          {block.items.map((item, index) => (
+            <li key={item.label} className={styles.flowItem}>
+              <span className={styles.flowNumber}>{String(index + 1).padStart(2, "0")}</span>
+              <span className={styles.flowLabel}>{item.label}</span>
+              <strong>{item.title}</strong>
+            </li>
+          ))}
+        </ol>
       );
     case "comparison":
       return (
