@@ -33,7 +33,44 @@ export interface SectionCopy {
   description: string;
 }
 
+/**
+ * Copy for the hidden "Flappy Flight" easter egg served at
+ * /sr/egg/coolfridgeguys. It is never linked from the public site and is
+ * answered with X-Robots-Tag: noindex, nofollow by proxy.ts.
+ */
+export interface EggCopy {
+  eyebrow: string;
+  title: string;
+  badge: string;
+  score: string;
+  best: string;
+  start: string;
+  loading: string;
+  retry: string;
+  resume: string;
+  readyTitle: string;
+  readyBody: string;
+  hint: string;
+  pauseTitle: string;
+  pauseBody: string;
+  overTitle: string;
+  newBest: string;
+  /** Sentence fragment placed right after the numeric score. */
+  cleared: string;
+  again: string;
+  footer: string;
+  saved: string;
+  close: string;
+  mute: string;
+  unmute: string;
+  pauseAria: string;
+  resumeAria: string;
+  restartAria: string;
+  canvasLabel: string;
+}
+
 export interface Dictionary {
+  egg: EggCopy;
   navigation: Record<RouteKey, string>;
   accessibility: {
     skipLink: string;
