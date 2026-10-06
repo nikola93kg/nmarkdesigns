@@ -2,6 +2,7 @@ import type { BlogSection } from "@/content/blog";
 import type { Localized } from "@/lib/i18n";
 import { gtaViWebsiteAnalysis } from "@/content/blog-gta-vi";
 import { websitePricingSerbia2026 } from "@/content/blog-pricing-guide";
+import { aiSearchGuide2026 } from "@/content/blog-ai-search";
 
 export interface Editorial {
   image: string;
@@ -79,6 +80,7 @@ export const blogLabels = {
 } as const;
 
 export const blogEditorial: Record<string, Editorial> = {
+  "ai-search-google-overviews-chatgpt": aiSearchGuide2026,
   "website-pricing-serbia-2026": websitePricingSerbia2026,
   "gta-vi-website-web-dizajn-core-web-vitals": gtaViWebsiteAnalysis,
   "iphone-duo-responsive-design": {

@@ -5,6 +5,7 @@ import { blogLabels } from "@/content/blog-editorial";
 
 for (const locale of ["sr", "en"] as const) {
   test(`${locale} blog guides, images, navigation and schema`, async ({ page }) => {
+    test.setTimeout(90_000);
     await page.goto(`/${locale}/blog/`);
     await expect(page.locator("h1")).toHaveCount(1);
     await expect(page.locator("main article")).toHaveCount(getBlogPosts(locale).length);
@@ -30,6 +31,8 @@ for (const locale of ["sr", "en"] as const) {
       expect(article.inLanguage).toBe(locale);
       expect(article.abstract).toBe(post.answer);
       await expect(page.locator('meta[property="og:type"]')).toHaveAttribute("content", "article");
+      await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", `https://nmarkdesigns.com${post.socialImage}`);
+      await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute("content", `https://nmarkdesigns.com${post.socialImage}`);
       const accessibility = await new AxeBuilder({ page }).include("main").analyze();
       expect(accessibility.violations).toEqual([]);
     }

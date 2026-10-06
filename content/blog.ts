@@ -147,6 +147,28 @@ export interface LocalizedBlogPost {
 
 export const blogPosts: readonly BlogPost[] = [
   {
+    id: "ai-search-google-overviews-chatgpt",
+    slug: "ai-menja-google-pretragu-ai-overviews-chatgpt-ai-search",
+    publishedOn: "2026-10-06",
+    updatedOn: "2026-10-06",
+    title: {
+      sr: "AI menja Google pretragu: kako pripremiti sajt za AI Overviews, ChatGPT i AI Search",
+      en: "AI is transforming Google Search: how to prepare your website for AI Overviews, ChatGPT, and AI Search",
+    },
+    seoTitle: {
+      sr: "AI menja Google pretragu: kako pripremiti sajt za AI Search | NMark Designs",
+      en: "AI is changing Google Search: how to prepare your site for AI Search | NMark Designs",
+    },
+    description: {
+      sr: "Google AI Overviews i ChatGPT menjaju način na koji ljudi pronalaze firme. Saznajte kako pripremiti sajt za SEO, AI Search i budućnost pretrage.",
+      en: "Google AI Overviews and ChatGPT are changing how people find businesses. Learn how to prepare your website for SEO, AI Search, and the future of search.",
+    },
+    excerpt: {
+      sr: "Korisnik više ne mora uvek da klikne na prvi rezultat na Google-u. AI može da pročita desetine izvora i sastavi odgovor umesto njega. To ne znači da je SEO mrtav — znači da vaš sajt sada mora da bude i dobar rezultat i dobar izvor.",
+      en: "Users no longer always have to click the first Google result. AI can read dozens of sources and synthesize an answer. That does not mean SEO is dead — it means your site must be both a great result and a reliable source.",
+    },
+  },
+  {
     id: "gta-vi-website-web-dizajn-core-web-vitals",
     slug: "gta-vi-website-web-dizajn-core-web-vitals",
     publishedOn: "2026-09-29",
