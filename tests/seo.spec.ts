@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { blogPosts } from "@/content/blog";
 import { site } from "@/content/site";
-import { caseStudyProjects } from "@/content/projects";
+import { projects, caseStudyProjects } from "@/content/projects";
 import { publicPages } from "@/lib/public-pages";
 import { isIndexableHost } from "@/lib/seo-config";
 import { robotsForHost } from "@/lib/crawl";
@@ -157,7 +157,10 @@ test("exact permanent legacy redirects have one hop and preserve queries", async
   const mappings = [
     ["/", "/sr/"], ["/about/", "/sr/o-nama/"], ["/contact/", "/sr/kontakt/"],
     ["/cenovnik/", "/sr/cenovnik/"], ["/portfolio/", "/sr/portfolio/"], ["/all-services/", "/sr/usluge/"],
-    ...caseStudyProjects.map((project) => [new URL(project.sourceUrl).pathname, `/sr/portfolio/${project.slug}/`]),
+    ...projects.map((project) => [
+      new URL(project.sourceUrl).pathname,
+      project.caseStudy ? `/sr/portfolio/${project.slug}/` : `/sr/portfolio/#project-${project.slug}`,
+    ]),
   ];
   for (const [legacy, target] of mappings) {
     for (const path of new Set([legacy, legacy === "/" ? legacy : legacy.slice(0, -1)])) {
