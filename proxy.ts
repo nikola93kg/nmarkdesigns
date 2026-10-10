@@ -24,12 +24,12 @@ function addSecurityHeaders(response: NextResponse): NextResponse {
   // form-action 'self' prevents form submission to external domains
   const cspDirectives = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "img-src 'self' data: blob: https://www.google-analytics.com https://stats.g.doubleclick.net",
     "font-src 'self' https://fonts.gstatic.com",
-    "connect-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net https://analytics.google.com",
-    "frame-src 'none'",
+    "connect-src 'self' https://challenges.cloudflare.com https://www.google-analytics.com https://stats.g.doubleclick.net https://analytics.google.com",
+    "frame-src https://challenges.cloudflare.com",
     "frame-ancestors 'none'",
     "form-action 'self'",
     "base-uri 'self'",
@@ -73,7 +73,6 @@ function addSecurityHeaders(response: NextResponse): NextResponse {
     "accelerometer=()",
     "gyroscope=()",
     "magnetometer=()",
-    "ambient-light-sensor=()",
     "autoplay=()",
     "encrypted-media=()",
     "fullscreen=()",

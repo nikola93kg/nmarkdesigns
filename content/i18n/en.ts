@@ -349,6 +349,9 @@ const en = {
         invalidValue: "Enter a valid text value.",
         invalidEmail: "Enter a valid email address.",
         invalidPhone: "Enter a valid phone number or leave this field empty.",
+        spamDetected: "Submission could not be completed. Please try again.",
+        rateLimited: "Too many requests. Please wait a few minutes before trying again.",
+        turnstileFailed: "Security verification failed. Please refresh the page and try again.",
       },
       status: {
         invalid: "Check the marked fields. Your message has not been sent.",

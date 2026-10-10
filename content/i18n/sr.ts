@@ -349,6 +349,9 @@ const sr = {
         invalidValue: "Unesite ispravnu tekstualnu vrednost.",
         invalidEmail: "Unesite ispravnu email adresu.",
         invalidPhone: "Unesite ispravan broj telefona ili ostavite polje prazno.",
+        spamDetected: "Slanje nije uspelo. Pokušajte ponovo.",
+        rateLimited: "Previše zahteva. Sačekajte nekoliko minuta pre ponovnog slanja.",
+        turnstileFailed: "Bezbednosna provera nije uspela. Osvežite stranicu i pokušajte ponovo.",
       },
       status: {
         invalid: "Proverite označena polja. Poruka nije poslata.",

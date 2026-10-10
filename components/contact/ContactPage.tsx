@@ -47,7 +47,7 @@ export function ContactPage({ locale, copy }: { locale: Locale; copy: Dictionary
             </ul>
           </address>
         </section>
-        <ContactForm key={locale} copy={copy.form} action={submitContact.bind(null, locale)} permalink={localizedPath("contact", locale)} deliveryAvailable={contactDelivery.available} />
+        <ContactForm key={locale} copy={copy.form} action={submitContact.bind(null, locale)} permalink={localizedPath("contact", locale)} deliveryAvailable={contactDelivery.isAvailable()} />
       </Container>
     </>
   );

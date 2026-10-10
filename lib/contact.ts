@@ -1,8 +1,16 @@
 export const contactFields = ["name", "email", "phone", "message"] as const;
-export type ContactField = typeof contactFields[number];
+export type ContactField = (typeof contactFields)[number];
 export type ContactValues = Record<ContactField, string>;
-export type ContactValidationError = "required" | "tooLong" | "invalidValue" | "invalidEmail" | "invalidPhone";
-export type ContactErrors = Partial<Record<ContactField, ContactValidationError>>;
+export type ContactValidationError =
+  | "required"
+  | "tooLong"
+  | "invalidValue"
+  | "invalidEmail"
+  | "invalidPhone"
+  | "spamDetected"
+  | "rateLimited"
+  | "turnstileFailed";
+export type ContactErrors = Partial<Record<ContactField | "form", ContactValidationError>>;
 
 export const contactLimits = { name: 120, email: 254, phone: 32, message: 5000 } as const;
 
