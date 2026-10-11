@@ -37,7 +37,15 @@ export const projects: readonly Project[] = [
     slug: "buy-pallet-jacks",
     title: "Buy Pallet Jacks",
     client: "Buy Pallet Jacks",
+    category: {
+      sr: "B2B sajt",
+      en: "B2B Website",
+    },
     websiteUrl: "https://buypalletjacks.com",
+    services: {
+      sr: ["Web dizajn", "Frontend razvoj", "Optimizacija"],
+      en: ["Web Design", "Frontend Development", "Optimization"],
+    },
     technologies: ["Next.js", "Vercel", "Tailwind CSS"],
     caseStudy: {
       overview: {
@@ -55,7 +63,15 @@ export const projects: readonly Project[] = [
     slug: "ilic-enterijer",
     title: "Ilić Enterijer",
     client: "Ilić Enterijer",
+    category: {
+      sr: "Poslovni sajt",
+      en: "Business Website",
+    },
     websiteUrl: "https://ilicenterijer.rs/",
+    services: {
+      sr: ["Web dizajn", "Frontend razvoj", "SEO osnova"],
+      en: ["Web Design", "Frontend Development", "SEO Foundation"],
+    },
     technologies: ["Next.js", "Vercel", "Tailwind CSS"],
     caseStudy: {
       overview: {
@@ -73,7 +89,15 @@ export const projects: readonly Project[] = [
     slug: "powder-brows-vienna",
     title: "Powder Brows Vienna",
     client: "Jovana Ristic Makeup",
+    category: {
+      sr: "Poslovni sajt",
+      en: "Business Website",
+    },
     websiteUrl: "https://www.powderbrowsvienna.com",
+    services: {
+      sr: ["Web dizajn", "Frontend razvoj"],
+      en: ["Web Design", "Frontend Development"],
+    },
     technologies: ["Next.js", "Tailwind CSS", "TypeScript", "Vercel"],
     caseStudy: {
       overview: {
@@ -91,8 +115,16 @@ export const projects: readonly Project[] = [
     slug: "coolfridgeguys",
     title: "CoolFridgeGuys",
     client: "CoolFridgeGuys",
+    category: {
+      sr: "Web prodavnica",
+      en: "E-commerce",
+    },
     websiteUrl: "https://www.coolfridgeguys.com/",
-    technologies: ["Next.js"],
+    services: {
+      sr: ["Headless frontend razvoj", "E-commerce integracija"],
+      en: ["Headless Frontend Development", "E-commerce Integration"],
+    },
+    technologies: ["Next.js", "Squarespace"],
     shortDescription: {
       sr: "Headless Next.js e-commerce frontend za prodaju rashladnih vitrina, frižidera i zamrzivača, sa secure checkout-om na Squarespace domenu coolfridgeguys.shop.",
       en: "A headless Next.js e-commerce frontend for refrigerated display cases, refrigerators and freezers, with secure checkout handled on the Squarespace domain coolfridgeguys.shop.",
@@ -113,7 +145,15 @@ export const projects: readonly Project[] = [
     slug: "tripolisweets",
     title: "Tripoli Sweets",
     client: "Tripoli Sweets",
+    category: {
+      sr: "Poslovni sajt",
+      en: "Business Website",
+    },
     websiteUrl: "https://www.tripolisweets.com.mx",
+    services: {
+      sr: ["Web dizajn", "WordPress razvoj"],
+      en: ["Web Design", "WordPress Development"],
+    },
     technologies: ["WordPress", "HTML", "CSS", "JavaScript"],
     caseStudy: {
       overview: {
@@ -131,7 +171,15 @@ export const projects: readonly Project[] = [
     slug: "casovi-francuskog",
     title: "Časovi Francuskog",
     client: "Jelena Marković - Časovi Francuskog",
+    category: {
+      sr: "Edukacija i kursevi",
+      en: "Education & Courses",
+    },
     websiteUrl: "https://casovifrancuskog.rs",
+    services: {
+      sr: ["Web dizajn", "WordPress razvoj", "Optimizacija"],
+      en: ["Web Design", "WordPress Development", "Optimization"],
+    },
     technologies: ["WordPress", "HTML", "CSS", "JavaScript"],
     caseStudy: {
       overview: {
@@ -149,7 +197,16 @@ export const projects: readonly Project[] = [
     slug: "ladekor",
     title: "LaDekor",
     client: "LaDekor",
+    category: {
+      sr: "Poslovni sajt",
+      en: "Business Website",
+    },
     websiteUrl: "https://ladekor.rs/",
+    services: {
+      sr: ["Web dizajn", "Izrada sajta"],
+      en: ["Web Design", "Website Development"],
+    },
+    technologies: ["WordPress", "HTML", "CSS", "JavaScript"],
     caseStudy: {
       overview: {
         sr: "Web sajt za LaDekor sa predstavljanjem molerskih radova.",
@@ -166,7 +223,15 @@ export const projects: readonly Project[] = [
     slug: "os-dule-karaklajic",
     title: "OŠ Dule Karaklajić",
     client: "ОШ „Дуле Караклајић“ – Лазаревац",
+    category: {
+      sr: "Obrazovna ustanova",
+      en: "Educational Institution",
+    },
     websiteUrl: "https://dulovaskola.edu.rs/",
+    services: {
+      sr: ["Web dizajn", "WordPress razvoj", "Struktura informacija"],
+      en: ["Web Design", "WordPress Development", "Information Architecture"],
+    },
     technologies: ["WordPress", "HTML", "CSS", "JavaScript"],
     caseStudy: {
       overview: {
@@ -183,7 +248,12 @@ export const projects: readonly Project[] = [
   {
     slug: "anabelabebioprema",
     title: "Anabela Bebi Oprema",
+    category: {
+      sr: "Web prodavnica",
+      en: "E-commerce",
+    },
     websiteUrl: "https://anabelashop.rs/",
+    technologies: ["WordPress", "WooCommerce"],
     shortDescription: {
       sr: "E-commerce WooCommerce web sajt za prodaju bebi opreme.",
       en: "A WooCommerce e-commerce website for selling baby equipment.",
@@ -199,6 +269,10 @@ export const projects: readonly Project[] = [
     slug: "frankultura",
     title: "Frankultura",
     client: "Frankultura",
+    category: {
+      sr: "Edukacija i kursevi",
+      en: "Education & Courses",
+    },
     websiteUrl: "https://www.frankultura.rs",
     technologies: ["WordPress", "HTML", "CSS", "JavaScript"],
     shortDescription: {
@@ -215,7 +289,12 @@ export const projects: readonly Project[] = [
   {
     slug: "madjionicar-bojan",
     title: "Mađioničar Bojan",
+    category: {
+      sr: "Prezentacioni sajt",
+      en: "Presentation Website",
+    },
     websiteUrl: "https://madjionicarbokac.com/",
+    technologies: ["WordPress", "HTML", "CSS", "JavaScript"],
     shortDescription: {
       sr: "Web prezentacija poznatog mađioničara Bojana Bogdanovića.",
       en: "A presentation website for the well-known magician Bojan Bogdanović.",
@@ -230,7 +309,12 @@ export const projects: readonly Project[] = [
   {
     slug: "banquetes-castellanos-zoreda",
     title: "Banquetes Castellanos Zoreda",
+    category: {
+      sr: "Poslovni sajt",
+      en: "Business Website",
+    },
     websiteUrl: "https://precious-marigold-0deefc.netlify.app/",
+    technologies: ["HTML", "CSS", "JavaScript", "Netlify"],
     shortDescription: {
       sr: "Prezentacioni website za klijenta iz Meksika koji iznajmljuje svadbene stolice, stolove i prateću opremu.",
       en: "A presentation website for a client in Mexico that rents wedding chairs, tables and related event equipment.",
@@ -245,7 +329,12 @@ export const projects: readonly Project[] = [
   {
     slug: "nest-home-solutions",
     title: "Nest Home Solutions",
+    category: {
+      sr: "Poslovni sajt",
+      en: "Business Website",
+    },
     websiteUrl: "https://nikola93kg.github.io/nest-home/",
+    technologies: ["HTML", "CSS", "JavaScript", "GitHub Pages"],
     shortDescription: {
       sr: "Web prezentacija građevinske firme koja gradi apartmane na Divčibarama.",
       en: "A presentation website for a construction company building apartments in Divčibare.",
@@ -260,7 +349,12 @@ export const projects: readonly Project[] = [
   {
     slug: "stamenko-milic-photography",
     title: "Stamenko Milić Photography",
+    category: {
+      sr: "Portfolio sajt",
+      en: "Portfolio Website",
+    },
     websiteUrl: "https://www.milicweddings.com/",
+    technologies: ["WordPress", "HTML", "CSS"],
     shortDescription: {
       sr: "Web prezentacija za fotografa Stamenka Milića.",
       en: "A presentation website for photographer Stamenko Milić.",
@@ -275,7 +369,12 @@ export const projects: readonly Project[] = [
   {
     slug: "dh-travell",
     title: "DH Travel",
+    category: {
+      sr: "Poslovni sajt",
+      en: "Business Website",
+    },
     websiteUrl: "https://dhtravell.rs/",
+    technologies: ["WordPress", "HTML", "CSS", "JavaScript"],
     shortDescription: {
       sr: "Web prezentacija za biznis koji organizuje prevoz putnika od adrese do aerodroma i nazad.",
       en: "A presentation website for a business that provides passenger transport from an address to the airport and back.",
@@ -297,8 +396,8 @@ const portfolioOrder = [
   "tripolisweets",
   "buy-pallet-jacks",
   "ladekor",
-  "anabelabebioprema",
   "os-dule-karaklajic",
+  "anabelabebioprema",
   "frankultura",
   "madjionicar-bojan",
   "banquetes-castellanos-zoreda",

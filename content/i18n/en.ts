@@ -51,6 +51,10 @@ const en = {
     },
     contactTitle: "Let's talk about your website.",
     visitWebsite: "Visit website",
+    viewCaseStudy: "View case study",
+    visitLiveWebsite: "Visit live website",
+    caseStudyBadge: "Case study",
+    opensNewTab: "opens in a new tab",
   },
   blog: {
     metadata: {
@@ -422,7 +426,14 @@ const en = {
         "Timelines begin when the client provides all required materials.",
         "Domain and hosting costs are not included in the website price and are paid separately according to the selected package specification.",
         "The 50% advance payment is non-refundable if the collaboration is terminated.",
+        "For larger online stores with dedicated ERP integrations or custom web applications, pricing is provided based on a detailed project specification.",
       ],
+    },
+    guideBanner: {
+      eyebrow: "2026 Pricing Guide",
+      title: "Looking for an in-depth breakdown of website costs in Serbia?",
+      description: "Read our comprehensive guide analyzing pricing ranges for landing pages, business websites, online stores, and recurring domain/hosting costs.",
+      label: "Read the 2026 guide",
     },
     cta: {
       title: "Not sure which package fits your project?",
@@ -458,6 +469,16 @@ const en = {
           id: "cancellation",
           question: "What happens if I want to stop the project during website development?",
           paragraphs: ["If the collaboration is terminated, the 50% advance payment is non-refundable. If the client does not pay the remaining agreed amount, NMark Designs reserves the right to stop work or take the website offline until the obligation is fully settled."],
+        },
+        {
+          id: "ecommerce-price",
+          question: "How much does an online store cost?",
+          paragraphs: ["Our Premium plan (1.000 €) includes full online store development, responsive layout, performance optimization, and integration of automated payment systems (such as PayPal or Stripe). Larger stores with extensive catalogs or ERP integrations are quoted individually based on requirements."],
+        },
+        {
+          id: "pricing-guide",
+          question: "Where can I read a detailed market pricing analysis?",
+          paragraphs: ["On our blog, you can read our comprehensive guide 'How much does website development cost in Serbia in 2026', covering one-off project budgets and recurring maintenance, domain, and hosting expenses."],
         },
       ],
     },
@@ -531,42 +552,63 @@ const en = {
     },
     faq: {
       eyebrow: "Help center",
-      title: "Have a question? Find your answer.",
-      description: "Answers to common questions about our services and working together.",
+      title: "Frequently asked questions",
+      description: "Clear answers to essential questions about pricing, technology, workflows, and website support.",
       items: [
         {
+          id: "pricing",
+          question: "How much does website development cost?",
+          paragraphs: ["Pricing depends on the project scope and functional requirements. Our defined starting packages are Basic plan (450 €) for up to 5 pages, Standard Plan (650 €) for multilingual websites with blog and image editing, and Premium plan (1.000 €) for online stores with integrated payment processing. Custom web applications are quoted based on technical specifications."],
+        },
+        {
           id: "services",
-          question: "What services does NMark Designs offer?",
-          paragraphs: ["NMark Designs provides website design and development, maintenance, optimization, and other digital solutions tailored to each client's needs."],
+          question: "What services does NMark Designs studio provide?",
+          paragraphs: ["NMark Designs provides new website builds, existing website redesigns, e-commerce store development, WordPress and custom Next.js engineering, technical SEO foundations, and ongoing monthly maintenance."],
+        },
+        {
+          id: "wordpress-vs-custom",
+          question: "What is the difference between WordPress and custom development?",
+          paragraphs: ["The choice depends on project requirements, workflow, and budget. WordPress is a practical option when you need an accessible CMS to edit articles, copy, and product catalogs independently. We develop custom Next.js solutions when projects demand a tailored frontend, specific interactive flows, focused resource optimization, or an architecture free from reliance on third-party plugins."],
         },
         {
           id: "timeline",
           question: "How long does it take to build a website?",
-          paragraphs: ["The timeline depends on the complexity of the website and how soon the client provides the required materials. Work begins once you have supplied all the necessary content."],
+          paragraphs: ["Standard build periods are up to 15 days for the Basic plan, up to 20 days for the Standard Plan, and up to 30 days for the Premium plan. Timelines begin once the client supplies all necessary content, copy, and visual assets."],
+        },
+        {
+          id: "seo",
+          question: "Is search engine optimization included in the build?",
+          paragraphs: ["Yes, every website includes technical SEO foundations required for search engine crawling and indexing: semantic HTML hierarchy, localized metadata, canonical tags, XML sitemap generation, and Core Web Vitals performance optimization."],
+        },
+        {
+          id: "redesign",
+          question: "When is a website redesign worthwhile?",
+          paragraphs: ["A redesign is worthwhile when your existing website fails to generate enquiries, performs sluggishly on mobile devices, looks outdated, or no longer reflects your current service offerings. Our goal is clearer messaging, faster speed, and a direct conversion path."],
+        },
+        {
+          id: "process",
+          question: "How does the collaboration process work?",
+          paragraphs: ["The project follows five defined phases: discovery and goal definition, information architecture and content preparation, design and visual styling, technical development and optimization, and final pre-launch quality assurance."],
         },
         {
           id: "payment",
           question: "How does payment work?",
           paragraphs: [],
           list: [
-            "A 50% deposit is paid before work begins.",
-            "The remaining 50% is paid when the project is completed, before the website goes live and access is handed over.",
-            "Maintenance can be paid monthly, quarterly, or annually, as agreed.",
+            "A 50% advance deposit is paid before project work commences.",
+            "The remaining 50% is settled upon completion, prior to final launch and access handover.",
+            "Website maintenance retainers are invoiced monthly, quarterly, or annually by agreement.",
           ],
         },
         {
           id: "hosting",
           question: "Are domain and hosting costs included?",
-          paragraphs: ["No. Domain and hosting costs are paid separately, directly to the provider, according to your needs and preferences."],
+          paragraphs: ["No, domain registration and hosting services are billed directly by the chosen providers. NMark Designs assists with provider selection, setup, and DNS configuration."],
         },
         {
           id: "maintenance",
-          question: "Do you offer website maintenance and optimization?",
-          paragraphs: ["Yes, we offer:"],
-          list: [
-            "Maintenance, including technical support, content updates, and security checks.",
-            "Optimization, which can include SEO, website speed improvements, and mobile-friendly adjustments.",
-          ],
+          question: "What does website maintenance include?",
+          paragraphs: ["Maintenance covers regular software and security updates, technical support, uptime monitoring, scheduled backups, and progressive performance and content improvements."],
         },
       ],
     },

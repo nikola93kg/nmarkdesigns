@@ -111,9 +111,9 @@ for (const locale of locales) {
 
     await page.goto(`/${locale}/portfolio/`);
     for (const project of caseStudyProjects) {
-      await expect(page.locator(`main a[href="${localizedProjectPath(project.slug, locale)}"]`)).toHaveCount(0);
+      await expect(page.locator(`main a[href="${localizedProjectPath(project.slug, locale)}"]`)).toHaveCount(3);
       if (project.websiteUrl) {
-        await expect(page.locator(`#project-${project.slug} a[href="${project.websiteUrl}"]`)).toHaveCount(2);
+        await expect(page.locator(`#project-${project.slug} a[href="${project.websiteUrl}"]`)).toHaveCount(1);
       }
     }
   });

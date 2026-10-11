@@ -41,6 +41,8 @@ export const blogLabels = {
     back: "Svi tekstovi",
     example: "Primer iz portfolija NMark Designs",
     publisher: "Objavljuje NMark Designs",
+    author: "Nikola Marković",
+    authorPrefix: "Autor",
     share: {
       title: "Podelite tekst",
       intro: "Pošaljite članak nekome kome može da koristi.",
@@ -64,6 +66,8 @@ export const blogLabels = {
     back: "All articles",
     example: "From the NMark Designs portfolio",
     publisher: "Published by NMark Designs",
+    author: "Nikola Marković",
+    authorPrefix: "Author",
     share: {
       title: "Share this article",
       intro: "Send the article to someone who may find it useful.",
@@ -117,6 +121,22 @@ export const blogEditorial: Record<string, Editorial> = {
       ],
     },
     sources: [{ label: "Apple Newsroom — Apple unveils iPhone Duo", href: "https://www.apple.com/newsroom/2026/09/apple-unveils-iphone-duo/" }, { label: "MDN Web Docs — Responsive design", href: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design" }, { label: "web.dev — Learn responsive design", href: "https://web.dev/learn/design" }],
+    cta: {
+      sr: {
+        title: "Želite proveru ponašanja vašeg sajta na mobilnim uređajima?",
+        description: "Pošaljite URL i NMark Designs će pregledati kako vaš sajt prolazi kroz ključne širine ekrana, gde nastaje problem i kako ga rešiti.",
+        label: "Zatražite besplatan audit",
+        secondaryLabel: "Pogledajte naše usluge",
+        secondaryHref: "/sr/usluge/",
+      },
+      en: {
+        title: "Want to check how your website behaves across mobile devices?",
+        description: "Send your URL and NMark Designs will test key viewport widths, locate layout bottlenecks, and recommend clear fixes.",
+        label: "Request a free review",
+        secondaryLabel: "Explore our services",
+        secondaryHref: "/en/services/",
+      },
+    },
   },
   "local-business-homepage-check": {
     image: "/blog/lokalni-biznis-treba-da-popravi-na-pocetnoj-stranici.webp",
@@ -136,18 +156,66 @@ export const blogEditorial: Record<string, Editorial> = {
         { heading: "1. Ponuda koju razumete bez skrolovanja", paragraphs: ["Otvorite početnu stranicu i pročitajte samo naslov i prvu rečenicu. Da li biste znali koju uslugu dobijate i za koga je namenjena? Ako ne, problem nije u veličini logotipa nego u poruci.", "Zamislite lokalnu molersku firmu. ‘Vaša vizija, naša strast’ ne govori šta radi. ‘Krečenje i gletovanje stanova’ daje kontekst odmah. Dodajte područje rada samo ako je tačno; nemojte ubacivati gradove radi ključnih reči."], list: ["Napišite glavnu uslugu običnim jezikom.", "Objasnite kome je namenjena u jednoj rečenici.", "Uklonite tvrdnje koje ne možete da potkrepite."] },
         { heading: "2. Jedna glavna akcija, bez slepih ulica", paragraphs: ["Izaberite akciju koja odgovara načinu na koji zaista poslujete: upit, poziv ili rezervacija. Portfolio može da bude sekundarni link, ali ne mora da izgleda jednako važno kao kontakt.", "‘Pošaljite upit’ je preciznije od ‘Saznajte više’ kada dugme otvara kontakt. Nakon klika posetilac treba da dobije upravo ono što tekst obećava. Ne nudite besplatnu procenu ako je zaista ne pružate."], list: ["Kliknite glavno dugme na svakoj važnoj stranici.", "Proverite da forma objašnjava obavezna polja i greške.", "Ponovite isti naziv akcije na kraju stranice."] },
         { heading: "3. Telefon je zaseban test, ne manji desktop", paragraphs: ["Otvorite sajt na stvarnom telefonu, bez uvećavanja. Dugačak naslov, meni preko sadržaja ili dugme prilepljeno uz ivicu mogu da prekinu put do upita. Testirajte i tastaturom: fokus mora da bude vidljiv.", "Velika fotografija nije problem sama po sebi. Problem je kada se preuzima nepotrebno velika datoteka ili slika pomeri sadržaj nakon učitavanja. Koristite odgovarajuće dimenzije i rezervišite prostor za sliku."], list: ["Proverite tekst, meni i kontakt na uskom ekranu.", "Ne sakrivajte važne informacije iza hover efekta.", "Proverite učitavanje i preko mobilne mreže."] },
-        { heading: "4. Poverenje gradite dokazima, ne superlativima", paragraphs: ["Umesto ‘najbolji kvalitet’, pokažite relevantan rad i objasnite šta je urađeno. Fotografija projekta sa kratkim kontekstom korisnija je od anonimne pohvale bez porekla.", "Objavite samo odobrene reference i proverljive podatke. Ako nemate merenja, opišite odluku i obim rada, a ne izmišljeni rast prodaje. To je korisnije i za čitaoca i za tačno razumevanje stranice u pretrazi."] },
+        {
+          heading: "4. Poverenje gradite dokazima, ne superlativima",
+          paragraphs: [
+            "Umesto ‘najbolji kvalitet’, pokažite relevantan rad i objasnite šta je urađeno. Fotografija projekta sa kratkim kontekstom korisnija je od anonimne pohvale bez porekla.",
+            "Objavite samo odobrene reference i proverljive podatke. Ako nemate merenja, opišite odluku i obim rada, a ne izmišljeni rast prodaje. To je korisnije i za čitaoca i za tačno razumevanje stranice u pretrazi.",
+          ],
+          blocks: [
+            {
+              type: "linkList",
+              title: "Primeri jasnog predstavljanja ponude i dokaza u NMark portfoliju",
+              items: [
+                { label: "Ilić Enterijer — lokalni zanatski biznis i nameštaj po meri", href: "/sr/portfolio/ilic-enterijer/" },
+                { label: "Časovi Francuskog — struktura kurseva i putanja do upita za edukativne usluge", href: "/sr/portfolio/casovi-francuskog/" },
+              ],
+            },
+          ],
+        },
         { heading: "5. Kontakt i lokalni podaci moraju biti tačni", paragraphs: ["Ime firme, telefon i područje rada treba da budu dosledni na sajtu i poslovnim profilima. Adresa je korisna samo kada je stvarna i namenjena javnosti. Za uslužni biznis bez javne kancelarije ne izmišljajte lokaciju.", "Za kraj zamolite nekoga ko ne poznaje sajt da pronađe uslugu i pošalje probni upit uz vaš dogovor. Zabeležite mesto gde zastane. Popravite tu prepreku, pa ponovite isti zadatak; to je konkretniji sledeći korak od potpunog redizajna napamet."] },
       ],
       en: [
         { heading: "1. An offer that makes sense before scrolling", paragraphs: ["Open the homepage and read only the heading and first sentence. Can you tell which service is offered and who it is for? If not, the problem is the message, not the size of the logo.", "Imagine a local painting business. ‘Your vision, our passion’ says little about the work. ‘Interior painting and wall preparation’ provides immediate context. Add a service area only if it is accurate; do not insert city names just for keywords."], list: ["Name the main service in plain language.", "Explain who it is for in one sentence.", "Remove claims you cannot substantiate."] },
         { heading: "2. One primary action, with no dead ends", paragraphs: ["Choose an action that reflects how the business actually works: an enquiry, call or booking. A portfolio can be a secondary link without competing visually with contact.", "‘Send an enquiry’ is more precise than ‘Learn more’ when the button opens a contact form. After clicking, visitors should get exactly what the label promises. Do not offer a free review unless you actually provide one."], list: ["Follow the main button on every important page.", "Check that the form explains required fields and errors.", "Repeat the same action label at the bottom of the page."] },
         { heading: "3. Mobile is a separate test, not a smaller desktop", paragraphs: ["Open the site on a real phone without zooming. A long headline, a menu covering content or a button squeezed against an edge can interrupt an enquiry. Test with a keyboard too: focus must remain visible.", "A large photograph is not inherently a problem. Downloading an unnecessarily large file or shifting content as it loads is. Supply appropriate dimensions and reserve the image’s space in the layout."], list: ["Check text, navigation and contact on a narrow screen.", "Do not hide essential information behind hover effects.", "Test loading over a mobile connection too."] },
-        { heading: "4. Build trust with evidence, not superlatives", paragraphs: ["Instead of ‘the best quality’, show relevant work and explain what was delivered. A project photograph with a little context is more useful than an anonymous compliment with no source.", "Publish only approved references and verifiable information. Without measurements, describe decisions and scope rather than inventing sales growth. This helps readers and supports an accurate understanding of the page in search."] },
+        {
+          heading: "4. Build trust with evidence, not superlatives",
+          paragraphs: [
+            "Instead of ‘the best quality’, show relevant work and explain what was delivered. A project photograph with a little context is more useful than an anonymous compliment with no source.",
+            "Publish only approved references and verifiable information. Without measurements, describe decisions and scope rather than inventing sales growth. This helps readers and supports an accurate understanding of the page in search.",
+          ],
+          blocks: [
+            {
+              type: "linkList",
+              title: "Examples of clear service presentation in the NMark portfolio",
+              items: [
+                { label: "Ilić Enterijer — local bespoke furniture craft business", href: "/en/portfolio/ilic-enterijer/" },
+                { label: "Časovi Francuskog — course structure and enquiry flow for education services", href: "/en/portfolio/casovi-francuskog/" },
+              ],
+            },
+          ],
+        },
         { heading: "5. Make contact and local details accurate", paragraphs: ["The business name, phone number and service area should be consistent across the website and business profiles. An address is useful only when it is real and intended to be public. Do not invent a location for a service business without a public office.", "Finally, ask someone unfamiliar with the site to find a service and send an agreed test enquiry. Note where they hesitate. Fix that obstacle and repeat the task: it is a more concrete next step than redesigning everything on instinct."] },
       ],
     },
     sources: [{ label: "Google Search Central — SEO Starter Guide", href: "https://developers.google.com/search/docs/fundamentals/seo-starter-guide" }],
+    cta: {
+      sr: {
+        title: "Želite procenu ili redizajn početne stranice?",
+        description: "Pošaljite link ka vašem sajtu ili opišite ponudu. NMark Designs može da uradi brz i temeljan pregled i predloži rešenja za jasniju konverziju.",
+        label: "Zatražite besplatan audit",
+        secondaryLabel: "Pogledajte sve usluge",
+        secondaryHref: "/sr/usluge/",
+      },
+      en: {
+        title: "Need a homepage review or redesign?",
+        description: "Send your website link or describe your service offer. NMark Designs provides actionable feedback and clear steps to improve conversion.",
+        label: "Request a free review",
+        secondaryLabel: "Explore all services",
+        secondaryHref: "/en/services/",
+      },
+    },
   },
   "website-audit-framework": {
     image: "/blog/10-minutni-audit-sajta.webp",
@@ -168,7 +236,25 @@ export const blogEditorial: Record<string, Editorial> = {
         { heading: "Minuti 2–4: prođite mobilni put", paragraphs: ["Na telefonu otvorite meni, pronađite uslugu i dođite do kontakta. Proverite da li tekst staje u ekran i da li lepljivi elementi prekrivaju dugmad. Zatim prođite glavne kontrole tastaturom na računaru.", "Snimak ekrana je koristan dokaz problema sa rasporedom. Uz njega navedite širinu ekrana i korake do greške. Samo ‘na telefonu ne radi’ ne daje dovoljno informacija za popravku."], list: ["Da li linkovi vode tamo gde njihov naziv obećava?", "Da li se fokus vidi i bez miša?", "Da li je moguće zatvoriti meni i vratiti se na sadržaj?"] },
         { heading: "Minuti 4–6: brzina bez lova na savršenu ocenu", paragraphs: ["Pokrenite PageSpeed Insights za izabrani URL. Razlikujte terenske podatke stvarnih korisnika od laboratorijskog testa. Ako nema dovoljno terenskih podataka, to ne znači da je sajt brz ili spor: znači da taj izveštaj nema dovoljno uzorka.", "Core Web Vitals prate učitavanje glavnog sadržaja (LCP), odziv na interakciju (INP) i stabilnost rasporeda (CLS). Jedan laboratorijski rezultat nije dokaz iskustva svih posetilaca. Zabeležite očigledan problem, poput prevelike naslovne slike, i proverite ga ponovo nakon izmene."] },
         { heading: "Minuti 6–8: proverite kontakt do kraja", paragraphs: ["Vidljivo dugme nije isto što i ispravan kontakt. Proverite broj telefona, oznake polja i poruke o grešci. Probnu poruku šaljite samo uz dogovor sa vlasnikom, pa potvrdite da je zaista primljena.", "Ne unosite osetljive podatke radi testa. Ako forma nema jasnu potvrdu ili vlasnik ne dobija poruku, to ima prednost nad finim podešavanjem senke dugmeta."] },
-        { heading: "Minuti 8–10: pretvorite nalaze u redosled rada", paragraphs: ["Sačuvajte tri najvažnija nalaza. Za svaki napišite: URL → problem → dokaz → predložena izmena → način provere. Najpre rešavajte ono što blokira zadatak, zatim razumevanje, pa vizuelne detalje.", "Primer beleške: ‘Kontakt stranica, telefon širine 375 px: meni prekriva dugme. Smanjiti visinu ili omogućiti skrol. Provera: otvoriti meni i stići do kontakta bez prekrivanja.’ To je zadatak koji može da se izvrši i proveri."], list: ["Odmah: neispravan kontakt ili blokiran sadržaj.", "Sledeće: nejasna ponuda, navigacija i čitljivost.", "Kasnije: estetska poboljšanja koja ne blokiraju zadatak."] },
+        {
+          heading: "Minuti 8–10: pretvorite nalaze u redosled rada",
+          paragraphs: [
+            "Sačuvajte tri najvažnija nalaza. Za svaki napišite: URL → problem → dokaz → predložena izmena → način provere. Najpre rešavajte ono što blokira zadatak, zatim razumevanje, pa vizuelne detalje.",
+            "Primer beleške: ‘Kontakt stranica, telefon širine 375 px: meni prekriva dugme. Smanjiti visinu ili omogućiti skrol. Provera: otvoriti meni i stići do kontakta bez prekrivanja.’ To je zadatak koji može da se izvrši i proveri.",
+          ],
+          list: ["Odmah: neispravan kontakt ili blokiran sadržaj.", "Sledeće: nejasna ponuda, navigacija i čitljivost.", "Kasnije: estetska poboljšanja koja ne blokiraju zadatak."],
+          blocks: [
+            {
+              type: "linkList",
+              title: "Povezane usluge i resursi za optimizaciju sajta",
+              items: [
+                { label: "Usluge izrade i tehničke optimizacije sajtova", href: "/sr/usluge/" },
+                { label: "Cenovnik i opcije fiksnih paketa", href: "/sr/cenovnik/" },
+                { label: "Vodič kroz cene izrade web sajtova u Srbiji 2026", href: "/sr/blog/koliko-kosta-izrada-web-sajta-u-srbiji-2026/" },
+              ],
+            },
+          ],
+        },
         { heading: "Šta ovaj kratki pregled ne može da potvrdi", paragraphs: ["Indeksiranje, kanonikale, preusmerenja, bezbednost i potpunu pristupačnost treba proveravati zasebno. Za indeksiranje koristite Search Console uz pristup vlasnika; pogled na stranicu ne može da potvrdi njen status u Google indeksu.", "Isto važi za AI rezultate pretrage. Google navodi da nema posebnih dodatnih tehničkih zahteva za AI Overviews i AI Mode. Koristan tekst, dostupnost pretraživaču i tačni podaci ostaju osnova; nijedan audit ne garantuje citiranje ili poziciju."] },
       ],
       en: [
@@ -176,11 +262,45 @@ export const blogEditorial: Record<string, Editorial> = {
         { heading: "Minutes 2–4: follow the mobile journey", paragraphs: ["On a phone, open the menu, find a service and reach contact. Check whether text fits the screen and sticky elements cover buttons. Then use a desktop keyboard to move through the main controls.", "A screenshot is useful evidence of a layout problem. Include the viewport width and steps to reproduce it. ‘Does not work on mobile’ alone does not give someone enough information to fix it."], list: ["Do links deliver what their labels promise?", "Can you see focus without using a mouse?", "Can you close the menu and return to the content?"] },
         { heading: "Minutes 4–6: check speed, not a perfect score", paragraphs: ["Run PageSpeed Insights for the selected URL. Distinguish field data from real users and a laboratory test. Missing field data does not mean the site is fast or slow: it means the report lacks a sufficient sample.", "Core Web Vitals track main-content loading (LCP), interaction responsiveness (INP) and layout stability (CLS). One lab score does not represent every visitor’s experience. Record an obvious issue, such as an oversized hero image, and retest after changing it."] },
         { heading: "Minutes 6–8: test contact end to end", paragraphs: ["A visible button is not the same as working contact. Check phone numbers, field labels and error messages. Send a test message only with the owner’s agreement, then confirm it actually arrived.", "Do not enter sensitive information for a test. If the form provides no clear confirmation or the owner never receives the message, fixing that takes priority over polishing button shadows."] },
-        { heading: "Minutes 8–10: turn findings into an order of work", paragraphs: ["Keep the three most important findings. For each, record: URL → problem → evidence → proposed change → verification. Fix task blockers first, understanding second and visual details last.", "Example note: ‘Contact page at 375 px: the menu covers the button. Reduce its height or allow scrolling. Verify by opening the menu and reaching contact without overlap.’ That is an actionable, testable task."], list: ["Now: broken contact or inaccessible content.", "Next: unclear offers, navigation and readability.", "Later: cosmetic improvements that do not block the task."] },
+        {
+          heading: "Minutes 8–10: turn findings into an order of work",
+          paragraphs: [
+            "Keep the three most important findings. For each, record: URL → problem → evidence → proposed change → verification. Fix task blockers first, understanding second and visual details last.",
+            "Example note: ‘Contact page at 375 px: the menu covers the button. Reduce its height or allow scrolling. Verify by opening the menu and reaching contact without overlap.’ That is an actionable, testable task.",
+          ],
+          list: ["Now: broken contact or inaccessible content.", "Next: unclear offers, navigation and readability.", "Later: cosmetic improvements that do not block the task."],
+          blocks: [
+            {
+              type: "linkList",
+              title: "Related services and optimization resources",
+              items: [
+                { label: "Website development and technical optimization services", href: "/en/services/" },
+                { label: "Website development pricing and scope packages", href: "/en/pricing/" },
+                { label: "Guide to website development costs in Serbia 2026", href: "/en/blog/koliko-kosta-izrada-web-sajta-u-srbiji-2026/" },
+              ],
+            },
+          ],
+        },
         { heading: "What this quick review cannot confirm", paragraphs: ["Indexing, canonicals, redirects, security and full accessibility need separate investigation. Use Search Console with the owner’s access to inspect indexing; simply viewing a page cannot confirm its Google index status.", "The same caution applies to AI search results. Google says AI Overviews and AI Mode have no special additional technical requirements. Useful text, crawlability and accurate information remain the foundation; no audit guarantees a citation or ranking."] },
       ],
     },
     sources: [{ label: "web.dev — Web Vitals", href: "https://web.dev/articles/vitals" }, { label: "PageSpeed Insights", href: "https://pagespeed.web.dev/" }, { label: "Google Search Central — AI features and your website", href: "https://developers.google.com/search/docs/appearance/ai-features" }],
+    cta: {
+      sr: {
+        title: "Želite profesionalnu proveru vašeg sajta?",
+        description: "Ako nemate vremena za samostalnu analizu, NMark Designs može pregledati vaš sajt i pripremiti listu konkretnih tehničkih i UX prioriteta.",
+        label: "Zatražite pregled sajta",
+        secondaryLabel: "Istražite naše usluge",
+        secondaryHref: "/sr/usluge/",
+      },
+      en: {
+        title: "Want a professional review of your website?",
+        description: "If you don't have time to run a manual check yourself, NMark Designs can audit your website and deliver clear technical and UX priorities.",
+        label: "Request a site review",
+        secondaryLabel: "Explore our services",
+        secondaryHref: "/en/services/",
+      },
+    },
   },
   "portfolio-storytelling": {
     image: "/blog/da-portfolio-ne-bude-galerija.webp",
@@ -197,20 +317,70 @@ export const blogEditorial: Record<string, Editorial> = {
     answer: { sr: "Portfolio je korisniji kada uz sliku objasni zadatak, odluku i isporučeno rešenje. Dodajte dokaz tamo gde postoji, označite granice onoga što znate i ponudite relevantan sledeći korak. Lep prikaz bez konteksta ostavlja previše pitanja.", en: "A portfolio is more useful when imagery is paired with the task, decision and delivered solution. Add evidence where available, state the limits of what you know and offer a relevant next step. A beautiful screenshot alone leaves too many questions unanswered." },
     sections: {
       sr: [
-        { heading: "Počnite od pitanja budućeg klijenta", paragraphs: ["Posetilac ne gleda vaš projekat samo da bi ocenio boje. Želi da razume da li poznajete problem sličan njegovom, šta ste konkretno radili i da li vaš način razmišljanja odgovara njegovom poslu.", "Uvod zato treba da navede vrstu projekta i zadatak. Izbegnite dugačak spisak tehnologija pre objašnjenja namene. Tehnologije imaju smisla kasnije, i samo kada su potvrđene."] },
+        { heading: "Počnite od pitanja budućeg klijenta", paragraphs: ["Posetilac ne gleda vaš projekat samo da bi ocenio boje. Želi da razume da li poznajete problem sličan njegovom, šta ste konkretno radili i da li vaš način razmišjanja odgovara njegovom poslu.", "Uvod zato treba da navede vrstu projekta i zadatak. Izbegnite dugačak spisak tehnologija pre objašnjenja namene. Tehnologije imaju smisla kasnije, i samo kada su potvrđene."] },
         { heading: "Zadatak → odluka → isporuka", paragraphs: ["Ova struktura odvaja potrebe od načina rada i rezultata koji zaista možete da pokažete. Zadatak opisuje problem. Odluka objašnjava izbor. Isporuka navodi šta je napravljeno, bez pretvaranja namere u izmereni poslovni uspeh.", "Ilustrativni primer, ne tvrdnja o konkretnom klijentu: škola jezika želi jasniji prikaz kurseva. Odluka je da se kursevi grupišu po nivou. Isporuka je pregled nivoa sa putanjom do prijave. ‘Više prijava’ možete dodati tek kada postoji odgovarajuće merenje."], list: ["Zadatak: šta je posetilac trebalo da razume ili uradi?", "Odluka: zašto je izabran baš taj raspored?", "Isporuka: šta je izrađeno i šta može da se proveri?"] },
         { heading: "Neka svaka slika nešto objasni", paragraphs: ["Jedna velika naslovna slika daje utisak, ali detalj navigacije ili mobilnog prikaza može da objasni odluku. Birajte slike prema priči koju pričate, ne samo prema tome koliko lepo izgledaju zajedno.", "Uz sliku napišite šta čitalac treba da primeti. Alternativni tekst neka opiše bitan sadržaj, bez niza SEO ključnih reči. Ne objavljujte privatne podatke iz administracije, analitike ili klijentskih poruka."], list: ["Naslovna slika: celina i vizuelni smer.", "Detalj: odluka o sadržaju ili navigaciji.", "Mobilni prikaz: kako se isti zadatak rešava na telefonu."] },
         { heading: "Razdvojite dokaz od očekivanja", paragraphs: ["‘Jasniji put do prijave’ opisuje nameru dizajna. ‘Prijave su porasle’ je tvrdnja o ponašanju i traži podatke. Ako objavljujete metriku, navedite period, izvor i kontekst koji utiče na poređenje.", "Ako takvih podataka nema, objavite obim rada i proverljive karakteristike. Preciznost nije slabija prodaja: pomaže klijentu da zna šta zapravo dobija. Isto važi za izjave klijenata, koje moraju biti autentične i odobrene."] },
-        { heading: "Završite povezanim sledećim korakom", paragraphs: ["Nakon priče ponudite link ka povezanoj usluzi, sličnom projektu ili kontaktu. Tekst linka neka objasni odredište. ‘Pogledajte usluge web dizajna’ daje više konteksta od ‘Kliknite ovde’.", "Za pretragu i AI čitanje važne informacije stavite u tekst, ne samo u slike. Naslov projekta, kratak odgovor o tome šta je urađeno i jasno organizovani odeljci olakšavaju razumevanje. Strukturirani podaci treba da opisuju isti vidljivi sadržaj, a ne da dodaju nepostojeće nagrade ili ocene."] },
+        {
+          heading: "Završite povezanim sledećim korakom",
+          paragraphs: [
+            "Nakon priče ponudite link ka povezanoj usluzi, sličnom projektu ili kontaktu. Tekst linka neka objasni odredište. ‘Pogledajte usluge web dizajna’ daje više konteksta od ‘Kliknite ovde’.",
+            "Za pretragu i AI čitanje važne informacije stavite u tekst, ne samo u slike. Naslov projekta, kratak odgovor o tome šta je urađeno i jasno organizovani odeljci olakšavaju razumevanje. Strukturirani podaci treba da opisuju isti vidljivi sadržaj, a ne da dodaju nepostojeće nagrade ili ocene.",
+          ],
+          blocks: [
+            {
+              type: "linkList",
+              title: "Primeri studija slučaja iz NMark portfolija",
+              items: [
+                { label: "Buy Pallet Jacks — B2B industrijski katalog i brza putanja do ponude", href: "/sr/portfolio/buy-pallet-jacks/" },
+                { label: "OŠ Dule Karaklajić — javna obrazovna ustanova sa jasnim obaveštenjima i dokumentacijom", href: "/sr/portfolio/os-dule-karaklajic/" },
+                { label: "Pogledajte sve projekte u portfoliju", href: "/sr/portfolio/" },
+              ],
+            },
+          ],
+        },
       ],
       en: [
         { heading: "Start with the prospective client’s question", paragraphs: ["Visitors are not looking at a project just to judge its colours. They want to know whether you understand a similar problem, what you actually did and whether your reasoning fits their business.", "The introduction should therefore name the type of project and its task. Avoid a long technology list before explaining the purpose. Technologies belong later, and only when verified."] },
         { heading: "Task → decision → delivery", paragraphs: ["This structure separates needs, approach and outcomes you can genuinely show. The task describes the problem. The decision explains a choice. Delivery states what was built without turning an intention into measured business success.", "An illustrative example, not a claim about a particular client: a language school wants clearer course information. The decision is to group courses by level. The delivery is a level overview with a path to registration. ‘More registrations’ can be added only when supported by appropriate measurement."], list: ["Task: what should the visitor understand or do?", "Decision: why was this particular structure chosen?", "Delivery: what was built and what can be verified?"] },
         { heading: "Make every image explain something", paragraphs: ["A large opening image establishes an impression, but a navigation detail or mobile view can explain a decision. Choose images for the story they tell, not just for how attractive they look together.", "Use a caption to explain what readers should notice. Alt text should describe meaningful content without a string of SEO keywords. Never publish private information from dashboards, analytics or client messages."], list: ["Opening image: the overall visual direction.", "Detail: a content or navigation decision.", "Mobile view: how the same task works on a phone."] },
         { heading: "Separate evidence from expectations", paragraphs: ["‘A clearer path to registration’ describes design intent. ‘Registrations increased’ is a behavioural claim that needs data. If publishing a metric, include the period, source and context affecting the comparison.", "Without those data, publish the scope and verifiable features. Precision is not weaker selling: it helps clients understand what they actually receive. Client quotes also need to be authentic and approved."] },
-        { heading: "Finish with a connected next step", paragraphs: ["After the story, link to a relevant service, similar project or contact. Link text should explain the destination. ‘Explore web design services’ provides more context than ‘Click here’.", "For search and AI readability, put important information in text, not only in images. A project title, a short answer about what was delivered and clearly organised sections make the page easier to understand. Structured data should describe that same visible content, not add nonexistent awards or ratings."] },
+        {
+          heading: "Finish with a connected next step",
+          paragraphs: [
+            "After the story, link to a relevant service, similar project or contact. Link text should explain the destination. ‘Explore web design services’ provides more context than ‘Click here’.",
+            "For search and AI readability, put important information in text, not only in images. A project title, a short answer about what was delivered and clearly organised sections make the page easier to understand. Structured data should describe that same visible content, not add nonexistent awards or ratings.",
+          ],
+          blocks: [
+            {
+              type: "linkList",
+              title: "Case study examples from the NMark portfolio",
+              items: [
+                { label: "Buy Pallet Jacks — B2B industrial catalog and quick quote journey", href: "/en/portfolio/buy-pallet-jacks/" },
+                { label: "OŠ Dule Karaklajić — public education institution with clear news and documentation", href: "/en/portfolio/os-dule-karaklajic/" },
+                { label: "View all portfolio projects", href: "/en/portfolio/" },
+              ],
+            },
+          ],
+        },
       ],
     },
     sources: [{ label: "Google Search Central — Helpful, reliable, people-first content", href: "https://developers.google.com/search/docs/fundamentals/creating-helpful-content" }, { label: "Google Search Central — Image SEO", href: "https://developers.google.com/search/docs/appearance/google-images" }],
+    cta: {
+      sr: {
+        title: "Planirate novi portfolio ili poslovni sajt?",
+        description: "Zajedno možemo organizovati vaše projekte i usluge tako da posetioci odmah razumeju šta radite i zašto treba da vas angažuju.",
+        label: "Kontaktirajte NMark Designs",
+        secondaryLabel: "Pogledajte portfolio",
+        secondaryHref: "/sr/portfolio/",
+      },
+      en: {
+        title: "Planning a new portfolio or business website?",
+        description: "We can structure your projects and services so visitors instantly grasp your expertise and understand why to hire you.",
+        label: "Contact NMark Designs",
+        secondaryLabel: "Explore portfolio",
+        secondaryHref: "/en/portfolio/",
+      },
+    },
   },
 };

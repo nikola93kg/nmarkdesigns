@@ -74,6 +74,10 @@ export interface Dictionary {
     };
     contactTitle: string;
     visitWebsite: string;
+    viewCaseStudy: string;
+    visitLiveWebsite: string;
+    caseStudyBadge: string;
+    opensNewTab: string;
   };
   blog: {
     metadata: { title: string; description: string };
@@ -152,6 +156,12 @@ export interface Dictionary {
     notes: {
       title: string;
       items: readonly string[];
+    };
+    guideBanner?: {
+      eyebrow?: string;
+      title: string;
+      description: string;
+      label: string;
     };
     cta: {
       title: string;

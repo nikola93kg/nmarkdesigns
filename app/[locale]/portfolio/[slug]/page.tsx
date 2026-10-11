@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { CaseStudyHero } from "@/components/portfolio/CaseStudyHero";
 import { CaseStudyDetails } from "@/components/portfolio/CaseStudyDetails";
 import { CaseStudyNavigation } from "@/components/portfolio/CaseStudyNavigation";
+import { PortfolioContact } from "@/components/portfolio/PortfolioContact";
 import { getDictionary } from "@/content/i18n";
 import { caseStudyProjects, getCaseStudyProject } from "@/content/projects";
 import { isLocale } from "@/lib/i18n";
@@ -47,6 +48,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/[locale]/por
       <CaseStudyHero project={project} locale={locale} copy={copy} />
       <CaseStudyDetails project={project} locale={locale} copy={copy.caseStudy} />
       <CaseStudyNavigation nextProject={nextProject} locale={locale} copy={copy} />
+      <PortfolioContact locale={locale} copy={copy} />
     </article>
   );
 }

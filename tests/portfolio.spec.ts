@@ -2,9 +2,9 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import sr from "@/content/i18n/sr";
 import en from "@/content/i18n/en";
-import { portfolioProjects } from "@/content/projects";
+import { portfolioProjects, caseStudyProjects } from "@/content/projects";
 import { locales } from "@/lib/i18n";
-import { localizedPath } from "@/lib/routes";
+import { localizedPath, localizedProjectPath } from "@/lib/routes";
 
 const dictionaries = { sr, en };
 
@@ -46,7 +46,12 @@ for (const locale of locales) {
         }
 
         if (project.websiteUrl) {
-          await expect(section.locator(`a[href="${project.websiteUrl}"]`)).toHaveCount(project.featuredImage ? 2 : 1);
+          if (project.caseStudy) {
+            await expect(section.locator(`a[href="${localizedProjectPath(project.slug, locale)}"]`)).toHaveCount(3);
+            await expect(section.locator(`a[href="${project.websiteUrl}"]`)).toHaveCount(1);
+          } else {
+            await expect(section.locator(`a[href="${project.websiteUrl}"]`)).toHaveCount(project.featuredImage ? 2 : 1);
+          }
         } else {
           await expect(section.getByText(copy.portfolio.contentNeeded.website, { exact: true })).toBeVisible();
         }
@@ -177,12 +182,15 @@ test("project index uses local details and only verified optional metadata", asy
       await expect(entry.getByText(project.category?.[locale] ?? copy.portfolio.defaultCategory, { exact: true })).toBeVisible();
       const description = project.shortDescription?.[locale] ?? project.caseStudy?.overview[locale] ?? copy.portfolio.contentNeeded.description;
       await expect(entry.getByText(description, { exact: true })).toBeVisible();
+      if (project.caseStudy) {
+        await expect(entry.getByRole("link", { name: `${copy.portfolio.viewCaseStudy}: ${project.title}`, exact: true }).first()).toHaveAttribute("href", localizedProjectPath(project.slug, locale));
+      }
       if (project.websiteUrl) {
-        await expect(entry.getByRole("link", { name: `${copy.portfolio.visitWebsite}: ${project.title}`, exact: true }).last()).toHaveAttribute("href", project.websiteUrl);
+        await expect(entry.getByRole("link", { name: `${copy.portfolio.visitLiveWebsite}: ${project.title} (${copy.portfolio.opensNewTab})`, exact: true }).last()).toHaveAttribute("href", project.websiteUrl);
       } else {
         await expect(entry.getByText(copy.portfolio.contentNeeded.website, { exact: true })).toBeVisible();
       }
     }
-    await expect(page.locator(`main a[href^="/${locale}/portfolio/"]`)).toHaveCount(0);
+    await expect(page.locator(`main a[href^="/${locale}/portfolio/"]`)).toHaveCount(caseStudyProjects.length * 3);
   }
 });

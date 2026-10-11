@@ -51,6 +51,10 @@ const sr = {
     },
     contactTitle: "Razgovarajmo o vašem sajtu.",
     visitWebsite: "Posetite web sajt",
+    viewCaseStudy: "Pogledajte studiju slučaja",
+    visitLiveWebsite: "Posetite sajt uživo",
+    caseStudyBadge: "Studija slučaja",
+    opensNewTab: "otvara se u novom prozoru",
   },
   blog: {
     metadata: {
@@ -75,13 +79,13 @@ const sr = {
   },
   services: {
     metadata: {
-      title: "Usluge izrade web sajtova i web dizajna",
-      description: "NMark Designs usluge obuhvataju izradu web sajtova, web dizajn, razvoj, SEO osnovu, optimizaciju performansi, web prodavnice i održavanje.",
+      title: "Usluge izrade web sajtova, web dizajna i razvoja",
+      description: "Usluge izrade sajtova, redizajna, e-commerce web prodavnica, WordPress i custom razvoja, SEO osnove i održavanja za firme u Beogradu, Srbiji i inostranstvu.",
     },
     intro: {
       eyebrow: "Usluge",
       title: "Izrada web sajtova, dizajn i optimizacija",
-      description: "Pomažemo malim biznisima, preduzetnicima, frilenserima i lokalnim brendovima da dobiju moderan, jasan i tehnički stabilan web sajt.",
+      description: "Pomažemo malim biznisima, preduzetnicima, frilenserima i brendovima u Beogradu i širom Srbije da dobiju moderan, jasan i tehnički stabilan web sajt.",
     },
     overview: {
       eyebrow: "Šta radimo",
@@ -272,7 +276,7 @@ const sr = {
     pricing: {
       eyebrow: "Budžet",
       title: "Želite okvirnu predstavu o ceni?",
-      description: "Cenovnik daje početni okvir, a konačna procena zavisi od obima, sadržaja i funkcionalnosti projekta.",
+      description: "Cenovnik daje početni okvir, a konačna procena zavisi od obima, sadržaja i funkcionalnosti projekta. Na raspolaganju su Basic (450 €), Standard (650 €) i Premium (1.000 €) paketi.",
       label: "Pogledajte cenovnik",
     },
     cta: {
@@ -284,8 +288,8 @@ const sr = {
   },
   about: {
     metadata: {
-      title: "O meni - NMark Designs",
-      description: "NMark Designs je rad Nikole Markovića na dizajnu, izradi i održavanju modernih web sajtova za male biznise, usluge i projekte kojima treba jasno online prisustvo.",
+      title: "O meni — Nikola Marković, web dizajner i developer",
+      description: "Upoznajte Nikolu Markovića, kreatora NMark Designs studija iz Beograda. Izrada modernih web sajtova, prilagođen dizajn i tehnička podrška za preduzetnike.",
     },
     intro: {
       eyebrow: "NMark Designs / Nikola Marković",
@@ -298,7 +302,7 @@ const sr = {
       eyebrow: "Pristup radu",
       title: "Bez velikih agencijskih priča. Fokus je na sajtu koji stvarno ima smisla za vaš posao.",
       paragraphs: [
-        "Ja sam Nikola Marković, frontend developer koji kroz NMark Designs spaja dizajn, strukturu sadržaja i tehničku izradu u jedan upotrebljiv sajt.",
+        "Ja sam Nikola Marković, frontend developer iz Beograda koji kroz NMark Designs spaja moderan web dizajn, strukturu sadržaja i tehničku izradu u brz i funkcionalan sajt za klijente u Srbiji i inostranstvu.",
         "Najčešće radim sa ljudima koji ne žele šablonsku stranicu, ali im ne treba ni komplikovan proces sa gomilom posrednika. Važno je da se brzo razumemo, donesemo dobre odluke i napravimo nešto što može dugo da služi.",
         "U praksi to znači jasnu hijerarhiju sadržaja, pažljiv vizuelni ritam, brzinu učitavanja, SEO osnove i strukturu koja kasnije može da se proširi bez potpunog rušenja sajta.",
         "NMark Designs zato nije predstavljen kao velika firma, već kao prepoznatljiv okvir za moj rad: direktna komunikacija, promišljen dizajn i tehnička izvedba bez nepotrebnih komplikacija.",
@@ -320,8 +324,8 @@ const sr = {
   },
   contact: {
     metadata: {
-      title: "Kontakt",
-      description: "Razgovarajte sa NMark Designs o izradi ili održavanju sajta i zatražite ponudu. Kontaktirajte nas putem emaila, telefona ili WhatsApp-a.",
+      title: "Kontakt — Zatražite ponudu za izradu sajta",
+      description: "Kontaktirajte NMark Designs za izradu novog sajta, redizajn ili tehničko održavanje. Dostupni za saradnju u Beogradu, širom Srbije i online.",
     },
     intro: {
       eyebrow: "Započnimo priču",
@@ -330,7 +334,7 @@ const sr = {
     },
     details: {
       title: "Tu smo za vas",
-      description: "Imate pitanje, ideju ili želite ponudu? Pozovite nas ili nam pišite.",
+      description: "Dostupni za saradnju sa klijentima u Beogradu, širom Srbije i online sa partnerima iz inostranstva. Pozovite nas ili pošaljite poruku za besplatnu konsultaciju.",
       email: "Email",
       phone: "Telefon",
       whatsapp: "Pišite na WhatsApp",
@@ -363,13 +367,13 @@ const sr = {
   },
   pricing: {
     metadata: {
-      title: "Cenovnik izrade web sajtova",
-      description: "Pogledajte okvirne NMark Designs pakete za izradu web sajta: Basic plan, Standard Plan i Premium plan. Cene zavise od složenosti i zahteva projekta.",
+      title: "Cenovnik izrade web sajtova — Koliko košta sajt",
+      description: "Jasne i transparentne cene izrade sajta u Srbiji: Basic (450 €), Standard (650 €) i Premium (1.000 €). Saznajte šta utiče na cenu i zatražite procenu.",
     },
     intro: {
-      eyebrow: "Cene izrade sajta",
-      title: "Pronađite plan koji vam odgovara",
-      description: "Cene su okvirne i mogu varirati u zavisnosti od složenosti i specifičnih zahteva vašeg projekta. Iako su planovi podeljeni prema ponuđenim uslugama, konačna cena može biti i niža za jednostavnije projekte, bez obzira na odabrani paket.",
+      eyebrow: "Cena izrade web sajta",
+      title: "Transparentne cene i paketi izrade sajta",
+      description: "Koliko košta izrada sajta? Naši paketi pružaju jasan početni okvir: Basic od 450 €, Standard od 650 € i Premium od 1.000 €. Konačna cena zavisi od složenosti i obima, a za veće internet prodavnice i custom sisteme izrađujemo ponudu po meri.",
     },
     packageLabel: "Paket",
     packageFeaturesLabel: "Šta dobijate u ovom paketu:",
@@ -422,7 +426,14 @@ const sr = {
         "Rokovi teku od trenutka kada klijent dostavi sav neophodan materijal.",
         "Troškovi domena i hostinga nisu uključeni u cenu izrade sajta i plaćaju se posebno prema specifikaciji izabranog paketa.",
         "Avansno plaćanje od 50% nije refundabilno u slučaju raskida saradnje.",
+        "Za veće internet prodavnice sa specifičnim ERP integracijama ili custom web aplikacije, cena se formira na osnovu detaljne specifikacije projekta.",
       ],
+    },
+    guideBanner: {
+      eyebrow: "Vodič kroz cene 2026",
+      title: "Želite detaljniji uvid u troškove izrade sajta u Srbiji?",
+      description: "Pročitajte naš vodič sa analizom tržišnih raspona cena za landing stranice, poslovne sajtove, web prodavnice i prateće troškove domena i hostinga.",
+      label: "Pročitajte vodič za 2026.",
     },
     cta: {
       title: "Niste sigurni koji paket odgovara vašem projektu?",
@@ -459,6 +470,16 @@ const sr = {
           question: "Šta se dešava ako želim da prekinem saradnju tokom izrade sajta?",
           paragraphs: ["U slučaju raskida saradnje, avansno plaćanje od 50% nije refundabilno, a ukoliko klijent ne isplati preostali deo dogovorene sume, NMark Designs zadržava pravo da obustavi rad ili ugasi sajt dok obaveza ne bude u potpunosti izmirena."],
         },
+        {
+          id: "ecommerce-price",
+          question: "Koliko košta izrada internet prodavnice (web shopa)?",
+          paragraphs: ["Naš Premium plan (1.000 €) uključuje kompletan razvoj web prodavnice, responsive dizajn, optimizaciju performansi i integraciju automatizovanih sistema plaćanja (kao što su PayPal ili Stripe). Za veće prodavnice sa hiljadama artikala ili namenskim ERP integracijama, izrađujemo ponudu na osnovu specifikacije."],
+        },
+        {
+          id: "pricing-guide",
+          question: "Gde mogu da vidim detaljniji vodič i analizu cena na tržištu?",
+          paragraphs: ["Na našem blogu možete pročitati detaljan vodič „Koliko košta izrada web sajta u Srbiji 2026“ sa analizom jednokratnih i tekućih troškova (domen, hosting, održavanje) za različite tipove sajtova."],
+        },
       ],
     },
   },
@@ -478,14 +499,14 @@ const sr = {
   },
   home: {
     metadata: {
-      title: "Izrada web sajtova i web dizajn",
-      description: "NMark Designs kreira moderne, brze i responsive web sajtove za male biznise, preduzetnike i brendove, uz web dizajn, razvoj, SEO optimizaciju i održavanje.",
+      title: "Izrada web sajtova i web dizajn — Beograd i Srbija",
+      description: "Profesionalna izrada modernih, brzih i SEO optimizovanih web sajtova u Beogradu i Srbiji. Prilagođen dizajn, WordPress i custom rešenja koja donose upite.",
     },
     hero: {
       eyebrow: "WEB DIZAJN · RAZVOJ · SEO",
       title: "Izrada modernih web sajtova",
       subtitle: "Dizajn. Performanse. SEO.",
-      description: "Kreiramo brze, responzivne i SEO optimizovane web sajtove sa fokusom na moderan dizajn, korisničko iskustvo i kvalitetnu tehničku osnovu.",
+      description: "Kreiramo brze, responzivne i SEO optimizovane web sajtove za preduzetnike i kompanije u Beogradu, Srbiji i inostranstvu. Fokus na čistom dizajnu, tehničkoj stabilnosti i jasnim upitima kupaca.",
       primaryAction: "Zatražite ponudu",
       secondaryAction: "Pogledajte projekte",
       imageAlt: "Vizuelna montaža NMark Designs web projekta na telefonu, tabletu i štampanim maketama.",
@@ -496,9 +517,9 @@ const sr = {
       description: "Stvarni web sajtovi za različite delatnosti, izabrani zbog načina na koji spajaju jasnu strukturu, vizuelni identitet i tehničku osnovu.",
     },
     services: {
-      eyebrow: "Vaša online prisutnost zaslužuje više",
+      eyebrow: "Usluge web dizajna i razvoja",
       title: "Moderni sajtovi.\nPromišljen pristup.",
-      description: "Od dizajna i SEO optimizacije do prilagođavanja različitim uređajima i redovnog održavanja.",
+      description: "Od dizajna i SEO optimizacije do prilagođavanja različitim uređajima, transparentnih paketa cena i redovnog održavanja.",
       imageAlt: "Web sajt Mađioničar Bojan prikazan na laptopu, uz šolju kafe na radnom stolu.",
       detailsAction: "Pogledajte sve usluge",
       items: [
@@ -525,48 +546,69 @@ const sr = {
       },
     },
     cta: {
-      eyebrow: "Ne dozvolite da vaš biznis ostane nevidljiv",
-      title: "Web sajt koji radi za vas.",
-      description: "Kontaktirajte nas za besplatnu konsultaciju i saznajte kako možemo zajedno unaprediti vašu digitalnu prisutnost.",
+      eyebrow: "Razgovarajmo o vašem sajtu",
+      title: "Web sajt koji radi za vaš biznis.",
+      description: "Planirate novi sajt ili redizajn postojećeg? Javite nam se za besplatnu konsultaciju i okvirnu procenu za vaš projekat u Beogradu ili online.",
     },
     faq: {
       eyebrow: "Centar za pomoć",
-      title: "Imate pitanje? Pronađite odgovor.",
-      description: "Brzi odgovori na najčešća pitanja o našim uslugama i saradnji.",
+      title: "Česta pitanja o izradi i saradnji",
+      description: "Jasan pregled najvažnijih pitanja o cenama, tehnologijama, procesima i održavanju sajta.",
       items: [
         {
+          id: "pricing",
+          question: "Koliko košta izrada web sajta?",
+          paragraphs: ["Cena zavisi od tipa projekta i potrebnih mogućnosti. Naši transparentni početni paketi su Basic plan (450 €) za sajtove do 5 stranica, Standard plan (650 €) za višejezični sajt sa blogom i obradom slika, i Premium plan (1.000 €) za web prodavnice sa integrisanim online plaćanjem. Za složenije zahteve i custom aplikacije radimo procenu na osnovu specifikacije."],
+        },
+        {
           id: "services",
-          question: "Koje usluge pruža NMark Designs?",
-          paragraphs: ["NMark Designs se bavi izradom web sajtova, njihovim održavanjem, optimizacijom i drugim digitalnim rešenjima prilagođenim potrebama klijenata."],
+          question: "Koje usluge pruža NMark Designs studio?",
+          paragraphs: ["NMark Designs nudi izradu novih sajtova, redizajn postojećih stranica, izradu web prodavnica, WordPress i custom Next.js razvoj, tehničku SEO osnovu i redovno mesečno održavanje."],
+        },
+        {
+          id: "wordpress-vs-custom",
+          question: "Koja je razlika između WordPress-a i custom razvoja?",
+          paragraphs: ["Izbor zavisi od vaših potreba, načina rada i budžeta. WordPress je praktično rešenje kada vam je potreban pristupačan CMS za samostalno uređivanje sadržaja, blog ili standardan katalog. Custom Next.js rešenja biramo kada projekat zahteva namenski frontend, specifične interakcije, visoke zahteve za optimizacijom resursa ili arhitekturu bez zavisnosti od eksternih dodataka (pluginova)."],
         },
         {
           id: "timeline",
           question: "Koliko traje izrada web sajta?",
-          paragraphs: ["Rok izrade zavisi od složenosti sajta i vremena potrebnog za dostavljanje materijala od strane klijenta. Rad na projektu počinje tek kada dostavite sav neophodan sadržaj."],
+          paragraphs: ["Okvirni rokovi su do 15 dana za Basic plan, do 20 dana za Standard plan i do 30 dana za Premium plan. Rokovi počinju od momenta kada klijent dostavi neophodan sadržaj i materijale."],
+        },
+        {
+          id: "seo",
+          question: "Da li je SEO optimizacija uključena u izradu sajta?",
+          paragraphs: ["Da, svaki sajt obuhvata tehničku SEO osnovu neophodnu za indeksiranje i pretraživače: semantičku strukturu, prilagođeni metadata (title i description), canonical URL-ove, XML sitemap i optimizovane Core Web Vitals performanse."],
+        },
+        {
+          id: "redesign",
+          question: "Kada se isplati redizajn postojećeg sajta?",
+          paragraphs: ["Redizajn se isplati kada trenutni sajt više ne donosi upite, sporo se otvara na mobilnim uređajima, vizuelno je prevaziđen ili ne odražava vašu trenutnu ponudu. Cilj je jasnija poruka i olakšan put posetioca do kontakta."],
+        },
+        {
+          id: "process",
+          question: "Kako izgleda proces saradnje?",
+          paragraphs: ["Saradnja ima pet faza: definisanje ciljeva i ponude, postavljanje strukture i sadržaja, dizajn i vizuelno usklađivanje, tehnički razvoj i testiranje pre zvaničnog launch-a."],
         },
         {
           id: "payment",
           question: "Kako se vrši plaćanje?",
           paragraphs: [],
           list: [
-            "50% avansno pre početka rada.",
-            "Preostalih 50% po završetku projekta, pre nego što se sajt objavi i omogući pristup klijentu.",
-            "Održavanje može biti mesečno, kvartalno ili godišnje, u skladu sa dogovorom.",
+            "50% avansno pre početka rada na projektu.",
+            "Preostalih 50% po završetku izrade, pre konačne predaje sajta klijentu.",
+            "Održavanje sajta plaća se mesečno, kvartalno ili godišnje, po dogovoru.",
           ],
         },
         {
           id: "hosting",
           question: "Da li su troškovi domena i hostinga uključeni u cenu?",
-          paragraphs: ["Ne, troškovi domena i hostinga se plaćaju odvojeno, direktno provajderu, u skladu sa vašim potrebama i željama."],
+          paragraphs: ["Ne, troškovi domena i hostinga plaćaju se odvojeno prema odabranom provajderu, a NMark Designs pomaže pri izboru i tehničkoj konfiguraciji."],
         },
         {
           id: "maintenance",
-          question: "Da li nudite usluge održavanja i optimizacije sajta?",
-          paragraphs: ["Da, nudimo:"],
-          list: [
-            "Održavanje, koje uključuje tehničku podršku, ažuriranje sadržaja i sigurnosne provere.",
-            "Optimizaciju, koja može obuhvatati SEO, ubrzanje sajta i prilagođavanje za mobilne uređaje.",
-          ],
+          question: "Šta obuhvata tehničko održavanje sajta?",
+          paragraphs: ["Održavanje uključuje tehničku podršku, sigurnosne provere, ažuriranja, redovan backup i postepena poboljšanja performansi i sadržaja."],
         },
       ],
     },

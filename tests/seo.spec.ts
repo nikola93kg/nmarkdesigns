@@ -82,7 +82,7 @@ for (const pair of pairs) {
       if (path === "/sr/kontakt/" || path === "/en/contact/") await expect(page.locator("main address")).toHaveCount(1);
       const schema = await page.locator('script[type="application/ld+json"]').allTextContents();
       const blogPost = blogPosts.find((entry) => path.endsWith(`/blog/${entry.slug}/`));
-      const expectedCount = path === "/sr/" || path === "/en/" || path === "/sr/o-nama/" || path === "/en/about/" || Boolean(project) || Boolean(blogPost) ? 1 : 0;
+      const expectedCount = path === "/sr/" || path === "/en/" || path === "/sr/o-nama/" || path === "/en/about/" || path === "/sr/usluge/" || path === "/en/services/" || Boolean(project) || Boolean(blogPost) ? 1 : 0;
       expect(schema).toHaveLength(expectedCount);
       for (const source of schema) {
         const value: unknown = JSON.parse(source);
@@ -101,6 +101,11 @@ for (const pair of pairs) {
           { "@type": "WebSite", name: "NMark Designs" },
         ] });
         if (path === "/sr/o-nama/" || path === "/en/about/") expect(value).toMatchObject({ "@type": "Person", name: "Nikola Marković", jobTitle: "Frontend developer" });
+        if (path === "/sr/usluge/" || path === "/en/services/") {
+          const graph = (value as { "@graph"?: Array<{ "@type": string; provider?: { "@id": string } }> })["@graph"];
+          expect(graph?.length).toBe(6);
+          expect(graph?.[0]).toMatchObject({ "@type": "Service", provider: { "@id": `${site.url}/#organization` } });
+        }
       }
       const images = await page.locator("main img").evaluateAll((elements) => elements.map((image) => ({
         alt: image.getAttribute("alt"),
