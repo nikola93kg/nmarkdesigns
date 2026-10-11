@@ -2,6 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { CtaButton } from "@/components/ui/CtaButton";
 import { Container } from "@/components/ui/Container";
 import background from "@/components/ui/GridBackground.module.css";
 import type { Dictionary, ServiceDetail, ServiceItem } from "@/content/i18n/types";
@@ -72,6 +73,14 @@ const serviceDetailVisuals: Record<string, ServiceVisual> = {
   "maintenance-support": overviewVisual,
 };
 
+const serviceCaseStudyLinks: Record<string, { slug: string; name: string }> = {
+  "website-build": { slug: "casovi-francuskog", name: "Časovi Francuskog" },
+  "design-ux": { slug: "ilic-enterijer", name: "Ilić Enterijer" },
+  "development-options": { slug: "buy-pallet-jacks", name: "Buy Pallet Jacks" },
+  "seo-performance": { slug: "os-dule-karaklajic", name: "OŠ Dule Karaklajić" },
+  "maintenance-support": { slug: "coolfridgeguys", name: "Cool Fridge Guys" },
+};
+
 function NumberedService({ item, index }: { item: ServiceItem; index: number }) {
   return (
     <li className="grid gap-3 border-t border-border py-6 text-center md:py-8 lg:grid-cols-[3rem_minmax(0,1fr)] lg:gap-6 lg:text-left">
@@ -84,8 +93,19 @@ function NumberedService({ item, index }: { item: ServiceItem; index: number }) 
   );
 }
 
-function ServiceDetailCard({ item, index, locale }: { item: ServiceDetail; index: number; locale: Locale }) {
+function ServiceDetailCard({
+  item,
+  index,
+  locale,
+  caseStudyLabel,
+}: {
+  item: ServiceDetail;
+  index: number;
+  locale: Locale;
+  caseStudyLabel?: string;
+}) {
   const visual = serviceDetailVisuals[item.id] ?? overviewVisual;
+  const caseStudyLink = serviceCaseStudyLinks[item.id];
   const featured = index === 0;
 
   return (
@@ -101,11 +121,24 @@ function ServiceDetailCard({ item, index, locale }: { item: ServiceDetail; index
           className={`h-full w-full ${visual.className ?? "object-cover"}`}
         />
       </div>
-      <div className="p-6 md:p-8">
-        <p className="text-small font-semibold tabular-nums text-brand">{String(index + 1).padStart(2, "0")}</p>
-        <h3 className="mt-5 text-subheading font-semibold text-ink">{item.title}</h3>
-        <p className="mt-4 text-pretty text-muted">{item.description}</p>
-        <p className="mt-4 border-t border-border pt-4 text-pretty text-muted">{item.when}</p>
+      <div className="flex flex-col justify-between p-6 md:p-8">
+        <div>
+          <p className="text-small font-semibold tabular-nums text-brand">{String(index + 1).padStart(2, "0")}</p>
+          <h3 className="mt-5 text-subheading font-semibold text-ink">{item.title}</h3>
+          <p className="mt-4 text-pretty text-muted">{item.description}</p>
+          <p className="mt-4 border-t border-border pt-4 text-pretty text-muted">{item.when}</p>
+        </div>
+        {caseStudyLink && (
+          <div className="mt-5 border-t border-border pt-4">
+            <Link
+              href={localizedProjectPath(caseStudyLink.slug, locale)}
+              className="inline-flex min-h-11 items-center gap-1.5 text-small font-semibold text-brand underline underline-offset-4 hover:text-focus"
+            >
+              <span>{caseStudyLabel ?? "Studija slučaja"}: <span translate="no">{caseStudyLink.name}</span></span>
+              <ArrowUpRight aria-hidden="true" size={16} />
+            </Link>
+          </div>
+        )}
       </div>
     </article>
   );
@@ -162,7 +195,15 @@ export function ServicesPage({ locale, copy }: { locale: Locale; copy: Dictionar
             <p className="mx-auto mt-5 max-w-2xl text-pretty text-muted lg:mx-0">{services.details.description}</p>
           </div>
           <div className="grid gap-6 lg:grid-cols-2">
-            {services.details.items.map((item, index) => <ServiceDetailCard key={item.id} item={item} index={index} locale={locale} />)}
+            {services.details.items.map((item, index) => (
+              <ServiceDetailCard
+                key={item.id}
+                item={item}
+                index={index}
+                locale={locale}
+                caseStudyLabel={services.details.caseStudyLabel}
+              />
+            ))}
           </div>
         </Container>
       </section>
@@ -267,10 +308,17 @@ export function ServicesPage({ locale, copy }: { locale: Locale; copy: Dictionar
             <h2 id="services-contact-title" className="text-heading font-bold">{services.cta.title}</h2>
             <p className="mx-auto mt-4 max-w-xl text-pretty text-on-brand-muted lg:mx-0">{services.cta.description}</p>
           </div>
-          <Button href={contact} variant="secondary" className="shrink-0">
+          <CtaButton
+            href={contact}
+            ctaName="request_quote"
+            ctaLocation="services_footer"
+            locale={locale}
+            variant="secondary"
+            className="shrink-0"
+          >
             {services.cta.label}
             <ArrowUpRight aria-hidden="true" size={18} className="shrink-0" />
-          </Button>
+          </CtaButton>
         </Container>
       </section>
     </>

@@ -9,7 +9,7 @@ const layers = [
     height: 1024,
     className: styles.backPanel,
     fraction: 0.72,
-    priority: true,
+    priority: false,
   },
   {
     id: "dark-panel",

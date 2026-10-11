@@ -11,7 +11,7 @@ import { isLocale } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
 import { corePageRoute, corePageRoutes, routes } from "@/lib/routes";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { founderSchema } from "@/lib/schema";
+import { founderSchema, servicesSchema } from "@/lib/schema";
 
 export const dynamicParams = false;
 
@@ -44,7 +44,14 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/[page]">
 
 export default async function CorePage({ params }: PageProps<"/[locale]/[page]">) {
   const { locale, route, copy } = await resolvePage(params);
-  if (route === "services") return <ServicesPage locale={locale} copy={copy} />;
+  if (route === "services") {
+    return (
+      <>
+        <JsonLd data={servicesSchema(locale, copy)} />
+        <ServicesPage locale={locale} copy={copy} />
+      </>
+    );
+  }
   if (route === "contact") return <ContactPage locale={locale} copy={copy.contact} />;
   if (route === "pricing") return <PricingPage locale={locale} copy={copy.pricing} navigation={copy.navigation} />;
   return (

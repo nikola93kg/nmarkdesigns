@@ -93,6 +93,7 @@ for (const locale of locales) {
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
+    await page.keyboard.press("Tab");
     await expect(mobileLink).toBeFocused();
     await expect(mobileLink).toHaveCSS("outline-style", "solid");
     await page.keyboard.press("Enter");

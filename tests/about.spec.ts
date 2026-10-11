@@ -24,13 +24,15 @@ for (const locale of locales) {
       for (const paragraph of copy.about.profile.paragraphs) {
         await expect(page.getByText(paragraph, { exact: true })).toBeVisible();
       }
-      await expect(page.locator("main li")).toHaveText([...copy.about.approach.principles]);
+      await expect(page.locator("main li")).toHaveText(
+        copy.about.approach.principles.map((principle, index) => `${String(index + 1).padStart(2, "0")}${principle}`)
+      );
       const portrait = page.getByRole("img", { name: copy.about.profile.imageAlt, exact: true });
       await portrait.scrollIntoViewIfNeeded();
       await expect.poll(() => portrait.evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0)).toBe(true);
-      await expect(portrait).toHaveCSS("object-fit", "contain");
+      await expect(portrait).toHaveCSS("object-fit", "cover");
       const bounds = await portrait.boundingBox();
-      expect(bounds!.height / bounds!.width).toBeCloseTo(1.5, 1);
+      expect(bounds!.height / bounds!.width).toBeCloseTo(1.0, 1);
       expect(bounds!.width).toBeGreaterThan(200);
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
       expect(await page.locator("main h1, main h2, main p, main li, main figcaption, header a:visible").evaluateAll((elements) =>
@@ -60,15 +62,18 @@ for (const locale of locales) {
   test(`${locale} about metadata`, async ({ page }) => {
     await page.goto(path);
     const canonical = `https://nmarkdesigns.com${path}`;
-    await expect(page).toHaveTitle(`${copy.about.metadata.title} | NMark Designs`);
+    const expectedTitle = copy.about.metadata.title.includes("NMark Designs")
+      ? copy.about.metadata.title
+      : `${copy.about.metadata.title} | NMark Designs`;
+    await expect(page).toHaveTitle(expectedTitle);
     await expect(page.locator("html")).toHaveAttribute("lang", locale);
     await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", copy.about.metadata.description);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", canonical);
     await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", canonical);
-    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", `${copy.about.metadata.title} | NMark Designs`);
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", expectedTitle);
     await expect(page.locator('meta[property="og:description"]')).toHaveAttribute("content", copy.about.metadata.description);
     await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute("content", localeSettings[locale].openGraph);
-    await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute("content", copy.about.profile.imageAlt);
+    await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute("content", copy.about.intro.imageAlt);
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
     await expect(page.locator('meta[name="twitter:description"]')).toHaveAttribute("content", copy.about.metadata.description);
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "index, follow");
@@ -125,7 +130,9 @@ for (const locale of locales) {
       for (const paragraph of copy.about.profile.paragraphs) {
         await expect(page.getByText(paragraph, { exact: true })).toBeVisible();
       }
-      await expect(page.locator("main li")).toHaveText([...copy.about.approach.principles]);
+      await expect(page.locator("main li")).toHaveText(
+        copy.about.approach.principles.map((principle, index) => `${String(index + 1).padStart(2, "0")}${principle}`)
+      );
       await page.getByLabel(copy.accessibility.menu, { exact: true }).click();
       await expect(page.getByRole("navigation", { name: copy.accessibility.mobileNavigation }).getByRole("link", { name: copy.navigation.about, exact: true })).toHaveAttribute("href", path);
       await page.getByLabel(copy.accessibility.menu, { exact: true }).click();

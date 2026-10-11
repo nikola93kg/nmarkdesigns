@@ -32,11 +32,11 @@ export function BlogArticlePage({ post, copy, locale, url }: { post: LocalizedBl
             />
           </div>
           <Container className={styles.introContent}>
-            <Link href={localizedPath("blog", locale)} className="inline-block py-2 text-small underline underline-offset-4">← {labels.back}</Link>
+            <Link href={localizedPath("blog", locale)} className="inline-flex min-h-11 items-center py-2 text-small underline underline-offset-4 focus-visible:outline-accent">← {labels.back}</Link>
             <p className="mt-6 text-small font-semibold text-accent">{post.topic}</p>
             <h1 className="mt-4 text-balance text-display font-semibold">{post.title}</h1>
             <p className="mt-5 text-pretty text-inverse/85">{post.description}</p>
-            <p className="mt-6 text-small">{labels.publisher} · <time dateTime={post.publishedOn}>{new Intl.DateTimeFormat(localeSettings[locale].dateTime, { dateStyle: "long", timeZone: "UTC" }).format(new Date(post.publishedOn))}</time> · {post.readTimeMinutes} {copy.readTime}</p>
+            <p className="mt-6 text-small">{labels.authorPrefix}: {labels.author} · {labels.publisher} · <time dateTime={post.publishedOn}>{new Intl.DateTimeFormat(localeSettings[locale].dateTime, { dateStyle: "long", timeZone: "UTC" }).format(new Date(post.publishedOn))}</time> · {post.readTimeMinutes} {copy.readTime}</p>
           </Container>
         </header>
         <Container className={styles.reading}>

@@ -52,6 +52,22 @@ export function projectBreadcrumbs(project: CaseStudyProject, locale: Locale, co
   };
 }
 
+export function servicesSchema(locale: Locale, copy: Dictionary): JsonValue {
+  const serviceUrl = canonicalUrl(localizedPath("services", locale));
+  return {
+    "@context": "https://schema.org",
+    "@graph": copy.services.overview.items.map((item, index) => ({
+      "@type": "Service",
+      "@id": `${serviceUrl}#service-${item.id}`,
+      name: item.title,
+      description: item.description,
+      url: serviceUrl,
+      provider: { "@id": organizationId },
+      position: index + 1,
+    })),
+  };
+}
+
 export function serializeJsonLd(value: JsonValue): string {
   return JSON.stringify(value).replace(/</g, "\\u003c").replace(/\u2028/g, "\\u2028").replace(/\u2029/g, "\\u2029");
 }

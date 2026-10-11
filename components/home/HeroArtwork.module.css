@@ -111,6 +111,13 @@
     width: min(100%, 23.5rem);
   }
 
+  .layer {
+    transform: none;
+    opacity: 1;
+    animation: none;
+    will-change: auto;
+  }
+
   .pencil {
     display: none;
   }

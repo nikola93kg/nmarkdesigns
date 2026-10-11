@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { ServiceClickLink } from "@/components/services/ServiceClickLink";
 import { Container } from "@/components/ui/Container";
 import type { Dictionary } from "@/content/i18n/types";
 import type { Locale } from "@/lib/i18n";
@@ -17,10 +17,15 @@ export function Services({ locale, copy }: { locale: Locale; copy: Dictionary["h
           </div>
           <div className="mx-auto max-w-lg lg:mx-0">
             <p className="text-pretty text-muted">{copy.description}</p>
-            <Link href={localizedPath("services", locale)} className="mt-4 inline-flex min-h-11 items-center gap-2 font-semibold text-brand underline underline-offset-4 hover:text-focus">
+            <ServiceClickLink
+              href={localizedPath("services", locale)}
+              serviceSlug="all_services"
+              locale={locale}
+              className="mt-4 inline-flex min-h-11 items-center gap-2 font-semibold text-brand underline underline-offset-4 hover:text-focus"
+            >
               {copy.detailsAction}
               <ArrowUpRight aria-hidden="true" size={18} />
-            </Link>
+            </ServiceClickLink>
           </div>
         </div>
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-20">

@@ -21,7 +21,7 @@ export function LanguageSwitcher({ locale, label, languageLabels }: LanguageSwit
         {locales.map((targetLocale) => {
           const href = equivalentPath(pathname, targetLocale);
           const active = targetLocale === locale;
-          const className = `inline-flex min-h-11 min-w-9 items-center justify-center px-2 text-small transition-colors hover:text-focus ${active ? "font-semibold text-brand underline decoration-2 underline-offset-8" : "text-muted"}`;
+          const className = `inline-flex min-h-11 min-w-9 min-[360px]:min-w-11 items-center justify-center px-2 min-[360px]:px-2.5 text-small transition-colors hover:text-focus focus-visible:outline-accent ${active ? "font-semibold text-brand underline decoration-2 underline-offset-8" : "text-muted"}`;
 
           return (
             <li key={targetLocale}>

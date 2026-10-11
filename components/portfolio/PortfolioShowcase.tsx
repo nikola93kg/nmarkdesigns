@@ -1,10 +1,16 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import { Button } from "@/components/ui/Button";
+import Link from "next/link";
+import {
+  CaseStudyClickLink,
+  CaseStudyButtonLink,
+  ExternalProjectLink,
+} from "@/components/portfolio/PortfolioProjectLink";
 import { Container } from "@/components/ui/Container";
 import type { Dictionary } from "@/content/i18n/types";
 import type { Project, ProjectImage } from "@/content/projects";
 import type { Locale } from "@/lib/i18n";
+import { localizedProjectPath } from "@/lib/routes";
 import styles from "./PortfolioShowcase.module.css";
 
 function cleanHostname(url: string) {
@@ -48,6 +54,10 @@ function ProjectTile({
   const content = projectCopy(project, locale, copy);
   const number = String(index + 1).padStart(2, "0");
   const totalLabel = String(total).padStart(2, "0");
+  const hasCaseStudy = Boolean(project.caseStudy);
+  const caseStudyHref = localizedProjectPath(project.slug, locale);
+
+  const isLive = project.status !== "inactive" && Boolean(project.websiteUrl);
 
   if (!image) {
     return (
@@ -55,9 +65,18 @@ function ProjectTile({
         <div className={styles.archiveMeta}>
           <span>{number} / {totalLabel}</span>
           <span>{content.category}</span>
+          {hasCaseStudy && (
+            <span className={styles.caseStudyBadge}>{copy.caseStudyBadge}</span>
+          )}
         </div>
         <h2 id={`project-${project.slug}-title`} className={styles.archiveTitle} translate="no">
-          {project.title}
+          {hasCaseStudy ? (
+            <Link href={caseStudyHref} className={styles.titleLink}>
+              {project.title}
+            </Link>
+          ) : (
+            project.title
+          )}
         </h2>
         <p className={styles.archiveDescription}>{content.description}</p>
         <div className={styles.archivePlaceholder}>
@@ -70,10 +89,13 @@ function ProjectTile({
 
   return (
     <article className={styles.projectTile}>
-      {project.websiteUrl ? (
-        <a
-          href={project.websiteUrl}
-          aria-label={`${copy.visitWebsite}: ${project.title}`}
+      {hasCaseStudy ? (
+        <CaseStudyClickLink
+          href={caseStudyHref}
+          projectSlug={project.slug}
+          position={index + 1}
+          locale={locale}
+          aria-label={`${copy.viewCaseStudy}: ${project.title}`}
           className={styles.imageLink}
         >
           <Image
@@ -81,12 +103,31 @@ function ProjectTile({
             alt={image.alt[locale]}
             width={image.width}
             height={image.height}
-            sizes="(min-width: 1600px) 1500px, (min-width: 1024px) calc(100vw - 96px), calc(100vw - 32px)"
-            quality={92}
-            preload={preload}
+            sizes="(min-width: 1600px) 880px, (min-width: 1024px) 60vw, (min-width: 768px) 50vw, calc(100vw - 32px)"
+            quality={85}
+            priority={preload}
             className={styles.image}
           />
-        </a>
+        </CaseStudyClickLink>
+      ) : isLive && project.websiteUrl ? (
+        <ExternalProjectLink
+          href={project.websiteUrl}
+          projectSlug={project.slug}
+          domain={content.websiteHost}
+          aria-label={`${copy.visitLiveWebsite}: ${project.title} (${copy.opensNewTab})`}
+          className={styles.imageLink}
+        >
+          <Image
+            src={image.src}
+            alt={image.alt[locale]}
+            width={image.width}
+            height={image.height}
+            sizes="(min-width: 1600px) 880px, (min-width: 1024px) 60vw, (min-width: 768px) 50vw, calc(100vw - 32px)"
+            quality={85}
+            priority={preload}
+            className={styles.image}
+          />
+        </ExternalProjectLink>
       ) : (
         <div className={styles.imageLink}>
           <Image
@@ -94,9 +135,9 @@ function ProjectTile({
             alt={image.alt[locale]}
             width={image.width}
             height={image.height}
-            sizes="(min-width: 1600px) 1500px, (min-width: 1024px) calc(100vw - 96px), calc(100vw - 32px)"
-            quality={92}
-            preload={preload}
+            sizes="(min-width: 1600px) 880px, (min-width: 1024px) 60vw, (min-width: 768px) 50vw, calc(100vw - 32px)"
+            quality={85}
+            priority={preload}
             className={styles.image}
           />
         </div>
@@ -106,27 +147,82 @@ function ProjectTile({
         <div className={styles.projectMeta}>
           <span>{number} / {totalLabel}</span>
           <span>{content.category}</span>
+          {hasCaseStudy && (
+            <span className={styles.caseStudyBadge}>{copy.caseStudyBadge}</span>
+          )}
         </div>
         <div className={styles.projectCopy}>
           <h2 id={`project-${project.slug}-title`} className={styles.projectTitle} translate="no">
-            {project.title}
+            {hasCaseStudy ? (
+              <CaseStudyClickLink
+                href={caseStudyHref}
+                projectSlug={project.slug}
+                position={index + 1}
+                locale={locale}
+                className={styles.titleLink}
+              >
+                {project.title}
+              </CaseStudyClickLink>
+            ) : (
+              project.title
+            )}
           </h2>
           <p className={styles.projectDescription}>{content.description}</p>
+          {project.technologies?.length ? (
+            <div className={styles.techPills} aria-label={`${project.title} technologies`}>
+              {project.technologies.slice(0, 4).map((tech) => (
+                <span key={tech} className={styles.techPill}>{tech}</span>
+              ))}
+            </div>
+          ) : null}
         </div>
         <div className={styles.projectActions}>
-          <p className={styles.projectHost}>{content.websiteHost}</p>
-          {project.websiteUrl ? (
-            <Button
-              href={project.websiteUrl}
-              external
-              variant="secondary"
-              aria-label={`${copy.visitWebsite}: ${project.title}`}
-              className={styles.projectButton}
-            >
-              {copy.visitWebsite}
-              <ArrowUpRight aria-hidden="true" size={18} className="shrink-0" />
-            </Button>
-          ) : null}
+          <div className={styles.projectHostInfo}>
+            <p className={styles.projectHost}>{content.websiteHost}</p>
+            {project.status === "inactive" && (
+              <span className="text-xs text-muted font-medium">({copy.historicalProject})</span>
+            )}
+          </div>
+          <div className={styles.projectButtons}>
+            {hasCaseStudy ? (
+              <>
+                <CaseStudyButtonLink
+                  href={caseStudyHref}
+                  projectSlug={project.slug}
+                  position={index + 1}
+                  locale={locale}
+                  aria-label={`${copy.viewCaseStudy}: ${project.title}`}
+                  className={styles.projectButton}
+                >
+                  {copy.viewCaseStudy}
+                  <ArrowRight aria-hidden="true" size={18} className="shrink-0" />
+                </CaseStudyButtonLink>
+                {isLive && project.websiteUrl ? (
+                  <ExternalProjectLink
+                    href={project.websiteUrl}
+                    projectSlug={project.slug}
+                    domain={content.websiteHost}
+                    aria-label={`${copy.visitLiveWebsite}: ${project.title} (${copy.opensNewTab})`}
+                    className={styles.secondaryLink}
+                  >
+                    <span>{copy.visitLiveWebsite}</span>
+                    <ArrowUpRight aria-hidden="true" size={16} className="shrink-0" />
+                  </ExternalProjectLink>
+                ) : null}
+              </>
+            ) : project.websiteUrl && isLive ? (
+              <ExternalProjectLink
+                href={project.websiteUrl}
+                projectSlug={project.slug}
+                domain={content.websiteHost}
+                aria-label={`${copy.visitLiveWebsite}: ${project.title} (${copy.opensNewTab})`}
+                className={`inline-flex min-h-12 max-w-full items-center justify-center gap-2 rounded-control border px-5 py-3 text-center text-small font-semibold whitespace-normal transition-colors border-border bg-surface text-brand hover:border-brand hover:bg-accent-soft ${styles.projectButton}`}
+              >
+                {copy.visitLiveWebsite}
+                <ArrowUpRight aria-hidden="true" size={18} className="shrink-0" />
+              </ExternalProjectLink>
+            ) : null}
+          </div>
         </div>
       </div>
     </article>
