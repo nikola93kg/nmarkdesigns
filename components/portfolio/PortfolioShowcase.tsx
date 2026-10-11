@@ -96,9 +96,9 @@ function ProjectTile({
             alt={image.alt[locale]}
             width={image.width}
             height={image.height}
-            sizes="(min-width: 1600px) 1500px, (min-width: 1024px) calc(100vw - 96px), calc(100vw - 32px)"
-            quality={92}
-            preload={preload}
+            sizes="(min-width: 1600px) 880px, (min-width: 1024px) 60vw, (min-width: 768px) 50vw, calc(100vw - 32px)"
+            quality={85}
+            priority={preload}
             className={styles.image}
           />
         </Link>
@@ -115,9 +115,9 @@ function ProjectTile({
             alt={image.alt[locale]}
             width={image.width}
             height={image.height}
-            sizes="(min-width: 1600px) 1500px, (min-width: 1024px) calc(100vw - 96px), calc(100vw - 32px)"
-            quality={92}
-            preload={preload}
+            sizes="(min-width: 1600px) 880px, (min-width: 1024px) 60vw, (min-width: 768px) 50vw, calc(100vw - 32px)"
+            quality={85}
+            priority={preload}
             className={styles.image}
           />
         </a>
@@ -128,9 +128,9 @@ function ProjectTile({
             alt={image.alt[locale]}
             width={image.width}
             height={image.height}
-            sizes="(min-width: 1600px) 1500px, (min-width: 1024px) calc(100vw - 96px), calc(100vw - 32px)"
-            quality={92}
-            preload={preload}
+            sizes="(min-width: 1600px) 880px, (min-width: 1024px) 60vw, (min-width: 768px) 50vw, calc(100vw - 32px)"
+            quality={85}
+            priority={preload}
             className={styles.image}
           />
         </div>

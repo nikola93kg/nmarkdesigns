@@ -27,7 +27,7 @@ export function RelatedProjects({
           </h2>
           <Link
             href={`/${locale}/portfolio/`}
-            className="text-small font-medium text-brand underline underline-offset-4 hover:text-focus"
+            className="inline-flex min-h-11 items-center py-2 text-small font-medium text-brand underline underline-offset-4 hover:text-focus focus-visible:outline-accent"
           >
             {copy.actions.allProjects}
           </Link>
@@ -110,7 +110,7 @@ export function RelatedProjects({
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`${project.title} (${copy.portfolio.visitLiveWebsite} - ${copy.portfolio.opensNewTab})`}
-                        className="inline-flex items-center gap-1.5 hover:underline focus-visible:outline-accent"
+                        className="inline-flex min-h-11 items-center gap-1.5 py-1.5 hover:underline focus-visible:outline-accent"
                       >
                         <span>{project.title}</span>
                         <ArrowUpRight size={16} aria-hidden="true" className="shrink-0 text-muted" />
@@ -118,7 +118,7 @@ export function RelatedProjects({
                     ) : (
                       <Link
                         href={href}
-                        className="inline-flex items-center gap-1.5 hover:underline focus-visible:outline-accent"
+                        className="inline-flex min-h-11 items-center gap-1.5 py-1.5 hover:underline focus-visible:outline-accent"
                       >
                         <span>{project.title}</span>
                         <ArrowRight size={16} aria-hidden="true" className="shrink-0 text-muted" />

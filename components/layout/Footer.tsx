@@ -8,10 +8,10 @@ import type { Locale } from "@/lib/i18n";
 import { navigationItem } from "@/lib/routes";
 
 const contactLinkClass =
-    "inline-flex min-h-9 items-center justify-center gap-3 text-center text-small text-on-brand-muted transition-colors hover:text-on-brand focus-visible:outline-accent lg:justify-start lg:text-left";
+    "inline-flex min-h-11 items-center justify-center gap-3 py-1.5 text-center text-small text-on-brand-muted transition-colors hover:text-on-brand focus-visible:outline-accent lg:justify-start lg:text-left";
 
 const socialLinkClass =
-    "inline-flex min-h-10 w-full items-center justify-center gap-3 rounded-full border border-border-inverse px-4 text-center text-small text-on-brand-muted transition-colors hover:border-on-brand-muted hover:text-on-brand focus-visible:outline-accent lg:justify-start lg:text-left";
+    "inline-flex min-h-11 w-full items-center justify-center gap-3 rounded-full border border-border-inverse px-4 py-2 text-center text-small text-on-brand-muted transition-colors hover:border-on-brand-muted hover:text-on-brand focus-visible:outline-accent lg:justify-start lg:text-left";
 
 export function Footer({
                          locale,
