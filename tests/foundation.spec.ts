@@ -146,7 +146,16 @@ test("desktop hero owns the first viewport without clipping", async ({ page }) =
     ]) {
       await page.setViewportSize(viewport);
       await page.goto(`/${locale}/`);
-      await page.evaluate(() => document.fonts.ready);
+      await page.evaluate(async () => {
+        await document.fonts.ready;
+        document.getAnimations().forEach((animation) => {
+          try {
+            animation.finish();
+          } catch {
+            // ignore animations that cannot be finished
+          }
+        });
+      });
       const measurements = await page.evaluate(() => {
         const header = document.querySelector("header")?.getBoundingClientRect();
         const hero = document.querySelector('section[aria-labelledby="hero-title"]')?.getBoundingClientRect();

@@ -117,6 +117,7 @@ export const websitePricingSerbia2026 = {
                 paragraphs: [
                   "Osnovni poslovni sajt najčešće uključuje početnu, o nama, usluge, portfolio ili reference, kontakt, a ponekad i blog. Za mali biznis ili uslužnu delatnost to je često najrazumniji početni format.",
                   "Okviran profesionalni raspon je približno 500-1.500 EUR. Ka donjem delu ide projekat sa jasnom strukturom, manjim brojem strana, pripremljenim tekstovima i fotografijama. Ka gornjem delu ide custom dizajn, više sekcija, CMS, dodatne forme, osnovna SEO arhitektura i više pažnje na sadržaj.",
+                  "Kao primer transparentnog formata, NMark Designs nudi Basic plan (450 €) za prezentacione sajtove do 5 stranica i Standard plan (650 €) sa višejezičnom podrškom i obradom slika. Primeri realizovanih sajtova u ovom rangu obuhvataju projekte kao što su OŠ „Dule Karaklajić“ ili Nest Home Solutions.",
                   "Responsive prikaz za telefon, tablet i računar ne bi trebalo tretirati kao luksuznu doplatu. U 2026. to je osnovni deo profesionalne izrade sajta.",
                 ],
               },
@@ -133,6 +134,7 @@ export const websitePricingSerbia2026 = {
                 paragraphs: [
                   "Internet prodavnica je složenija od prezentacionog sajta zato što uključuje proizvode, kategorije, korpu, checkout, porudžbine, plaćanje, isporuku, email obaveštenja i često administraciju zaliha.",
                   "Manja profesionalna WooCommerce prodavnica može krenuti od oko 900-1.800 EUR. Standardni web shop se često planira u rasponu od 1.500 do 2.800 ili 4.000 EUR, zavisno od obima. Veći ili custom e-commerce projekti sa integracijama mogu ići 4.000-8.000+ EUR.",
+                  "U NMark Designs ponudi, Premium plan (1.000 €) predstavlja definisano rešenje za izradu web prodavnice sa optimizacijom, personalizovanim dizajnom i sistemom online plaćanja, dok veći katalozi i B2B sistemi (poput Buy Pallet Jacks) zahtevaju namenski dogovorenu specifikaciju.",
                   "Broj proizvoda sam po sebi nije jedini faktor. Varijacije, atributi, kvalitet fotografija, kategorije, uvoz proizvoda, filteri, način plaćanja, kurirske službe, ERP ili knjigovodstveni sistem često više utiču na cenu od same brojke proizvoda.",
                 ],
               },
@@ -148,12 +150,12 @@ export const websitePricingSerbia2026 = {
           },
           {
             type: "linkList",
-            title: "Korisni sledeći koraci na sajtu NMark Designs",
+            title: "Povezane usluge i paketi na sajtu NMark Designs",
             items: [
-              { label: "Pogledajte okvirni cenovnik", href: "/sr/cenovnik/" },
-              { label: "Istražite usluge izrade web sajtova", href: "/sr/usluge/" },
-              { label: "Pogledajte portfolio projekte", href: "/sr/portfolio/" },
-              { label: "Pročitajte 10-minutni audit sajta", href: "/sr/blog/kako-da-radite-brzi-audit-sajta/" },
+              { label: "Pogledajte zvanični cenovnik paketa (od 450 €)", href: "/sr/cenovnik/" },
+              { label: "Istražite usluge izrade, dizajna i održavanja sajtova", href: "/sr/usluge/" },
+              { label: "Pogledajte portfolio realizovanih web projekata", href: "/sr/portfolio/" },
+              { label: "Pročitajte besplatni 10-minutni vodič za audit sajta", href: "/sr/blog/kako-da-radite-brzi-audit-sajta/" },
             ],
           },
         ],

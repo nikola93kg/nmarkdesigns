@@ -5,7 +5,7 @@ import background from "@/components/ui/GridBackground.module.css";
 import type { Dictionary } from "@/content/i18n/types";
 import { pricingPackages } from "@/content/pricing";
 import type { Locale } from "@/lib/i18n";
-import { localizedPath } from "@/lib/routes";
+import { localizedBlogPostPath, localizedPath } from "@/lib/routes";
 
 type PricingPageProps = {
   locale: Locale;
@@ -136,6 +136,34 @@ export function PricingPage({ locale, copy }: PricingPageProps) {
           </ol>
         </Container>
       </section>
+
+      {copy.guideBanner ? (
+        <section aria-labelledby="pricing-guide-banner" className="border-b border-border bg-surface py-12 md:py-16">
+          <Container className="flex flex-col items-center justify-between gap-6 rounded-card border border-border bg-surface-muted p-8 text-center md:flex-row md:text-left">
+            <div className="max-w-2xl">
+              {copy.guideBanner.eyebrow ? (
+                <p className="text-small font-semibold uppercase text-brand">
+                  {copy.guideBanner.eyebrow}
+                </p>
+              ) : null}
+              <h2 id="pricing-guide-banner" className="mt-2 text-subheading font-bold text-ink">
+                {copy.guideBanner.title}
+              </h2>
+              <p className="mt-2 text-pretty text-muted">
+                {copy.guideBanner.description}
+              </p>
+            </div>
+            <Button
+              href={localizedBlogPostPath("koliko-kosta-izrada-web-sajta-u-srbiji-2026", locale)}
+              variant="secondary"
+              className="shrink-0"
+            >
+              {copy.guideBanner.label}
+              <ArrowUpRight aria-hidden="true" size={18} className="shrink-0" />
+            </Button>
+          </Container>
+        </section>
+      ) : null}
 
       <section
         aria-labelledby="pricing-questions"

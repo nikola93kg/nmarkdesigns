@@ -527,8 +527,8 @@ const sectionsEn = [
 ] as const;
 
 export const gtaViWebsiteAnalysis = {
-  image: "/blog/gta-vi-website-cover.png",
-  imageType: "image/png",
+  image: "/blog/gta-vi-website-cover.webp",
+  imageType: "image/webp",
   heroBackground: {
     image: "/blog/hero/gta-vi-website-hero.webp",
     width: 1920,

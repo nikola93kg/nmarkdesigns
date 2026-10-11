@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { HeroArtwork } from "@/components/home/HeroArtwork";
 import { Button } from "@/components/ui/Button";
+import { CtaButton } from "@/components/ui/CtaButton";
 import { Container } from "@/components/ui/Container";
 import type { Dictionary } from "@/content/i18n/types";
 import type { Locale } from "@/lib/i18n";
@@ -21,11 +22,27 @@ export function Hero({ locale, copy }: { locale: Locale; copy: Dictionary }) {
           <p className="mx-auto mt-4 max-w-lg text-subheading font-semibold text-ink lg:mx-0">{hero.subtitle}</p>
           <p className="mx-auto mt-4 max-w-xl text-pretty text-muted lg:mx-0">{hero.description}</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3 lg:justify-start">
-            <Button href={contact.href} external={contact.external}>
+            <CtaButton
+              href={contact.href}
+              ctaName="request_quote"
+              ctaLocation="hero"
+              locale={locale}
+              external={contact.external}
+            >
               {contact.label}<ArrowUpRight aria-hidden="true" size={18} className="shrink-0" />
-            </Button>
+            </CtaButton>
             <Button href={portfolio.href} external={portfolio.external} variant="secondary">{portfolio.label}</Button>
           </div>
+          {hero.trustSignals && hero.trustSignals.length > 0 && (
+            <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted lg:justify-start">
+              {hero.trustSignals.map((signal) => (
+                <li key={signal} className="flex items-center gap-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-brand" aria-hidden="true" />
+                  <span>{signal}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
         <HeroArtwork />
       </Container>

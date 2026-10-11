@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { blogPosts } from "@/content/blog";
 import { site } from "@/content/site";
-import { caseStudyProjects } from "@/content/projects";
+import { projects, caseStudyProjects } from "@/content/projects";
 import { publicPages } from "@/lib/public-pages";
 import { isIndexableHost } from "@/lib/seo-config";
 import { robotsForHost } from "@/lib/crawl";
@@ -74,15 +74,18 @@ for (const pair of pairs) {
       const project = caseStudyProjects.find((entry) => path.endsWith(`/portfolio/${entry.slug}/`));
       if (project) {
         expect(title).toContain(project.title);
-        expect(description).toBe(project.caseStudy.overview[index === 0 ? "sr" : "en"]);
-        await expect(page.locator(`main a[href="${project.websiteUrl}"]`)).toHaveCount(1);
+        if (project.status === "inactive") {
+          await expect(page.locator(`main a[href="${project.websiteUrl}"]`)).toHaveCount(0);
+        } else {
+          await expect(page.locator(`main a[href="${project.websiteUrl}"]`)).toHaveCount(1);
+        }
         await expect(page.locator('main > article')).toHaveCount(1);
         expect(image).toBe(site.url + project.featuredImage.src);
       }
       if (path === "/sr/kontakt/" || path === "/en/contact/") await expect(page.locator("main address")).toHaveCount(1);
       const schema = await page.locator('script[type="application/ld+json"]').allTextContents();
       const blogPost = blogPosts.find((entry) => path.endsWith(`/blog/${entry.slug}/`));
-      const expectedCount = path === "/sr/" || path === "/en/" || path === "/sr/o-nama/" || path === "/en/about/" || Boolean(project) || Boolean(blogPost) ? 1 : 0;
+      const expectedCount = path === "/sr/" || path === "/en/" || path === "/sr/o-nama/" || path === "/en/about/" || path === "/sr/usluge/" || path === "/en/services/" || Boolean(project) || Boolean(blogPost) ? 1 : 0;
       expect(schema).toHaveLength(expectedCount);
       for (const source of schema) {
         const value: unknown = JSON.parse(source);
@@ -101,6 +104,11 @@ for (const pair of pairs) {
           { "@type": "WebSite", name: "NMark Designs" },
         ] });
         if (path === "/sr/o-nama/" || path === "/en/about/") expect(value).toMatchObject({ "@type": "Person", name: "Nikola Marković", jobTitle: "Frontend developer" });
+        if (path === "/sr/usluge/" || path === "/en/services/") {
+          const graph = (value as { "@graph"?: Array<{ "@type": string; provider?: { "@id": string } }> })["@graph"];
+          expect(graph?.length).toBe(6);
+          expect(graph?.[0]).toMatchObject({ "@type": "Service", provider: { "@id": `${site.url}/#organization` } });
+        }
       }
       const images = await page.locator("main img").evaluateAll((elements) => elements.map((image) => ({
         alt: image.getAttribute("alt"),
@@ -157,7 +165,10 @@ test("exact permanent legacy redirects have one hop and preserve queries", async
   const mappings = [
     ["/", "/sr/"], ["/about/", "/sr/o-nama/"], ["/contact/", "/sr/kontakt/"],
     ["/cenovnik/", "/sr/cenovnik/"], ["/portfolio/", "/sr/portfolio/"], ["/all-services/", "/sr/usluge/"],
-    ...caseStudyProjects.map((project) => [new URL(project.sourceUrl).pathname, `/sr/portfolio/${project.slug}/`]),
+    ...projects.map((project) => [
+      new URL(project.sourceUrl).pathname,
+      project.caseStudy ? `/sr/portfolio/${project.slug}/` : `/sr/portfolio/#project-${project.slug}`,
+    ]),
   ];
   for (const [legacy, target] of mappings) {
     for (const path of new Set([legacy, legacy === "/" ? legacy : legacy.slice(0, -1)])) {

@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { CtaButton } from "@/components/ui/CtaButton";
 import { Container } from "@/components/ui/Container";
 import type { Dictionary } from "@/content/i18n/types";
 import type { Locale } from "@/lib/i18n";
@@ -19,9 +19,17 @@ export function CTA({ locale, copy }: { locale: Locale; copy: Dictionary }) {
           <h2 id="cta-title" className={`${styles.ctaHeading} font-bold`}>{content.title}</h2>
           <p className="mx-auto mt-4 max-w-xl text-pretty text-on-brand-muted lg:mx-0">{content.description}</p>
         </div>
-        <Button href={contact.href} external={contact.external} variant="secondary" className="min-h-14 justify-self-center px-6 focus-visible:outline-accent lg:justify-self-start">
+        <CtaButton
+          href={contact.href}
+          ctaName="contact_cta"
+          ctaLocation="home_cta"
+          locale={locale}
+          external={contact.external}
+          variant="secondary"
+          className="min-h-14 justify-self-center px-6 focus-visible:outline-accent lg:justify-self-start"
+        >
           {contact.label}<ArrowUpRight aria-hidden="true" size={18} />
-        </Button>
+        </CtaButton>
       </Container>
     </section>
   );

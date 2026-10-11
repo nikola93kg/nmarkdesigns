@@ -33,13 +33,23 @@ for (const locale of locales) {
       } else {
         await expect(page.locator("main dt").filter({ hasText: copy.caseStudy.technologies })).toHaveCount(0);
       }
-      if (project.websiteUrl) {
+      if (project.websiteUrl && project.status !== "inactive") {
         await expect(page.getByRole("link", { name: copy.portfolio.visitWebsite, exact: true })).toHaveAttribute("href", project.websiteUrl);
+      } else if (project.status === "inactive") {
+        await expect(page.getByText(copy.portfolio.historicalProject, { exact: true })).toBeVisible();
       }
-      for (const key of ["challenge", "solution", "results"] as const) {
-        if (!project.caseStudy[key]?.[locale].length) {
+      for (const key of ["challenge", "approach", "solution", "results"] as const) {
+        if (!project.caseStudy[key]?.[locale]?.length) {
           await expect(page.getByRole("heading", { name: copy.caseStudy[key], exact: true })).toHaveCount(0);
+        } else {
+          await expect(page.getByRole("heading", { name: copy.caseStudy[key], exact: true })).toBeVisible();
         }
+      }
+      if (project.caseStudy.technicalHighlights?.length) {
+        await expect(page.getByRole("heading", { name: copy.caseStudy.technicalHighlights, exact: true })).toBeVisible();
+      }
+      if (project.caseStudy.relatedSlugs?.length) {
+        await expect(page.getByRole("heading", { name: copy.caseStudy.relatedProjects, exact: true })).toBeVisible();
       }
       await expect(page.locator("#project-gallery")).toHaveCount(0);
       const url = `https://nmarkdesigns.com${localizedProjectPath(project.slug, locale)}`;
@@ -101,7 +111,7 @@ for (const locale of locales) {
 
   test(`${locale} homepage links to local case studies and index links to client sites`, async ({ page }) => {
     await page.goto(`/${locale}/`);
-    for (const project of caseStudyProjects) {
+    for (const project of caseStudyProjects.filter((p) => p.featured !== false)) {
       await expect(page.getByRole("link", { name: `${copy.actions.viewProject}: ${project.title}`, exact: true })).toHaveAttribute("href", localizedProjectPath(project.slug, locale));
     }
     await page.getByRole("link", { name: `${copy.actions.viewProject}: ${caseStudyProjects[0].title}`, exact: true }).click();
@@ -111,9 +121,11 @@ for (const locale of locales) {
 
     await page.goto(`/${locale}/portfolio/`);
     for (const project of caseStudyProjects) {
-      await expect(page.locator(`main a[href="${localizedProjectPath(project.slug, locale)}"]`)).toHaveCount(0);
-      if (project.websiteUrl) {
-        await expect(page.locator(`#project-${project.slug} a[href="${project.websiteUrl}"]`)).toHaveCount(2);
+      await expect(page.locator(`main a[href="${localizedProjectPath(project.slug, locale)}"]`)).toHaveCount(3);
+      if (project.status === "inactive") {
+        await expect(page.locator(`#project-${project.slug} a[href="${project.websiteUrl}"]`)).toHaveCount(0);
+      } else if (project.websiteUrl) {
+        await expect(page.locator(`#project-${project.slug} a[href="${project.websiteUrl}"]`)).toHaveCount(1);
       }
     }
   });
@@ -157,8 +169,185 @@ for (const width of [375, 1440]) {
   });
 }
 
+test("Cool Fridge Guys case study renders all premium sections and related projects", async ({ page }) => {
+  for (const locale of locales) {
+    const copy = dictionaries[locale];
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto(`/${locale}/portfolio/coolfridgeguys/`);
+
+    // Facts DL
+    await expect(page.locator("main dt").filter({ hasText: copy.caseStudy.client })).toBeVisible();
+    await expect(page.locator("main dt").filter({ hasText: copy.caseStudy.technologies })).toBeVisible();
+    await expect(page.locator("main dt").filter({ hasText: copy.caseStudy.technologies }).locator("+ dd")).toHaveText(/Next\.js 15/);
+
+    // Narrative sections
+    await expect(page.getByRole("heading", { name: copy.caseStudy.challenge, exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: copy.caseStudy.approach, exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: copy.caseStudy.solution, exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: copy.caseStudy.results, exact: true })).toBeVisible();
+
+    // AI Sales Assistant section
+    const aiSection = page.locator('section[aria-labelledby="project-ai-assistant"]');
+    await expect(aiSection).toBeVisible();
+    await expect(aiSection.getByRole("heading", { level: 2 })).toBeVisible();
+
+    // Technical highlights section
+    await expect(page.getByRole("heading", { name: copy.caseStudy.technicalHighlights, exact: true })).toBeVisible();
+    const highlightCards = page.locator('section[aria-labelledby="project-highlights"] div.rounded-card');
+    await expect(highlightCards).toHaveCount(4);
+
+    // Related projects section
+    await expect(page.getByRole("heading", { name: copy.caseStudy.relatedProjects, exact: true })).toBeVisible();
+    const relatedCards = page.locator('section[aria-labelledby="related-projects-title"] article');
+    await expect(relatedCards).toHaveCount(2);
+
+    // External visit website link
+    await expect(page.getByRole("link", { name: copy.portfolio.visitWebsite, exact: true })).toHaveAttribute("href", "https://www.coolfridgeguys.com/");
+
+    // Contact form CTA
+    const expectedContactTitle = copy.caseStudy.contactTitle ?? copy.portfolio.contactTitle;
+    await expect(page.getByRole("heading", { name: expectedContactTitle, exact: true })).toBeVisible();
+  }
+});
+
+test("Phase 3B.2 case studies (Ilić Enterijer, Powder Brows Vienna, Časovi Francuskog) render 4 highlights and deliverables", async ({ page }) => {
+  const targetSlugs = ["ilic-enterijer", "powder-brows-vienna", "casovi-francuskog"] as const;
+  for (const locale of locales) {
+    const copy = dictionaries[locale];
+    await page.setViewportSize({ width: 1440, height: 900 });
+    for (const slug of targetSlugs) {
+      await page.goto(localizedProjectPath(slug, locale));
+      const project = caseStudyProjects.find((p) => p.slug === slug)!;
+
+      // Technical highlights section has 4 cards
+      await expect(page.getByRole("heading", { name: copy.caseStudy.technicalHighlights, exact: true })).toBeVisible();
+      const highlightCards = page.locator('section[aria-labelledby="project-highlights"] div.rounded-card');
+      await expect(highlightCards).toHaveCount(4);
+
+      // Results section has 4 items
+      await expect(page.getByRole("heading", { name: copy.caseStudy.results, exact: true })).toBeVisible();
+      const resultItems = page.locator('section[aria-labelledby="project-results"] p');
+      await expect(resultItems).toHaveCount(4);
+
+      // External website link
+      if (project.websiteUrl && project.status !== "inactive") {
+        await expect(page.getByRole("link", { name: copy.portfolio.visitWebsite, exact: true })).toHaveAttribute("href", project.websiteUrl);
+      }
+
+      // Related projects
+      if (project.caseStudy.relatedSlugs?.length) {
+        await expect(page.getByRole("heading", { name: copy.caseStudy.relatedProjects, exact: true })).toBeVisible();
+      }
+    }
+  }
+});
+
+test("Phase 3B.3 case studies (Buy Pallet Jacks, OŠ Dule Karaklajić, Tripoli Sweets, LaDekor) render 4 highlights and deliverables", async ({ page }) => {
+  const targetSlugs = ["buy-pallet-jacks", "os-dule-karaklajic", "tripolisweets", "ladekor"] as const;
+  for (const locale of locales) {
+    const copy = dictionaries[locale];
+    await page.setViewportSize({ width: 1440, height: 900 });
+    for (const slug of targetSlugs) {
+      await page.goto(localizedProjectPath(slug, locale));
+      const project = caseStudyProjects.find((p) => p.slug === slug)!;
+
+      // Technical highlights section has 4 cards
+      await expect(page.getByRole("heading", { name: copy.caseStudy.technicalHighlights, exact: true })).toBeVisible();
+      const highlightCards = page.locator('section[aria-labelledby="project-highlights"] div.rounded-card');
+      await expect(highlightCards).toHaveCount(4);
+
+      // Results section has 4 items
+      await expect(page.getByRole("heading", { name: copy.caseStudy.results, exact: true })).toBeVisible();
+      const resultItems = page.locator('section[aria-labelledby="project-results"] p');
+      await expect(resultItems).toHaveCount(4);
+
+      // Outbound link or historical badge based on operational status
+      if (project.websiteUrl && project.status !== "inactive") {
+        await expect(page.getByRole("link", { name: copy.portfolio.visitWebsite, exact: true })).toHaveAttribute("href", project.websiteUrl);
+      } else if (project.status === "inactive") {
+        await expect(page.getByText(copy.portfolio.historicalProject, { exact: true })).toBeVisible();
+        await expect(page.getByRole("link", { name: copy.portfolio.visitWebsite, exact: true })).toHaveCount(0);
+      }
+
+      // Related projects
+      if (project.caseStudy.relatedSlugs?.length) {
+        await expect(page.getByRole("heading", { name: copy.caseStudy.relatedProjects, exact: true })).toBeVisible();
+      }
+    }
+  }
+});
+
+test("casovi-francuskog case study strictly presents individual lessons and no group lessons", async ({ page }) => {
+  for (const locale of locales) {
+    await page.goto(localizedProjectPath("casovi-francuskog", locale));
+    const caseStudyElements = page.locator("article > header, article dl, article section:not([aria-labelledby='related-projects-title'])");
+    const caseStudyText = (await caseStudyElements.allInnerTexts()).join("\n");
+    expect(caseStudyText).not.toMatch(/grupn/i);
+    expect(caseStudyText).not.toMatch(/group/i);
+    expect(caseStudyText).toMatch(locale === "sr" ? /individualn/i : /individual|1-on-1/i);
+  }
+});
+
+test("Phase 3B.4 case study (Anabela Bebi Oprema) renders 4 highlights, 4 deliverables, 200+ catalog, and WooCommerce", async ({ page }) => {
+  for (const locale of locales) {
+    const copy = dictionaries[locale];
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto(localizedProjectPath("anabelabebioprema", locale));
+    const project = caseStudyProjects.find((p) => p.slug === "anabelabebioprema")!;
+    expect(project).toBeDefined();
+
+    // Verify H1 title and overview
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(project.title);
+    await expect(page.getByText(project.caseStudy.overview[locale], { exact: true })).toBeVisible();
+
+    // Technical highlights section has 4 cards
+    await expect(page.getByRole("heading", { name: copy.caseStudy.technicalHighlights, exact: true })).toBeVisible();
+    const highlightCards = page.locator('section[aria-labelledby="project-highlights"] div.rounded-card');
+    await expect(highlightCards).toHaveCount(4);
+
+    // Results section has 4 items
+    await expect(page.getByRole("heading", { name: copy.caseStudy.results, exact: true })).toBeVisible();
+    const resultItems = page.locator('section[aria-labelledby="project-results"] p');
+    await expect(resultItems).toHaveCount(4);
+
+    // External website link is active
+    await expect(page.getByRole("link", { name: copy.portfolio.visitWebsite, exact: true })).toHaveAttribute("href", project.websiteUrl!);
+
+    // Related projects section
+    await expect(page.getByRole("heading", { name: copy.caseStudy.relatedProjects, exact: true })).toBeVisible();
+
+    // Verify evidence content: 200+ catalog mention and WooCommerce
+    const mainText = await page.locator("main").innerText();
+    expect(mainText).toMatch(/200\+/);
+    expect(mainText).toMatch(/WooCommerce/i);
+
+    // Verify location accuracy: based in Ćuprija with stores in Ćuprija, Jagodina, Paraćin
+    expect(mainText).toMatch(/Ćuprij|Cuprij/i);
+    expect(mainText).toMatch(/Jagodin/i);
+    expect(mainText).toMatch(/Paraćin|Paracin/i);
+    // Strict regression guard: Anabela Bebi Oprema must NEVER be associated with Lazarevac
+    expect(mainText).not.toMatch(/Lazarevac/i);
+
+    // Meta description and OG description must contain Ćuprija and never Lazarevac
+    const metaDesc = await page.locator('meta[name="description"]').getAttribute("content");
+    expect(metaDesc).toMatch(/Ćuprij|Cuprij/i);
+    expect(metaDesc).not.toMatch(/Lazarevac/i);
+  }
+});
+
+test("Authentic Lazarevac locations are preserved for other verified projects", async ({ page }) => {
+  for (const locale of locales) {
+    for (const slug of ["ilic-enterijer", "os-dule-karaklajic", "ladekor"]) {
+      await page.goto(localizedProjectPath(slug, locale));
+      const mainText = await page.locator("main").innerText();
+      expect(mainText).toMatch(/Lazarevac/i);
+    }
+  }
+});
+
 test("case studies reject unknown slugs and unsupported locales", async ({ request }) => {
   for (const path of ["/sr/portfolio/unknown/", "/en/portfolio/cool-fridge-guys/", "/fr/portfolio/coolfridgeguys/", "/SR/portfolio/coolfridgeguys/", "/sr/portfolio/COOLFRIDGEGUYS/", "/sr/PORTFOLIO/coolfridgeguys/", "/sr/portfolio/coolfridgeguys/extra/"]) {
     expect((await request.get(path)).status(), path).toBe(404);
   }
 });
+

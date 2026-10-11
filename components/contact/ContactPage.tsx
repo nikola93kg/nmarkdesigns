@@ -1,4 +1,5 @@
 import { Mail, MessageCircle, Phone } from "lucide-react";
+import { ContactDirectLink } from "@/components/layout/ContactDirectLink";
 import { submitContact } from "@/app/[locale]/[page]/actions";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { Container } from "@/components/ui/Container";
@@ -11,9 +12,9 @@ import { localizedPath } from "@/lib/routes";
 
 export function ContactPage({ locale, copy }: { locale: Locale; copy: Dictionary["contact"] }) {
   const methods = [
-    { label: copy.details.email, value: site.email, href: `mailto:${site.email}`, icon: Mail },
-    { label: copy.details.phone, value: site.phone.label, href: site.phone.href, icon: Phone },
-    { label: copy.details.whatsapp, value: site.phone.label, href: site.whatsappUrl, icon: MessageCircle },
+    { label: copy.details.email, value: site.email, href: `mailto:${site.email}`, icon: Mail, method: "email" as const },
+    { label: copy.details.phone, value: site.phone.label, href: site.phone.href, icon: Phone, method: "phone" as const },
+    { label: copy.details.whatsapp, value: site.phone.label, href: site.whatsappUrl, icon: MessageCircle, method: "whatsapp" as const },
   ];
 
   return (
@@ -33,21 +34,27 @@ export function ContactPage({ locale, copy }: { locale: Locale; copy: Dictionary
           <p className="mx-auto mt-4 max-w-sm text-pretty text-muted lg:mx-0">{copy.details.description}</p>
           <address className="mt-8 not-italic">
             <ul className="divide-y divide-border border-y border-border">
-              {methods.map(({ label, value, href, icon: Icon }) => (
+              {methods.map(({ label, value, href, icon: Icon, method }) => (
                 <li key={href}>
-                  <a href={href} className="group flex min-h-12 flex-col items-center gap-2 py-5 text-center text-brand lg:flex-row lg:items-start lg:gap-4 lg:text-left">
+                  <ContactDirectLink
+                    href={href}
+                    method={method}
+                    location="contact_page"
+                    locale={locale}
+                    className="group flex min-h-12 flex-col items-center gap-2 py-5 text-center text-brand lg:flex-row lg:items-start lg:gap-4 lg:text-left"
+                  >
                     <Icon size={20} className="shrink-0 lg:mt-1" aria-hidden="true" />
                     <span className="min-w-0">
                       <span className="block text-small text-muted">{label}</span>
                       <span className="mt-1 block break-words font-medium underline-offset-4 group-hover:underline">{value}</span>
                     </span>
-                  </a>
+                  </ContactDirectLink>
                 </li>
               ))}
             </ul>
           </address>
         </section>
-        <ContactForm key={locale} copy={copy.form} action={submitContact.bind(null, locale)} permalink={localizedPath("contact", locale)} deliveryAvailable={contactDelivery.available} />
+        <ContactForm key={locale} copy={copy.form} action={submitContact.bind(null, locale)} permalink={localizedPath("contact", locale)} deliveryAvailable={contactDelivery.isAvailable()} />
       </Container>
     </>
   );

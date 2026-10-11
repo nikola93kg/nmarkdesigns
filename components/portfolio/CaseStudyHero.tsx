@@ -27,10 +27,15 @@ export function CaseStudyHero({ project, locale, copy }: { project: CaseStudyPro
           </div>
           <div>
             <p className="mx-auto max-w-xl text-pretty text-on-brand-muted lg:mx-0">{project.caseStudy.overview[locale]}</p>
-            {project.websiteUrl && (
+            {project.websiteUrl && project.status !== "inactive" && (
               <Button href={project.websiteUrl} external variant="secondary" className="mt-6 focus-visible:outline-accent">
                 {copy.portfolio.visitWebsite}<ArrowUpRight aria-hidden="true" size={18} />
               </Button>
+            )}
+            {project.status === "inactive" && (
+              <p className="mt-6 inline-flex items-center rounded border border-border-inverse/30 bg-surface/10 px-3 py-1.5 text-xs font-medium text-on-brand-muted">
+                {copy.portfolio.historicalProject}
+              </p>
             )}
           </div>
         </div>

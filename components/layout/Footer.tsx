@@ -1,4 +1,6 @@
 import { Camera, Mail, MessageCircle, Phone } from "lucide-react";
+import { ContactDirectLink } from "@/components/layout/ContactDirectLink";
+import { CookieSettingsButton } from "@/components/layout/CookieSettingsButton";
 import { Logo } from "@/components/layout/Logo";
 import { Navigation } from "@/components/layout/Navigation";
 import { Container } from "@/components/ui/Container";
@@ -8,10 +10,10 @@ import type { Locale } from "@/lib/i18n";
 import { navigationItem } from "@/lib/routes";
 
 const contactLinkClass =
-    "inline-flex min-h-9 items-center justify-center gap-3 text-center text-small text-on-brand-muted transition-colors hover:text-on-brand focus-visible:outline-accent lg:justify-start lg:text-left";
+    "inline-flex min-h-11 items-center justify-center gap-3 py-1.5 text-center text-small text-on-brand-muted transition-colors hover:text-on-brand focus-visible:outline-accent lg:justify-start lg:text-left";
 
 const socialLinkClass =
-    "inline-flex min-h-10 w-full items-center justify-center gap-3 rounded-full border border-border-inverse px-4 text-center text-small text-on-brand-muted transition-colors hover:border-on-brand-muted hover:text-on-brand focus-visible:outline-accent lg:justify-start lg:text-left";
+    "inline-flex min-h-11 w-full items-center justify-center gap-3 rounded-full border border-border-inverse px-4 py-2 text-center text-small text-on-brand-muted transition-colors hover:border-on-brand-muted hover:text-on-brand focus-visible:outline-accent lg:justify-start lg:text-left";
 
 export function Footer({
                          locale,
@@ -90,8 +92,11 @@ export function Footer({
             </h2>
 
             <address className="flex flex-col items-center gap-1 not-italic lg:items-start">
-              <a
+              <ContactDirectLink
                   href={site.phone.href}
+                  method="phone"
+                  location="footer"
+                  locale={locale}
                   className={contactLinkClass}
               >
                 <Phone
@@ -99,10 +104,13 @@ export function Footer({
                     aria-hidden="true"
                 />
                 {site.phone.label}
-              </a>
+              </ContactDirectLink>
 
-              <a
+              <ContactDirectLink
                   href={`mailto:${site.email}`}
+                  method="email"
+                  location="footer"
+                  locale={locale}
                   className={contactLinkClass}
               >
                 <Mail
@@ -110,7 +118,7 @@ export function Footer({
                     aria-hidden="true"
                 />
                 <span>{site.email}</span>
-              </a>
+              </ContactDirectLink>
             </address>
 
             <ul
@@ -133,8 +141,11 @@ export function Footer({
               </li>
 
               <li>
-                <a
+                <ContactDirectLink
                     href={site.whatsappUrl}
+                    method="whatsapp"
+                    location="footer"
+                    locale={locale}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={socialLinkClass}
@@ -144,18 +155,19 @@ export function Footer({
                       aria-hidden="true"
                   />
                   WhatsApp
-                </a>
+                </ContactDirectLink>
               </li>
             </ul>
           </div>
         </Container>
 
         <div className="border-t border-border-inverse">
-          <Container className="flex min-h-[72px] items-center justify-center py-4 text-center">
+          <Container className="flex min-h-[72px] flex-col items-center justify-center gap-2 py-4 text-center sm:flex-row sm:justify-between">
             <p className="text-small text-on-brand-muted">
               <span translate="no">nmarkdesigns</span>{" "}
               &copy; {copy.footer.copyright}
             </p>
+            <CookieSettingsButton locale={locale} />
           </Container>
         </div>
       </footer>

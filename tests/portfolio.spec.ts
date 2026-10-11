@@ -2,9 +2,9 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import sr from "@/content/i18n/sr";
 import en from "@/content/i18n/en";
-import { portfolioProjects } from "@/content/projects";
+import { portfolioProjects, caseStudyProjects } from "@/content/projects";
 import { locales } from "@/lib/i18n";
-import { localizedPath } from "@/lib/routes";
+import { localizedPath, localizedProjectPath } from "@/lib/routes";
 
 const dictionaries = { sr, en };
 
@@ -45,8 +45,19 @@ for (const locale of locales) {
           await expect(section.getByText(copy.portfolio.contentNeeded.screenshot, { exact: true })).toBeVisible();
         }
 
-        if (project.websiteUrl) {
-          await expect(section.locator(`a[href="${project.websiteUrl}"]`)).toHaveCount(project.featuredImage ? 2 : 1);
+        if (project.status === "inactive") {
+          if (project.caseStudy) {
+            await expect(section.locator(`a[href="${localizedProjectPath(project.slug, locale)}"]`)).toHaveCount(3);
+          }
+          await expect(section.locator(`a[href="${project.websiteUrl}"]`)).toHaveCount(0);
+          await expect(section.getByText(copy.portfolio.historicalProject, { exact: false })).toBeVisible();
+        } else if (project.websiteUrl) {
+          if (project.caseStudy) {
+            await expect(section.locator(`a[href="${localizedProjectPath(project.slug, locale)}"]`)).toHaveCount(3);
+            await expect(section.locator(`a[href="${project.websiteUrl}"]`)).toHaveCount(1);
+          } else {
+            await expect(section.locator(`a[href="${project.websiteUrl}"]`)).toHaveCount(project.featuredImage ? 2 : 1);
+          }
         } else {
           await expect(section.getByText(copy.portfolio.contentNeeded.website, { exact: true })).toBeVisible();
         }
@@ -177,12 +188,91 @@ test("project index uses local details and only verified optional metadata", asy
       await expect(entry.getByText(project.category?.[locale] ?? copy.portfolio.defaultCategory, { exact: true })).toBeVisible();
       const description = project.shortDescription?.[locale] ?? project.caseStudy?.overview[locale] ?? copy.portfolio.contentNeeded.description;
       await expect(entry.getByText(description, { exact: true })).toBeVisible();
-      if (project.websiteUrl) {
-        await expect(entry.getByRole("link", { name: `${copy.portfolio.visitWebsite}: ${project.title}`, exact: true }).last()).toHaveAttribute("href", project.websiteUrl);
+      if (project.caseStudy) {
+        await expect(entry.getByRole("link", { name: `${copy.portfolio.viewCaseStudy}: ${project.title}`, exact: true }).first()).toHaveAttribute("href", localizedProjectPath(project.slug, locale));
+      }
+      if (project.status === "inactive") {
+        await expect(entry.getByRole("link", { name: `${copy.portfolio.visitLiveWebsite}: ${project.title} (${copy.portfolio.opensNewTab})`, exact: true })).toHaveCount(0);
+        await expect(entry.getByText(copy.portfolio.historicalProject, { exact: false })).toBeVisible();
+      } else if (project.websiteUrl) {
+        await expect(entry.getByRole("link", { name: `${copy.portfolio.visitLiveWebsite}: ${project.title} (${copy.portfolio.opensNewTab})`, exact: true }).last()).toHaveAttribute("href", project.websiteUrl);
       } else {
         await expect(entry.getByText(copy.portfolio.contentNeeded.website, { exact: true })).toBeVisible();
       }
     }
-    await expect(page.locator(`main a[href^="/${locale}/portfolio/"]`)).toHaveCount(0);
+    await expect(page.locator(`main a[href^="/${locale}/portfolio/"]`)).toHaveCount(caseStudyProjects.length * 3);
   }
 });
+
+test("portfolio projects match owner-verified evidence and technology stacks", async () => {
+  const madjionicar = portfolioProjects.find((p) => p.slug === "madjionicar-bojan");
+  expect(madjionicar).toBeDefined();
+  expect(madjionicar?.technologies).toContain("React");
+  expect(madjionicar?.technologies).not.toContain("WordPress");
+  expect(madjionicar?.technologies).not.toContain("Next.js");
+  expect(madjionicar?.status).toBe("active");
+
+  const ladekor = portfolioProjects.find((p) => p.slug === "ladekor");
+  expect(ladekor).toBeDefined();
+  expect(ladekor?.technologies).toEqual(["HTML", "CSS", "JavaScript"]);
+  expect(ladekor?.technologies).not.toContain("WordPress");
+  expect(ladekor?.status).toBe("inactive");
+
+  const tripoli = portfolioProjects.find((p) => p.slug === "tripolisweets");
+  expect(tripoli).toBeDefined();
+  expect(tripoli?.status).toBe("inactive");
+  expect(tripoli?.technologies).toContain("WooCommerce");
+
+  const cfg = portfolioProjects.find((p) => p.slug === "coolfridgeguys");
+  expect(cfg).toBeDefined();
+  expect(cfg?.technologies).toContain("Next.js 15");
+  expect(cfg?.technologies).toContain("OpenAI API");
+  expect(cfg?.caseStudy?.aiSalesAssistant).toBeDefined();
+  expect(cfg?.status).toBe("active");
+
+  const anabela = portfolioProjects.find((p) => p.slug === "anabelabebioprema");
+  expect(anabela).toBeDefined();
+  expect(anabela?.status).toBe("active");
+  expect(anabela?.technologies).toContain("WordPress");
+  expect(anabela?.technologies).toContain("WooCommerce");
+  expect(anabela?.caseStudy).toBeDefined();
+  expect(anabela?.caseStudy?.technicalHighlights).toHaveLength(4);
+  expect(anabela?.caseStudy?.results?.sr).toHaveLength(4);
+  expect(anabela?.caseStudy?.overview.sr).toMatch(/200/);
+  expect(anabela?.role?.sr).toMatch(/200/);
+  expect(anabela?.role?.en).toMatch(/200\+/);
+});
+
+test("portfolio strictly distinguishes Časovi Francuskog (individual only) and Frankultura (individual and group)", async () => {
+  const casovi = portfolioProjects.find((p) => p.slug === "casovi-francuskog");
+  expect(casovi).toBeDefined();
+  if (!casovi) throw new Error("casovi-francuskog project must be defined");
+  expect(casovi.status).toBe("active");
+  expect(casovi.technologies).toContain("WordPress");
+
+  // Časovi Francuskog must NEVER associate with group lessons
+  const casoviSerialized = JSON.stringify(casovi);
+  expect(casoviSerialized).not.toMatch(/grupn/i);
+  expect(casoviSerialized).not.toMatch(/group/i);
+
+  // Must explicitly emphasize individual instruction
+  expect(casovi.role?.sr).toMatch(/individualne/i);
+  expect(casovi.role?.en).toMatch(/individual/i);
+  expect(casovi.caseStudy?.overview.sr).toMatch(/individualn/i);
+  expect(casovi.caseStudy?.overview.en).toMatch(/individual|1-on-1/i);
+
+  const frankultura = portfolioProjects.find((p) => p.slug === "frankultura");
+  expect(frankultura).toBeDefined();
+  if (!frankultura) throw new Error("frankultura project must be defined");
+  expect(frankultura.status).toBe("active");
+  expect(frankultura.technologies).toContain("WordPress");
+
+  // Frankultura must explicitly offer both individual and group lessons
+  expect(frankultura.role?.sr).toMatch(/individualne i grupne/i);
+  expect(frankultura.role?.en).toMatch(/individual and group/i);
+  expect(frankultura.services?.sr).toContain("Individualni i grupni kursevi");
+  expect(frankultura.services?.en).toContain("Individual & Group Courses");
+  expect(frankultura.shortDescription?.sr).toMatch(/individualne i grupne/i);
+  expect(frankultura.shortDescription?.en).toMatch(/individual and group/i);
+});
+

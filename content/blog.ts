@@ -200,11 +200,11 @@ export const blogPosts: readonly BlogPost[] = [
       en: "How much does website development cost in Serbia in 2026?",
     },
     seoTitle: {
-      sr: "Koliko košta izrada web sajta u Srbiji 2026? Cene i vodič",
+      sr: "Cena Izrade Web Sajta u Srbiji 2026: Koliko Košta Sajt i Vodič",
       en: "Website development cost in Serbia 2026: prices and guide",
     },
     description: {
-      sr: "Saznajte koliko košta izrada web sajta u Srbiji 2026. Uporedili smo cene poslovnih sajtova, WordPress rešenja, web shopova i custom razvoja.",
+      sr: "Koliko košta izrada web sajta u Srbiji 2026? Detaljan vodič kroz cene i troškove: poslovni sajtovi, WordPress, internet prodavnice i NMark Designs paketi.",
       en: "See how much website development costs in Serbia in 2026, with ranges for business sites, WordPress builds, online stores, and custom development.",
     },
     excerpt: {

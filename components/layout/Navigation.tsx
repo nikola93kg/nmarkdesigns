@@ -19,7 +19,7 @@ const linkStyles = {
   mobile:
     "mobile-navigation-link min-h-18 justify-between gap-5 py-4 text-[clamp(2.35rem,11vw,4.75rem)] font-semibold leading-none tracking-[-0.045em] text-on-brand hover:text-accent focus-visible:outline-accent",
   footer:
-      "min-h-8 justify-center py-1 text-center text-on-brand-muted hover:text-on-brand focus-visible:outline-accent lg:justify-start lg:text-left",
+      "min-h-11 justify-center py-2 text-center text-on-brand-muted hover:text-on-brand focus-visible:outline-accent lg:justify-start lg:text-left",
 };
 
 export function Navigation({
