@@ -2,9 +2,10 @@ import { notFound } from "next/navigation";
 import { CaseStudyHero } from "@/components/portfolio/CaseStudyHero";
 import { CaseStudyDetails } from "@/components/portfolio/CaseStudyDetails";
 import { CaseStudyNavigation } from "@/components/portfolio/CaseStudyNavigation";
+import { RelatedProjects } from "@/components/portfolio/RelatedProjects";
 import { PortfolioContact } from "@/components/portfolio/PortfolioContact";
 import { getDictionary } from "@/content/i18n";
-import { caseStudyProjects, getCaseStudyProject } from "@/content/projects";
+import { caseStudyProjects, getCaseStudyProject, getProjectsBySlugs } from "@/content/projects";
 import { isLocale } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -42,13 +43,26 @@ export default async function CaseStudyPage({ params }: PageProps<"/[locale]/por
     ? caseStudyProjects[(index + 1) % caseStudyProjects.length]
     : undefined;
 
+  const relatedProjects = project.caseStudy.relatedSlugs?.length
+    ? getProjectsBySlugs(project.caseStudy.relatedSlugs)
+    : [];
+
   return (
     <article aria-labelledby="case-study-title">
       <JsonLd data={projectBreadcrumbs(project, locale, copy)} />
       <CaseStudyHero project={project} locale={locale} copy={copy} />
       <CaseStudyDetails project={project} locale={locale} copy={copy.caseStudy} />
+      {relatedProjects.length > 0 && (
+        <RelatedProjects projects={relatedProjects} locale={locale} copy={copy} />
+      )}
       <CaseStudyNavigation nextProject={nextProject} locale={locale} copy={copy} />
-      <PortfolioContact locale={locale} copy={copy} />
+      <PortfolioContact
+        locale={locale}
+        copy={copy}
+        title={copy.caseStudy.contactTitle}
+        description={copy.caseStudy.contactDescription}
+        buttonLabel={copy.caseStudy.contactAction}
+      />
     </article>
   );
 }

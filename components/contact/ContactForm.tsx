@@ -49,12 +49,17 @@ export function ContactForm({ copy, action, permalink, deliveryAvailable }: Cont
       action={formAction}
       noValidate
       aria-labelledby="contact-form-title"
-      aria-describedby="contact-required contact-availability"
+      aria-describedby={deliveryAvailable ? "contact-required" : "contact-required contact-availability"}
       className="mx-auto w-full max-w-2xl lg:max-w-none"
     >
       <h2 id="contact-form-title" className="mx-auto max-w-xl text-heading font-bold lg:mx-0">
         {copy.title}
       </h2>
+      {copy.reassurance ? (
+        <p className="mt-2 text-small font-medium text-brand">
+          {copy.reassurance}
+        </p>
+      ) : null}
       <p id="contact-required" className="mt-4 text-small text-muted">
         {copy.required}
       </p>
@@ -132,7 +137,7 @@ export function ContactForm({ copy, action, permalink, deliveryAvailable }: Cont
           };
           return (
             <div key={field} className="min-w-0">
-              <label htmlFor={shared.id} className="mb-2 block text-center text-small font-medium text-ink lg:text-left">
+              <label htmlFor={shared.id} className="mb-2 block text-left text-small font-medium text-ink">
                 {copy.labels[field]}{" "}
                 {field === "phone" ? (
                   <span className="font-normal text-muted">({copy.optional})</span>
@@ -150,7 +155,7 @@ export function ContactForm({ copy, action, permalink, deliveryAvailable }: Cont
                 />
               )}
               {error && (
-                <p id={`contact-${field}-error`} className="mt-2 text-small font-medium text-brand">
+                <p id={`contact-${field}-error`} className="mt-2 text-left text-small font-medium text-brand">
                   {copy.validation[error]}
                 </p>
               )}

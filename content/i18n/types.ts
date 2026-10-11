@@ -78,6 +78,8 @@ export interface Dictionary {
     visitLiveWebsite: string;
     caseStudyBadge: string;
     opensNewTab: string;
+    historicalProject: string;
+    liveProject: string;
   };
   blog: {
     metadata: { title: string; description: string };
@@ -92,7 +94,7 @@ export interface Dictionary {
     metadata: { title: string; description: string };
     intro: SectionCopy;
     overview: SectionCopy & { items: readonly ServiceItem[] };
-    details: SectionCopy & { includeLabel: string; items: readonly ServiceDetail[] };
+    details: SectionCopy & { includeLabel: string; caseStudyLabel?: string; items: readonly ServiceDetail[] };
     audience: SectionCopy & { items: readonly string[] };
     process: SectionCopy & { items: readonly ProcessStep[] };
     principles: SectionCopy & { items: readonly ServiceItem[] };
@@ -138,6 +140,7 @@ export interface Dictionary {
       submit: string;
       pending: string;
       unavailableNotice: string;
+      reassurance?: string;
       validation: Record<ContactValidationError, string>;
       status: Record<Exclude<ContactFormState["status"], "idle">, string>;
     };
@@ -178,11 +181,17 @@ export interface Dictionary {
     services: string;
     technologies: string;
     challenge: string;
+    approach: string;
     solution: string;
+    technicalHighlights: string;
     results: string;
     gallery: string;
+    relatedProjects: string;
     navigation: string;
     nextProject: string;
+    contactTitle?: string;
+    contactDescription?: string;
+    contactAction?: string;
   };
   home: {
     metadata: { title: string; description: string };
@@ -191,6 +200,7 @@ export interface Dictionary {
       primaryAction: string;
       secondaryAction: string;
       imageAlt: string;
+      trustSignals?: readonly string[];
     };
     projects: SectionCopy;
     services: SectionCopy & {

@@ -53,6 +53,8 @@ function ProjectTile({
   const hasCaseStudy = Boolean(project.caseStudy);
   const caseStudyHref = localizedProjectPath(project.slug, locale);
 
+  const isLive = project.status !== "inactive" && Boolean(project.websiteUrl);
+
   if (!image) {
     return (
       <article className={styles.archiveTile}>
@@ -100,7 +102,7 @@ function ProjectTile({
             className={styles.image}
           />
         </Link>
-      ) : project.websiteUrl ? (
+      ) : isLive ? (
         <a
           href={project.websiteUrl}
           target="_blank"
@@ -164,6 +166,9 @@ function ProjectTile({
         <div className={styles.projectActions}>
           <div className={styles.projectHostInfo}>
             <p className={styles.projectHost}>{content.websiteHost}</p>
+            {project.status === "inactive" && (
+              <span className="text-xs text-muted font-medium">({copy.historicalProject})</span>
+            )}
           </div>
           <div className={styles.projectButtons}>
             {hasCaseStudy ? (
@@ -177,7 +182,7 @@ function ProjectTile({
                   {copy.viewCaseStudy}
                   <ArrowRight aria-hidden="true" size={18} className="shrink-0" />
                 </Button>
-                {project.websiteUrl ? (
+                {isLive ? (
                   <a
                     href={project.websiteUrl}
                     target="_blank"
@@ -190,7 +195,7 @@ function ProjectTile({
                   </a>
                 ) : null}
               </>
-            ) : project.websiteUrl ? (
+            ) : project.websiteUrl && isLive ? (
               <Button
                 href={project.websiteUrl}
                 external

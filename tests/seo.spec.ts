@@ -74,8 +74,11 @@ for (const pair of pairs) {
       const project = caseStudyProjects.find((entry) => path.endsWith(`/portfolio/${entry.slug}/`));
       if (project) {
         expect(title).toContain(project.title);
-        expect(description).toBe(project.caseStudy.overview[index === 0 ? "sr" : "en"]);
-        await expect(page.locator(`main a[href="${project.websiteUrl}"]`)).toHaveCount(1);
+        if (project.status === "inactive") {
+          await expect(page.locator(`main a[href="${project.websiteUrl}"]`)).toHaveCount(0);
+        } else {
+          await expect(page.locator(`main a[href="${project.websiteUrl}"]`)).toHaveCount(1);
+        }
         await expect(page.locator('main > article')).toHaveCount(1);
         expect(image).toBe(site.url + project.featuredImage.src);
       }

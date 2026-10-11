@@ -25,6 +25,7 @@ htmlcov/
 .coverage
 playwright-report/
 test-results/
+docs/screenshots/
 
 # Python
 __pycache__/

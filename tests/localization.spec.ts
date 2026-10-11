@@ -63,8 +63,8 @@ for (const locale of locales) {
     await expect(second).toBeFocused();
     await expect(second).toHaveAttribute("aria-expanded", "true");
     await expect(first).toHaveAttribute("aria-expanded", "false");
-    await expect(page.locator("#faq-answer-timeline")).toBeVisible();
-    await expect(page.locator("#faq-answer-services")).toBeHidden();
+    await expect(page.locator(`#faq-answer-${copy.home.faq.items[1].id}`)).toBeVisible();
+    await expect(page.locator(`#faq-answer-${copy.home.faq.items[0].id}`)).toBeHidden();
     await page.keyboard.press("Space");
     await expect(second).toHaveAttribute("aria-expanded", "false");
     for (const item of copy.home.faq.items) {
