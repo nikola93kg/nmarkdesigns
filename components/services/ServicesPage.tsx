@@ -134,7 +134,7 @@ function ServiceDetailCard({
               href={localizedProjectPath(caseStudyLink.slug, locale)}
               className="inline-flex min-h-11 items-center gap-1.5 text-small font-semibold text-brand underline underline-offset-4 hover:text-focus"
             >
-              <span>{caseStudyLabel ?? "Studija slučaja"}: <span translate="no">{caseStudyLink.name}</span></span>
+              <span>{caseStudyLabel ?? (locale === "en" ? "Project details" : "Detalji projekta")}: <span translate="no">{caseStudyLink.name}</span></span>
               <ArrowUpRight aria-hidden="true" size={16} />
             </Link>
           </div>

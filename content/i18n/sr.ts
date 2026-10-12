@@ -51,9 +51,9 @@ const sr = {
     },
     contactTitle: "Razgovarajmo o vašem sajtu.",
     visitWebsite: "Posetite web sajt",
-    viewCaseStudy: "Pogledajte studiju slučaja",
+    viewCaseStudy: "Pogledajte projekat",
     visitLiveWebsite: "Posetite sajt uživo",
-    caseStudyBadge: "Studija slučaja",
+    caseStudyBadge: "Detalji projekta",
     opensNewTab: "otvara se u novom prozoru",
     historicalProject: "Arhivski / realizovan projekat",
     liveProject: "Aktivan sajt",
@@ -131,7 +131,7 @@ const sr = {
       title: "Šta svaka usluga znači u praksi",
       description: "Bez nepotrebnog žargona: najvažnije je da znate šta dobijate, kada vam je potrebno i kako pomaže vašem sajtu.",
       includeLabel: "Može da uključuje",
-      caseStudyLabel: "Pogledajte studiju slučaja",
+      caseStudyLabel: "Pogledajte projekat",
       items: [
         {
           id: "website-build",
@@ -519,18 +519,13 @@ const sr = {
       description: "Profesionalna izrada modernih, brzih i SEO optimizovanih web sajtova u Beogradu i Srbiji. Prilagođen dizajn, WordPress i custom rešenja koja donose upite.",
     },
     hero: {
-      eyebrow: "WEB DIZAJN · NEXT.JS & WORDPRESS · SEO",
+      eyebrow: "WEB DIZAJN · RAZVOJ SAJTOVA · SEO",
       title: "Izrada modernih web sajtova",
       subtitle: "Dizajn. Performanse. SEO.",
       description: "Kreiramo brze, prilagođene Next.js i WordPress sajtove koji donose stvarne upite klijenata — bez šablona, sa transparentnim cenama i dokazanim radom.",
       primaryAction: "Zatražite besplatnu ponudu",
       secondaryAction: "Pogledajte portfolio",
       imageAlt: "Vizuelna montaža NMark Designs web projekta na telefonu, tabletu i štampanim maketama.",
-      trustSignals: [
-        "9 detaljnih studija slučaja",
-        "Next.js, WordPress & WooCommerce",
-        "Direktna saradnja sa developerom",
-      ],
     },
     projects: {
       eyebrow: "Odabrani projekti",
@@ -539,7 +534,7 @@ const sr = {
     },
     services: {
       eyebrow: "Usluge web dizajna i razvoja",
-      title: "Moderni sajtovi.\nPromišljen pristup.",
+      title: "Moderni sajtovi\nPromišljen pristup",
       description: "Od vizuelnog identiteta i dizajna do Next.js i WordPress razvoja, SEO osnove i dugoročnog održavanja.",
       imageAlt: "Web sajt Mađioničar Bojan prikazan na laptopu, uz šolju kafe na radnom stolu.",
       detailsAction: "Pogledajte sve usluge",

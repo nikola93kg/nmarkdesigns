@@ -200,7 +200,6 @@ export interface Dictionary {
       primaryAction: string;
       secondaryAction: string;
       imageAlt: string;
-      trustSignals?: readonly string[];
     };
     projects: SectionCopy;
     services: SectionCopy & {

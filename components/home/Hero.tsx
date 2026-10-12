@@ -33,16 +33,6 @@ export function Hero({ locale, copy }: { locale: Locale; copy: Dictionary }) {
             </CtaButton>
             <Button href={portfolio.href} external={portfolio.external} variant="secondary">{portfolio.label}</Button>
           </div>
-          {hero.trustSignals && hero.trustSignals.length > 0 && (
-            <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted lg:justify-start">
-              {hero.trustSignals.map((signal) => (
-                <li key={signal} className="flex items-center gap-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-brand" aria-hidden="true" />
-                  <span>{signal}</span>
-                </li>
-              ))}
-            </ul>
-          )}
         </div>
         <HeroArtwork />
       </Container>

@@ -51,9 +51,9 @@ const en = {
     },
     contactTitle: "Let's talk about your website.",
     visitWebsite: "Visit website",
-    viewCaseStudy: "View case study",
+    viewCaseStudy: "View project",
     visitLiveWebsite: "Visit live website",
-    caseStudyBadge: "Case study",
+    caseStudyBadge: "Project details",
     opensNewTab: "opens in a new tab",
     historicalProject: "Archival / delivered project",
     liveProject: "Live website",
@@ -131,7 +131,7 @@ const en = {
       title: "What each service means in practice",
       description: "No unnecessary jargon: the goal is to understand what is included, when you need it, and how it helps your website.",
       includeLabel: "Can include",
-      caseStudyLabel: "View case study",
+      caseStudyLabel: "View project",
       items: [
         {
           id: "website-build",
@@ -519,18 +519,13 @@ const en = {
       description: "NMark Designs creates modern, fast, responsive websites for small businesses, freelancers, and brands, with web design, development, SEO, and maintenance support.",
     },
     hero: {
-      eyebrow: "WEB DESIGN · NEXT.JS & WORDPRESS · SEO",
+      eyebrow: "WEB DESIGN · WEB DEVELOPMENT · SEO",
       title: "Modern websites, thoughtfully built",
       subtitle: "Design. Performance. SEO.",
       description: "We create fast, custom Next.js and WordPress websites that generate genuine client inquiries — no templates, with transparent pricing and proven client work.",
       primaryAction: "Request a free quote",
       secondaryAction: "View portfolio",
       imageAlt: "NMark Designs website project montage on a phone, tablet, and printed mockups.",
-      trustSignals: [
-        "9 detailed case studies",
-        "Next.js, WordPress & WooCommerce",
-        "Direct collaboration with founder",
-      ],
     },
     projects: {
       eyebrow: "Selected work",
@@ -539,7 +534,7 @@ const en = {
     },
     services: {
       eyebrow: "Your online presence deserves more",
-      title: "Modern websites.\nA thoughtful approach.",
+      title: "Modern websites\nA thoughtful approach",
       description: "From visual branding and UI design to custom Next.js and WordPress engineering, SEO fundamentals, and ongoing support.",
       imageAlt: "The Mađioničar Bojan website displayed on a laptop beside a coffee cup on a desk.",
       detailsAction: "Explore all services",

@@ -82,6 +82,10 @@ export const projects: readonly Project[] = [
       ],
     },
     technologies: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Vercel"],
+    shortDescription: {
+      sr: "Migracija B2B platforme sa Squarespace-a na Next.js, sa mrežom od preko 31 lokacije i pojednostavljenim upitima za ponudu industrijske opreme.",
+      en: "B2B platform migration from Squarespace to Next.js, organizing a network of 31+ warehouse locations with streamlined commercial quote requests.",
+    },
     caseStudy: {
       overview: {
         sr: "Kompletna migracija B2B platforme za Buy Pallet Jacks sa krutog Squarespace šablona na moderan Next.js App Router, sa strukturiranom mrežom od preko 31 skladišne i distributivne lokacije i jasnim uputstvima za preuzimanje industrijske opreme širom SAD.",
@@ -225,6 +229,10 @@ export const projects: readonly Project[] = [
       ],
     },
     technologies: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Vercel", "Resend"],
+    shortDescription: {
+      sr: "Prezentacioni web sajt za studio za izradu nameštaja po meri i dizajn enterijera, sa fokusom na vizuelni portfolio i direktne upite klijenata.",
+      en: "Custom showcase website for a bespoke furniture and interior design studio, highlighting a visual project portfolio and direct client inquiries.",
+    },
     caseStudy: {
       overview: {
         sr: "Sveobuhvatna digitalna prezentacija i brending za Ilić Enterijer — porodičnu radionicu za izradu nameštaja i kuhinja po meri. Projekat je obuhvatio kreiranje originalnog logotipa, razvoj modernog Next.js sajta, lokalnu SEO optimizaciju i uspostavljanje Google Business profila za tržište Lazarevca i Beograda.",
@@ -366,6 +374,10 @@ export const projects: readonly Project[] = [
       ],
     },
     technologies: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Vercel"],
+    shortDescription: {
+      sr: "Višejezični web sajt za kozmetički PMU studio u Beču, sa jasnim prikazom tretmana, galerijom rezultata i direktnim zakazivanjem termina.",
+      en: "Multilingual website for a Vienna cosmetic PMU studio, featuring treatment details, result galleries, and direct appointment booking.",
+    },
     caseStudy: {
       overview: {
         sr: "Elegantna web prezentacija i digitalni identitet za kozmetički studio Powder Brows Vienna (Jovana Ristić) u Beču. Projekat je obuhvatio kreiranje originalnog minimalističkog logotipa i razvoj brzog Next.js sajta sa potpunom trojezičnom podrškom na nemačkom, engleskom i srpskom jeziku, prilagođenom klijentima u Austriji.",
@@ -685,6 +697,10 @@ export const projects: readonly Project[] = [
       ],
     },
     technologies: ["WordPress", "WooCommerce", "PHP", "HTML", "CSS", "JavaScript"],
+    shortDescription: {
+      sr: "Dvojezični kataloški sajt za tradicionalnu poslastičarnicu orijentalnih poslastica, sa strukturiranim artiklima i detaljima naručivanja.",
+      en: "Bilingual catalog website for a traditional oriental pastry shop, presenting structured product displays and ordering details.",
+    },
     caseStudy: {
       overview: {
         sr: "E-commerce web sajt i katalog za Tripoli Sweets u Kankunu (Meksiko), razvijen na WordPress i WooCommerce platformi za online naručivanje tradicionalnih mediteranskih i bliskoistočnih poslastica. Projekat je sačuvan kao istorijski portfolio prikaz nakon što klijent nije obnovio domen i servis.",
@@ -814,6 +830,10 @@ export const projects: readonly Project[] = [
       en: ["Web Design", "Custom WordPress Theme", "Bespoke HTML/CSS", "Educational Content SEO", "Performance Optimization"],
     },
     technologies: ["WordPress", "PHP", "HTML5", "CSS3", "JavaScript"],
+    shortDescription: {
+      sr: "Edukativna platforma za individualne online časove francuskog jezika i pripremu za DELF/DALF ispite, sa brzim učitavanjem i jasnim upitima.",
+      en: "Educational platform for 1-on-1 online French tutoring and DELF/DALF exam preparation, featuring fast performance and clear inquiry forms.",
+    },
     caseStudy: {
       overview: {
         sr: "Kompletna izrada edukativne web platforme za individualne online časove francuskog jezika i srpskog za strance. Sajt je izgrađen od nule na namenskoj WordPress temi bez teških page buildera, sa fokusom na individualnu nastavu, personalizovano učenje, samostalno objavljivanje nastavnih materijala, visoku čitljivost dvojezičnog teksta i ciljani SEO za edukativne upite.",
@@ -953,6 +973,10 @@ export const projects: readonly Project[] = [
       ],
     },
     technologies: ["HTML", "CSS", "JavaScript"],
+    shortDescription: {
+      sr: "Prezentacioni katalog za salon tapeta, zavesa i dekorativnih tehnika u Lazarevcu, sa organizovanim pregledom kolekcija za lokalne kupce.",
+      en: "Presentation catalog for an interior wallpaper and curtain showroom in Lazarevac, organizing decorative collections for local clients.",
+    },
     caseStudy: {
       overview: {
         sr: "Statički poslovni web sajt za LaDekor, izrađen u čistom HTML, CSS i JavaScript kodu bez korišćenja WordPress-a ili glomaznih JavaScript radnih okvira. Sajt je kreiran za prezentaciju molerskih, fasaderskih, keramičarskih i dekorativnih tehnika u Lazarevcu, a arhiviran je u portfoliju kao istorijski projekat nakon što klijent nije obnovio domen.",
@@ -1094,6 +1118,10 @@ export const projects: readonly Project[] = [
       ],
     },
     technologies: ["WordPress", "PHP", "HTML5", "CSS3", "JavaScript"],
+    shortDescription: {
+      sr: "Zvanični sajt osnovne škole u Lazarevcu, sa centralizovanim vestima, školskim kalendarom i javnom dokumentacijom na svim uređajima.",
+      en: "Official elementary school website in Lazarevac, centralizing school bulletins, academic calendar, and public documentation across all devices.",
+    },
     caseStudy: {
       overview: {
         sr: "Sveobuhvatan redizajn zvaničnog web sajta Osnovne škole „Dule Karaklajić“ u Lazarevcu, sa namenskom WordPress temom, čistim HTML/CSS rešenjima za ključne sekcije i reorganizovanom arhitekturom informacija koja učenicima, roditeljima i nastavnicima omogućava brz pristup školskim vestima, rasporedima i službenim dokumentima.",
@@ -1224,8 +1252,8 @@ export const projects: readonly Project[] = [
     },
     technologies: ["WordPress", "WooCommerce", "PHP", "HTML", "CSS", "JavaScript"],
     shortDescription: {
-      sr: "WooCommerce e-commerce prodavnica za prodavnicu bebi opreme sa sedištem u Ćupriji i maloprodajnim objektima u Ćupriji, Jagodini i Paraćinu, sa katalogom od preko 200 artikala bebi opreme, optimizovana za pretragu i kupovinu na mobilnim uređajima.",
-      en: "WooCommerce e-commerce store for a baby equipment retailer based in Ćuprija, Serbia, with physical stores in Ćuprija, Jagodina, and Paraćin, featuring a 200+ product catalog optimized for mobile shopping and search.",
+      sr: "WooCommerce e-commerce prodavnica za maloprodajni lanac bebi opreme, sa katalogom od preko 200 artikala i optimizacijom za mobilnu kupovinu.",
+      en: "WooCommerce e-commerce store for a baby equipment retail chain, featuring a 200+ product catalog optimized for mobile shopping.",
     },
     caseStudy: {
       overview: {
@@ -1586,3 +1614,20 @@ export function getProjectsBySlugs(slugs: readonly string[]): readonly Project[]
     .map((slug) => projectsBySlug.get(slug))
     .filter((project): project is Project => Boolean(project));
 }
+
+export const homepageProjectSlugs = [
+  "casovi-francuskog",
+  "coolfridgeguys",
+  "buy-pallet-jacks",
+  "os-dule-karaklajic",
+  "ilic-enterijer",
+  "powder-brows-vienna",
+  "anabelabebioprema",
+  "tripolisweets",
+] as const;
+
+export const homepageProjects: readonly ProjectWithImage[] = homepageProjectSlugs.map((slug) => {
+  const project = projectsWithImages.find((p) => p.slug === slug);
+  if (!project) throw new Error(`Missing homepage project: ${slug}`);
+  return project;
+});

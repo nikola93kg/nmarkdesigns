@@ -15,18 +15,13 @@ test.describe("Phase 3C.1 Customer Journey & Conversion Optimization", () => {
       await page.setViewportSize({ width: 1440, height: 900 });
       await page.goto(localizedPath("home", locale));
 
-      // 1. Verify Homepage Hero value proposition, sharp CTA, and trust signals
+      // 1. Verify Homepage Hero value proposition and sharp CTA
       const hero = page.locator('section[aria-labelledby="hero-title"]');
       await expect(hero.getByRole("heading", { level: 1 })).toBeVisible();
       await expect(hero.getByRole("link", { name: copy.home.hero.primaryAction })).toHaveAttribute(
         "href",
         localizedPath("contact", locale)
       );
-      if (copy.home.hero.trustSignals?.length) {
-        for (const signal of copy.home.hero.trustSignals) {
-          await expect(hero.getByText(signal)).toBeVisible();
-        }
-      }
 
       // 2. Navigate to Services page
       await page.goto(localizedPath("services", locale));

@@ -4,12 +4,10 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import grid from "@/components/ui/GridBackground.module.css";
 import type { Dictionary } from "@/content/i18n/types";
-import { type ProjectWithImage, projectsWithImages } from "@/content/projects";
+import { type ProjectWithImage, homepageProjects } from "@/content/projects";
 import type { Locale } from "@/lib/i18n";
 import { localizedPath, localizedProjectPath } from "@/lib/routes";
 import styles from "./FeaturedProjects.module.css";
-
-const primaryProjectSlug = "casovi-francuskog";
 
 interface ProjectView {
   project: ProjectWithImage;
@@ -17,14 +15,6 @@ interface ProjectView {
   description?: string;
   websiteHost?: string;
   imageAlt: string;
-}
-
-function orderedHomepageProjects() {
-  const homepageProjects = projectsWithImages.filter((project) => project.featured !== false);
-  const primary = homepageProjects.find((project) => project.slug === primaryProjectSlug);
-  if (!primary) return homepageProjects;
-
-  return [primary, ...homepageProjects.filter((project) => project.slug !== primaryProjectSlug)];
 }
 
 function cleanHostname(url: string) {
@@ -95,7 +85,7 @@ function ProjectPreview({
 
 export function FeaturedProjects({ locale, copy }: { locale: Locale; copy: Dictionary }) {
   const content = copy.home.projects;
-  const [featuredProject, ...supportingProjects] = orderedHomepageProjects().map((project) => projectView(project, locale));
+  const [featuredProject, ...supportingProjects] = homepageProjects.map((project) => projectView(project, locale));
 
   return (
     <section id="portfolio" aria-labelledby="projects-title" className={`${grid.grid} ${grid.inverseGrid} ${styles.section} scroll-mt-8 bg-brand text-on-brand`}>
