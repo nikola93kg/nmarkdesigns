@@ -559,14 +559,14 @@ export const gtaViWebsiteAnalysis = {
   ],
   cta: {
     sr: {
-      title: "Vaš sajt ne mora da izgleda kao GTA VI. Ali mora da zna zašto postoji.",
+      title: "Vaš sajt ne mora da izgleda kao GTA VI. Ali mora da zna zašto postoji",
       description: "NMark Designs gradi sajtove koji spajaju promišljen dizajn, performanse i jasan put ka upitu — bez kopiranja tuđeg brenda.",
       label: "Razgovarajmo o vašem sajtu",
       secondaryLabel: "Pogledajte naše radove",
       secondaryHref: "/sr/portfolio/",
     },
     en: {
-      title: "Your website does not have to look like GTA VI. But it has to know why it exists.",
+      title: "Your website does not have to look like GTA VI. But it has to know why it exists",
       description: "NMark Designs builds websites that combine thoughtful design, performance, and a clear path to an enquiry — without copying someone else’s brand.",
       label: "Let’s talk about your website",
       secondaryLabel: "View our work",

@@ -49,7 +49,7 @@ const en = {
       screenshot: "Project screenshot needs to be added.",
       website: "Website URL needs to be added.",
     },
-    contactTitle: "Let's talk about your website.",
+    contactTitle: "Let's talk about your website",
     visitWebsite: "Visit website",
     viewCaseStudy: "View project",
     visitLiveWebsite: "Visit live website",
@@ -296,14 +296,14 @@ const en = {
     },
     intro: {
       eyebrow: "NMark Designs / Nikola Marković",
-      title: "A website that feels professional, built through a clear and grounded process.",
+      title: "A website that feels professional, built through a clear and grounded process",
       description: "NMark Designs is the name I use for website design, development and maintenance work for small businesses, service providers and projects that need a clean, fast and clear online presence.",
       imageAlt: "NMark Designs visual identity shown on a facade mockup.",
       imageCaption: "Visual direction: clean, modern and distinctive enough to be remembered.",
     },
     profile: {
       eyebrow: "Working Approach",
-      title: "No big-agency theatre. The focus is a website that actually makes sense for your work.",
+      title: "No big-agency theatre. The focus is a website that actually makes sense for your work",
       paragraphs: [
         "I am Nikola Marković, the frontend developer and designer behind NMark Designs, guiding projects from initial concept through to a stable, polished launch. I work with business owners, professionals, and organizations looking for a distinctive and dependable online presence.",
         "The advantage of working directly with a dedicated developer is absolute clarity: there are no middlemen, account managers, or bloated agency processes. Every architectural, design, and technical decision is made directly and transparently, focused on your actual business goals.",
@@ -520,11 +520,11 @@ const en = {
     },
     hero: {
       eyebrow: "WEB DESIGN · WEB DEVELOPMENT · SEO",
-      title: "Modern websites, thoughtfully built",
-      subtitle: "Design. Performance. SEO.",
-      description: "We create fast, custom Next.js and WordPress websites that generate genuine client inquiries — no templates, with transparent pricing and proven client work.",
-      primaryAction: "Request a free quote",
-      secondaryAction: "View portfolio",
+      title: "Modern Websites, Thoughtfully Built",
+      subtitle: "A website that looks great. And works even better.",
+      description: "From the first idea to the final detail, I design and develop websites that look great, load fast, and serve a clear business purpose.",
+      primaryAction: "Request a Free Quote",
+      secondaryAction: "View Portfolio",
       imageAlt: "NMark Designs website project montage on a phone, tablet, and printed mockups.",
     },
     projects: {
@@ -563,7 +563,7 @@ const en = {
     },
     cta: {
       eyebrow: "Don't let your business go unseen",
-      title: "A website that works for you.",
+      title: "A website that works for you",
       description: "Get in touch for a free consultation and find out how we can improve your online presence together.",
     },
     faq: {

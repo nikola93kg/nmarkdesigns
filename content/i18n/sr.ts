@@ -49,7 +49,7 @@ const sr = {
       screenshot: "Screenshot projekta treba naknadno uneti.",
       website: "URL sajta treba naknadno uneti.",
     },
-    contactTitle: "Razgovarajmo o vašem sajtu.",
+    contactTitle: "Razgovarajmo o vašem sajtu",
     visitWebsite: "Posetite web sajt",
     viewCaseStudy: "Pogledajte projekat",
     visitLiveWebsite: "Posetite sajt uživo",
@@ -296,14 +296,14 @@ const sr = {
     },
     intro: {
       eyebrow: "NMark Designs / Nikola Marković",
-      title: "Web sajt koji izgleda ozbiljno, a nastaje kroz jasan i normalan proces.",
+      title: "Web sajt koji izgleda ozbiljno, a nastaje kroz jasan i normalan proces",
       description: "NMark Designs je ime pod kojim radim web dizajn, izradu i održavanje sajtova za male biznise, usluge i projekte kojima treba uredno, brzo i jasno online prisustvo.",
       imageAlt: "NMark Designs vizuelni identitet prikazan na fasadnom mockupu.",
       imageCaption: "Vizuelni pravac: čisto, moderno i dovoljno upečatljivo da ostane prepoznatljivo.",
     },
     profile: {
       eyebrow: "Pristup radu",
-      title: "Bez velikih agencijskih priča. Fokus je na sajtu koji stvarno ima smisla za vaš posao.",
+      title: "Bez velikih agencijskih priča. Fokus je na sajtu koji stvarno ima smisla za vaš posao",
       paragraphs: [
         "Ja sam Nikola Marković, frontend developer i dizajner koji kroz NMark Designs vodi projekte od prve ideje do gotovog, stabilnog sajta. Radim sa preduzetnicima, malim biznisima i organizacijama kojima je potrebno profesionalno i prepoznatljivo prisustvo na internetu.",
         "Prednost direktnog rada sa developerom je u potpunoj jasnoći: nema posrednika, komplikovane agencijske birokratije niti prenošenja poruka kroz više nivoa. Svaku odluku o arhitekturi, dizajnu i tehničkom rešenju donosimo direktno, sa fokusom na stvarne ciljeve vašeg posla.",
@@ -521,8 +521,8 @@ const sr = {
     hero: {
       eyebrow: "WEB DIZAJN · RAZVOJ SAJTOVA · SEO",
       title: "Izrada modernih web sajtova",
-      subtitle: "Dizajn. Performanse. SEO.",
-      description: "Kreiramo brze, prilagođene Next.js i WordPress sajtove koji donose stvarne upite klijenata — bez šablona, sa transparentnim cenama i dokazanim radom.",
+      subtitle: "Sajt koji izgleda dobro. I radi još bolje.",
+      description: "Od prve ideje do poslednjeg detalja — dizajniram i razvijam web sajtove koji izgledaju odlično, rade brzo i imaju jasnu poslovnu svrhu.",
       primaryAction: "Zatražite besplatnu ponudu",
       secondaryAction: "Pogledajte portfolio",
       imageAlt: "Vizuelna montaža NMark Designs web projekta na telefonu, tabletu i štampanim maketama.",
@@ -563,7 +563,7 @@ const sr = {
     },
     cta: {
       eyebrow: "Razgovarajmo o vašem sajtu",
-      title: "Web sajt koji radi za vaš biznis.",
+      title: "Web sajt koji radi za vaš biznis",
       description: "Planirate novi sajt ili redizajn postojećeg? Javite nam se za besplatnu konsultaciju i okvirnu procenu za vaš projekat u Beogradu ili online.",
     },
     faq: {
