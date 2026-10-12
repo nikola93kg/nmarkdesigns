@@ -180,7 +180,7 @@ function ProjectTile({
           <div className={styles.projectHostInfo}>
             <p className={styles.projectHost}>{content.websiteHost}</p>
             {project.status === "inactive" && (
-              <span className="text-xs text-muted font-medium">({copy.historicalProject})</span>
+              <span className="text-xs text-on-brand-muted font-medium">({copy.historicalProject})</span>
             )}
           </div>
           <div className={styles.projectButtons}>

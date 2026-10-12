@@ -26,6 +26,8 @@ htmlcov/
 playwright-report/
 test-results/
 docs/screenshots/
+docs/polishing/screenshots/
+docs/polishing/evidence/
 
 # Python
 __pycache__/

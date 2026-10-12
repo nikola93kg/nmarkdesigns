@@ -2,7 +2,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import sr from "@/content/i18n/sr";
 import en from "@/content/i18n/en";
-import { caseStudyProjects } from "@/content/projects";
+import { caseStudyProjects, homepageProjects } from "@/content/projects";
 import { locales } from "@/lib/i18n";
 import { localizedProjectPath } from "@/lib/routes";
 
@@ -111,7 +111,7 @@ for (const locale of locales) {
 
   test(`${locale} homepage links to local case studies and index links to client sites`, async ({ page }) => {
     await page.goto(`/${locale}/`);
-    for (const project of caseStudyProjects.filter((p) => p.featured !== false)) {
+    for (const project of homepageProjects) {
       await expect(page.getByRole("link", { name: `${copy.actions.viewProject}: ${project.title}`, exact: true })).toHaveAttribute("href", localizedProjectPath(project.slug, locale));
     }
     await page.getByRole("link", { name: `${copy.actions.viewProject}: ${caseStudyProjects[0].title}`, exact: true }).click();
