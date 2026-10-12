@@ -57,25 +57,35 @@ test.describe("Phase 3C.1 Customer Journey & Conversion Optimization", () => {
       await page.setViewportSize({ width: 1440, height: 900 });
       await page.goto(localizedPath("pricing", locale));
 
-      // 1. Verify exact 3 packages and strictly unchanged prices
-      const plans = page.locator('section[aria-label] article');
-      await expect(plans).toHaveCount(3);
-      await expect(plans.nth(0)).toContainText("450 €");
-      await expect(plans.nth(1)).toContainText("650 €");
-      await expect(plans.nth(2)).toContainText("1.000 €");
+      // 1. Verify 4 website packages and approved starting prices
+      const plans = page.locator("#packages article");
+      await expect(plans).toHaveCount(4);
+      if (locale === "sr") {
+        await expect(plans.nth(0)).toContainText("Od 300 €");
+        await expect(plans.nth(1)).toContainText("Od 550 €");
+        await expect(plans.nth(2)).toContainText("Od 900 €");
+        await expect(plans.nth(3)).toContainText("Od 1.200 €");
+      } else {
+        await expect(plans.nth(0)).toContainText("From €300");
+        await expect(plans.nth(1)).toContainText("From €550");
+        await expect(plans.nth(2)).toContainText("From €900");
+        await expect(plans.nth(3)).toContainText("From €1,200");
+      }
 
-      // 2. Verify pricing notes on e-commerce scope and 30-day maintenance
+      // 2. Verify pricing notes
       const notesSection = page.locator('section[aria-labelledby="pricing-notes-title"]');
       await expect(notesSection).toBeVisible();
-      await expect(notesSection).toContainText(copy.pricing.notes.items[3]);
+      await expect(notesSection).toContainText(copy.pricing.notes.items[0]);
 
-      // 3. Verify FAQ includes maintenance scope explanation
+      // 3. Verify FAQ section is visible
       const faqSection = page.locator('section[aria-labelledby="pricing-questions"]');
       await expect(faqSection).toBeVisible();
 
       // 4. Click package CTA and arrive at Contact
       const packageButton = plans.first().getByRole("link");
-      await expect(packageButton).toHaveAttribute("href", localizedPath("contact", locale));
+      const href = await packageButton.getAttribute("href");
+      expect(href).toContain(localizedPath("contact", locale));
+      expect(href).toContain("service=landing-page");
       await packageButton.click();
 
       await expect(page).toHaveURL(new RegExp(localizedPath("contact", locale)));

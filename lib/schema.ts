@@ -68,6 +68,43 @@ export function servicesSchema(locale: Locale, copy: Dictionary): JsonValue {
   };
 }
 
+export function pricingSchema(locale: Locale, copy: Dictionary): JsonValue {
+  const pricingUrl = canonicalUrl(localizedPath("pricing", locale));
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pricingUrl}#webpage`,
+        url: pricingUrl,
+        name: copy.pricing.metadata.title,
+        description: copy.pricing.metadata.description,
+        inLanguage: locale,
+        isPartOf: { "@id": `${site.url}/#website` },
+        breadcrumb: { "@id": `${pricingUrl}#breadcrumb` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${pricingUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: copy.navigation.home,
+            item: canonicalUrl(localizedPath("home", locale)),
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: copy.navigation.pricing,
+            item: pricingUrl,
+          },
+        ],
+      },
+    ],
+  };
+}
+
 export function serializeJsonLd(value: JsonValue): string {
   return JSON.stringify(value).replace(/</g, "\\u003c").replace(/\u2028/g, "\\u2028").replace(/\u2029/g, "\\u2029");
 }
