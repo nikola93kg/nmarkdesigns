@@ -81,7 +81,7 @@ export function CaseStudyDetails({ project, locale, copy }: { project: CaseStudy
         )}
 
         {project.caseStudy.aiSalesAssistant && (
-          <section aria-labelledby="project-ai-assistant" className="mt-14 border-t border-border pt-12 md:mt-18 md:pt-16">
+          <section aria-labelledby="project-ai-assistant" className="mt-14 pt-12 md:mt-18 md:pt-16">
             <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr] lg:gap-12">
               <div>
                 <span className="inline-block rounded bg-brand-light px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-brand">
@@ -106,7 +106,7 @@ export function CaseStudyDetails({ project, locale, copy }: { project: CaseStudy
         )}
 
         {Boolean(highlights?.length) && (
-          <section aria-labelledby="project-highlights" className="mt-14 border-t border-border pt-12 md:mt-18 md:pt-16">
+          <section aria-labelledby="project-highlights" className="mt-14 pt-12 md:mt-18 md:pt-16">
             <div className="max-w-2xl">
               <h2 id="project-highlights" className="text-heading font-bold text-ink">{copy.technicalHighlights}</h2>
             </div>

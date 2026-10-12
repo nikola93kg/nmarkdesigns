@@ -39,11 +39,18 @@ export function CaseStudyHero({ project, locale, copy }: { project: CaseStudyPro
             )}
           </div>
         </div>
-        <div className="flex aspect-[3/2] items-center rounded-card border border-border-inverse bg-surface-muted p-3 md:aspect-[2/1] md:p-5">
-          <Image src={image.src} alt={image.alt[locale]} width={image.width} height={image.height}
-            sizes="(min-width: 1280px) 1160px, (min-width: 768px) calc(100vw - 104px), calc(100vw - 64px)"
-            quality={85} preload className="h-full w-full object-contain" />
-        </div>
+        <div className="overflow-hidden rounded-card">
+  <Image
+    src={image.src}
+    alt={image.alt[locale]}
+    width={image.width}
+    height={image.height}
+    sizes="(min-width: 1280px) 1160px, (min-width: 768px) calc(100vw - 104px), calc(100vw - 64px)"
+    quality={85}
+    preload
+    className="h-auto w-full"
+  />
+</div>
       </Container>
     </section>
   );
