@@ -11,7 +11,7 @@ import { isLocale } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
 import { corePageRoute, corePageRoutes, routes } from "@/lib/routes";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { founderSchema, servicesSchema } from "@/lib/schema";
+import { founderSchema, pricingSchema, servicesSchema } from "@/lib/schema";
 
 export const dynamicParams = false;
 
@@ -53,7 +53,14 @@ export default async function CorePage({ params }: PageProps<"/[locale]/[page]">
     );
   }
   if (route === "contact") return <ContactPage locale={locale} copy={copy.contact} />;
-  if (route === "pricing") return <PricingPage locale={locale} copy={copy.pricing} navigation={copy.navigation} />;
+  if (route === "pricing") {
+    return (
+      <>
+        <JsonLd data={pricingSchema(locale, copy)} />
+        <PricingPage locale={locale} copy={copy.pricing} navigation={copy.navigation} />
+      </>
+    );
+  }
   return (
     <>
       <JsonLd data={founderSchema(locale)} />

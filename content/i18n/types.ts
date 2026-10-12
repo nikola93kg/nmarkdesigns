@@ -1,7 +1,11 @@
 import type { Locale } from "@/lib/i18n";
 import type { RouteKey } from "@/lib/routes";
 import type { ContactField, ContactFormState, ContactValidationError } from "@/lib/contact";
-import type { PricingPackageId } from "@/content/pricing";
+import type {
+  AdditionalServiceId,
+  CarePlanId,
+  WebsitePackageId,
+} from "@/content/pricing";
 
 export interface FAQItem {
   id: string;
@@ -147,15 +151,65 @@ export interface Dictionary {
   };
   pricing: {
     metadata: { title: string; description: string };
-    intro: SectionCopy;
-    packageLabel: string;
-    packageFeaturesLabel: string;
-    packageCta: string;
-    excludedLabel: string;
-    packages: Record<PricingPackageId, {
-      features: readonly string[];
-      excluded?: readonly string[];
-    }>;
+    intro: SectionCopy & {
+      primaryAction: string;
+      secondaryAction: string;
+    };
+    websiteDevelopment: SectionCopy & {
+      startingFromLabel: string;
+      ctaLabel: string;
+      includesLabel: string;
+      scopeNotesLabel: string;
+      packages: Record<
+        WebsitePackageId,
+        {
+          name: string;
+          price: string;
+          description: string;
+          features: readonly string[];
+          scopeNote: string;
+        }
+      >;
+    };
+    customDevelopment: {
+      eyebrow: string;
+      title: string;
+      price: string;
+      description: string;
+      priceNotice: string;
+      capabilitiesTitle: string;
+      capabilities: readonly string[];
+      cta: string;
+    };
+    additionalServices: SectionCopy & {
+      startingFromLabel: string;
+      ctaLabel: string;
+      services: Record<
+        AdditionalServiceId,
+        {
+          name: string;
+          price: string;
+          description: string;
+        }
+      >;
+    };
+    maintenance: SectionCopy & {
+      notice: string;
+      ctaLabel: string;
+      plans: Record<
+        CarePlanId,
+        {
+          name: string;
+          target: string;
+          price: string;
+          features: readonly string[];
+          scopeNote: string;
+        }
+      >;
+    };
+    process: SectionCopy & {
+      steps: readonly ProcessStep[];
+    };
     notes: {
       title: string;
       items: readonly string[];
@@ -166,12 +220,8 @@ export interface Dictionary {
       description: string;
       label: string;
     };
-    cta: {
-      title: string;
-      description: string;
-      label: string;
-    };
     faq: SectionCopy & { items: readonly FAQItem[] };
+    cta: SectionCopy & { label: string };
   };
   caseStudy: {
     eyebrow: string;

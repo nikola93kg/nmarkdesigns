@@ -18,6 +18,61 @@ interface ContactFormProps {
 const inputClass =
   "min-h-12 w-full min-w-0 rounded-control border border-border bg-surface px-4 py-3 text-base text-ink aria-invalid:border-brand aria-invalid:ring-1 aria-invalid:ring-brand disabled:opacity-70";
 
+const serviceMessages: Record<string, { sr: string; en: string }> = {
+  "landing-page": {
+    sr: "Pozdrav Nikola, zanima me izrada Landing Page sajta (od 300 €).",
+    en: "Hi Nikola, I'm interested in Landing Page website development (from €300).",
+  },
+  "business-website": {
+    sr: "Pozdrav Nikola, zanima me izrada poslovnog sajta (od 550 €).",
+    en: "Hi Nikola, I'm interested in Business Website development (from €550).",
+  },
+  "advanced-website": {
+    sr: "Pozdrav Nikola, zanima me izrada naprednog sajta (od 900 €).",
+    en: "Hi Nikola, I'm interested in Advanced Website development (from €900).",
+  },
+  ecommerce: {
+    sr: "Pozdrav Nikola, zanima me izrada web prodavnice (od 1.200 €).",
+    en: "Hi Nikola, I'm interested in E-commerce online store development (from €1,200).",
+  },
+  "custom-development": {
+    sr: "Pozdrav Nikola, potreban mi je razvoj custom web aplikacije.",
+    en: "Hi Nikola, I'm interested in Custom Web Application development.",
+  },
+  redesign: {
+    sr: "Pozdrav Nikola, zanima me redizajn postojećeg sajta (od 400 €).",
+    en: "Hi Nikola, I'm interested in Website Redesign (from €400).",
+  },
+  seo: {
+    sr: "Pozdrav Nikola, potreban mi je SEO audit i optimizacija (od 150 €).",
+    en: "Hi Nikola, I'm interested in SEO Audit & Basic Optimization (from €150).",
+  },
+  performance: {
+    sr: "Pozdrav Nikola, zanima me optimizacija brzine sajta (od 100 €).",
+    en: "Hi Nikola, I'm interested in Website Speed Optimization (from €100).",
+  },
+  "ai-chatbot": {
+    sr: "Pozdrav Nikola, zanima me integracija AI chatbota (od 350 €).",
+    en: "Hi Nikola, I'm interested in AI Chatbot Integration (from €350).",
+  },
+  hosting: {
+    sr: "Pozdrav Nikola, zanima me Managed hosting (od 30 € / god.).",
+    en: "Hi Nikola, I'm interested in Managed Hosting (from €30/year).",
+  },
+  "basic-care": {
+    sr: "Pozdrav Nikola, zanima me Basic Care tehničko održavanje (od 25 € / mes.).",
+    en: "Hi Nikola, I'm interested in Basic Care website maintenance (from €25/month).",
+  },
+  "business-care": {
+    sr: "Pozdrav Nikola, zanima me Business Care tehničko održavanje (od 50 € / mes.).",
+    en: "Hi Nikola, I'm interested in Business Care website maintenance (from €50/month).",
+  },
+  "custom-support": {
+    sr: "Pozdrav Nikola, potrebna mi je namenska tehnička podrška (Custom Support).",
+    en: "Hi Nikola, I'm interested in Custom Support & Maintenance.",
+  },
+};
+
 export function ContactForm({ copy, action, permalink, deliveryAvailable }: ContactFormProps) {
   const [state, formAction, pending] = useActionState(action, initialContactState, permalink);
   const [values, setValues] = useState(state.values);
@@ -49,6 +104,26 @@ export function ContactForm({ copy, action, permalink, deliveryAvailable }: Cont
     }
   }, [state, locale]);
 
+  const [selectedService, setSelectedService] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const serviceParam = params.get("service");
+    if (!serviceParam) return;
+
+    const timer = setTimeout(() => {
+      setSelectedService(serviceParam);
+      setValues((current) => {
+        if (current.message.trim().length > 0) return current;
+        const starter = serviceMessages[serviceParam]?.[locale];
+        return starter ? { ...current, message: starter } : current;
+      });
+    }, 0);
+
+    return () => clearTimeout(timer);
+  }, [locale]);
+
   function handleFieldFocus() {
     if (!hasFiredFormStartRef.current) {
       hasFiredFormStartRef.current = true;
@@ -71,6 +146,7 @@ export function ContactForm({ copy, action, permalink, deliveryAvailable }: Cont
 
   return (
     <form
+      id="contact-form"
       ref={formRef}
       action={formAction}
       noValidate
@@ -81,6 +157,12 @@ export function ContactForm({ copy, action, permalink, deliveryAvailable }: Cont
       <h2 id="contact-form-title" className="mx-auto max-w-xl text-heading font-bold lg:mx-0">
         {copy.title}
       </h2>
+      {selectedService ? (
+        <div className="mt-3 inline-flex items-center gap-2 rounded-control bg-accent-soft px-3 py-1.5 text-small font-medium text-brand">
+          <span>{locale === "sr" ? "Izabrana usluga iz cenovnika:" : "Selected service:"}</span>
+          <span className="font-semibold">{selectedService}</span>
+        </div>
+      ) : null}
       {copy.reassurance ? (
         <p className="mt-2 text-small font-medium text-brand">
           {copy.reassurance}
