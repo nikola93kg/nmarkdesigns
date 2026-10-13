@@ -3,6 +3,7 @@ import type { Localized } from "@/lib/i18n";
 import { gtaViWebsiteAnalysis } from "@/content/blog-gta-vi";
 import { websitePricingSerbia2026 } from "@/content/blog-pricing-guide";
 import { aiSearchGuide2026 } from "@/content/blog-ai-search";
+import { googleAiContent2026 } from "@/content/blog-google-ai-content-2026";
 
 export interface Editorial {
   image: string;
@@ -84,6 +85,7 @@ export const blogLabels = {
 } as const;
 
 export const blogEditorial: Record<string, Editorial> = {
+  "google-ai-sadrzaj-2026-chatgpt-seo": googleAiContent2026,
   "ai-search-google-overviews-chatgpt": aiSearchGuide2026,
   "website-pricing-serbia-2026": websitePricingSerbia2026,
   "gta-vi-website-web-dizajn-core-web-vitals": gtaViWebsiteAnalysis,
