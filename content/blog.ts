@@ -147,6 +147,28 @@ export interface LocalizedBlogPost {
 
 export const blogPosts: readonly BlogPost[] = [
   {
+    id: "google-ai-sadrzaj-2026-chatgpt-seo",
+    slug: "google-ai-sadrzaj-2026-chatgpt-seo",
+    publishedOn: "2026-10-13",
+    updatedOn: "2026-10-13",
+    title: {
+      sr: "Da li sajt napravljen uz pomoć AI alata može da se rangira na Google-u?",
+      en: "Can an AI-Built Website Rank on Google?",
+    },
+    seoTitle: {
+      sr: "AI sajt i Google SEO u 2026: Može li da se rangira?",
+      en: "Can AI-Built Websites Rank on Google? SEO in 2026",
+    },
+    description: {
+      sr: "Google ne kažnjava AI sadržaj samo zato što je nastao uz AI alat. Saznajte šta se promenilo 1. oktobra 2026. i koje ljudske i tehničke provere su potrebne.",
+      en: "Google does not penalize content simply because an AI tool helped create it. Learn what changed on October 1, 2026, and which human and technical checks still matter.",
+    },
+    excerpt: {
+      sr: "AI može da napiše tekst, generiše kod ili sastavi sajt, ali rangiranje zavisi od tačnosti, originalne vrednosti, tehničke dostupnosti i ljudske provere.",
+      en: "AI can draft copy, generate code, or assemble a website, but rankings still depend on accuracy, original value, technical accessibility, and human review.",
+    },
+  },
+  {
     id: "ai-search-google-overviews-chatgpt",
     slug: "ai-menja-google-pretragu-ai-overviews-chatgpt-ai-search",
     publishedOn: "2026-10-06",

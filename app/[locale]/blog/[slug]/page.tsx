@@ -34,7 +34,15 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/blog/[sl
     slug: post.slug,
     image: { src: post.socialImage, width: post.width, height: post.height, alt: post.coverAlt, type: post.imageType ?? "image/webp" },
   });
-  return { ...metadata, openGraph: { ...metadata.openGraph, type: "article", publishedTime: post.publishedOn } };
+  return {
+    ...metadata,
+    openGraph: {
+      ...metadata.openGraph,
+      type: "article",
+      publishedTime: post.publishedOn,
+      modifiedTime: post.updatedOn,
+    },
+  };
 }
 
 export default async function BlogArticleRoute({ params }: PageProps<"/[locale]/blog/[slug]">) {
