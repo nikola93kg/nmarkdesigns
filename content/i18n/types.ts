@@ -23,6 +23,8 @@ export interface ServiceItem {
 export interface ServiceDetail extends ServiceItem {
   when: string;
   includes: readonly string[];
+  startingPrice?: string;
+  pricingAnchor?: string;
 }
 
 export interface ProcessStep {
@@ -96,14 +98,32 @@ export interface Dictionary {
   };
   services: {
     metadata: { title: string; description: string };
-    intro: SectionCopy;
+    intro: SectionCopy & {
+      primaryAction?: string;
+      secondaryAction?: string;
+    };
     overview: SectionCopy & { items: readonly ServiceItem[] };
-    details: SectionCopy & { includeLabel: string; caseStudyLabel?: string; items: readonly ServiceDetail[] };
+    details: SectionCopy & {
+      includeLabel: string;
+      caseStudyLabel?: string;
+      pricingLinkPrefix?: string;
+      items: readonly ServiceDetail[];
+    };
     audience: SectionCopy & { items: readonly string[] };
     process: SectionCopy & { items: readonly ProcessStep[] };
     principles: SectionCopy & { items: readonly ServiceItem[] };
     proof: SectionCopy;
-    pricing: SectionCopy & { label: string };
+    pricing: SectionCopy & {
+      label: string;
+      tiers?: readonly {
+        id: string;
+        title: string;
+        price: string;
+        description: string;
+        anchor: string;
+        actionLabel: string;
+      }[];
+    };
     cta: SectionCopy & { label: string };
   };
   about: {
@@ -160,6 +180,7 @@ export interface Dictionary {
       ctaLabel: string;
       includesLabel: string;
       scopeNotesLabel: string;
+      servicesLinkLabel?: string;
       packages: Record<
         WebsitePackageId,
         {
@@ -180,10 +201,12 @@ export interface Dictionary {
       capabilitiesTitle: string;
       capabilities: readonly string[];
       cta: string;
+      servicesLinkLabel?: string;
     };
     additionalServices: SectionCopy & {
       startingFromLabel: string;
       ctaLabel: string;
+      servicesLinkLabel?: string;
       services: Record<
         AdditionalServiceId,
         {
@@ -196,6 +219,7 @@ export interface Dictionary {
     maintenance: SectionCopy & {
       notice: string;
       ctaLabel: string;
+      servicesLinkLabel?: string;
       plans: Record<
         CarePlanId,
         {

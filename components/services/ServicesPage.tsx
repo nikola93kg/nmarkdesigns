@@ -70,11 +70,22 @@ const serviceDetailVisuals: Record<string, ServiceVisual> = {
     },
     className: "object-contain",
   },
+  ecommerce: {
+    src: "/projects/anabela-bebi-oprema.webp",
+    width: 1757,
+    height: 931,
+    alt: {
+      sr: "Prikaz početne stranice web prodavnice Anabela Bebi Oprema.",
+      en: "Anabela Bebi Oprema e-commerce website homepage.",
+    },
+    className: "object-contain",
+  },
   "maintenance-support": overviewVisual,
 };
 
 const serviceCaseStudyLinks: Record<string, { slug: string; name: string }> = {
   "website-build": { slug: "casovi-francuskog", name: "Časovi Francuskog" },
+  ecommerce: { slug: "anabelabebioprema", name: "Anabela Bebi Oprema" },
   "design-ux": { slug: "ilic-enterijer", name: "Ilić Enterijer" },
   "development-options": { slug: "buy-pallet-jacks", name: "Buy Pallet Jacks" },
   "seo-performance": { slug: "os-dule-karaklajic", name: "OŠ Dule Karaklajić" },
@@ -98,46 +109,66 @@ function ServiceDetailCard({
   index,
   locale,
   caseStudyLabel,
+  pricingPath,
 }: {
   item: ServiceDetail;
   index: number;
   locale: Locale;
   caseStudyLabel?: string;
+  pricingPath: string;
 }) {
   const visual = serviceDetailVisuals[item.id] ?? overviewVisual;
   const caseStudyLink = serviceCaseStudyLinks[item.id];
-  const featured = index === 0;
 
   return (
-    <article className={`overflow-hidden rounded-card border border-border bg-surface text-center lg:text-left ${featured ? "lg:col-span-2 lg:grid lg:grid-cols-[1.15fr_0.85fr]" : ""}`}>
-      <div className={`relative bg-surface-muted ${featured ? "min-h-72 lg:min-h-full" : "aspect-[16/10]"}`}>
-        <Image
-          src={visual.src}
-          alt={visual.alt[locale]}
-          width={visual.width}
-          height={visual.height}
-          sizes={featured ? "(min-width: 1024px) 660px, 100vw" : "(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"}
-          quality={85}
-          className={`h-full w-full ${visual.className ?? "object-cover"}`}
-        />
-      </div>
-      <div className="flex flex-col justify-between p-6 md:p-8">
-        <div>
-          <p className="text-small font-semibold tabular-nums text-brand">{String(index + 1).padStart(2, "0")}</p>
-          <h3 className="mt-5 text-subheading font-semibold text-ink">{item.title}</h3>
-          <p className="mt-4 text-pretty text-muted">{item.description}</p>
-          <p className="mt-4 border-t border-border pt-4 text-pretty text-muted">{item.when}</p>
+    <article className="flex flex-col justify-between overflow-hidden rounded-card border border-border bg-surface text-center transition-colors hover:border-brand/40 lg:text-left">
+      <div>
+        <div className="relative aspect-[16/10] overflow-hidden bg-surface-muted">
+          <Image
+            src={visual.src}
+            alt={visual.alt[locale]}
+            width={visual.width}
+            height={visual.height}
+            sizes="(min-width: 1024px) 560px, (min-width: 768px) 50vw, 100vw"
+            quality={85}
+            className={`h-full w-full ${visual.className ?? "object-cover"}`}
+          />
         </div>
-        {caseStudyLink && (
-          <div className="mt-5 border-t border-border pt-4">
-            <Link
-              href={localizedProjectPath(caseStudyLink.slug, locale)}
-              className="inline-flex min-h-11 items-center gap-1.5 text-small font-semibold text-brand underline underline-offset-4 hover:text-focus"
-            >
-              <span>{caseStudyLabel ?? (locale === "en" ? "Project details" : "Detalji projekta")}: <span translate="no">{caseStudyLink.name}</span></span>
-              <ArrowUpRight aria-hidden="true" size={16} />
-            </Link>
+        <div className="p-6 md:p-8">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <span aria-hidden="true" className="text-small font-semibold tabular-nums text-brand">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            {item.startingPrice && (
+              <span className="rounded-control bg-accent-soft px-2.5 py-1 text-xs font-semibold text-brand">
+                {item.startingPrice}
+              </span>
+            )}
           </div>
+          <h3 className="mt-4 text-subheading font-semibold text-ink">{item.title}</h3>
+          <p className="mt-3 text-pretty text-muted">{item.description}</p>
+          <p className="mt-4 border-t border-border pt-4 text-pretty text-small text-muted">{item.when}</p>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-2.5 border-t border-border p-6 pt-4 md:px-8 md:pb-6">
+        {caseStudyLink && (
+          <Link
+            href={localizedProjectPath(caseStudyLink.slug, locale)}
+            className="inline-flex min-h-11 items-center gap-1.5 text-small font-semibold text-brand underline underline-offset-4 hover:text-focus"
+          >
+            <span>{caseStudyLabel ?? (locale === "en" ? "Project details" : "Detalji projekta")}: <span translate="no">{caseStudyLink.name}</span></span>
+            <ArrowUpRight aria-hidden="true" size={16} className="shrink-0" />
+          </Link>
+        )}
+        {item.pricingAnchor && (
+          <Link
+            href={`${pricingPath}#${item.pricingAnchor}`}
+            className="inline-flex min-h-11 items-center gap-1.5 text-small font-semibold text-muted underline underline-offset-4 hover:text-brand"
+          >
+            <span>{locale === "en" ? "View pricing & scope" : "Pogledajte cene i obim na cenovniku"}</span>
+            <ArrowUpRight aria-hidden="true" size={14} className="shrink-0" />
+          </Link>
         )}
       </div>
     </article>
@@ -202,6 +233,7 @@ export function ServicesPage({ locale, copy }: { locale: Locale; copy: Dictionar
                 index={index}
                 locale={locale}
                 caseStudyLabel={services.details.caseStudyLabel}
+                pricingPath={pricing}
               />
             ))}
           </div>
@@ -232,7 +264,7 @@ export function ServicesPage({ locale, copy }: { locale: Locale; copy: Dictionar
             </div>
             <p className="mx-auto max-w-xl text-pretty text-on-brand-muted lg:mx-0">{services.process.description}</p>
           </div>
-          <ol className="grid gap-px overflow-hidden rounded-card border border-border-inverse bg-border-inverse lg:grid-cols-3">
+          <ol className="grid gap-px overflow-hidden rounded-card border border-border-inverse bg-border-inverse md:grid-cols-2 lg:grid-cols-3">
             {services.process.items.map((item, index) => (
               <li key={item.id} className="min-h-52 bg-brand p-6 md:p-8">
                 <span aria-hidden="true" className="text-small font-semibold tabular-nums text-on-brand-muted">{String(index + 1).padStart(2, "0")}</span>
@@ -290,14 +322,49 @@ export function ServicesPage({ locale, copy }: { locale: Locale; copy: Dictionar
         </Container>
       </section>
 
-      <section aria-labelledby="services-pricing-title" className="py-12 md:py-16">
-        <Container className="grid gap-8 text-center lg:grid-cols-[1fr_auto] lg:items-center lg:gap-12 lg:text-left">
-          <div className="mx-auto max-w-2xl lg:mx-0">
-            <p className="mb-3 text-small font-semibold uppercase text-brand">{services.pricing.eyebrow}</p>
-            <h2 id="services-pricing-title" className="text-subheading font-bold text-ink">{services.pricing.title}</h2>
+      {/* SECTION — PRICING OVERVIEW TIERS */}
+      <section aria-labelledby="services-pricing-title" className="border-t border-border bg-surface py-12 md:py-16">
+        <Container>
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-small font-semibold uppercase text-brand">{services.pricing.eyebrow}</p>
+            <h2 id="services-pricing-title" className="mt-2 text-heading font-bold text-ink">{services.pricing.title}</h2>
             <p className="mt-3 text-pretty text-muted">{services.pricing.description}</p>
           </div>
-          <Button href={pricing} variant="secondary" className="justify-self-center lg:justify-self-start">{services.pricing.label}</Button>
+
+          {services.pricing.tiers && (
+            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {services.pricing.tiers.map((tier) => (
+                <article
+                  key={tier.id}
+                  className="flex flex-col justify-between rounded-card border border-border bg-surface p-6 shadow-xs transition-colors hover:border-brand/40"
+                >
+                  <div>
+                    <h3 className="text-lg font-bold text-ink">{tier.title}</h3>
+                    <p className="mt-2 text-2xl font-bold text-brand">{tier.price}</p>
+                    <p className="mt-3 text-small text-muted">{tier.description}</p>
+                  </div>
+                  <div className="pt-6">
+                    <Button
+                      href={`${pricing}#${tier.anchor}`}
+                      variant="secondary"
+                      className="w-full justify-center"
+                      aria-label={`${tier.actionLabel}: ${tier.title}`}
+                    >
+                      {tier.actionLabel}
+                      <ArrowUpRight aria-hidden="true" size={16} className="shrink-0" />
+                    </Button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+
+          <div className="mt-10 text-center">
+            <Button href={pricing} className="inline-flex">
+              {services.pricing.label}
+              <ArrowUpRight aria-hidden="true" size={18} className="shrink-0" />
+            </Button>
+          </div>
         </Container>
       </section>
 
