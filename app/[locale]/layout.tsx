@@ -55,7 +55,8 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
       <head>
         <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
       </head>
-      <body className="flex min-h-dvh flex-col">
+      {/* Grammarly can inject body attributes before React hydrates. */}
+      <body className="flex min-h-dvh flex-col" suppressHydrationWarning>
         <a
           href="#main-content"
           className="fixed top-4 left-gutter z-50 -translate-y-32 rounded-control bg-brand px-5 py-3 text-on-brand focus:translate-y-0"

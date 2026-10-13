@@ -742,7 +742,7 @@ const sr = {
     hero: {
       eyebrow: "WEB DIZAJN · RAZVOJ SAJTOVA · SEO",
       title: "Izrada modernih web sajtova",
-      subtitle: "Sajt koji izgleda dobro. I radi još bolje.",
+      subtitle: "Sajt koji izgleda dobro i radi još bolje",
       description: "Od prve ideje do poslednjeg detalja — dizajniram i razvijam web sajtove koji izgledaju odlično, rade brzo i imaju jasnu poslovnu svrhu.",
       primaryAction: "Zatražite besplatnu ponudu",
       secondaryAction: "Pogledajte portfolio",

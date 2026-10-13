@@ -16,7 +16,7 @@ test.describe("Phase 3 — Homepage Hero Copy & Heading Punctuation", () => {
 
     // 3. Subtitle (p.text-subheading)
     const subtitle = hero.locator("p.text-subheading");
-    await expect(subtitle).toHaveText("Sajt koji izgleda dobro. I radi još bolje.");
+    await expect(subtitle).toHaveText("Sajt koji izgleda dobro i radi još bolje");
 
     // 4. Description (personal singular voice "dizajniram i razvijam")
     const description = hero.locator("p.text-pretty");

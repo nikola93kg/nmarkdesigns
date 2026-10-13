@@ -214,6 +214,7 @@ test("mobile navigation supports keyboard, dismissal, and viewport changes", asy
   await toggle.click();
   await page.setViewportSize({ width: 1440, height: 900 });
   await expect(page.getByRole("navigation", { name: "Glavna navigacija", exact: true })).toBeVisible();
+  await expect(page.locator("details.mobile-navigation")).not.toHaveAttribute("open");
   await page.setViewportSize({ width: 375, height: 812 });
   await expect(menu).not.toBeVisible();
   await toggle.click();

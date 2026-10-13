@@ -18,7 +18,6 @@ export function MobileNavigation({ items, pricing, label, menuLabel }: MobileNav
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const toggleRef = useRef<HTMLElement>(null);
   const menuListRef = useRef<HTMLDivElement>(null);
-  const pointerInteractionRef = useRef(false);
 
   useEffect(() => {
     const desktop = window.matchMedia("(min-width: 64rem)");
@@ -63,22 +62,16 @@ export function MobileNavigation({ items, pricing, label, menuLabel }: MobileNav
 
   }
 
-  function handlePointerDown() {
-    pointerInteractionRef.current = true;
-    window.setTimeout(() => {
-      pointerInteractionRef.current = false;
-    }, 0);
-  }
-
   return (
     <details
       ref={detailsRef}
       className="mobile-navigation group lg:hidden"
       onToggle={syncBodyScroll}
       onKeyDown={handleKeyDown}
-      onPointerDown={handlePointerDown}
       onBlur={(event) => {
-        if (!pointerInteractionRef.current && !event.currentTarget.contains(event.relatedTarget)) {
+        // Safari can blur the focused control without focusing a tapped link.
+        // A null relatedTarget does not mean focus moved outside the menu.
+        if (event.relatedTarget instanceof Node && !event.currentTarget.contains(event.relatedTarget)) {
           closeMenu();
         }
       }}
