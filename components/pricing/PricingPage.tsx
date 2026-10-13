@@ -1,4 +1,5 @@
 import { ArrowDown, ArrowUpRight, Check } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import background from "@/components/ui/GridBackground.module.css";
@@ -82,6 +83,15 @@ export function PricingPage({ locale, copy }: PricingPageProps) {
             <p className="mt-3 text-pretty text-muted">
               {copy.websiteDevelopment.description}
             </p>
+            <div className="mt-4">
+              <Link
+                href={localizedPath("services", locale)}
+                className="inline-flex items-center gap-1.5 text-small font-semibold text-brand underline underline-offset-4 hover:text-focus"
+              >
+                <span>{locale === "en" ? "Explore our technical approach and case studies on Services" : "Saznajte više o tehničkom pristupu i realizovanim projektima na stranici Usluge"}</span>
+                <ArrowUpRight aria-hidden="true" size={16} />
+              </Link>
+            </div>
           </div>
 
           <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
@@ -162,8 +172,9 @@ export function PricingPage({ locale, copy }: PricingPageProps) {
 
       {/* SECTION 3 — CUSTOM WEB APPLICATIONS */}
       <section
+        id="custom-development"
         aria-labelledby="custom-dev-title"
-        className="py-12 md:py-16"
+        className="scroll-mt-20 py-12 md:py-16"
       >
         <Container>
           <div
@@ -224,8 +235,9 @@ export function PricingPage({ locale, copy }: PricingPageProps) {
 
       {/* SECTION 4 — ADDITIONAL SERVICES */}
       <section
+        id="additional-services"
         aria-labelledby="additional-services-title"
-        className="py-section bg-surface-muted"
+        className="scroll-mt-20 py-section bg-surface-muted"
       >
         <Container>
           <div className="mx-auto max-w-2xl text-center">
@@ -288,8 +300,9 @@ export function PricingPage({ locale, copy }: PricingPageProps) {
 
       {/* SECTION 5 — HOSTING & TECHNICAL MAINTENANCE */}
       <section
+        id="maintenance"
         aria-labelledby="maintenance-title"
-        className="py-section bg-surface"
+        className="scroll-mt-20 py-section bg-surface"
       >
         <Container>
           <div className="mx-auto max-w-2xl text-center">

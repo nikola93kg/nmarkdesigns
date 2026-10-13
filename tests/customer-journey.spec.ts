@@ -29,7 +29,7 @@ test.describe("Phase 3C.1 Customer Journey & Conversion Optimization", () => {
 
       // 3. Verify service cards link to verified case studies
       const serviceLinks = page.locator('section[aria-labelledby="services-details-title"] article a[href*="/portfolio/"]');
-      await expect(serviceLinks).toHaveCount(5);
+      await expect(serviceLinks).toHaveCount(6);
 
       // Verify specific case study link (e.g. Časovi Francuskog)
       const casoviLink = page.locator(`a[href="${localizedProjectPath("casovi-francuskog", locale)}"]`).first();

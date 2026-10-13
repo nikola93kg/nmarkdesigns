@@ -50,3 +50,11 @@ export const carePlans: readonly CarePlan[] = [
 ] as const;
 
 export const pricingSourceUrl = "https://nmarkdesigns.com/cenovnik/";
+
+export const pricingAnchors = {
+  packages: "packages",
+  customDevelopment: "custom-development",
+  additionalServices: "additional-services",
+  maintenance: "maintenance",
+  faq: "faq",
+} as const;
