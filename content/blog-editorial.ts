@@ -4,6 +4,7 @@ import { gtaViWebsiteAnalysis } from "@/content/blog-gta-vi";
 import { websitePricingSerbia2026 } from "@/content/blog-pricing-guide";
 import { aiSearchGuide2026 } from "@/content/blog-ai-search";
 import { googleAiContent2026 } from "@/content/blog-google-ai-content-2026";
+import { aiChatbotGuide2026 } from "@/content/blog-ai-chatbot-2026";
 
 export interface Editorial {
   image: string;
@@ -85,6 +86,7 @@ export const blogLabels = {
 } as const;
 
 export const blogEditorial: Record<string, Editorial> = {
+  "ai-chatbot-za-sajt-2026": aiChatbotGuide2026,
   "google-ai-sadrzaj-2026-chatgpt-seo": googleAiContent2026,
   "ai-search-google-overviews-chatgpt": aiSearchGuide2026,
   "website-pricing-serbia-2026": websitePricingSerbia2026,
