@@ -147,6 +147,27 @@ export interface LocalizedBlogPost {
 
 export const blogPosts: readonly BlogPost[] = [
   {
+    id: "ai-chatbot-za-sajt-2026",
+    slug: "ai-chatbot-za-sajt-cena-isplativost-2026",
+    publishedOn: "2026-10-20",
+    title: {
+      sr: "AI chatbot za sajt: koliko košta, šta može da radi i da li se isplati u 2026?",
+      en: "AI Chatbot for Your Website: Cost, Capabilities, and Value in 2026",
+    },
+    seoTitle: {
+      sr: "AI chatbot za sajt: cena i isplativost u 2026.",
+      en: "Website AI Chatbot: Pricing and Value in 2026",
+    },
+    description: {
+      sr: "Kolika je cena AI chatbota za sajt u 2026? Uporedite FAQ bot i AI asistenta, troškove integracije i korišćenja, pretragu kataloga i prikupljanje upita.",
+      en: "What does a website AI chatbot cost in 2026? Compare FAQ bots and AI assistants, setup and running costs, catalog search, and lead collection.",
+    },
+    excerpt: {
+      sr: "Jedan chatbot samo prikazuje unapred napisane odgovore. Drugi pretražuje katalog i priprema upit za prodaju. Razlika određuje i cenu i poslovnu vrednost.",
+      en: "One chatbot displays scripted answers. Another searches your catalog and prepares a sales enquiry. That difference shapes both its cost and its business value.",
+    },
+  },
+  {
     id: "google-ai-sadrzaj-2026-chatgpt-seo",
     slug: "google-ai-sadrzaj-2026-chatgpt-seo",
     publishedOn: "2026-10-13",
