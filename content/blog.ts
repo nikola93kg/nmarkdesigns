@@ -147,6 +147,27 @@ export interface LocalizedBlogPost {
 
 export const blogPosts: readonly BlogPost[] = [
   {
+    id: "wordpress-vs-nextjs-poslovni-sajt",
+    slug: "wordpress-vs-nextjs-poslovni-sajt",
+    publishedOn: "2026-10-27",
+    title: {
+      sr: "WordPress ili Next.js u 2026: šta je bolji izbor za poslovni web sajt?",
+      en: "WordPress or Next.js in 2026: Which Is Better for a Business Website?",
+    },
+    seoTitle: {
+      sr: "WordPress ili Next.js u 2026: cena, SEO i održavanje",
+      en: "WordPress vs Next.js in 2026: Cost, SEO and Maintenance",
+    },
+    description: {
+      sr: "WordPress ili Next.js za poslovni sajt? Uporedite izradu, hosting, održavanje, brzinu i SEO, uz primere iz portfolija i računicu troškova za tri godine.",
+      en: "WordPress or Next.js for your business website? Compare development, hosting, maintenance, speed and SEO, with portfolio examples and three-year cost scenarios.",
+    },
+    excerpt: {
+      sr: "WordPress donosi gotov sistem za uređivanje sadržaja. Next.js daje slobodu za namenski razvoj. Pravi izbor zavisi od posla koji sajt treba da obavlja i troškova posle objave.",
+      en: "WordPress includes a content management system. Next.js offers flexibility for custom development. The right choice depends on your website’s job and its costs after launch.",
+    },
+  },
+  {
     id: "ai-chatbot-za-sajt-2026",
     slug: "ai-chatbot-za-sajt-cena-isplativost-2026",
     publishedOn: "2026-10-20",

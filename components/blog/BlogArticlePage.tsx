@@ -91,8 +91,8 @@ function BlogBlockRenderer({ block }: { block: BlogBlock }) {
               {block.rows.map((row, rowIndex) => (
                 <tr key={`${row[0]}-${rowIndex}`}>
                   {row.map((cell, cellIndex) => cellIndex === 0
-                    ? <th key={cell} scope="row" data-label={block.columns[cellIndex]}>{cell}</th>
-                    : <td key={cell} data-label={block.columns[cellIndex]}>{cell}</td>)}
+                    ? <th key={cellIndex} scope="row" data-label={block.columns[cellIndex]}>{cell}</th>
+                    : <td key={cellIndex} data-label={block.columns[cellIndex]}>{cell}</td>)}
                 </tr>
               ))}
             </tbody>
