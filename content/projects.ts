@@ -48,8 +48,131 @@ export interface Project {
   featured?: boolean;
 }
 
-// Names, slugs, and screenshots are from the production homepage. See migration notes.
+// Migrated projects retain production provenance. New work is documented in docs/reference/project-content-sources.md.
 export const projects: readonly Project[] = [
+  {
+    slug: "krajina-gordana-jp",
+    title: "Krajina — Gordana Janićijević Potpara",
+    status: "active",
+    category: {
+      sr: "Memorijalni portal",
+      en: "Memorial Website",
+    },
+    role: {
+      sr: "Web dizajn i WordPress izrada memorijalnog portala",
+      en: "Memorial website design and WordPress development",
+    },
+    websiteUrl: "https://krajina-gordanajp.rs/",
+    sourceUrl: "https://krajina-gordanajp.rs/",
+    services: {
+      sr: ["Web dizajn", "WordPress izrada", "Prezentacija monografije"],
+      en: ["Web Design", "WordPress Development", "Book Presentation"],
+    },
+    technologies: ["WordPress", "WooCommerce", "Elementor"],
+    shortDescription: {
+      sr: "Memorijalni portal posvećen Gordani Janićijević Potpari, sa biografijom, predstavljanjem monografije „Krajina koja nekad bejaše“ i informacijama o naručivanju knjige.",
+      en: "A memorial website dedicated to Gordana Janićijević Potpara, presenting her biography, the book ‘Krajina koja nekad bejaše’ and information about ordering a copy.",
+    },
+    featuredImage: {
+      src: "/projects/krajina-gordana-jp.webp",
+      width: 1600,
+      height: 779,
+      alt: {
+        sr: "Početna stranica memorijalnog portala Gordane Janićijević Potpare, sa velikim ćiriličnim naslovom i prikazom crvene korice monografije „Krajina koja nekad bejaše“.",
+        en: "Gordana Janićijević Potpara memorial website homepage, with a large Cyrillic headline and the red cover of ‘Krajina koja nekad bejaše’.",
+      },
+    },
+    caseStudy: {
+      overview: {
+        sr: "Memorijalni portal koji povezuje život i novinarski rad Gordane Janićijević Potpare sa monografijom „Krajina koja nekad bejaše“. Urednički raspored daje prostor biografiji, predstavljanju knjige i informacijama za čitaoce.",
+        en: "A memorial website connecting Gordana Janićijević Potpara’s life and journalism with her book ‘Krajina koja nekad bejaše’. An editorial layout gives space to her biography, the book and information for readers.",
+      },
+      approach: {
+        sr: [
+          "Vizuelni pravac oslanja se na svetlu podlogu, izražajnu serifnu tipografiju i prigušene crvene akcente povezane sa koricom knjige. Veliki ćirilični naslov i izdvojeni citat daju početnom ekranu karakter štampane publikacije.",
+          "Dvokolonska kompozicija povezuje uvod o autorki sa velikim prikazom monografije. Navigacija i tekstualni pozivi na akciju izdvajaju knjigu, biografiju, predstavljanja i arhivu, uz poseban poziv za naručivanje.",
+        ],
+        en: [
+          "The visual direction uses a light background, expressive serif typography and muted red accents drawn from the book cover. A large Cyrillic headline and a prominent quotation give the opening screen the character of a printed publication.",
+          "A two-column composition pairs an introduction to the author with a large image of the book. Navigation and text links distinguish the book, biography, presentations and archive, with a separate call to order a copy.",
+        ],
+      },
+      solution: {
+        sr: [
+          "WordPress prezentacija objedinjuje opis monografije, hronološki pregled novinarskog rada i odeljak o predstavljanjima knjige. Arhivski materijali i video zapisi označeni su kao sadržaj u pripremi.",
+          "Informacije o dobijanju knjige putem donacije povezane su sa WooCommerce stranicom proizvoda. Poziv za naručivanje dostupan je u navigaciji i u zasebnom odeljku posvećenom knjizi.",
+        ],
+        en: [
+          "The WordPress website brings together a book overview, a chronological account of the author’s journalism and a section about book presentations. Archival materials and video recordings are identified as content in preparation.",
+          "Information about obtaining the book through a donation links to a WooCommerce product page. Ordering links appear in the navigation and in a dedicated book section.",
+        ],
+      },
+      relatedSlugs: ["casovi-francuskog", "os-dule-karaklajic"],
+    },
+    featured: false,
+  },
+  {
+    slug: "alma-balcanica",
+    title: "Alma Balcánica",
+    client: "Alma Balcánica",
+    status: "active",
+    category: {
+      sr: "Turizam i putovanja",
+      en: "Travel & Tourism",
+    },
+    role: {
+      sr: "Web dizajn i razvoj turističkog sajta",
+      en: "Travel website design and development",
+    },
+    websiteUrl: "https://almabalcanica.com/",
+    sourceUrl: "https://almabalcanica.com/",
+    services: {
+      sr: ["Web dizajn", "Frontend razvoj", "Prezentacija putovanja i destinacija"],
+      en: ["Web Design", "Frontend Development", "Tour & Destination Presentation"],
+    },
+    technologies: ["Next.js", "React"],
+    shortDescription: {
+      sr: "Turistički sajt za putovanja po Srbiji i Balkanu, namenjen publici koja govori španski, sa pregledom tura, destinacija i direktnim kontaktom putem WhatsApp-a.",
+      en: "A travel website for Spanish-speaking visitors exploring Serbia and the Balkans, with tour listings, destinations and direct WhatsApp contact.",
+    },
+    featuredImage: {
+      src: "/projects/alma-balcanica.webp",
+      width: 1600,
+      height: 774,
+      alt: {
+        sr: "Početna stranica Alma Balcánica sa fotografijom vodopada i drvenih staza, naslovom na španskom i pozivima za istraživanje putovanja i WhatsApp kontakt.",
+        en: "Alma Balcánica homepage featuring waterfalls and wooden walkways, a Spanish headline, and calls to explore trips or contact the team on WhatsApp.",
+      },
+    },
+    caseStudy: {
+      overview: {
+        sr: "Web prezentacija putovanja po Srbiji i Balkanu za publiku koja govori španski. Velike fotografije destinacija povezuju se sa pregledom tura i jasnim putem do kontakta.",
+        en: "A website presenting travel in Serbia and the Balkans to Spanish-speaking visitors. Large destination photographs connect with tour listings and a clear path to contact.",
+      },
+      approach: {
+        sr: [
+          "Vizuelni pravac povezuje tamnozelene tonove, serifne naslove i fotografije prirode. Početni ekran daje fotografiji veliki prostor, dok tekst i kontrastna dugmad ostaju jasno izdvojeni.",
+          "Navigacija i pozivi na akciju usmeravaju posetioca ka istraživanju putovanja ili razgovoru. Opis ponude ostaje uz fotografiju, tako da prvi ekran istovremeno prenosi atmosferu i objašnjava temu sajta.",
+        ],
+        en: [
+          "The visual direction combines deep green tones, serif headings and landscape photography. The opening screen gives imagery generous space while keeping copy and contrasting buttons clearly defined.",
+          "Navigation and calls to action guide visitors toward exploring trips or starting a conversation. The offer is explained alongside the photography, so the first screen establishes both atmosphere and purpose.",
+        ],
+      },
+      solution: {
+        sr: [
+          "Pregled ponude razdvaja grupne polaske i privatna putovanja, uz stranice destinacija i informacije o načinu organizacije putovanja.",
+          "Izdvojene ture prikazuju itinerere, trajanje i cene, dok WhatsApp link omogućava direktan kontakt za dodatna pitanja.",
+        ],
+        en: [
+          "The offer distinguishes scheduled group departures from private trips, alongside destination pages and information about how travel is organized.",
+          "Featured tours present itineraries, duration and pricing, while a WhatsApp link provides direct contact for further questions.",
+        ],
+      },
+      relatedSlugs: ["ilic-enterijer", "powder-brows-vienna"],
+    },
+    featured: false,
+  },
   {
     slug: "buy-pallet-jacks",
     title: "Buy Pallet Jacks",
@@ -1554,6 +1677,8 @@ export const projects: readonly Project[] = [
 ];
 
 const portfolioOrder = [
+  "krajina-gordana-jp",
+  "alma-balcanica",
   "casovi-francuskog",
   "ilic-enterijer",
   "powder-brows-vienna",
@@ -1581,6 +1706,8 @@ const caseStudyOrder = [
   "coolfridgeguys",
   "ladekor",
   "anabelabebioprema",
+  "alma-balcanica",
+  "krajina-gordana-jp",
 ] as const;
 
 export type ProjectWithImage = Project & { featuredImage: ProjectImage };

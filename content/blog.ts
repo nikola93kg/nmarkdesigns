@@ -147,6 +147,27 @@ export interface LocalizedBlogPost {
 
 export const blogPosts: readonly BlogPost[] = [
   {
+    id: "seo-aeo-geo-2026",
+    slug: "seo-aeo-geo-razlike-2026",
+    publishedOn: "2026-11-03",
+    title: {
+      sr: "SEO, AEO i GEO — šta je razlika i šta je potrebno vašem sajtu u 2026?",
+      en: "SEO, AEO and GEO: What’s the Difference and What Does Your Website Need in 2026?",
+    },
+    seoTitle: {
+      sr: "SEO, AEO i GEO: razlike i prioriteti za sajt u 2026.",
+      en: "SEO, AEO and GEO: Differences and Website Priorities in 2026",
+    },
+    description: {
+      sr: "Šta znače SEO, AEO i GEO? Saznajte kako se razlikuju rangiranje, direktni odgovori i AI citati, i u šta prvo ulagati na poslovnom sajtu u 2026.",
+      en: "What do SEO, AEO and GEO mean? Compare rankings, direct answers and AI citations, and learn what to prioritize on your business website in 2026.",
+    },
+    excerpt: {
+      sr: "Tri skraćenice ne znače da su vam potrebna tri odvojena sajta ili budžeta. Razlika je u tome gde korisnik dobija odgovor i kako procenjujete uspeh.",
+      en: "Three acronyms do not require three separate websites or budgets. The difference is where people get their answers and how you measure success.",
+    },
+  },
+  {
     id: "wordpress-vs-nextjs-poslovni-sajt",
     slug: "wordpress-vs-nextjs-poslovni-sajt",
     publishedOn: "2026-10-27",

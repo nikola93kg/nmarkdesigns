@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <rect width="1600" height="1000" fill="#f9f8fc"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#110024">
+    <text x="88" y="99" font-size="28" font-weight="700" letter-spacing="-1">NMark Designs</text>
+    <text x="1512" y="99" text-anchor="end" font-size="25">2026</text>
+    <path d="M88 141H1512" stroke="#110024" stroke-width="2"/>
+    <path d="M552 208V835M1048 208V835" stroke="#e2e2e8" stroke-width="2"/>
+    <g font-size="116" font-weight="700" letter-spacing="-7">
+      <text x="88" y="338">SEO</text>
+      <text x="584" y="338">AEO</text>
+      <text x="1080" y="338">GEO</text>
+    </g>
+  </g>
+  <!-- Organic search: several distinct results. -->
+  <g transform="translate(88 412)">
+    <rect width="400" height="54" rx="27" fill="#fff" stroke="#bdb7c7" stroke-width="2"/>
+    <circle cx="27" cy="26" r="9" fill="none" stroke="#110024" stroke-width="2.5"/>
+    <path d="m34 33 7 7M62 27H253" stroke="#bdb7c7" stroke-width="2.5"/>
+    <g transform="translate(0 104)">
+      <circle cx="9" cy="9" r="9" fill="#ab7eff"/>
+      <path d="M30 9H140" stroke="#65616e" stroke-width="7"/>
+      <path d="M0 40H309" stroke="#110024" stroke-width="13"/>
+      <path d="M0 66H385M0 85H330" stroke="#bdb7c7" stroke-width="7"/>
+    </g>
+    <g transform="translate(0 226)">
+      <circle cx="9" cy="9" r="9" fill="#e2e2e8"/>
+      <path d="M30 9H165" stroke="#65616e" stroke-width="7"/>
+      <path d="M0 40H267" stroke="#110024" stroke-width="13"/>
+      <path d="M0 66H367M0 85H290" stroke="#bdb7c7" stroke-width="7"/>
+    </g>
+  </g>
+  <!-- A direct answer, with its supporting context underneath. -->
+  <g transform="translate(584 412)">
+    <rect width="400" height="237" rx="8" fill="#110024"/>
+    <path d="M28 40H214" stroke="#ab7eff" stroke-width="8"/>
+    <path d="M28 82H354M28 110H328M28 138H348M28 166H242" stroke="#fff" stroke-width="10"/>
+    <path d="M28 207H139" stroke="#ab7eff" stroke-width="5"/>
+    <path d="M0 278H373M0 301H320M0 324H350" stroke="#bdb7c7" stroke-width="7"/>
+  </g>
+  <!-- Synthesized answer with three identifiable sources. -->
+  <g transform="translate(1080 412)">
+    <path d="M0 7H264" stroke="#110024" stroke-width="13"/>
+    <path d="M0 53H372M0 80H350M0 107H293" stroke="#65616e" stroke-width="8"/>
+    <rect x="310" y="94" width="28" height="25" rx="3" fill="#e9ddff"/>
+    <text x="324" y="112" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#110024">1</text>
+    <path d="M0 147H350M0 174H259" stroke="#65616e" stroke-width="8"/>
+    <rect x="276" y="161" width="28" height="25" rx="3" fill="#e9ddff"/>
+    <text x="290" y="179" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#110024">2</text>
+    <path d="M0 224H400" stroke="#bdb7c7" stroke-width="2"/>
+    <g fill="#fff" stroke="#bdb7c7" stroke-width="2">
+      <rect y="253" width="122" height="83" rx="4"/>
+      <rect x="139" y="253" width="122" height="83" rx="4"/>
+      <rect x="278" y="253" width="122" height="83" rx="4"/>
+    </g>
+    <g font-family="Arial, sans-serif" font-size="23" fill="#110024">
+      <text x="15" y="284">1</text><text x="154" y="284">2</text><text x="293" y="284">3</text>
+    </g>
+    <path d="M15 310H103M154 310H242M293 310H381" stroke="#ab7eff" stroke-width="5"/>
+  </g>
+  <path d="M88 869H1512" stroke="#110024" stroke-width="2"/>
+  <g fill="#110024">
+    <circle cx="101" cy="922" r="9"/>
+    <circle cx="132" cy="922" r="9"/>
+    <circle cx="163" cy="922" r="9"/>
+  </g>
+  <path d="M1396 922H1509m-15-15 15 15-15 15" fill="none" stroke="#110024" stroke-width="3"/>
+</svg>
