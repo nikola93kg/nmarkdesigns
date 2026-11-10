@@ -151,7 +151,7 @@ export const blogPosts: readonly BlogPost[] = [
     slug: "10-znakova-da-je-vreme-za-redizajn-sajta-2026",
     publishedOn: "2026-11-10",
     title: {
-      sr: "10 znakova da je vreme za redizajn vašeg sajta u 2026.",
+      sr: "10 znakova da je vreme za redizajn vašeg sajta u 2026",
       en: "10 Signs It's Time to Redesign Your Website in 2026",
     },
     seoTitle: {

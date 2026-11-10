@@ -402,18 +402,18 @@ const sectionsEn: readonly BlogSection[] = [
 ];
 
 export const redesignSigns2026: Editorial = {
-  image: "/blog/redesign-signs-2026-cover.webp",
+  image: "/blog/redesign-signs-2026-cover-v3.webp",
   heroBackground: {
     image: "/blog/hero/redesign-signs-2026-bg.webp",
     width: 1920,
     height: 820,
     position: "center",
   },
-  width: 1600,
-  height: 1000,
+  width: 972,
+  height: 729,
   alt: {
-    sr: "Ilustracija 10 znakova za redizajn sajta: analiza performansi, mobilni prikaz, konverzija i pretraga.",
-    en: "Illustration of 10 website redesign signs: performance audits, mobile UX, conversion optimization, and search readiness.",
+    sr: "Radni sto sa zastarelim sajtom na monitoru i redizajniranim sajtom na laptopu i telefonu, povezanim žutom strelicom.",
+    en: "A desk with an outdated website on a monitor and a redesigned website on a laptop and phone, connected by a yellow arrow.",
   },
   caption: {
     sr: "Prepoznavanje ključnih znakova za redizajn pre nego što zastareli sajt počne da košta vaš biznis upita i pozicija.",
