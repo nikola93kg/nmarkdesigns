@@ -66,7 +66,7 @@ const sr: readonly BlogSection[] = [
         title: "Proverite cene i uslove",
         items: [
           { label: "NMark Designs cenovnik — obim paketa i podrška", href: "/sr/cenovnik/" },
-          { label: "Hostinger — WordPress hosting i obnova", href: "https://www.hostinger.com/wordpress-hosting" },
+          { label: "Hostinger — WordPress hosting (20% popusta)", href: "https://www.hostinger.com?REFERRALCODE=JIPMARKOVUSK" },
           { label: "Vercel — Pro cene", href: "https://vercel.com/pricing" },
           { label: "Vercel — uslovi Hobby plana", href: "https://vercel.com/docs/plans/hobby" },
         ],
@@ -270,7 +270,7 @@ const en: readonly BlogSection[] = [
       ] },
       { type: "linkList", title: "Check prices and conditions", items: [
         { label: "NMark Designs pricing — package scope and support", href: "/en/pricing/" },
-        { label: "Hostinger — WordPress hosting and renewal", href: "https://www.hostinger.com/wordpress-hosting" },
+        { label: "Hostinger — WordPress hosting (20% off)", href: "https://www.hostinger.com?REFERRALCODE=JIPMARKOVUSK" },
         { label: "Vercel — Pro pricing", href: "https://vercel.com/pricing" },
         { label: "Vercel — Hobby plan conditions", href: "https://vercel.com/docs/plans/hobby" },
       ] },
@@ -421,7 +421,7 @@ export const wordpressVsNextjs2026: Editorial = {
     { label: "Next.js — Security Update, December 11, 2025", href: "https://nextjs.org/blog/security-update-2025-12-11" },
     { label: "Google Search Central — Core Web Vitals", href: "https://developers.google.com/search/docs/appearance/core-web-vitals" },
     { label: "Google Search Central — Page Experience", href: "https://developers.google.com/search/docs/appearance/page-experience" },
-    { label: "Hostinger — WordPress Hosting", href: "https://www.hostinger.com/wordpress-hosting" },
+    { label: "Hostinger — WordPress Hosting (Partner)", href: "https://www.hostinger.com?REFERRALCODE=JIPMARKOVUSK" },
     { label: "Vercel — Pricing", href: "https://vercel.com/pricing" },
     { label: "Vercel — Hobby Plan", href: "https://vercel.com/docs/plans/hobby" },
   ],

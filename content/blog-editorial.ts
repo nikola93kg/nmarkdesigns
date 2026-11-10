@@ -7,6 +7,7 @@ import { googleAiContent2026 } from "@/content/blog-google-ai-content-2026";
 import { aiChatbotGuide2026 } from "@/content/blog-ai-chatbot-2026";
 import { wordpressVsNextjs2026 } from "@/content/blog-wordpress-nextjs-2026";
 import { seoAeoGeo2026 } from "@/content/blog-seo-aeo-geo-2026";
+import { redesignSigns2026 } from "@/content/blog-redesign-signs-2026";
 
 export interface Editorial {
   image: string;
@@ -88,6 +89,7 @@ export const blogLabels = {
 } as const;
 
 export const blogEditorial: Record<string, Editorial> = {
+  "redesign-signs-2026": redesignSigns2026,
   "seo-aeo-geo-2026": seoAeoGeo2026,
   "wordpress-vs-nextjs-poslovni-sajt": wordpressVsNextjs2026,
   "ai-chatbot-za-sajt-2026": aiChatbotGuide2026,
