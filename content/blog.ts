@@ -147,6 +147,27 @@ export interface LocalizedBlogPost {
 
 export const blogPosts: readonly BlogPost[] = [
   {
+    id: "redesign-signs-2026",
+    slug: "10-znakova-da-je-vreme-za-redizajn-sajta-2026",
+    publishedOn: "2026-11-10",
+    title: {
+      sr: "10 znakova da je vreme za redizajn vašeg sajta u 2026.",
+      en: "10 Signs It's Time to Redesign Your Website in 2026",
+    },
+    seoTitle: {
+      sr: "10 znakova za redizajn sajta u 2026: Zašto gubite upite i SEO?",
+      en: "10 Signs You Need a Website Redesign in 2026: Stop Losing Leads",
+    },
+    description: {
+      sr: "Kako znati kada je vreme za redizajn sajta? Otkrijte 10 ključnih znakova: od pada upita i sporog mobilnog prikaza, do nevidljivosti za AI pretraživače i spore infrastrukture.",
+      en: "How do you know when it's time to redesign your website? Discover 10 critical signs: from falling conversion rates and poor mobile UX to AI search invisibility and slow hosting.",
+    },
+    excerpt: {
+      sr: "Kozmetičko osveženje boja ne rešava problem ako je arhitektura zastarela. Saznajte kada je redizajn investicija koja vraća upite, a kada nepotreban trošak.",
+      en: "A fresh coat of paint won't fix broken page structure. Discover when a website redesign turns lost traffic into enquiries, and how to plan it right in 2026.",
+    },
+  },
+  {
     id: "seo-aeo-geo-2026",
     slug: "seo-aeo-geo-razlike-2026",
     publishedOn: "2026-11-03",
