@@ -55,6 +55,9 @@ export function createSmtpTransport(config: SmtpConfig): Transporter {
       user: config.user,
       pass: config.password,
     },
+    tls: {
+      rejectUnauthorized: false,
+    },
     // Prevent hanging connections in serverless or Node environments
     connectionTimeout: 10_000, // 10 seconds
     greetingTimeout: 10_000,
@@ -162,8 +165,8 @@ export const contactDelivery: ContactDelivery = {
       const mailOptions = buildEmailMessage(submission, config);
       const info = await transporter.sendMail(mailOptions);
       return { status: "accepted", messageId: info.messageId };
-    } catch {
-      // Do not leak internal SMTP/network errors
+    } catch (error) {
+      console.error("[Contact Delivery SMTP Error]:", error);
       return { status: "failed" };
     }
   },
