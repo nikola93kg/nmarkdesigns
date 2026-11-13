@@ -249,6 +249,7 @@ export function ServiceDetailPage({ service, locale, copy }: ServiceDetailPagePr
               <div className="flex flex-col justify-center">
                 <span className="text-small font-medium text-muted">
                   {relatedProject.category?.[locale] ?? "Portfolio"}
+                  {relatedProject.location ? ` · ${relatedProject.location}` : ""}
                 </span>
                 <h3 className="mt-2 text-subheading font-bold text-brand">
                   {relatedProject.title}

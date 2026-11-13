@@ -49,7 +49,7 @@ export function siteSchema(): JsonValue {
 export function founderSchema(locale: Locale): JsonValue {
   return {
     "@context": "https://schema.org", "@type": "Person", "@id": founderId,
-    name: "Nikola Marković", jobTitle: "Senior Frontend Developer & Founder",
+    name: "Nikola Marković", jobTitle: "Frontend developer",
     url: canonicalUrl(localizedPath("about", locale)),
     image: canonicalUrl(founderPortrait.src),
     brand: { "@type": "Brand", name: site.name },

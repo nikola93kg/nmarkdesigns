@@ -147,7 +147,7 @@ const en = {
             "clean engineering without bloated generic templates",
             "conversion-focused contact forms and clear calls to action",
           ],
-          startingPrice: "From €300",
+          startingPrice: "From €300 (~$350)",
           pricingAnchor: "packages",
         },
         {
@@ -161,7 +161,7 @@ const en = {
             "configured cart, categories, and agreed payment gateway",
             "e-commerce SEO baseline and checkout flow testing",
           ],
-          startingPrice: "From €1,200",
+          startingPrice: "From €1,200 (~$1,350)",
           pricingAnchor: "packages",
         },
         {
@@ -189,7 +189,7 @@ const en = {
             "clear visual hierarchy and frictionless section flow",
             "mobile user experience optimization and touch target polish",
           ],
-          startingPrice: "From €400",
+          startingPrice: "From €400 (~$450)",
           pricingAnchor: "additional-services",
         },
         {
@@ -203,7 +203,7 @@ const en = {
             "semantic metadata, Open Graph, and JSON-LD structured data",
             "custom AI chatbot integration trained on business FAQs",
           ],
-          startingPrice: "From €100",
+          startingPrice: "From €100 (~$120)",
           pricingAnchor: "additional-services",
         },
         {
@@ -217,7 +217,7 @@ const en = {
             "automated backups and verification routines",
             "content updates and priority technical assistance",
           ],
-          startingPrice: "From €25 / mo.",
+          startingPrice: "From €25 / mo. (~$30 / mo.)",
           pricingAnchor: "maintenance",
         },
       ],
