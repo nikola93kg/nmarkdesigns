@@ -1,0 +1,101 @@
+# NMark Designs
+
+> Boutique web development and design studio founded by Nikola Marković. Specialized in high-performance Next.js web applications, custom business websites, e-commerce, and technical SEO for clients in Serbia, Europe, and the United States.
+
+## Core Identity & Positioning
+
+- **Studio Name**: NMark Designs
+- **Founder & Lead Developer**: Nikola Marković
+- **Website**: https://nmarkdesigns.com
+- **Languages**: Serbian (Primary, `/sr/`), English (`/en/`)
+- **Key Stack**: Next.js (App Router), React, TypeScript, Tailwind CSS, WordPress (Headless / Monolith), Cloudflare, Node.js
+- **Value Proposition**: Senior-level boutique execution, zero agency overhead, 100/100 Core Web Vitals performance, conversion-focused design, and transparent pricing.
+
+---
+
+## Services & Offerings
+
+### 1. Izrada Web Sajtova / Website Development
+- **URLs**:
+  - Serbian: https://nmarkdesigns.com/sr/usluge/izrada-web-sajtova/
+  - English: https://nmarkdesigns.com/en/services/website-development/
+- **Description**: High-performance landing pages, corporate, and business websites built for maximum speed, SEO indexing, and lead generation.
+- **Starting Price**: From €300 / $350 (Landing page) to €900+ / $1,000+ (Advanced corporate).
+- **Featured Case Study**: OŠ Dule Karaklajić (https://nmarkdesigns.com/sr/portfolio/os-dule-karaklajic/)
+
+### 2. Web Prodavnice (E-commerce) / E-Commerce Development
+- **URLs**:
+  - Serbian: https://nmarkdesigns.com/sr/usluge/web-prodavnice/
+  - English: https://nmarkdesigns.com/en/services/ecommerce-development/
+- **Description**: Fast, conversion-optimized WooCommerce and custom online stores with seamless payment gateways, inventory management, and zero layout shift.
+- **Starting Price**: From €1,200 / $1,350.
+- **Featured Case Studies**: Tripoli Sweets (https://nmarkdesigns.com/sr/portfolio/tripolisweets/), Anabela Bebi Oprema (https://nmarkdesigns.com/sr/portfolio/anabelabebioprema/)
+
+### 3. Custom Web Aplikacije / Custom Web Applications
+- **URLs**:
+  - Serbian: https://nmarkdesigns.com/sr/usluge/custom-web-aplikacije/
+  - English: https://nmarkdesigns.com/en/services/custom-web-applications/
+- **Description**: Bespoke Next.js and React full-stack applications, interactive portals, real-time calculators, and third-party API integrations.
+- **Pricing**: Project-based scope / quote.
+- **Featured Case Study**: Buy Pallet Jacks (https://nmarkdesigns.com/en/portfolio/buy-pallet-jacks/)
+
+### 4. Web Dizajn i Redizajn / Web Design & Redesign
+- **URLs**:
+  - Serbian: https://nmarkdesigns.com/sr/usluge/web-dizajn-i-redizajn/
+  - English: https://nmarkdesigns.com/en/services/web-design-and-redesign/
+- **Description**: Modern UI/UX visual identity and technical restructuring of legacy websites into fast, responsive, mobile-first digital experiences.
+- **Starting Price**: From €400 / $450.
+- **Featured Case Study**: OŠ Dule Karaklajić
+
+### 5. SEO i Optimizacija Brzine / SEO & Speed Optimization
+- **URLs**:
+  - Serbian: https://nmarkdesigns.com/sr/usluge/seo-i-optimizacija-brzine/
+  - English: https://nmarkdesigns.com/en/services/seo-and-speed-optimization/
+- **Description**: Technical SEO audits, Core Web Vitals optimization, Schema.org semantic graphs, and AI Chatbot integration.
+- **Starting Price**: Audits from €150 / $170, Speed optimization from €100 / $120, AI integrations from €350 / $400.
+- **Featured Case Study**: Ilić Enterijer (https://nmarkdesigns.com/sr/portfolio/ilic-enterijer/)
+
+### 6. Održavanje i Hosting / Website Maintenance & Hosting
+- **URLs**:
+  - Serbian: https://nmarkdesigns.com/sr/usluge/odrzavanje-i-hosting/
+  - English: https://nmarkdesigns.com/en/services/website-maintenance/
+- **Description**: Continuous security monitoring, automated backups, uptime checks, and managed cloud hosting.
+- **Starting Price**: Hosting from €30/year, Maintenance care plans from €25/month.
+
+---
+
+## Verified International & Domestic Case Studies
+
+1. **Cool Fridge Guys (United States)**:
+   - Commercial refrigeration & HVAC specialist in Texas, USA.
+   - Result: Modern high-performance web presence targeting commercial contractors in the US market.
+   - URL: https://nmarkdesigns.com/en/portfolio/coolfridgeguys/
+
+2. **Tripoli Sweets (International / E-commerce)**:
+   - Authentic Lebanese handmade baklava and sweets e-commerce store.
+   - Result: Multi-category e-commerce catalog, responsive mobile ordering, seamless checkout.
+   - URL: https://nmarkdesigns.com/en/portfolio/tripolisweets/
+
+3. **OŠ Dule Karaklajić (Public Educational Institution)**:
+   - Official institutional portal serving students, teachers, and parents.
+   - Result: Modern redesign replacing legacy CMS, high accessibility, rapid mobile loading.
+   - URL: https://nmarkdesigns.com/sr/portfolio/os-dule-karaklajic/
+
+4. **Ilić Enterijer (Interior Design & Furniture)**:
+   - Bespoke furniture, acoustic slat panels, and custom interior solutions.
+   - Result: Core Web Vitals 95+, semantic structured data, prominent local search visibility.
+   - URL: https://nmarkdesigns.com/sr/portfolio/ilic-enterijer/
+
+5. **Buy Pallet Jacks (Industrial Equipment / US Market)**:
+   - Industrial material handling and pallet jack equipment catalog.
+   - URL: https://nmarkdesigns.com/en/portfolio/buy-pallet-jacks/
+
+---
+
+## Contact & Inquiries
+
+- **Email**: info@nmarkdesigns.com
+- **Phone / WhatsApp**: +381 64 300 5654
+- **Online Form**: https://nmarkdesigns.com/sr/kontakt/ (SR) | https://nmarkdesigns.com/en/contact/ (EN)
+- **Pricing Hub**: https://nmarkdesigns.com/sr/cenovnik/ (SR) | https://nmarkdesigns.com/en/pricing/ (EN)
+- **Instagram**: https://www.instagram.com/nmarkdesigns/
