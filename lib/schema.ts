@@ -2,9 +2,10 @@ import { founderPortrait } from "@/content/about";
 import { site } from "@/content/site";
 import type { Dictionary } from "@/content/i18n/types";
 import type { CaseStudyProject } from "@/content/projects";
+import type { ServiceDetailDefinition } from "@/content/services";
 import type { Locale } from "@/lib/i18n";
 import { canonicalUrl } from "@/lib/public-pages";
-import { localizedPath, localizedProjectPath } from "@/lib/routes";
+import { localizedPath, localizedProjectPath, localizedServicePath } from "@/lib/routes";
 
 export type JsonValue = string | number | boolean | null | readonly JsonValue[] | { readonly [key: string]: JsonValue };
 
@@ -65,6 +66,55 @@ export function servicesSchema(locale: Locale, copy: Dictionary): JsonValue {
       provider: { "@id": organizationId },
       position: index + 1,
     })),
+  };
+}
+
+export function serviceDetailSchema(
+  service: ServiceDetailDefinition,
+  locale: Locale,
+  copy: Dictionary,
+): JsonValue {
+  const serviceUrl = canonicalUrl(localizedServicePath(service.slugs[locale], locale));
+  const servicesHubUrl = canonicalUrl(localizedPath("services", locale));
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${serviceUrl}#service`,
+        name: service.metadata.title[locale],
+        description: service.metadata.description[locale],
+        url: serviceUrl,
+        provider: { "@id": organizationId },
+        serviceType: service.eyebrow[locale],
+        offers: {
+          "@type": "Offer",
+          priceCurrency: locale === "sr" ? "EUR" : "USD",
+          description: service.startingPrice[locale],
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${serviceUrl}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: copy.navigation.home, item: canonicalUrl(localizedPath("home", locale)) },
+          { "@type": "ListItem", position: 2, name: copy.navigation.services, item: servicesHubUrl },
+          { "@type": "ListItem", position: 3, name: service.metadata.title[locale], item: serviceUrl },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${serviceUrl}#faq`,
+        mainEntity: service.faq.map((item) => ({
+          "@type": "Question",
+          name: item.question[locale],
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer[locale].join(" "),
+          },
+        })),
+      },
+    ],
   };
 }
 

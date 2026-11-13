@@ -86,6 +86,15 @@ function addSecurityHeaders(response: NextResponse): NextResponse {
 }
 
 export function proxy(request: NextRequest) {
+  const host = request.headers.get("host")?.toLowerCase()?.replace(/:\d+$/, "");
+  if (host === "www.nmarkdesigns.com") {
+    const destination = new URL(request.url);
+    destination.hostname = "nmarkdesigns.com";
+    destination.port = "";
+    destination.protocol = "https:";
+    return addSecurityHeaders(NextResponse.redirect(destination, 308));
+  }
+
   const path = request.nextUrl.pathname;
   const normalized = path.endsWith("/") ? path : `${path}/`;
   const protect = (response: NextResponse, force = false) => {
@@ -118,7 +127,13 @@ export function proxy(request: NextRequest) {
     return protect(addSecurityHeaders(NextResponse.next()));
   }
   // Reject unknown and incorrectly cased URLs before case-insensitive static caches.
-  const notFoundResponse = NextResponse.rewrite(new URL("/_not-found/", request.url), { status: 404 });
+  const isEnglish = path.startsWith("/en/") || path === "/en";
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-not-found-lang", isEnglish ? "en" : "sr");
+  const notFoundResponse = NextResponse.rewrite(new URL("/_not-found/", request.url), {
+    status: 404,
+    request: { headers: requestHeaders },
+  });
   return protect(addSecurityHeaders(notFoundResponse), true);
 }
 

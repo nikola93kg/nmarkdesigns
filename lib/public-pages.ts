@@ -1,13 +1,22 @@
 import { blogPosts } from "@/content/blog";
 import { caseStudyProjects } from "@/content/projects";
+import { serviceDefinitions, serviceKeys, type ServiceKey } from "@/content/services";
 import { locales, type Locale } from "@/lib/i18n";
-import { localizedBlogPostPath, localizedPath, localizedProjectPath, routes, type RouteKey } from "@/lib/routes";
+import {
+  localizedBlogPostPath,
+  localizedPath,
+  localizedProjectPath,
+  localizedServicePath,
+  routes,
+  type RouteKey,
+} from "@/lib/routes";
 import { site } from "@/content/site";
 
 export interface PublicPage {
   locale: Locale;
   route: RouteKey;
   slug?: string;
+  serviceKey?: ServiceKey;
   path: string;
 }
 
@@ -21,6 +30,13 @@ export const publicPages: readonly PublicPage[] = locales.flatMap((locale) => [
   ...caseStudyProjects.map(({ slug }) => ({
     locale, route: "portfolio" as const, slug, path: localizedProjectPath(slug, locale),
   })),
+  ...serviceKeys.map((key) => ({
+    locale,
+    route: "services" as const,
+    slug: serviceDefinitions[key].slugs[locale],
+    serviceKey: key,
+    path: localizedServicePath(serviceDefinitions[key].slugs[locale], locale),
+  })),
 ]);
 
 export function canonicalUrl(path: string): string {
@@ -30,7 +46,12 @@ export function canonicalUrl(path: string): string {
 export function pageAlternates(path: string): Record<string, string> {
   const page = publicPages.find((entry) => entry.path === path);
   if (!page) throw new Error(`No published page for ${path}`);
-  const equivalents = publicPages.filter((entry) => entry.route === page.route && entry.slug === page.slug);
+  const equivalents = publicPages.filter((entry) => {
+    if (page.serviceKey) {
+      return entry.route === page.route && entry.serviceKey === page.serviceKey;
+    }
+    return entry.route === page.route && entry.slug === page.slug;
+  });
   return Object.fromEntries([
     ...equivalents.map((entry) => [entry.locale, canonicalUrl(entry.path)]),
     ...equivalents.filter((entry) => entry.locale === "sr").map((entry) => ["x-default", canonicalUrl(entry.path)]),
