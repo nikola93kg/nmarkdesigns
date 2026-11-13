@@ -121,6 +121,8 @@ export function proxy(request: NextRequest) {
   if (
     path === "/robots.txt" ||
     path === "/sitemap.xml" ||
+    path === "/llms.txt" ||
+    path === "/llms-full.txt" ||
     /^\/(?:about|blog|images|projects|logo)\//.test(path) ||
     /^\/(?:apple-icon\.png|icon\.png|favicon\.ico|manifest\.webmanifest|web-app-manifest-\d+x\d+\.png)$/.test(path)
   ) {
