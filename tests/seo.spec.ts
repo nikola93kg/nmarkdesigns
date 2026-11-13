@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 import { blogPosts } from "@/content/blog";
 import { site } from "@/content/site";
 import { projects, caseStudyProjects } from "@/content/projects";
+import { serviceDefinitions, serviceKeys } from "@/content/services";
 import { publicPages } from "@/lib/public-pages";
 import { isIndexableHost } from "@/lib/seo-config";
 import { robotsForHost } from "@/lib/crawl";
@@ -9,6 +10,10 @@ import { serializeJsonLd } from "@/lib/schema";
 
 const slugs = caseStudyProjects.map((project) => project.slug);
 const blogSlugs = blogPosts.map((post) => post.slug);
+const servicePairs = serviceKeys.map((key) => [
+  `/sr/usluge/${serviceDefinitions[key].slugs.sr}/`,
+  `/en/services/${serviceDefinitions[key].slugs.en}/`,
+]);
 const pairs = [
   ["/sr/", "/en/"], ["/sr/portfolio/", "/en/portfolio/"],
   ["/sr/blog/", "/en/blog/"],
@@ -16,6 +21,7 @@ const pairs = [
   ["/sr/cenovnik/", "/en/pricing/"],
   ...blogSlugs.map((slug) => [`/sr/blog/${slug}/`, `/en/blog/${slug}/`]),
   ...slugs.map((slug) => [`/sr/portfolio/${slug}/`, `/en/portfolio/${slug}/`]),
+  ...servicePairs,
 ];
 const paths = pairs.flat();
 
@@ -43,7 +49,7 @@ for (const pair of pairs) {
       await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute("content", title);
       await expect(page.locator('meta[name="twitter:description"]')).toHaveAttribute("content", description!);
       const image = await page.locator('meta[property="og:image"]').evaluateAll((elements) => elements[0]?.getAttribute("content") ?? null);
-      const isServicesPage = path === "/sr/usluge/" || path === "/en/services/";
+      const isServicesPage = path.startsWith("/sr/usluge/") || path.startsWith("/en/services/");
       if (isServicesPage) {
         expect(image).toBeNull();
         await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary");
@@ -85,7 +91,8 @@ for (const pair of pairs) {
       if (path === "/sr/kontakt/" || path === "/en/contact/") await expect(page.locator("main address")).toHaveCount(1);
       const schema = await page.locator('script[type="application/ld+json"]').allTextContents();
       const blogPost = blogPosts.find((entry) => path.endsWith(`/blog/${entry.slug}/`));
-      const expectedCount = path === "/sr/" || path === "/en/" || path === "/sr/o-nama/" || path === "/en/about/" || path === "/sr/usluge/" || path === "/en/services/" || path === "/sr/cenovnik/" || path === "/en/pricing/" || Boolean(project) || Boolean(blogPost) ? 1 : 0;
+      const isServiceDetail = serviceKeys.some((key) => path.endsWith(`/${serviceDefinitions[key].slugs.sr}/`) || path.endsWith(`/${serviceDefinitions[key].slugs.en}/`));
+      const expectedCount = path === "/sr/" || path === "/en/" || path === "/sr/o-nama/" || path === "/en/about/" || path === "/sr/usluge/" || path === "/en/services/" || path === "/sr/cenovnik/" || path === "/en/pricing/" || Boolean(project) || Boolean(blogPost) || isServiceDetail ? 1 : 0;
       expect(schema).toHaveLength(expectedCount);
       for (const source of schema) {
         const value: unknown = JSON.parse(source);
@@ -94,7 +101,16 @@ for (const pair of pairs) {
           { "@type": "BlogPosting", headline: blogPost.title[index === 0 ? "sr" : "en"], url: site.url + path },
           { "@type": "BreadcrumbList" },
         ] });
-        expect(source).not.toMatch(/"(address|openingHours|priceRange|legalName|numberOfEmployees|foundingDate|aggregateRating|review|areaServed|SearchAction|FAQPage|Offer|Product|Article)"/);
+        if (isServiceDetail) {
+          expect(source).not.toMatch(/"(address|openingHours|priceRange|legalName|numberOfEmployees|foundingDate|aggregateRating|review|areaServed|SearchAction|Product|Article)"/);
+          expect(value).toMatchObject({ "@graph": [
+            { "@type": "Service" },
+            { "@type": "BreadcrumbList" },
+            { "@type": "FAQPage" },
+          ] });
+        } else {
+          expect(source).not.toMatch(/"(address|openingHours|priceRange|legalName|numberOfEmployees|foundingDate|aggregateRating|review|areaServed|SearchAction|FAQPage|Offer|Product|Article)"/);
+        }
         if (project) expect(value).toMatchObject({ "@type": "BreadcrumbList", itemListElement: [
           { position: 1, item: `${site.url}/${index === 0 ? "sr" : "en"}/portfolio/` },
           { position: 2, name: project.title, item: site.url + path },
@@ -165,10 +181,21 @@ test("exact permanent legacy redirects have one hop and preserve queries", async
   const mappings = [
     ["/", "/sr/"], ["/about/", "/sr/o-nama/"], ["/contact/", "/sr/kontakt/"],
     ["/cenovnik/", "/sr/cenovnik/"], ["/portfolio/", "/sr/portfolio/"], ["/all-services/", "/sr/usluge/"],
-    ...projects.map((project) => [
-      new URL(project.sourceUrl).pathname,
-      project.caseStudy ? `/sr/portfolio/${project.slug}/` : `/sr/portfolio/#project-${project.slug}`,
-    ]),
+    ["/usluge/", "/sr/usluge/"], ["/kontakt/", "/sr/kontakt/"], ["/blog/", "/sr/blog/"],
+    ["/portfolio-2/", "/sr/portfolio/"], ["/faqs/", "/sr/#faq"],
+    ...projects
+      .filter((project) => {
+        try {
+          const pathname = new URL(project.sourceUrl).pathname;
+          return pathname !== "/" && pathname.length > 1;
+        } catch {
+          return false;
+        }
+      })
+      .map((project) => [
+        new URL(project.sourceUrl).pathname,
+        project.caseStudy ? `/sr/portfolio/${project.slug}/` : `/sr/portfolio/#project-${project.slug}`,
+      ]),
   ];
   for (const [legacy, target] of mappings) {
     for (const path of new Set([legacy, legacy === "/" ? legacy : legacy.slice(0, -1)])) {
@@ -188,10 +215,13 @@ test("exact permanent legacy redirects have one hop and preserve queries", async
     expect(location.search).toBe("?utm_source=canonical");
     expect((await request.get(location.toString(), { maxRedirects: 0 })).status()).toBe(200);
   }
+  const wwwResponse = await request.get("/", { headers: { host: "www.nmarkdesigns.com" }, maxRedirects: 0 });
+  expect(wwwResponse.status()).toBe(308);
+  expect(wwwResponse.headers().location).toBe("https://nmarkdesigns.com/");
 });
 
 test("unknown legacy, locales and case variants are genuine 404s", async ({ request }) => {
-  for (const path of ["/unknown/", "/fr/", "/SR/", "/About/", "/portfolio/UNKNOWN/", "/sr/about/", "/en/o-nama/", "/sr/pricing/", "/en/cenovnik/", "/sr/portfolio/COOLFRIDGEGUYS/", "/en/contact/extra/", "/sr/cenovnik/extra/", "/blog/", "/portfolio-2/", "/maintenance-mode/", "/faqs/", "/usluge/", "/kontakt/", "/wp-admin/", "/wp-json/", "/sr/blog/UNKNOWN/", "/en/blog/UNKNOWN/", "/random.php", "/sr/unknown.html"]) {
+  for (const path of ["/unknown/", "/fr/", "/SR/", "/About/", "/portfolio/UNKNOWN/", "/sr/about/", "/en/o-nama/", "/sr/pricing/", "/en/cenovnik/", "/sr/portfolio/COOLFRIDGEGUYS/", "/en/contact/extra/", "/sr/cenovnik/extra/", "/maintenance-mode/", "/wp-admin/", "/wp-json/", "/sr/blog/UNKNOWN/", "/en/blog/UNKNOWN/", "/random.php", "/sr/unknown.html"]) {
     const response = await request.get(path, { maxRedirects: 0 });
     expect(response.status(), path).toBe(404);
     expect(response.headers()["x-robots-tag"]).toBe("noindex, nofollow");

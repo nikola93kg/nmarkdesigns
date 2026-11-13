@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { site } from "@/content/site";
 import { locales, localeSettings, type Locale } from "@/lib/i18n";
-import { localizedBlogPostPath, localizedPath, localizedProjectPath, type RouteKey } from "@/lib/routes";
+import {
+  localizedBlogPostPath,
+  localizedPath,
+  localizedProjectPath,
+  localizedServicePath,
+  type RouteKey,
+} from "@/lib/routes";
 import { canonicalUrl, pageAlternates } from "@/lib/public-pages";
 import { pageRobots } from "@/lib/seo-config";
 
@@ -21,7 +27,8 @@ interface PageMetadataContent {
 type PageMetadataOptions = PageMetadataContent & (
   | { route: "portfolio"; slug?: string }
   | { route: "blog"; slug?: string }
-  | { route: Exclude<RouteKey, "portfolio" | "blog">; slug?: never }
+  | { route: "services"; slug?: string }
+  | { route: Exclude<RouteKey, "portfolio" | "blog" | "services">; slug?: never }
 );
 
 export function createPageMetadata({
@@ -32,11 +39,12 @@ export function createPageMetadata({
   locale,
   image,
 }: PageMetadataOptions): Metadata {
-  const pagePath = (language: Locale) => route === "portfolio" && slug
-    ? localizedProjectPath(slug, language)
-    : route === "blog" && slug
-      ? localizedBlogPostPath(slug, language)
-      : localizedPath(route, language);
+  const pagePath = (language: Locale) => {
+    if (route === "portfolio" && slug) return localizedProjectPath(slug, language);
+    if (route === "blog" && slug) return localizedBlogPostPath(slug, language);
+    if (route === "services" && slug) return localizedServicePath(slug, language);
+    return localizedPath(route, language);
+  };
   const url = canonicalUrl(pagePath(locale));
   const socialTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
   const images = image ? [{

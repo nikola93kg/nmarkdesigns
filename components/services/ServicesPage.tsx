@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
@@ -7,8 +7,9 @@ import { Container } from "@/components/ui/Container";
 import background from "@/components/ui/GridBackground.module.css";
 import type { Dictionary, ServiceDetail, ServiceItem } from "@/content/i18n/types";
 import { projects } from "@/content/projects";
+import { serviceDefinitions } from "@/content/services";
 import type { Locale } from "@/lib/i18n";
-import { localizedPath, localizedProjectPath } from "@/lib/routes";
+import { localizedPath, localizedProjectPath, localizedServicePath } from "@/lib/routes";
 
 interface ServiceVisual {
   src: string;
@@ -41,12 +42,12 @@ const serviceDetailVisuals: Record<string, ServiceVisual> = {
     className: "object-contain",
   },
   "design-ux": {
-    src: "/projects/ilic-enterijer.webp",
-    width: 1894,
+    src: "/projects/os-dule-karaklajic.webp",
+    width: 1877,
     height: 868,
     alt: {
-      sr: "Prikaz web sajta Ilić Enterijer kao primer vizuelne organizacije sadržaja.",
-      en: "Ilić Enterijer website shown as an example of visual content organization.",
+      sr: "Prikaz web sajta OŠ Dule Karaklajić sa jasnom strukturom stranice.",
+      en: "OŠ Dule Karaklajić website screen with a clear page structure.",
     },
     className: "object-contain",
   },
@@ -61,12 +62,12 @@ const serviceDetailVisuals: Record<string, ServiceVisual> = {
     className: "object-contain",
   },
   "seo-performance": {
-    src: "/projects/os-dule-karaklajic.webp",
-    width: 1877,
+    src: "/projects/ilic-enterijer.webp",
+    width: 1894,
     height: 868,
     alt: {
-      sr: "Prikaz web sajta OŠ Dule Karaklajić sa jasnom strukturom stranice.",
-      en: "OŠ Dule Karaklajić website screen with a clear page structure.",
+      sr: "Prikaz web sajta Ilić Enterijer kao primer vizuelne organizacije sadržaja.",
+      en: "Ilić Enterijer website shown as an example of visual content organization.",
     },
     className: "object-contain",
   },
@@ -86,9 +87,9 @@ const serviceDetailVisuals: Record<string, ServiceVisual> = {
 const serviceCaseStudyLinks: Record<string, { slug: string; name: string }> = {
   "website-build": { slug: "casovi-francuskog", name: "Časovi Francuskog" },
   ecommerce: { slug: "anabelabebioprema", name: "Anabela Bebi Oprema" },
-  "design-ux": { slug: "ilic-enterijer", name: "Ilić Enterijer" },
+  "design-ux": { slug: "os-dule-karaklajic", name: "OŠ Dule Karaklajić" },
   "development-options": { slug: "buy-pallet-jacks", name: "Buy Pallet Jacks" },
-  "seo-performance": { slug: "os-dule-karaklajic", name: "OŠ Dule Karaklajić" },
+  "seo-performance": { slug: "ilic-enterijer", name: "Ilić Enterijer" },
   "maintenance-support": { slug: "coolfridgeguys", name: "Cool Fridge Guys" },
 };
 
@@ -152,6 +153,19 @@ function ServiceDetailCard({
       </div>
 
       <div className="flex flex-col gap-2.5 border-t border-border p-6 pt-4 md:px-8 md:pb-6">
+        {(() => {
+          const serviceDef = Object.values(serviceDefinitions).find((def) => def.id === item.id);
+          if (!serviceDef) return null;
+          return (
+            <Link
+              href={localizedServicePath(serviceDef.slugs[locale], locale)}
+              className="inline-flex min-h-11 items-center gap-1.5 text-small font-semibold text-brand underline underline-offset-4 hover:text-focus"
+            >
+              <span>{locale === "en" ? "Explore dedicated service page" : "Detaljnije o ovoj usluzi"}</span>
+              <ArrowRight aria-hidden="true" size={16} className="shrink-0" />
+            </Link>
+          );
+        })()}
         {caseStudyLink && (
           <Link
             href={localizedProjectPath(caseStudyLink.slug, locale)}

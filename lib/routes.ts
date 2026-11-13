@@ -1,4 +1,5 @@
 import { site, type NavigationItem } from "@/content/site";
+import { serviceDefinitions } from "@/content/services";
 import { defaultLocale, isLocale, type Locale, type Localized } from "@/lib/i18n";
 
 export type RouteKey = "home" | "portfolio" | "blog" | "services" | "about" | "contact" | "pricing";
@@ -60,6 +61,10 @@ export function localizedBlogPostPath(slug: string, locale: Locale): string {
   return `${localizedPath("blog", locale)}${encodeURIComponent(slug)}/`;
 }
 
+export function localizedServicePath(slug: string, locale: Locale): string {
+  return `${localizedPath("services", locale)}${encodeURIComponent(slug)}/`;
+}
+
 export function navigationItem(
   route: RouteKey,
   locale: Locale,
@@ -85,8 +90,15 @@ export function equivalentPath(path: string, targetLocale: Locale): string | nul
   const route = (Object.keys(routes) as RouteKey[]).find(
     (key) => routes[key].paths[locale] === segment,
   );
-  if (!route || (rest.length > 0 && ((route !== "portfolio" && route !== "blog") || rest.length !== 1))) {
-    return null;
+  if (!route) return null;
+  if (rest.length > 0) {
+    if (rest.length !== 1) return null;
+    if (route === "services") {
+      const service = Object.values(serviceDefinitions).find((item) => item.slugs[locale] === rest[0]);
+      if (!service) return null;
+      return `${localizedServicePath(service.slugs[targetLocale], targetLocale)}${url.search}${url.hash}`;
+    }
+    if (route !== "portfolio" && route !== "blog") return null;
   }
 
   const suffix = rest.length ? `${rest[0]}/` : "";
