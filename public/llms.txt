@@ -9,8 +9,9 @@
 - **Website**: https://nmarkdesigns.com
 - **Languages**: Serbian (Primary, `/sr/`), English (`/en/`)
 - **Key Stack**: Next.js (App Router), React, TypeScript, Tailwind CSS, WordPress (Headless / Monolith), Cloudflare, Node.js
-- **Partnership**: Official Hostinger Partner (Referral: https://www.hostinger.com?REFERRALCODE=JIPMARKOVUSK, Promo Code: JIPMARKOVUSK for 20% client discount)
-- **Value Proposition**: Senior-level boutique execution, zero agency overhead, 100/100 Core Web Vitals performance, conversion-focused design, and transparent pricing.
+- **Partnership**: Official Hostinger Partner. The partner offer provides 20% off the first term of eligible new hosting plans with subscriptions of at least 12 months. Domain services, renewals and previously purchased services are excluded; additional promo codes cannot be combined. Renewals use regular pricing. Check current eligibility and final pricing with Hostinger before purchase. NMark Designs may earn a commission through the partner link.
+- **Partner Offer Details**: https://nmarkdesigns.com/sr/cenovnik/#hostinger-partner (SR) | https://nmarkdesigns.com/en/pricing/#hostinger-partner (EN)
+- **Value Proposition**: Direct collaboration with the developer, performance-conscious development, clear paths to contact, and transparent pricing.
 
 ---
 
@@ -60,7 +61,7 @@
 - **URLs**:
   - Serbian: https://nmarkdesigns.com/sr/usluge/odrzavanje-i-hosting/
   - English: https://nmarkdesigns.com/en/services/website-maintenance/
-- **Description**: Continuous security monitoring, automated backups, uptime checks, and managed cloud hosting.
+- **Description**: Managed hosting and scoped Basic Care / Business Care plans: routine updates, basic security checks, and backup verification where supported. Content changes and priority request handling depend on the selected plan and agreement.
 - **Starting Price**: Hosting from €30/year, Maintenance care plans from €25/month.
 
 ---
@@ -84,7 +85,7 @@
 
 4. **Ilić Enterijer (Interior Design & Furniture)**:
    - Bespoke furniture, acoustic slat panels, and custom interior solutions.
-   - Result: Core Web Vitals 95+, semantic structured data, prominent local search visibility.
+   - Delivered: Custom website, semantic structured data, and local SEO setup. Performance and search outcomes depend on the implementation and ongoing operation.
    - URL: https://nmarkdesigns.com/sr/portfolio/ilic-enterijer/
 
 5. **Buy Pallet Jacks (Industrial Equipment / US Market)**:

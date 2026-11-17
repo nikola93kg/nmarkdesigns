@@ -1,4 +1,7 @@
 import type { Localized } from "@/lib/i18n";
+import { getCarePlanStartingPrice } from "@/content/pricing";
+
+const maintenanceStartingPrice = getCarePlanStartingPrice("basic-care");
 
 export type ServiceKey =
   | "websites"
@@ -39,6 +42,7 @@ export interface ServiceDetailDefinition {
     sr: string;
     en: string;
   };
+  priceCurrency?: "EUR" | "USD";
   pricingAnchor: string;
   relatedCaseStudySlug: string;
   audience: {
@@ -78,8 +82,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         en: "Website Development Services — Fast, Custom Business Websites",
       },
       description: {
-        sr: "Profesionalna izrada web sajtova po meri za firme i preduzetnike u Beogradu i Srbiji. Brzo učitavanje, Core Web Vitals 100/100, jasan dizajn i tehnički SEO temelji.",
-        en: "Custom website development for ambitious businesses. Built with Next.js and clean engineering for speed, conversions, Core Web Vitals excellence, and top Google rankings.",
+        sr: "Profesionalna izrada web sajtova po meri za firme i preduzetnike u Beogradu i Srbiji. Responzivan prikaz, optimizacija učitavanja, jasan dizajn i tehnički SEO temelji.",
+        en: "Custom website development for ambitious businesses. Built with Next.js or WordPress, clear content structure, responsive layouts, performance optimization and technical SEO foundations.",
       },
     },
     eyebrow: {
@@ -466,8 +470,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         en: "E-commerce technology stack",
       },
       description: {
-        sr: "Gradimo na proverenom, open-source rešenju koje garantuje stabilnost, bezbednost i potpunu kontrolu nad bazom podataka.",
-        en: "We build on battle-tested open-source systems that guarantee reliability, data sovereignty, and limitless scalability.",
+        sr: "Gradimo na proverenom open-source rešenju, uz podešavanje bezbednosti, održavanja i dogovorenih pristupa bazi podataka.",
+        en: "We build on established open-source systems, with security, maintenance and data access configured for the agreed scope.",
       },
       technologies: ["WordPress", "WooCommerce", "MySQL", "PHP", "Tailwind CSS", "Next.js (Headless opciono)"],
     },
@@ -699,7 +703,7 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
           },
           description: {
             sr: "Playwright E2E testovi i statička provera koda kako nijedna izmena u budućnosti ne bi pokvarila postojeće funkcije.",
-            en: "End-to-end automated testing to guarantee zero regressions during future feature releases and dependency updates.",
+            en: "End-to-end automated tests covering agreed user journeys to help detect regressions during feature releases and dependency updates.",
           },
         },
       ],
@@ -1034,7 +1038,7 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
     },
     metadata: {
       title: {
-        sr: "SEO, Optimizacija Brzine i AI Asistenti — Core Web Vitals 100/100",
+        sr: "SEO i optimizacija brzine sajta — audit i AI integracije",
         en: "SEO, Speed Optimization & AI — Core Web Vitals Excellence",
       },
       description: {
@@ -1051,8 +1055,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
       en: "Technical SEO, Core Web Vitals speed, and practical AI assistants",
     },
     heroDescription: {
-      sr: "Postavljamo čvrstu tehničku osnovu za pretraživače i korisnike: semantički HTML, Core Web Vitals performanse, brisanje suvišnog koda, AEO/GEO strukturiranje i implementaciju obučenih AI asistenata za posetioce.",
-      en: "We establish rock-solid engineering foundations for users and modern search engines: semantic HTML, Core Web Vitals 100/100 performance, AEO/GEO structured data, and custom-trained AI chatbots.",
+      sr: "Unapređujemo tehničku osnovu za posetioce i pretraživače: semantički HTML, merljive Core Web Vitals performanse, jasne odgovore, strukturirane podatke usklađene sa vidljivim sadržajem i praktične AI asistente.",
+      en: "We improve technical foundations for visitors and search engines: semantic HTML, measured Core Web Vitals improvements, clear answers, structured data that matches visible content, and practical AI assistants.",
     },
     startingPrice: {
       sr: "Od 100 €",
@@ -1126,12 +1130,12 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         },
         {
           title: {
-            sr: "Schema.org strukturirani podaci (AEO & GEO)",
-            en: "Schema.org structured data (AEO & GEO)",
+            sr: "Schema.org strukturirani podaci",
+            en: "Schema.org structured data",
           },
           description: {
-            sr: "Povezivanje entiteta Organization, Person, Service, FAQPage i LocalBusiness za prepoznavanje u AI odgovorima.",
-            en: "Semantic JSON-LD graphs linking Organization, Service, Breadcrumbs, and FAQPage for generative AI engine recognition.",
+            sr: "JSON-LD podaci o organizaciji, uslugama i navigaciji, prema stvarnom sadržaju stranice. Jasni podaci pomažu razumevanju sajta; ne garantuju izdvojene rezultate ili AI citate.",
+            en: "JSON-LD describing the organization, services and navigation where supported by the page content. Clear data helps explain the website; it does not guarantee rich results or AI citations.",
           },
         },
         {
@@ -1196,8 +1200,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Structured data & AI grounding",
           },
           description: {
-            sr: "Dodajemo semantički Schema.org kod za AEO/GEO i integrišemo AI asistenta ukoliko je dogovoren.",
-            en: "We deploy rich Schema JSON-LD graphs and wire up your verified knowledge base into the conversational AI assistant.",
+            sr: "Dodajemo strukturirane podatke koji odgovaraju vidljivom sadržaju. Ako je dogovorena integracija AI asistenta, povezujemo ga sa proverenim informacijama o poslovanju.",
+            en: "We add structured data that matches visible content. If an AI assistant is included in the agreed scope, we connect it to verified business information.",
           },
         },
         {
@@ -1237,10 +1241,10 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         },
         answer: {
           sr: [
-            "SEO optimizuje sajt za tradicionalne rezultate pretrage (plave linkove). AEO (Answer Engine Optimization) strukturira sadržaj tako da ga pretraživači i glasovni asistenti prikažu kao direktan izdvojeni odgovor. GEO (Generative Engine Optimization) gradi autoritet brenda tako da vas veliki jezički modeli (Perplexity, ChatGPT, Gemini) citiraju i preporučuju u AI sažecima.",
+            "SEO unapređuje dostupnost, relevantnost i kvalitet sajta za pretragu. AEO stavlja naglasak na jasne, direktne odgovore na pitanja. GEO se bavi time koliko je sadržaj koristan i pouzdan kao izvor u generativnim odgovorima. Ovi pristupi se preklapaju: tačni podaci, dostupne stranice, korisni odgovori i stvarne reference važni su za sve njih. Ne postoji poseban Schema.org kod koji garantuje AI citat, preporuku ili poziciju.",
           ],
           en: [
-            "SEO optimizes for traditional search engine result links. AEO formats answers directly for featured snippets and voice assistants. GEO builds entity authority so generative AI platforms (Perplexity, SearchGPT, Gemini) confidently recommend and cite your business.",
+            "SEO improves a website's accessibility to search engines, relevance and quality. AEO emphasizes clear, direct answers to questions. GEO considers how useful and trustworthy content is as a source in generative answers. These approaches overlap: accurate information, accessible pages, helpful answers and real references matter to all of them. No special Schema.org markup guarantees an AI citation, recommendation or ranking.",
           ],
         },
       },
@@ -1260,8 +1264,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         en: "Website Maintenance and Hosting Services — Reliable Support",
       },
       description: {
-        sr: "Pouzdano tehničko održavanje web sajtova i optimizovan managed hosting. Redovni backup, bezbednosna ažuriranja, praćenje dostupnosti (uptime) i brze izmene sadržaja.",
-        en: "Reliable website maintenance packages and managed hosting. Regular offsite backups, security monitoring, uptime checks, and priority technical support.",
+        sr: "Managed hosting i tehničko održavanje: ažuriranja, provere bezbednosti i rezervnih kopija u podržanom okruženju. Izmene sadržaja prema odabranom planu.",
+        en: "Managed hosting and website maintenance: updates, security and backup checks where supported. Content changes and priority support depend on the selected plan.",
       },
     },
     eyebrow: {
@@ -1273,13 +1277,14 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
       en: "Dependable hosting and ongoing technical care for complete peace of mind",
     },
     heroDescription: {
-      sr: "Jasno razdvajamo brzi hosting od aktivnog tehničkog održavanja. Pružamo optimizovanu infrastrukturu i fleksibilne mesečne pakete nege (Basic i Business Care) za redovna ažuriranja, backup i bezbednost bez vezivanja krutim ugovorima.",
-      en: "We clearly separate fast hosting from active technical care. We provide reliable cloud infrastructure and monthly care plans (Basic and Business Care) for security updates, backups, and peace of mind without lock-in contracts.",
+      sr: "Hosting i održavanje ugovaraju se zasebno. Basic Care obuhvata redovna ažuriranja, osnovne bezbednosne provere i proveru rezervnih kopija gde je podržana. Business Care dodaje manje izmene sadržaja, periodične provere performansi i prioritetnu obradu zahteva u dogovorenom obimu.",
+      en: "Hosting and maintenance are agreed separately. Basic Care covers routine updates, basic security checks, and backup verification where supported. Business Care adds minor content changes, periodic performance checks, and priority request handling within the agreed scope.",
     },
     startingPrice: {
-      sr: "Od 25 € / mes.",
-      en: "Starting from $40 / mo.",
+      sr: `Od ${maintenanceStartingPrice} € / mes.`,
+      en: `From €${maintenanceStartingPrice} / mo.`,
     },
+    priceCurrency: "EUR",
     pricingAnchor: "maintenance",
     relatedCaseStudySlug: "coolfridgeguys",
     audience: {
@@ -1296,13 +1301,13 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
           "Vlasnici firmi koji nemaju vremena da se bave tehničkim ažuriranjima i žele da se posvete svom poslu",
           "Kompanije kojima sajt donosi svakodnevne upite i ne smeju da priušte sate ili dane prekida rada",
           "Klijenti koji žele pouzdanog partnera za brze izmene tekstova, cenovnika i novih fotografija",
-          "Biznisi koji žele verifikovane rezervne kopije (backup) iz kojih se sajt može vratiti u minuti",
+          "Biznisi kojima je potrebna provera raspoloživih rezervnih kopija i dogovoren postupak oporavka sajta",
         ],
         en: [
           "Business owners who lack the time or desire to navigate technical updates and server configs",
           "Operations that depend on daily inquiries and cannot afford costly downtime",
-          "Clients who need a reliable developer on call for fast copy, pricing, and image updates",
-          "Brands requiring verified offsite backups that can restore operations within minutes",
+          "Clients who need agreed support for copy, pricing, and image updates through Business Care",
+          "Businesses needing available backups checked and a recovery process agreed for their setup",
         ],
       },
     },
@@ -1312,8 +1317,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         en: "Maintenance plan deliverables",
       },
       description: {
-        sr: "Jasno definisane aktivnosti koje garantuju stabilnost i ažurnost vašeg sajta.",
-        en: "Strictly defined operational routines that safeguard uptime, security, and content freshness.",
+        sr: "Basic Care obuhvata osnovne tehničke provere. Business Care dodaje manje izmene sadržaja, provere performansi i prioritetnu obradu zahteva. Aktivnosti zavise od odabranog plana i podržanog okruženja.",
+        en: "Basic Care covers core technical checks. Business Care adds minor content changes, performance checks, and priority request handling. Activities depend on the selected plan and supported setup.",
       },
       items: [
         {
@@ -1322,38 +1327,38 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Proactive platform & plugin updates",
           },
           description: {
-            sr: "Bezbedno ažuriranje CMS-a, biblioteka i dodataka uz prethodno testiranje kako izmene ne bi pokvarile sajt.",
-            en: "Pre-tested updates to core systems, runtime libraries, and plugins to eliminate security vulnerabilities.",
+            sr: "Redovna ažuriranja CMS-a i dodataka gde je primenjivo, uz kontrolu rada sajta u dogovorenom obimu. Održavanje namenskih aplikacija ugovara se kroz Custom Support.",
+            en: "Routine CMS and plugin updates where applicable, with website checks within the agreed scope. Custom application maintenance is agreed through Custom Support.",
           },
         },
         {
           title: {
-            sr: "Automatizovani eksterni backup",
-            en: "Automated offsite backup routines",
+            sr: "Provera rezervnih kopija",
+            en: "Backup verification",
           },
           description: {
-            sr: "Redovne rezervne kopije baze podataka i fajlova koje se čuvaju na izdvojenom serveru uz periodičnu proveru povraćaja.",
-            en: "Regular snapshots of files and databases stored safely offsite with verified restore procedures.",
+            sr: "Proveravamo raspoložive rezervne kopije gde postojeća postavka to podržava. Učestalost, mesto čuvanja i postupak oporavka definišu se prema okruženju i dogovorenom obimu.",
+            en: "We verify available backups where the setup supports it. Backup frequency, storage location, and recovery procedures depend on the environment and agreed scope.",
           },
         },
         {
           title: {
-            sr: "24/7 nadzor dostupnosti (Uptime monitoring)",
-            en: "24/7 automated uptime monitoring",
+            sr: "Provera zdravlja i dostupnosti sajta",
+            en: "Website health and availability checks",
           },
           description: {
-            sr: "Automatski nadzor rada sajta u realnom vremenu: ukoliko dođe do problema na serveru, reagujemo odmah.",
-            en: "Continuous health checks alerting us the moment an incident occurs, enabling instant remediation.",
+            sr: "Redovno proveravamo zdravlje i dostupnost sajta. Automatska upozorenja zavise od podešenog nadzora; rok i način intervencije ugovaraju se zasebno. Planovi ne uključuju 24/7 dežurstvo.",
+            en: "We regularly check website health and availability. Automated alerts depend on the monitoring setup; response times and intervention scope are agreed separately. Plans do not include staffed 24/7 support.",
           },
         },
         {
           title: {
-            sr: "Bezbednosno skeniranje i SSL nadzor",
-            en: "Security scanning & SSL renewal",
+            sr: "Osnovne bezbednosne i SSL provere",
+            en: "Basic security and SSL checks",
           },
           description: {
-            sr: "Provera malicioznog koda, nadzor automatske obnove SSL sertifikata i zaštita od neželjenog saobraćaja.",
-            en: "Automated malware scanning, SSL certificate lifecycle management, and spam mitigation.",
+            sr: "Osnovne bezbednosne provere i provera SSL sertifikata u dogovorenom obimu, uz alate koje podržava izabrano okruženje.",
+            en: "Basic security and SSL certificate checks within the agreed scope, using tools supported by the selected environment.",
           },
         },
         {
@@ -1362,8 +1367,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Content updates & priority support",
           },
           description: {
-            sr: "Sve izmene tekstova, novih projekata, radnog vremena ili fotografija rešavamo u dogovorenom roku bez komplikacija.",
-            en: "Fast execution of copy updates, new portfolio entries, pricing changes, and emergency technical troubleshooting.",
+            sr: "Business Care uključuje manje izmene tekstova i fotografija, provere performansi i prioritetnu obradu u odnosu na Basic Care. Veće izmene ugovaraju se posebno.",
+            en: "Business Care includes minor text and image changes, performance checks, and priority handling relative to Basic Care. Larger changes are agreed separately.",
           },
         },
       ],
@@ -1374,10 +1379,10 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         en: "Infrastructure & tooling",
       },
       description: {
-        sr: "Pouzdani cloud provajderi i profesionalni alati za nadzor bezbednosti i stabilnosti.",
-        en: "Enterprise cloud hosting providers and dedicated monitoring systems.",
+        sr: "Hosting i alati biraju se prema tehnologiji i resursima sajta. Nadzor i provera rezervnih kopija zavise od podržanog okruženja i ugovorenog plana.",
+        en: "Hosting and tools are selected for the website's technology and resource needs. Monitoring and backup verification depend on the supported environment and agreed plan.",
       },
-      technologies: ["Managed Cloud Hosting", "Automated Off-site Backup", "Uptime Monitoring", "SSL TLS 1.3", "Cloudflare CDN", "Security Firewalls"],
+      technologies: ["Managed Hosting", "Backup Verification", "Website Health Checks", "SSL / HTTPS"],
     },
     process: {
       title: {
@@ -1385,8 +1390,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         en: "How maintenance works",
       },
       description: {
-        sr: "Jednostavna mesečna saradnja bez dugoročnog vezivanja — tu smo kad god vam zatrebamo.",
-        en: "Frictionless monthly collaboration with zero lock-in contracts—reliable care whenever you need it.",
+        sr: "Mesečna saradnja sa definisanim aktivnostima, obimom podrške i načinom prijave zahteva.",
+        en: "Monthly collaboration with defined activities, support scope, and a clear way to submit requests.",
       },
       steps: [
         {
@@ -1396,8 +1401,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Onboarding health check",
           },
           description: {
-            sr: "Pregledamo postojeći sajt, kreiramo početni sigurnosni backup, proveravamo verzije softvera i podešavamo monitoring.",
-            en: "We inspect site health, take a clean baseline backup, verify plugin licenses, and wire up uptime monitors.",
+            sr: "Pregledamo sajt, verzije softvera i raspoložive rezervne kopije. Dogovaramo odabrani plan, podržano okruženje i način praćenja dostupnosti.",
+            en: "We inspect the website, software versions, and available backups. We agree on the plan, supported environment, and availability checks.",
           },
         },
         {
@@ -1407,8 +1412,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Monthly upkeep routines",
           },
           description: {
-            sr: "Svakog meseca vršimo kontrolisana ažuriranja, proveravamo sigurnost i kreiramo izveštaj o zdravlju sajta.",
-            en: "Each month we deploy tested updates, verify backup viability, and monitor site health.",
+            sr: "Vršimo ažuriranja gde je primenjivo, osnovne bezbednosne provere i proveru rezervnih kopija gde je podržana. Business Care uključuje i mesečni pregled tehničkog stanja.",
+            en: "We perform updates where applicable, basic security checks, and backup verification where supported. Business Care also includes a monthly technical overview.",
           },
         },
         {
@@ -1418,19 +1423,19 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Content update requests",
           },
           description: {
-            sr: "Sve izmene šaljete direktno putem emaila ili poruke, a mi ih unosimo i optimizujemo za prikaz na sajtu.",
-            en: "Simply send text or image updates via email, and we publish them formatted and optimized.",
+            sr: "Manje izmene tekstova i fotografija u Business Care planu šaljete emailom ili porukom. Izmene izvan ugovorenog obima dogovaraju se zasebno.",
+            en: "Submit minor text and image changes under Business Care by email or message. Changes outside the agreed scope are quoted separately.",
           },
         },
         {
           step: "04",
           title: {
-            sr: "Prioritetna intervencija u slučaju potrebe",
-            en: "Priority incident resolution",
+            sr: "Obrada tehničkih zahteva",
+            en: "Handling technical requests",
           },
           description: {
-            sr: "Ukoliko se javi neočekivan problem ili prekid rada, vaša lokacija ima prioritet u brzom rešavanju.",
-            en: "In the rare event of an infrastructure hiccup, your site receives top-priority resolution.",
+            sr: "Manje tehničke smetnje rešavamo u okviru ugovorenog plana. Business Care ima prioritet u odnosu na Basic Care; odziv i veće intervencije definišu se dogovorom.",
+            en: "Minor technical issues are handled within the agreed plan. Business Care has priority over Basic Care; response times and larger interventions are agreed separately.",
           },
         },
       ],
@@ -1443,11 +1448,11 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         },
         answer: {
           sr: [
-            "Hosting je zakup prostora i resursa na serveru kako bi sajt bio dostupan na internetu. Tehničko održavanje je aktivan inženjerski rad na sajtu: ažuriranje softvera, provera bezbednosti, kreiranje i testiranje backup-a i unošenje izmena sadržaja.",
+            "Hosting je zakup prostora i resursa na serveru kako bi sajt bio dostupan na internetu. Basic Care održavanje obuhvata ažuriranja gde je primenjivo, osnovne bezbednosne provere i proveru rezervnih kopija gde je podržana. Business Care dodaje manje izmene sadržaja, provere performansi i prioritetnu obradu zahteva.",
             "Možete imati hosting bez održavanja, ali tada sami snosite odgovornost za bezbednost i kvarove na sajtu.",
           ],
           en: [
-            "Hosting provides the physical server resources and bandwidth to keep your site online. Maintenance is active developer engineering: updating core software, testing backups, resolving errors, and updating content.",
+            "Hosting provides server resources to keep your website online. Basic Care covers updates where applicable, basic security checks, and backup verification where supported. Business Care adds minor content changes, performance checks, and priority request handling.",
             "You can purchase hosting without maintenance, but you remain personally responsible for updates, security, and repairs.",
           ],
         },

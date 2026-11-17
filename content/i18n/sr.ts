@@ -1,4 +1,11 @@
 import type { Dictionary } from "./types";
+import { getCarePlanStartingPrice, getWebsiteStartingPrice } from "@/content/pricing";
+
+const landingStartingPrice = getWebsiteStartingPrice("landing-page");
+
+const hostingStartingPrice = getCarePlanStartingPrice("hosting");
+const basicCareStartingPrice = getCarePlanStartingPrice("basic-care");
+const businessCareStartingPrice = getCarePlanStartingPrice("business-care");
 
 const sr = {
   navigation: {
@@ -124,7 +131,7 @@ const sr = {
         {
           id: "maintenance",
           title: "Hosting i tehničko održavanje",
-          description: "Optimizovan hosting i definisani mesečni paketi održavanja (Basic i Business Care) za redovna ažuriranja, backup i bezbednost.",
+          description: "Managed hosting i mesečni Basic Care i Business Care planovi za ažuriranja, osnovne bezbednosne provere i proveru rezervnih kopija gde je podržana, u dogovorenom obimu.",
         },
       ],
     },
@@ -209,15 +216,15 @@ const sr = {
         {
           id: "maintenance-support",
           title: "Hosting i tehničko održavanje",
-          description: "Jasno razdvajamo brzi hosting od tehničkog održavanja. Pružamo optimizovanu infrastrukturu i fleksibilne mesečne pakete nege (Basic i Business Care) za miran rad.",
+          description: "Hosting i tehničko održavanje ugovaraju se zasebno. Basic Care obuhvata osnovnu tehničku brigu, a Business Care dodaje manje izmene sadržaja i prioritetnu obradu zahteva.",
           when: "Korisno je ako želite pouzdanog partnera koji brine o zdravlju i stabilnosti vašeg sajta bez vezivanja krutim dugoročnim ugovorima.",
           includes: [
             "Managed hosting sa SSL sertifikatom i osnovnim nadzorom",
             "redovna ažuriranja CMS-a i provere ranjivosti",
-            "verifikaciju automatskih rezervnih kopija (backup)",
-            "ažuriranje sadržaja i prioritetnu tehničku podršku",
+            "proveru rezervnih kopija gde je podržana postojećim okruženjem",
+            "manje izmene sadržaja, provere performansi i prioritetnu obradu zahteva kroz Business Care",
           ],
-          startingPrice: "Od 25 € / mes.",
+          startingPrice: `Od ${basicCareStartingPrice} € / mes.`,
           pricingAnchor: "maintenance",
         },
       ],
@@ -312,7 +319,7 @@ const sr = {
         {
           id: "packages",
           title: "Paketi izrade web sajtova",
-          price: "Od 300 €",
+          price: `Od ${getWebsiteStartingPrice("landing-page")} €`,
           description: "Landing Page (300 €), Poslovni sajt (550 €), Napredni sajt (900 €) ili Web prodavnica (1.200 €).",
           anchor: "packages",
           actionLabel: "Pogledajte pakete",
@@ -336,8 +343,8 @@ const sr = {
         {
           id: "maintenance",
           title: "Hosting i održavanje",
-          price: "Od 25 € / mes.",
-          description: "Managed hosting (30 €/god), Basic Care (25 €/mes) i Business Care (50 €/mes) planovi podrške.",
+          price: `Od ${basicCareStartingPrice} € / mes.`,
+          description: `Managed hosting (od ${hostingStartingPrice} €/god), Basic Care (od ${basicCareStartingPrice} €/mes) i Business Care (od ${businessCareStartingPrice} €/mes) planovi podrške.`,
           anchor: "maintenance",
           actionLabel: "Planovi održavanja",
         },
@@ -433,17 +440,20 @@ const sr = {
   },
   pricing: {
     metadata: {
-      title: "Cenovnik izrade web sajtova 2026 | NMark Designs",
-      description: "Pogledajte početne cene izrade web sajtova, WordPress i WooCommerce prodavnica, SEO optimizacije, AI integracija i održavanja.",
+      title: `Izrada sajta — cenovnik i paketi od ${landingStartingPrice} € | NMark Designs`,
+      description: "Aktuelni NMark Designs paketi: landing stranica od 300 €, poslovni sajt od 550 €, napredni sajt od 900 € i web prodavnica od 1.200 €. Pogledajte obim i troškove.",
     },
     intro: {
       eyebrow: "Cenovnik digitalnih usluga",
-      title: "Jasne cene. Rešenja po meri",
-      description: "Od jednostavnog prezentacionog sajta do napredne web aplikacije — odaberite rešenje koje odgovara vašem poslovanju, ciljevima i budžetu.",
+      title: "Cenovnik izrade sajtova i web usluga",
+      description: "Pogledajte početne cene NMark Designs paketa i šta svaki obuhvata. Konačna ponuda zavisi od funkcija, sadržaja i obima projekta; hosting, održavanje i licence dogovaraju se zasebno.",
       primaryAction: "Zatražite ponudu",
       secondaryAction: "Pogledajte pakete",
     },
     websiteDevelopment: {
+      resourcesLabel: "Cene, obim i izbor sajta",
+      serviceAction: "Izrada sajta — obim usluge i primeri",
+      guideAction: "Kako planirati budžet za sajt",
       eyebrow: "Izrada web sajtova",
       title: "Paketi izrade web sajtova",
       description: "Početne cene za kompletna web rešenja. Konačni budžet zavisi od specifičnih funkcionalnosti, pripremljenosti materijala i tehničkog obima projekta.",
@@ -454,7 +464,7 @@ const sr = {
       packages: {
         "landing-page": {
           name: "Landing Page",
-          price: "Od 300 €",
+          price: `Od ${getWebsiteStartingPrice("landing-page")} €`,
           description: "Profesionalna jednostranična prezentacija za promociju određene usluge, proizvoda, marketinške kampanje ili konkretne ponude.",
           features: [
             "Jedna profesionalno dizajnirana stranica",
@@ -469,7 +479,7 @@ const sr = {
         },
         "business-website": {
           name: "Poslovni sajt",
-          price: "Od 550 €",
+          price: `Od ${getWebsiteStartingPrice("business-website")} €`,
           description: "Profesionalan višestranični sajt za preduzetnike, male biznise, samostalne profesionalce i lokalne brendove.",
           features: [
             "Do 5 standardnih sadržajnih stranica",
@@ -484,7 +494,7 @@ const sr = {
         },
         "advanced-website": {
           name: "Napredni sajt",
-          price: "Od 900 €",
+          price: `Od ${getWebsiteStartingPrice("advanced-website")} €`,
           description: "Zahtevniji sajt sa namenskim komponentama, upravljanjem sadržajem (CMS) ili specifičnim interaktivnim funkcionalnostima.",
           features: [
             "Napredniji vizuelni i funkcionalni zahtevi",
@@ -498,7 +508,7 @@ const sr = {
         },
         ecommerce: {
           name: "Web prodavnica",
-          price: "Od 1.200 €",
+          price: `Od ${new Intl.NumberFormat("sr-RS").format(getWebsiteStartingPrice("ecommerce"))} €`,
           description: "Online prodavnica za brendove kojima je potreban profesionalan katalog proizvoda i stabilan proces naručivanja.",
           features: [
             "Instalacija i podešavanje prodavnice (WooCommerce)",
@@ -567,14 +577,14 @@ const sr = {
     maintenance: {
       eyebrow: "Kontinuirana podrška",
       title: "Hosting i tehničko održavanje sajta",
-      description: "Hosting i tehničko održavanje su dve različite usluge. Hosting obezbeđuje server i dostupnost, dok održavanje brine o redovnim ažuriranjima, bezbednosti i stabilnosti koda.",
+      description: "Hosting obezbeđuje server i osnovnu dostupnost sajta. Tehničko održavanje obuhvata ažuriranja, bezbednosne provere i proveru rezervnih kopija gde je podržana. Obim rada i odziv zavise od odabranog plana i dogovora.",
       notice: "Usluge održavanja su opcione i ugovaraju se po želji klijenta. Domen i licencni troškovi registruju se zasebno.",
       ctaLabel: "Odaberite plan",
       plans: {
         hosting: {
           name: "Managed hosting",
           target: "Za podržane, lagane prezentacione sajtove",
-          price: "Od 30 € / god.",
+          price: `Od ${hostingStartingPrice} € / god.`,
           features: [
             "Optimizovana infrastruktura za podržane sajtove",
             "Podešavanje i konfiguracija servera",
@@ -586,12 +596,12 @@ const sr = {
         "basic-care": {
           name: "Basic Care održavanje",
           target: "Za stabilne poslovne sajtove",
-          price: "Od 25 € / mes.",
+          price: `Od ${basicCareStartingPrice} € / mes.`,
           features: [
             "Redovna ažuriranja CMS-a i dodataka gde je primenjivo",
             "Redovna provera zdravlja i dostupnosti sajta",
             "Osnovne bezbednosne provere",
-            "Verifikacija backup kopija",
+            "Provera rezervnih kopija gde je podržana postojećim okruženjem",
             "Otklanjanje manjih tehničkih smetnji u dogovorenom obimu",
           ],
           scopeNote: "Ne uključuje 24/7 dežurstvo niti neograničene sate podrške.",
@@ -599,7 +609,7 @@ const sr = {
         "business-care": {
           name: "Business Care održavanje",
           target: "Za aktivne sajtove i brži odziv",
-          price: "Od 50 € / mes.",
+          price: `Od ${businessCareStartingPrice} € / mes.`,
           features: [
             "Sve aktivnosti iz Basic Care plana",
             "Manje izmene i dopune sadržaja (tekstovi, slike)",
@@ -714,7 +724,7 @@ const sr = {
           id: "domain-and-hosting",
           question: "Da li su domen i hosting uključeni u cenu?",
           paragraphs: [
-            "Domen i hosting nisu automatski uključeni u cenu razvoja sajta jer zavise od potreba projekta. Pomažem vam pri izboru i registraciji, a možete se odlučiti za NMark Designs Managed hosting (od 30 € godišnje za lagane sajtove) ili zakupiti hosting samostalno kod eksternog provajdera.",
+            `Domen i hosting nisu automatski uključeni u cenu razvoja sajta jer zavise od potreba projekta. Pomažem vam pri izboru i registraciji, a možete se odlučiti za NMark Designs Managed hosting (od ${hostingStartingPrice} € godišnje za lagane sajtove) ili zakupiti hosting samostalno kod eksternog provajdera.`,
           ],
         },
         {
@@ -735,7 +745,7 @@ const sr = {
           id: "maintenance-options",
           question: "Da li nudite redovno tehničko održavanje?",
           paragraphs: [
-            "Da, održavanje je opcionalno i podeljeno na Basic Care (od 25 € mesečno za bezbednost i ažuriranja), Business Care (od 50 € mesečno sa uključenim manjim izmenama sadržaja i prioritetnim odzivom) i Custom Support za zahtevnije aplikacije i WooCommerce prodavnice.",
+            `Da. Basic Care (od ${basicCareStartingPrice} € mesečno) uključuje ažuriranja gde je primenjivo, osnovne bezbednosne provere i proveru rezervnih kopija gde je podržana. Business Care (od ${businessCareStartingPrice} € mesečno) dodaje manje izmene sadržaja, provere performansi i prioritetnu obradu zahteva. Custom Support je za zahtevnije aplikacije i WooCommerce prodavnice. Obim rada i odziv se dogovaraju; planovi ne uključuju 24/7 dežurstvo.`,
           ],
         },
         {
@@ -906,7 +916,7 @@ const sr = {
         {
           id: "maintenance",
           question: "Šta obuhvata tehničko održavanje sajta?",
-          paragraphs: ["Održavanje uključuje tehničku podršku, sigurnosne provere, ažuriranja, redovan backup i postepena poboljšanja performansi i sadržaja."],
+          paragraphs: ["Basic Care obuhvata ažuriranja gde je primenjivo, osnovne bezbednosne provere i proveru rezervnih kopija gde je podržana. Business Care dodaje manje izmene sadržaja, provere performansi i prioritetnu obradu zahteva. Obim rada i odziv se dogovaraju; planovi ne uključuju 24/7 dežurstvo."],
         },
       ],
     },

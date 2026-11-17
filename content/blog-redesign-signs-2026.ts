@@ -1,5 +1,6 @@
 import type { BlogSection } from "@/content/blog";
 import type { Editorial } from "@/content/blog-editorial";
+import { getHostingerCopy, hostingerPartner } from "@/content/partners";
 
 const sectionsSr: readonly BlogSection[] = [
   {
@@ -73,11 +74,11 @@ const sectionsSr: readonly BlogSection[] = [
           {
             heading: "04. Sajt se sporo učitava i pada na Core Web Vitals testovima",
             paragraphs: [
-              "Svaka sekunda čekanja duže od 2.5 sekunde smanjuje šansu za upit za više od 20%. Zastarele skripte, prevelike fotografije i pretrpan kod obaraju pozicije na Google-u. Redizajn podrazumeva prelazak na moderne formate slika (WebP), čišćenje nepotrebnog JavaScript-a i postizanje visokih ocena performansi.",
-              "Često je usko grlo i zastarela hosting infrastruktura. Ako tokom redizajna migrirate sajt, preporučujemo prelazak na optimizovan NVMe Cloud hosting sa LiteSpeed podrškom. Kroz NMark Designs partnerski program možete iskoristiti 20% popusta na Hostinger hosting planove.",
+              "Sporo učitavanje može da oteža korišćenje sajta i navede posetioce da odustanu. Prevelike fotografije, nepotrebne skripte i loše keširanje mogu biti deo problema. Pre redizajna izmerite stvarne stranice na telefonu i proverite Core Web Vitals podatke kada su dostupni, pa odredite koje izmene imaju smisla.",
+              "Hosting takođe može biti usko grlo, ali promena provajdera nije automatsko rešenje. Ako merenja pokažu da je infrastruktura problem, uporedite resurse, serversko okruženje, keširanje, podršku i trošak obnove prema potrebama sajta.",
             ],
             list: [
-              "Preporuka za brzu infrastrukturu: Hostinger Cloud i WordPress hosting planovi obezbeđuju NVMe skladište i automatsko keširanje.",
+              "Kod Hostingera proverite specifikacije konkretnog plana: vrsta skladišta, podrška za keširanje i serverske mogućnosti zavise od izabranog proizvoda i paketa.",
             ],
           },
           {
@@ -118,6 +119,11 @@ const sectionsSr: readonly BlogSection[] = [
           },
         ],
       },
+      {
+        type: "linkList",
+        title: getHostingerCopy("sr").title,
+        items: [{ label: getHostingerCopy("sr").offerAction, href: hostingerPartner.url }],
+      },
     ],
   },
   {
@@ -144,10 +150,6 @@ const sectionsSr: readonly BlogSection[] = [
           {
             label: "NMark Designs cenovnik — paketi izrade i redizajna od 400 €",
             href: "/sr/cenovnik/#additional-services",
-          },
-          {
-            label: "Hostinger — pouzdan NVMe i WordPress hosting uz 20% popusta",
-            href: "https://www.hostinger.com?REFERRALCODE=JIPMARKOVUSK",
           },
           {
             label: "Google PageSpeed Insights — proverite brzinu svog trenutnog sajta",
@@ -273,11 +275,11 @@ const sectionsEn: readonly BlogSection[] = [
           {
             heading: "04. Slow page speed and failing Core Web Vitals scores",
             paragraphs: [
-              "Every second of delay beyond 2.5 seconds degrades conversion rates by over 20%. Bulky legacy scripts, uncompressed images, and outdated builders hurt Google rankings. A proper redesign deploys modern image formats (WebP), prunes unnecessary JavaScript, and achieves green Core Web Vitals scores.",
-              "Often, the bottleneck stems from an antiquated hosting environment. When migrating your website during a redesign, we recommend switching to an optimized NVMe Cloud hosting stack with LiteSpeed caching. You can take advantage of 20% off Hostinger plans through our partner link.",
+              "Slow loading can make a website harder to use and lead visitors to leave. Oversized images, unnecessary scripts and poor caching may contribute. Before committing to a redesign, measure real pages on mobile and review Core Web Vitals data where available, then decide which changes address the problem.",
+              "Hosting can also be a bottleneck, but changing providers is not an automatic fix. If measurements identify infrastructure as the issue, compare resources, server environments, caching, support and renewal costs against the website's requirements.",
             ],
             list: [
-              "Recommended infrastructure: Hostinger Cloud and WordPress hosting plans deliver NVMe performance, automatic caching, and high reliability.",
+              "Check the specific Hostinger plan: storage type, caching support and server capabilities depend on the selected product and package.",
             ],
           },
           {
@@ -318,6 +320,11 @@ const sectionsEn: readonly BlogSection[] = [
           },
         ],
       },
+      {
+        type: "linkList",
+        title: getHostingerCopy("en").title,
+        items: [{ label: getHostingerCopy("en").offerAction, href: hostingerPartner.url }],
+      },
     ],
   },
   {
@@ -344,10 +351,6 @@ const sectionsEn: readonly BlogSection[] = [
           {
             label: "NMark Designs pricing — website redesign packages starting from €400",
             href: "/en/pricing/#additional-services",
-          },
-          {
-            label: "Hostinger — reliable NVMe Cloud & WordPress hosting (20% off)",
-            href: "https://www.hostinger.com?REFERRALCODE=JIPMARKOVUSK",
           },
           {
             label: "Google PageSpeed Insights — test your current site's speed",
@@ -439,10 +442,6 @@ export const redesignSigns2026: Editorial = {
     {
       label: "Google Search Central — Core Web Vitals Guidance",
       href: "https://developers.google.com/search/docs/appearance/core-web-vitals",
-    },
-    {
-      label: "Hostinger — Fast WordPress and Cloud Infrastructure (Partner)",
-      href: "https://www.hostinger.com?REFERRALCODE=JIPMARKOVUSK",
     },
     {
       label: "Google Search Central — Creating Helpful, Reliable Content",

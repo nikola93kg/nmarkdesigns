@@ -8,6 +8,7 @@ import { aiChatbotGuide2026 } from "@/content/blog-ai-chatbot-2026";
 import { wordpressVsNextjs2026 } from "@/content/blog-wordpress-nextjs-2026";
 import { seoAeoGeo2026 } from "@/content/blog-seo-aeo-geo-2026";
 import { redesignSigns2026 } from "@/content/blog-redesign-signs-2026";
+import { aiBusinessCheck2026 } from "@/content/blog-ai-business-check-2026";
 
 export interface Editorial {
   image: string;
@@ -48,6 +49,7 @@ export const blogLabels = {
     publisher: "Objavljuje NMark Designs",
     author: "Nikola Marković",
     authorPrefix: "Autor",
+    updated: "Ažurirano",
     share: {
       title: "Podelite tekst",
       intro: "Pošaljite članak nekome kome može da koristi.",
@@ -73,6 +75,7 @@ export const blogLabels = {
     publisher: "Published by NMark Designs",
     author: "Nikola Marković",
     authorPrefix: "Author",
+    updated: "Updated",
     share: {
       title: "Share this article",
       intro: "Send the article to someone who may find it useful.",
@@ -89,6 +92,7 @@ export const blogLabels = {
 } as const;
 
 export const blogEditorial: Record<string, Editorial> = {
+  "ai-business-check-2026": aiBusinessCheck2026,
   "redesign-signs-2026": redesignSigns2026,
   "seo-aeo-geo-2026": seoAeoGeo2026,
   "wordpress-vs-nextjs-poslovni-sajt": wordpressVsNextjs2026,

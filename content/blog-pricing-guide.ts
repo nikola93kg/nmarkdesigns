@@ -1,4 +1,65 @@
 import type { Editorial } from "@/content/blog-editorial";
+import type { BlogSection } from "@/content/blog";
+import { getWebsiteStartingPrice } from "@/content/pricing";
+
+const prices = {
+  landing: getWebsiteStartingPrice("landing-page"),
+  business: getWebsiteStartingPrice("business-website"),
+  advanced: getWebsiteStartingPrice("advanced-website"),
+  ecommerce: getWebsiteStartingPrice("ecommerce"),
+};
+
+const currentOfferSr: BlogSection = {
+  heading: "Aktuelne početne cene NMark Designs paketa",
+  paragraphs: [
+    "Ovo je konkretna NMark Designs ponuda, proverena 17. novembra 2026. Širi budžetski rasponi u nastavku služe poređenju obima i nisu naš cenovnik, zvanični prosek za Srbiju ili potvrda cene bilo kog projekta iz portfolija.",
+    "Početna cena odnosi se na osnovni obim paketa. Konačan iznos zavisi od sadržaja, jezika, funkcija i integracija. Domen, hosting, licence i održavanje razmatraju se zasebno; tačan obim i troškovi definišu se u ponudi.",
+  ],
+  blocks: [
+    { type: "table", caption: "NMark Designs početne cene — osnovni obim", columns: ["Paket", "Početna cena", "Osnovni obim"], rows: [
+      ["Landing stranica", `Od ${prices.landing} €`, "Jedna stranica za jednu uslugu, proizvod ili kampanju"],
+      ["Poslovni sajt", `Od ${prices.business} €`, "Do pet standardnih sadržajnih stranica"],
+      ["Napredni sajt", `Od ${prices.advanced} €`, "Zahtevniji prikaz, CMS ili dodatna interaktivnost prema specifikaciji"],
+      ["Web prodavnica", `Od ${new Intl.NumberFormat("sr-RS").format(prices.ecommerce)} €`, "Osnovna WooCommerce prodavnica sa dogovorenim katalogom i naručivanjem"],
+      ["Custom web aplikacija", "Po ponudi", "Namenske funkcije, korisnički nalozi ili integracije"],
+    ] },
+    { type: "linkList", title: "Izaberite naredni korak", items: [
+      { label: "NMark cenovnik — uključene stavke i ograničenja svakog paketa", href: "/sr/cenovnik/#packages" },
+      { label: "Izrada web sajtova — proces i obim usluge", href: "/sr/usluge/izrada-web-sajtova/" },
+      { label: "Izrada web prodavnice — funkcije i dogovor o obimu", href: "/sr/usluge/web-prodavnice/" },
+    ] },
+    { type: "linkList", title: "Primeri iz našeg portfolija", items: [
+      { label: "OŠ Dule Karaklajić — reorganizacija sadržaja i namenski WordPress sajt", href: "/sr/portfolio/os-dule-karaklajic/" },
+      { label: "Anabela Bebi Oprema — katalog i WooCommerce prodavnica", href: "/sr/portfolio/anabelabebioprema/" },
+    ] },
+  ],
+};
+
+const currentOfferEn: BlogSection = {
+  heading: "Current NMark Designs starting prices",
+  paragraphs: [
+    "These are NMark Designs packages, checked on November 17, 2026. The broader budgeting ranges below help compare scope. They are not our price list, an official Serbian market average or evidence of any portfolio project's budget.",
+    "Starting prices cover the baseline package scope. Your final quote depends on content, languages, features and integrations. Domain, hosting, licences and maintenance are considered separately; the proposal defines the actual scope and costs.",
+  ],
+  blocks: [
+    { type: "table", caption: "NMark Designs starting prices — baseline scope", columns: ["Package", "Starting price", "Baseline scope"], rows: [
+      ["Landing page", `From €${prices.landing}`, "One page for a focused service, product or campaign"],
+      ["Business website", `From €${prices.business}`, "Up to five standard content pages"],
+      ["Advanced website", `From €${prices.advanced}`, "More demanding layouts, CMS or interactivity as specified"],
+      ["Online store", `From €${new Intl.NumberFormat("en").format(prices.ecommerce)}`, "A baseline WooCommerce store with agreed catalogue and ordering scope"],
+      ["Custom web application", "Quoted individually", "Custom features, user accounts or integrations"],
+    ] },
+    { type: "linkList", title: "Choose your next step", items: [
+      { label: "NMark pricing: package inclusions and limits", href: "/en/pricing/#packages" },
+      { label: "Website development: process and service scope", href: "/en/services/website-development/" },
+      { label: "E-commerce development: features and scope", href: "/en/services/ecommerce-development/" },
+    ] },
+    { type: "linkList", title: "Examples from our portfolio", items: [
+      { label: "Dule Karaklajić primary school: content reorganization and custom WordPress development", href: "/en/portfolio/os-dule-karaklajic/" },
+      { label: "Anabela Bebi Oprema: catalogue and WooCommerce store", href: "/en/portfolio/anabelabebioprema/" },
+    ] },
+  ],
+};
 
 const priceRows = [
   ["Landing page", "250-900 EUR", "1-2 nedelje", "kampanja, jedna usluga, prikupljanje upita"],
@@ -67,11 +128,12 @@ export const websitePricingSerbia2026 = {
     en: "Website pricing",
   },
   answer: {
-    sr: "Izrada web sajta u Srbiji 2026. nema jednu zvaničnu prosečnu cenu. Na osnovu javno dostupnih domaćih ponuda i vodiča iz 2025-2026, korisni budžetski okviri su oko 250-900 EUR za landing page, 500-1.500 EUR za osnovni poslovni sajt, 1.200-3.000+ EUR za napredniji poslovni sajt, 900-4.000+ EUR za standardnu internet prodavnicu i od oko 2.000 EUR naviše za jednostavnije custom web aplikacije. To su orijentacioni rasponi, ne službeni tržišni prosek.",
-    en: "Website development in Serbia in 2026 has no official average price. Based on publicly available Serbian offers and guides from 2025-2026, useful budgeting ranges are around EUR 250-900 for a landing page, EUR 500-1,500 for a basic business website, EUR 1,200-3,000+ for an advanced business website, EUR 900-4,000+ for a standard online store, and from about EUR 2,000 upward for simpler custom web applications. These are orientation ranges, not an official market average.",
+    sr: `Cena izrade sajta zavisi od obima, sadržaja i funkcija. U NMark Designs početne cene su ${prices.landing} € za landing stranicu, ${prices.business} € za poslovni sajt, ${prices.advanced} € za napredni sajt i ${new Intl.NumberFormat("sr-RS").format(prices.ecommerce)} € za web prodavnicu. To su naši osnovni paketi, ne prosek cena u Srbiji. U nastavku razdvajamo aktuelnu ponudu, orijentacione tržišne raspone i troškove posle izrade.`,
+    en: `Website cost depends on scope, content and features. NMark Designs starting prices are €${prices.landing} for a landing page, €${prices.business} for a business website, €${prices.advanced} for an advanced site and €${new Intl.NumberFormat("en").format(prices.ecommerce)} for an online store. These are our baseline packages, not Serbian market averages. This guide separates our current offer, indicative market ranges and ongoing costs.`,
   },
   sections: {
     sr: [
+      currentOfferSr,
       {
         heading: "Zašto se ponude toliko razlikuju?",
         paragraphs: [
@@ -90,7 +152,7 @@ export const websitePricingSerbia2026 = {
           {
             type: "table",
             caption: "Orijentacioni profesionalni budžeti, sintetizovani iz javnih domaćih ponuda i vodiča.",
-            columns: ["Tip sajta", "Okvirna cena", "Tipično vreme", "Najčešća namena"],
+            columns: ["Tip sajta", "Orijentacioni budžet", "Okvirno vreme", "Namena"],
             rows: priceRows,
           },
         ],
@@ -113,11 +175,11 @@ export const websitePricingSerbia2026 = {
                 ],
               },
               {
-                heading: "Basic business website",
+                heading: "Osnovni poslovni sajt",
                 paragraphs: [
                   "Osnovni poslovni sajt najčešće uključuje početnu, o nama, usluge, portfolio ili reference, kontakt, a ponekad i blog. Za mali biznis ili uslužnu delatnost to je često najrazumniji početni format.",
                   "Okviran profesionalni raspon je približno 500-1.500 EUR. Ka donjem delu ide projekat sa jasnom strukturom, manjim brojem strana, pripremljenim tekstovima i fotografijama. Ka gornjem delu ide custom dizajn, više sekcija, CMS, dodatne forme, osnovna SEO arhitektura i više pažnje na sadržaj.",
-                  "Kao primer transparentnog formata, NMark Designs nudi početne cene od 300 € za landing stranice i od 550 € za poslovne sajtove do 5 stranica, dok napredniji sajtovi kreću od 900 €. Primeri realizovanih sajtova u ovom rangu obuhvataju projekte kao što su OŠ „Dule Karaklajić“ ili Nest Home Solutions.",
+                  "NMark Designs početni paketi prikazani su na početku vodiča i u cenovniku. Studija slučaja OŠ „Dule Karaklajić“ pokazuje reorganizaciju sadržaja i namenski WordPress razvoj. Javni prikaz projekta ne potvrđuje cenu njegove izrade.",
                   "Responsive prikaz za telefon, tablet i računar ne bi trebalo tretirati kao luksuznu doplatu. U 2026. to je osnovni deo profesionalne izrade sajta.",
                 ],
               },
@@ -134,7 +196,7 @@ export const websitePricingSerbia2026 = {
                 paragraphs: [
                   "Internet prodavnica je složenija od prezentacionog sajta zato što uključuje proizvode, kategorije, korpu, checkout, porudžbine, plaćanje, isporuku, email obaveštenja i često administraciju zaliha.",
                   "Manja profesionalna WooCommerce prodavnica može krenuti od oko 900-1.800 EUR. Standardni web shop se često planira u rasponu od 1.500 do 2.800 ili 4.000 EUR, zavisno od obima. Veći ili custom e-commerce projekti sa integracijama mogu ići 4.000-8.000+ EUR.",
-                  "U NMark Designs ponudi, izrada web prodavnice kreće od 1.200 € kao definisano rešenje sa WooCommerce platformom, prilagođenim dizajnom i standardnim sistemom naručivanja, dok veći katalozi i B2B sistemi (poput Buy Pallet Jacks) zahtevaju namenski dogovorenu specifikaciju.",
+                  "Osnovni obim NMark WooCommerce paketa prikazan je u cenovniku. Veći katalozi i B2B sistemi zahtevaju posebnu specifikaciju. Anabela Bebi Oprema i Buy Pallet Jacks mogu da posluže za razumevanje različitih funkcija prodajnog sajta, bez pretpostavke o njihovim budžetima.",
                   "Broj proizvoda sam po sebi nije jedini faktor. Varijacije, atributi, kvalitet fotografija, kategorije, uvoz proizvoda, filteri, način plaćanja, kurirske službe, ERP ili knjigovodstveni sistem često više utiču na cenu od same brojke proizvoda.",
                 ],
               },
@@ -153,7 +215,7 @@ export const websitePricingSerbia2026 = {
             title: "Povezane usluge i paketi na sajtu NMark Designs",
             items: [
               { label: "Pogledajte zvanični cenovnik usluga (od 300 €)", href: "/sr/cenovnik/" },
-              { label: "Istražite usluge izrade, dizajna i održavanja sajtova", href: "/sr/usluge/" },
+              { label: "Istražite usluge izrade, dizajna i održavanja sajtova", href: "/sr/usluge/izrada-web-sajtova/" },
               { label: "Pogledajte portfolio realizovanih web projekata", href: "/sr/portfolio/" },
               { label: "Pročitajte besplatni 10-minutni vodič za audit sajta", href: "/sr/blog/kako-da-radite-brzi-audit-sajta/" },
             ],
@@ -335,6 +397,7 @@ export const websitePricingSerbia2026 = {
       },
     ],
     en: [
+      currentOfferEn,
       {
         heading: "Why do quotes differ so much?",
         paragraphs: [
@@ -385,7 +448,7 @@ export const websitePricingSerbia2026 = {
             title: "Useful next steps on NMark Designs",
             items: [
               { label: "View pricing", href: "/en/pricing/" },
-              { label: "Explore website services", href: "/en/services/" },
+              { label: "Explore website services", href: "/en/services/website-development/" },
               { label: "See portfolio projects", href: "/en/portfolio/" },
               { label: "Read the 10-minute website audit", href: "/en/blog/kako-da-radite-brzi-audit-sajta/" },
             ],

@@ -35,6 +35,12 @@ export const websitePackages: readonly WebsitePackage[] = [
   { id: "ecommerce", startingPrice: 1200, inquiryKey: "ecommerce" },
 ] as const;
 
+export function getWebsiteStartingPrice(id: WebsitePackageId): number {
+  const price = websitePackages.find((item) => item.id === id)?.startingPrice;
+  if (price === undefined) throw new Error(`Missing website starting price: ${id}`);
+  return price;
+}
+
 export const additionalServices: readonly AdditionalService[] = [
   { id: "redesign", startingPrice: 400, inquiryKey: "redesign" },
   { id: "seo", startingPrice: 150, inquiryKey: "seo" },
@@ -48,6 +54,14 @@ export const carePlans: readonly CarePlan[] = [
   { id: "business-care", startingPrice: 50, period: "month", inquiryKey: "business-care" },
   { id: "custom-support", isQuote: true, inquiryKey: "custom-support" },
 ] as const;
+
+export function getCarePlanStartingPrice(id: Exclude<CarePlanId, "custom-support">): number {
+  const price = carePlans.find((plan) => plan.id === id)?.startingPrice;
+  if (price === undefined) {
+    throw new Error(`Missing starting price for care plan: ${id}`);
+  }
+  return price;
+}
 
 export const pricingSourceUrl = "https://nmarkdesigns.com/cenovnik/";
 

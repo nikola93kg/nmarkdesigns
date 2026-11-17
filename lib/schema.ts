@@ -40,7 +40,7 @@ export function siteSchema(): JsonValue {
       },
       {
         "@type": "WebSite", "@id": `${site.url}/#website`,
-        name: site.name, url: canonicalUrl(localizedPath("home", "sr")),
+        name: site.name, alternateName: "NMarkDesigns", url: canonicalUrl("/"),
         inLanguage: ["sr", "en"], publisher: { "@id": organizationId },
       },
     ],
@@ -112,7 +112,7 @@ export function serviceDetailSchema(
         serviceType: service.eyebrow[locale],
         offers: {
           "@type": "Offer",
-          priceCurrency: locale === "sr" ? "EUR" : "USD",
+          priceCurrency: service.priceCurrency ?? (locale === "sr" ? "EUR" : "USD"),
           description: service.startingPrice[locale],
         },
       },

@@ -1,9 +1,13 @@
 import type { MetadataRoute } from "next";
 import { canonicalUrl, pageAlternates, publicPages } from "@/lib/public-pages";
+import { blogPosts } from "@/content/blog";
+
+const blogModifiedDates = new Map(blogPosts.map((post) => [post.slug, post.updatedOn ?? post.publishedOn]));
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return publicPages.map(({ path }) => ({
+  return publicPages.map(({ path, route, slug }) => ({
     url: canonicalUrl(path),
     alternates: { languages: pageAlternates(path) },
+    lastModified: route === "blog" && slug ? blogModifiedDates.get(slug) : undefined,
   }));
 }

@@ -151,7 +151,15 @@ test("complete sitemap, unique metadata and preview robots", async ({ page, requ
   await page.setContent("<main></main>");
   const urls = await page.evaluate((xml) => Array.from(new DOMParser().parseFromString(xml, "application/xml").getElementsByTagName("url")).map((entry) => entry.getElementsByTagName("loc")[0].textContent), source);
   expect(urls.sort()).toEqual(paths.map((path) => site.url + path).sort());
-  expect(source).not.toMatch(/lastmod|changefreq|priority|localhost/);
+  expect(source).not.toMatch(/changefreq|priority|localhost/);
+  const modifiedDates = await page.evaluate((xml) => Array.from(new DOMParser().parseFromString(xml, "application/xml").getElementsByTagName("url")).map((entry) => ({
+    url: entry.getElementsByTagName("loc")[0].textContent,
+    modified: entry.getElementsByTagName("lastmod")[0]?.textContent ?? null,
+  })), source);
+  for (const entry of modifiedDates) {
+    const post = blogPosts.find((post) => entry.url?.endsWith(`/blog/${post.slug}/`));
+    expect(entry.modified).toBe(post ? post.updatedOn ?? post.publishedOn : null);
+  }
   const titles = new Set<string>();
   const descriptions = new Set<string>();
   for (const path of paths) {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { GoogleAnalytics } from "@/components/seo/GoogleAnalytics";
@@ -53,7 +54,18 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
   return (
     <html lang={localeSettings[locale].language} className={dmSans.variable}>
       <head>
-        <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        <Script id="ga4-consent-default" strategy="beforeInteractive">
+          {`
+window.dataLayer = window.dataLayer || [];
+window.gtag = window.gtag || function(){window.dataLayer.push(arguments);};
+window.gtag('consent', 'default', {
+  analytics_storage: 'denied',
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied'
+});
+          `}
+        </Script>
       </head>
       {/* Grammarly can inject body attributes before React hydrates. */}
       <body className="flex min-h-dvh flex-col" suppressHydrationWarning>
@@ -69,6 +81,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
         </main>
         <Footer locale={locale} copy={copy} />
         <BackToTop />
+        <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         <CookieConsent locale={locale} />
       </body>
     </html>

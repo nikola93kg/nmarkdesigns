@@ -176,6 +176,9 @@ export interface Dictionary {
       secondaryAction: string;
     };
     websiteDevelopment: SectionCopy & {
+      resourcesLabel: string;
+      serviceAction: string;
+      guideAction: string;
       startingFromLabel: string;
       ctaLabel: string;
       includesLabel: string;

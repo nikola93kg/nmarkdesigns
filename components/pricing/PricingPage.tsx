@@ -1,11 +1,11 @@
 import { ArrowDown, ArrowUpRight, Check } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { HostingerOffer } from "@/components/ui/HostingerOffer";
 import background from "@/components/ui/GridBackground.module.css";
 import type { Dictionary } from "@/content/i18n/types";
-import { site } from "@/content/site";
+import { hostingerPartner } from "@/content/partners";
 import {
   additionalServices,
   carePlans,
@@ -13,7 +13,8 @@ import {
   type ServiceInquiryId,
 } from "@/content/pricing";
 import type { Locale } from "@/lib/i18n";
-import { localizedBlogPostPath, localizedPath } from "@/lib/routes";
+import { localizedBlogPostPath, localizedPath, localizedServicePath } from "@/lib/routes";
+import { serviceDefinitions } from "@/content/services";
 
 type PricingPageProps = {
   locale: Locale;
@@ -85,15 +86,21 @@ export function PricingPage({ locale, copy }: PricingPageProps) {
             <p className="mt-3 text-pretty text-muted">
               {copy.websiteDevelopment.description}
             </p>
-            <div className="mt-4">
+            <nav aria-label={copy.websiteDevelopment.resourcesLabel} className="mt-4 flex flex-wrap justify-center gap-x-5 gap-y-1">
               <Link
-                href={localizedPath("services", locale)}
-                className="inline-flex items-center gap-1.5 text-small font-semibold text-brand underline underline-offset-4 hover:text-focus"
+                href={localizedServicePath(serviceDefinitions.websites.slugs[locale], locale)}
+                className="inline-flex min-h-11 items-center gap-1.5 text-small font-semibold text-brand underline underline-offset-4 hover:text-focus"
               >
-                <span>{locale === "en" ? "Explore our technical approach and case studies on Services" : "Saznajte više o tehničkom pristupu i realizovanim projektima na stranici Usluge"}</span>
+                <span>{copy.websiteDevelopment.serviceAction}</span>
                 <ArrowUpRight aria-hidden="true" size={16} />
               </Link>
-            </div>
+              <Link
+                href={localizedBlogPostPath("koliko-kosta-izrada-web-sajta-u-srbiji-2026", locale)}
+                className="inline-flex min-h-11 items-center gap-1.5 text-small font-semibold text-brand underline underline-offset-4 hover:text-focus"
+              >
+                {copy.websiteDevelopment.guideAction}<ArrowUpRight aria-hidden="true" size={16} />
+              </Link>
+            </nav>
           </div>
 
           <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
@@ -375,54 +382,7 @@ export function PricingPage({ locale, copy }: PricingPageProps) {
             })}
           </div>
 
-          {/* Hostinger Partner Callout */}
-          <div className="mt-10 rounded-2xl border border-border bg-surface-muted/60 p-6 md:p-8">
-            <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
-                <a
-                  href={site.hostingerPartnerUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="shrink-0 transition-opacity hover:opacity-90"
-                  title="Hostinger Verified Partner"
-                >
-                  <Image
-                    src="/logo/hostinger-logo/badge-brand-light-320x120.webp"
-                    alt="Hostinger Partner Badge"
-                    width={180}
-                    height={68}
-                    className="h-12 w-auto object-contain"
-                  />
-                </a>
-                <div className="max-w-xl">
-                  <h3 className="text-base font-bold text-ink">
-                    {locale === "sr"
-                      ? "Preporučeni cloud hosting za samostalan zakup"
-                      : "Recommended Cloud Hosting for Independent Setup"}
-                  </h3>
-                  <p className="mt-1 text-small text-muted">
-                    {locale === "sr"
-                      ? "Ukoliko želite samostalno vlasništvo nad hosting nalogom, obezbedili smo 20% popusta za naše klijente. Iskoristite kupon kod "
-                      : "If you prefer managing your own hosting account, we provide 20% off for our clients. Apply coupon code "}
-                    <span className="rounded bg-surface px-1.5 py-0.5 font-mono font-semibold text-brand border border-border">
-                      {site.hostingerCouponCode}
-                    </span>
-                    {locale === "sr" ? " na Hostingeru." : " at Hostinger checkout."}
-                  </p>
-                </div>
-              </div>
-              <Button
-                href={site.hostingerPartnerUrl}
-                variant="secondary"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="shrink-0"
-              >
-                {locale === "sr" ? "Preuzmite popust" : "Claim 20% discount"}
-                <ArrowUpRight aria-hidden="true" size={16} className="shrink-0" />
-              </Button>
-            </div>
-          </div>
+          <HostingerOffer locale={locale} placement="pricing" id={hostingerPartner.detailsAnchor} />
         </Container>
       </section>
 

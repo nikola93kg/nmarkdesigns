@@ -14,6 +14,34 @@ test.describe("Phase 5B: Analytics, Consent Mode v2 & Conversion Tracking", () =
     await context.clearCookies();
   });
 
+  test("consent defaults run once before GA configuration and survive client navigation", async ({ page }) => {
+    const scriptErrors: string[] = [];
+    page.on("console", (message) => {
+      if (message.type() === "error" && /Encountered a script tag/.test(message.text())) {
+        scriptErrors.push(message.text());
+      }
+    });
+    await page.addInitScript((key) => {
+      window.__MOCK_ANALYTICS__ = true;
+      window.__MOCK_ANALYTICS_EVENTS__ = [];
+      localStorage.setItem(key, JSON.stringify({ status: "granted", timestamp: Date.now(), version: "2.0" }));
+    }, CONSENT_STORAGE_KEY);
+    await page.goto("/en/");
+    await expect.poll(() => page.evaluate(() =>
+      (window.__MOCK_ANALYTICS_EVENTS__ ?? []).some((event) => event.event === "page_view"),
+    )).toBe(true);
+    await page.getByRole("navigation", { name: "Main navigation", exact: true }).getByRole("link", { name: "Services", exact: true }).click();
+    await expect(page).toHaveURL(/\/en\/services\/$/);
+    const commands = await page.evaluate(() => (window.dataLayer ?? []).map((entry) => Array.from(entry as ArrayLike<unknown>)));
+    const defaults = commands.filter((command) => command[0] === "consent" && command[1] === "default");
+    expect(defaults).toHaveLength(1);
+    expect(defaults[0][2]).toEqual({ analytics_storage: "denied", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" });
+    const defaultIndex = commands.findIndex((command) => command[0] === "consent" && command[1] === "default");
+    const configIndex = commands.findIndex((command) => command[0] === "config");
+    expect(configIndex).toBeGreaterThan(defaultIndex);
+    expect(scriptErrors).toEqual([]);
+  });
+
   test("1. No GA4 script or tracking events are dispatched before explicit user consent", async ({ page }) => {
     await page.addInitScript(() => {
       window.__MOCK_ANALYTICS__ = true;

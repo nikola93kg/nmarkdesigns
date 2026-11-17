@@ -764,13 +764,13 @@ const sectionsSr: readonly BlogSection[] = [
           {
             heading: "Google Search Console",
             paragraphs: [
-              "Search Console ostaje vaš osnovni prozor u Google ekosistem. Pratite trendove impresija i klikova. Imajte u vidu da Google trenutno ne nudi zaseban filter koji razdvaja klikove iz AI Overviews od onih iz klasičnih organskih linkova; svi podaci su agregirani u opštem izveštaju o pretrazi.",
+              "Uz opšti izveštaj, proverite i Generative AI performance izveštaj za prikaze iz AI Overviews i AI Mode. To nije izdvojeni izveštaj o AI klikovima.",
             ],
           },
           {
             heading: "GA4 i referral saobraćaj sa AI platformi",
             paragraphs: [
-              "U Google Analytics 4 pratite referral izvore: saobraćaj koji dolazi sa domena kao što su chatgpt.com, perplexity.ai i claude.ai. Iako je ovaj saobraćaj po broju poseta često manji od Google-a, posetioci koji dolaze preko AI preporuka obično imaju znatno višu stopu angažovanja.",
+              "U Google Analytics 4 proverite prepoznatljive referral izvore poput chatgpt.com, perplexity.ai i claude.ai, uz ulazne stranice i potvrđene upite. Angažovanje procenjujte iz svojih podataka; nemojte unapred pretpostavljati da AI posete donose bolje rezultate. Odsustvo referral izvora ne dokazuje odsustvo AI prikaza.",
             ],
           },
           {
@@ -1419,13 +1419,13 @@ const sectionsEn: readonly BlogSection[] = [
           {
             heading: "Google Search Console",
             paragraphs: [
-              "Search Console remains your fundamental diagnostic tool. Monitor impression and click trajectories. Keep in mind that Google does not currently segment AI Overview clicks into a separate report; they are bundled into general performance metrics.",
+              "Alongside the overall report, check the Generative AI performance report for AI Overviews and AI Mode impressions. This is not a separate AI click report.",
             ],
           },
           {
             heading: "GA4 and AI referral channels",
             paragraphs: [
-              "Monitor referral traffic originating from domains like chatgpt.com, perplexity.ai, and claude.ai. While overall volume may be modest compared to Google organic, visitors arriving via AI recommendations frequently show elevated engagement and intent.",
+              "Review identifiable referrals such as chatgpt.com, perplexity.ai and claude.ai alongside landing pages and confirmed enquiries. Assess engagement from your own data rather than assuming AI referrals perform better. An absent referral source does not establish an absence of AI appearances.",
             ],
           },
           {
@@ -1486,6 +1486,10 @@ export const aiSearchGuide2026: Editorial = {
     en: sectionsEn,
   },
   sources: [
+    {
+      label: "Google — Generative AI performance report (Search)",
+      href: "https://support.google.com/webmasters/answer/16984139",
+    },
     {
       label: "Google Search Central — AI features and your website",
       href: "https://developers.google.com/search/docs/appearance/ai-features",

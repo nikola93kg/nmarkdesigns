@@ -2,9 +2,12 @@ import { Container } from "@/components/ui/Container";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { HostingerLink } from "@/components/ui/HostingerLink";
+import { HostingerOffer } from "@/components/ui/HostingerOffer";
 import { getBlogPosts, type BlogBlock, type LocalizedBlogPost } from "@/content/blog";
 import { blogLabels } from "@/content/blog-editorial";
 import type { Dictionary } from "@/content/i18n/types";
+import { isHostingerPartnerUrl } from "@/content/partners";
 import { localeSettings, type Locale } from "@/lib/i18n";
 import { localizedPath } from "@/lib/routes";
 import { BlogCard } from "./BlogCard";
@@ -14,6 +17,7 @@ import styles from "./Blog.module.css";
 export function BlogArticlePage({ post, copy, locale, url }: { post: LocalizedBlogPost; copy: Dictionary["blog"]; locale: Locale; url: string }) {
   const labels = blogLabels[locale];
   const finalCta = post.cta ?? copy.cta;
+  const sources = post.sources.filter((source) => !isHostingerPartnerUrl(source.href));
 
   return (
     <>
@@ -37,6 +41,9 @@ export function BlogArticlePage({ post, copy, locale, url }: { post: LocalizedBl
             <h1 className="mt-4 text-balance text-display font-semibold">{post.title}</h1>
             <p className="mt-5 text-pretty text-inverse/85">{post.description}</p>
             <p className="mt-6 text-small">{labels.authorPrefix}: {labels.author} · {labels.publisher} · <time dateTime={post.publishedOn}>{new Intl.DateTimeFormat(localeSettings[locale].dateTime, { dateStyle: "long", timeZone: "UTC" }).format(new Date(post.publishedOn))}</time> · {post.readTimeMinutes} {copy.readTime}</p>
+            {post.updatedOn !== post.publishedOn && (
+              <p className="mt-2 text-small">{labels.updated}: <time dateTime={post.updatedOn}>{new Intl.DateTimeFormat(localeSettings[locale].dateTime, { dateStyle: "long", timeZone: "UTC" }).format(new Date(post.updatedOn))}</time></p>
+            )}
           </Container>
         </header>
         <Container className={styles.reading}>
@@ -58,7 +65,7 @@ export function BlogArticlePage({ post, copy, locale, url }: { post: LocalizedBl
                 <h2 className="text-heading font-semibold text-ink">{section.heading}</h2>
                 {section.paragraphs.map((paragraph) => <p key={paragraph} className="text-muted">{paragraph}</p>)}
                 {section.list && <ul>{section.list.map((item) => <li key={item}>{item}</li>)}</ul>}
-                {section.blocks?.map((block, blockIndex) => <BlogBlockRenderer key={`${section.heading}-${blockIndex}`} block={block} />)}
+                {section.blocks?.map((block, blockIndex) => <BlogBlockRenderer key={`${section.heading}-${blockIndex}`} block={block} locale={locale} />)}
                 {section.media?.map((media) => (
                   <figure key={media.image} className={styles.figure}>
                     <div className={styles.image}><Image src={media.image} alt={media.alt} width={media.width} height={media.height} unoptimized={post.imageType === "image/svg+xml"} sizes="(max-width: 767px) 100vw, 65vw" loading="eager" /></div>
@@ -67,7 +74,7 @@ export function BlogArticlePage({ post, copy, locale, url }: { post: LocalizedBl
                 ))}
               </section>
             ))}
-            <section className={styles.sources}><h2 className="text-subheading font-semibold">{labels.sources}</h2><ul>{post.sources.map((source) => <li key={source.href}><a href={source.href}>{source.label}</a></li>)}</ul></section>
+            <section className={styles.sources}><h2 className="text-subheading font-semibold">{labels.sources}</h2><ul>{sources.map((source) => <li key={source.href}><a href={source.href}>{source.label}</a></li>)}</ul></section>
             <section><h2 className="text-heading font-semibold">{finalCta.title}</h2><p className="text-muted">{finalCta.description}</p><div className="mt-6 flex flex-wrap gap-3"><Button href={localizedPath("contact", locale)}>{finalCta.label}</Button>{post.cta?.secondaryHref && post.cta.secondaryLabel ? <Button href={post.cta.secondaryHref} variant="secondary">{post.cta.secondaryLabel}</Button> : null}</div></section>
           </div>
         </Container>
@@ -77,7 +84,7 @@ export function BlogArticlePage({ post, copy, locale, url }: { post: LocalizedBl
   );
 }
 
-function BlogBlockRenderer({ block }: { block: BlogBlock }) {
+function BlogBlockRenderer({ block, locale }: { block: BlogBlock; locale: Locale }) {
   switch (block.type) {
     case "table":
       return (
@@ -182,23 +189,38 @@ function BlogBlockRenderer({ block }: { block: BlogBlock }) {
           ))}
         </div>
       );
-    case "linkList":
+    case "linkList": {
+      const links = block.items.filter((item) => !isHostingerPartnerUrl(item.href));
+      const hasPartnerOffer = links.length !== block.items.length;
+
       return (
-        <nav className={styles.contextLinks} aria-label={block.title}>
-          <p>{block.title}</p>
-          <ul>
-            {block.items.map((item) => (
-              <li key={item.href}><Link href={item.href}>{item.label}</Link></li>
-            ))}
-          </ul>
-        </nav>
+        <>
+          {links.length > 0 && (
+            <nav className={styles.contextLinks} aria-label={block.title}>
+              <p>{block.title}</p>
+              <ul>
+                {links.map((item) => (
+                  <li key={item.href}><Link href={item.href}>{item.label}</Link></li>
+                ))}
+              </ul>
+            </nav>
+          )}
+          {hasPartnerOffer && <HostingerOffer locale={locale} placement="blog" />}
+        </>
       );
+    }
     case "cta":
       return (
         <aside className={styles.inlineCta}>
           <h3>{block.title}</h3>
           <p>{block.body}</p>
-          <Button href={block.href} variant="secondary">{block.label}</Button>
+          {isHostingerPartnerUrl(block.href) ? (
+            <HostingerLink locale={locale} placement="blog" href={block.href}>
+              {block.label}
+            </HostingerLink>
+          ) : (
+            <Button href={block.href} variant="secondary">{block.label}</Button>
+          )}
         </aside>
       );
   }

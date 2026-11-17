@@ -18,11 +18,24 @@ export type AnalyticsEventName =
   | "view_case_study"
   | "click_proof_case_study"
   | "click_external_project"
-  | "click_service";
+  | "click_service"
+  | "click_partner"
+  | "copy_partner_code";
 
 export type ContactMethod = "phone" | "email" | "whatsapp";
 
 export interface EventParamsMap {
+  click_partner: {
+    partner_name: "hostinger";
+    partner_placement: string;
+    locale: "sr" | "en";
+    destination_domain: string;
+  };
+  copy_partner_code: {
+    partner_name: "hostinger";
+    partner_placement: string;
+    locale: "sr" | "en";
+  };
   generate_lead: {
     page_type: "contact";
     locale: "sr" | "en";
@@ -255,6 +268,8 @@ export function isAnalyticsEnvironmentAllowed(customHostname?: string): boolean 
  * Runtime PII Sanitizer and Parameter Allowlist Scrubber.
  */
 const ALLOWED_KEYS = new Set([
+  "partner_name",
+  "partner_placement",
   "cta_name",
   "cta_location",
   "contact_method",

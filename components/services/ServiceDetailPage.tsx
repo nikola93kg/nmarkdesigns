@@ -3,13 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { HostingerOffer } from "@/components/ui/HostingerOffer";
 import { CtaButton } from "@/components/ui/CtaButton";
 import background from "@/components/ui/GridBackground.module.css";
 import type { Dictionary } from "@/content/i18n/types";
 import { projects } from "@/content/projects";
 import type { ServiceDetailDefinition } from "@/content/services";
 import type { Locale } from "@/lib/i18n";
-import { localizedPath, localizedProjectPath } from "@/lib/routes";
+import { localizedPath, localizedProjectPath, localizedBlogPostPath } from "@/lib/routes";
 
 interface ServiceDetailPageProps {
   service: ServiceDetailDefinition;
@@ -83,6 +84,14 @@ export function ServiceDetailPage({ service, locale, copy }: ServiceDetailPagePr
                 {locale === "sr" ? "Pogledajte cenovnik" : "View pricing"}
               </Button>
             </div>
+            {(service.key === "websites" || service.key === "commerce") && (
+              <Link
+                href={localizedBlogPostPath("koliko-kosta-izrada-web-sajta-u-srbiji-2026", locale)}
+                className="mt-4 inline-flex min-h-11 items-center gap-2 text-small font-semibold text-brand underline underline-offset-4 focus-visible:outline-accent"
+              >
+                {copy.pricing.websiteDevelopment.guideAction}<ArrowUpRight size={16} aria-hidden="true" />
+              </Link>
+            )}
           </div>
         </Container>
       </section>
@@ -183,41 +192,7 @@ export function ServiceDetailPage({ service, locale, copy }: ServiceDetailPagePr
               ))}
             </div>
 
-            {service.key === "maintenance" && (
-              <div className="mt-8 pt-8 border-t border-border flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <div className="flex items-center gap-4">
-                  <a
-                    href="https://www.hostinger.com?REFERRALCODE=JIPMARKOVUSK"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="shrink-0 transition-opacity hover:opacity-90"
-                    title="Hostinger Official Partner"
-                  >
-                    <Image
-                      src="/logo/hostinger-logo/badge-brand-light-320x120.webp"
-                      alt="Hostinger Partner Badge"
-                      width={150}
-                      height={56}
-                      className="h-10 w-auto object-contain"
-                    />
-                  </a>
-                  <p className="text-small text-muted">
-                    {locale === "sr"
-                      ? "NMark Designs je verifikovani Hostinger partner. Za samostalan zakup cloud infrastrukture i domena, iskoristite kod JIPMARKOVUSK za 20% popusta."
-                      : "NMark Designs is a verified Hostinger partner. For self-managed cloud infrastructure and domains, apply code JIPMARKOVUSK for a 20% discount."}
-                  </p>
-                </div>
-                <a
-                  href="https://www.hostinger.com?REFERRALCODE=JIPMARKOVUSK"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex shrink-0 items-center gap-1.5 text-small font-semibold text-brand hover:underline"
-                >
-                  <span>{locale === "sr" ? "Pogledajte ponudu" : "View partner plans"}</span>
-                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                </a>
-              </div>
-            )}
+            {service.key === "maintenance" && <HostingerOffer locale={locale} placement="maintenance" />}
           </div>
         </Container>
       </section>

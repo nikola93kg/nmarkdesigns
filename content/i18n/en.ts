@@ -1,4 +1,11 @@
 import type { Dictionary } from "./types";
+import { getCarePlanStartingPrice, getWebsiteStartingPrice } from "@/content/pricing";
+
+const landingStartingPrice = getWebsiteStartingPrice("landing-page");
+
+const hostingStartingPrice = getCarePlanStartingPrice("hosting");
+const basicCareStartingPrice = getCarePlanStartingPrice("basic-care");
+const businessCareStartingPrice = getCarePlanStartingPrice("business-care");
 
 const en = {
   navigation: {
@@ -124,7 +131,7 @@ const en = {
         {
           id: "maintenance",
           title: "Hosting and maintenance",
-          description: "Optimized managed hosting and predictable monthly care plans (Basic and Business Care) for security updates, backups, and peace of mind.",
+          description: "Managed hosting and monthly Basic Care and Business Care plans for updates, basic security checks, and backup verification where supported, within the agreed scope.",
         },
       ],
     },
@@ -209,15 +216,15 @@ const en = {
         {
           id: "maintenance-support",
           title: "Hosting and maintenance",
-          description: "We clearly separate fast hosting from active technical care. We provide reliable infrastructure and monthly care plans (Basic and Business Care) for long-term peace of mind.",
+          description: "Hosting and maintenance are agreed separately. Basic Care covers core technical care; Business Care adds minor content changes and priority request handling.",
           when: "Useful when you want a dependable partner to oversee website health, security updates, and backups without being locked into rigid contracts.",
           includes: [
             "Managed hosting with SSL certificates and uptime monitoring",
             "regular CMS and plugin updates with security checks",
-            "automated backups and verification routines",
-            "content updates and priority technical assistance",
+            "backup verification where supported by the existing setup",
+            "minor content changes, performance checks, and priority request handling through Business Care",
           ],
-          startingPrice: "From €25 / mo. (~$30 / mo.)",
+          startingPrice: `From €${basicCareStartingPrice} / mo.`,
           pricingAnchor: "maintenance",
         },
       ],
@@ -312,7 +319,7 @@ const en = {
         {
           id: "packages",
           title: "Website development packages",
-          price: "From €300",
+          price: `From €${getWebsiteStartingPrice("landing-page")}`,
           description: "Landing Page (€300), Business Website (€550), Advanced Website (€900), or E-commerce Website (€1,200).",
           anchor: "packages",
           actionLabel: "View packages",
@@ -336,8 +343,8 @@ const en = {
         {
           id: "maintenance",
           title: "Hosting and maintenance",
-          price: "From €25 / mo.",
-          description: "Managed hosting (from €30/yr), Basic Care (from €25/mo), and Business Care (from €50/mo) support plans.",
+          price: `From €${basicCareStartingPrice} / mo.`,
+          description: `Managed hosting (from €${hostingStartingPrice}/yr), Basic Care (from €${basicCareStartingPrice}/mo), and Business Care (from €${businessCareStartingPrice}/mo) support plans.`,
           anchor: "maintenance",
           actionLabel: "Care plans",
         },
@@ -433,17 +440,20 @@ const en = {
   },
   pricing: {
     metadata: {
-      title: "Website Development Pricing 2026 | NMark Designs",
-      description: "Explore starting prices for websites, e-commerce development, SEO optimization, AI chatbot integrations, and ongoing website maintenance.",
+      title: `Website development pricing — packages from €${landingStartingPrice} | NMark Designs`,
+      description: "Current NMark Designs packages: landing pages from €300, business websites from €550, advanced sites from €900 and online stores from €1,200. Compare scope and costs.",
     },
     intro: {
       eyebrow: "Digital Services Pricing",
-      title: "Clear pricing. Solutions tailored to you",
-      description: "From a simple business website to a custom web application, find the right solution for your business, goals, and budget.",
+      title: "Website development pricing and services",
+      description: "Review NMark Designs starting prices and what each package includes. Your final quote depends on features, content and project scope; hosting, maintenance and licences are agreed separately.",
       primaryAction: "Request a Quote",
       secondaryAction: "Explore Packages",
     },
     websiteDevelopment: {
+      resourcesLabel: "Pricing, scope and website planning",
+      serviceAction: "Website development scope and examples",
+      guideAction: "How to plan a website budget",
       eyebrow: "Website Development",
       title: "Website Development Packages",
       description: "Starting prices for complete web solutions. The final investment depends on specific requirements, content readiness, and technical scope.",
@@ -454,7 +464,7 @@ const en = {
       packages: {
         "landing-page": {
           name: "Landing Page",
-          price: "From €300",
+          price: `From €${getWebsiteStartingPrice("landing-page")}`,
           description: "A professional single-page website for showcasing a specific service, product, marketing campaign, or focused offer.",
           features: [
             "One professionally designed page",
@@ -469,7 +479,7 @@ const en = {
         },
         "business-website": {
           name: "Business Website",
-          price: "From €550",
+          price: `From €${getWebsiteStartingPrice("business-website")}`,
           description: "A professional multi-page website for small businesses, independent professionals, and local brands.",
           features: [
             "Up to 5 standard content pages",
@@ -484,7 +494,7 @@ const en = {
         },
         "advanced-website": {
           name: "Advanced Website",
-          price: "From €900",
+          price: `From €${getWebsiteStartingPrice("advanced-website")}`,
           description: "A more sophisticated website with custom components, content management (CMS), or additional interactive functionality.",
           features: [
             "Advanced visual and functional specifications",
@@ -498,7 +508,7 @@ const en = {
         },
         ecommerce: {
           name: "E-commerce Website",
-          price: "From €1,200",
+          price: `From €${new Intl.NumberFormat("en").format(getWebsiteStartingPrice("ecommerce"))}`,
           description: "An online store for businesses that need a professional product catalog and reliable ordering workflow.",
           features: [
             "Store setup and configuration (WooCommerce)",
@@ -567,14 +577,14 @@ const en = {
     maintenance: {
       eyebrow: "Ongoing Support",
       title: "Hosting and Technical Website Maintenance",
-      description: "Hosting and maintenance are distinct services. Hosting provides server resources and uptime, while maintenance ensures updates, security, and codebase stability.",
+      description: "Hosting provides server resources and basic website availability. Maintenance covers updates, security checks, and backup verification where supported. Work and response scope depend on the selected plan and agreement.",
       notice: "Maintenance services are optional and separately agreed. Domain registration and third-party software licenses are separate.",
       ctaLabel: "Choose plan",
       plans: {
         hosting: {
           name: "Managed Hosting",
           target: "For eligible lightweight business websites",
-          price: "From €30/year",
+          price: `From €${hostingStartingPrice}/year`,
           features: [
             "Optimized shared infrastructure for eligible lightweight websites",
             "Server setup and configuration",
@@ -586,20 +596,20 @@ const en = {
         "basic-care": {
           name: "Basic Care",
           target: "For stable business websites",
-          price: "From €25/month",
+          price: `From €${basicCareStartingPrice}/month`,
           features: [
             "Routine CMS and plugin updates where applicable",
             "Regular website health and availability checks",
-            "Basic security monitoring",
-            "Backup verification where supported",
+            "Basic security checks",
+            "Backup verification where supported by the existing setup",
             "Resolution of minor technical issues within agreed scope",
           ],
-          scopeNote: "Does not include 24/7 monitoring or unlimited support hours.",
+          scopeNote: "Does not include staffed 24/7 support or unlimited support hours.",
         },
         "business-care": {
           name: "Business Care",
           target: "For active websites requiring priority response",
-          price: "From €50/month",
+          price: `From €${businessCareStartingPrice}/month`,
           features: [
             "All activities from the Basic Care plan",
             "Minor content updates (text, images)",
@@ -714,7 +724,7 @@ const en = {
           id: "domain-and-hosting",
           question: "Are domain and hosting included in the price?",
           paragraphs: [
-            "Domain and hosting are not automatically included in the development price because requirements vary. I assist with selection and setup, and you can choose NMark Designs Managed Hosting (from €30/year for lightweight sites) or use an independent hosting provider.",
+            `Domain and hosting are not automatically included in the development price because requirements vary. I assist with selection and setup, and you can choose NMark Designs Managed Hosting (from €${hostingStartingPrice}/year for lightweight sites) or use an independent hosting provider.`,
           ],
         },
         {
@@ -735,7 +745,7 @@ const en = {
           id: "maintenance-options",
           question: "Do you offer ongoing website maintenance?",
           paragraphs: [
-            "Yes. Maintenance is optional and offered via Basic Care (from €25/month for security and updates), Business Care (from €50/month with content edits and priority support), or Custom Support for complex applications and WooCommerce shops.",
+            `Yes. Basic Care (from €${basicCareStartingPrice}/month) includes updates where applicable, basic security checks, and backup verification where supported. Business Care (from €${businessCareStartingPrice}/month) adds minor content changes, performance checks, and priority request handling. Custom Support covers complex applications and WooCommerce stores. Work and response scope are agreed; plans do not include staffed 24/7 support.`,
           ],
         },
         {
@@ -906,7 +916,7 @@ const en = {
         {
           id: "maintenance",
           question: "What does website maintenance include?",
-          paragraphs: ["Maintenance covers regular software and security updates, technical support, uptime monitoring, scheduled backups, and progressive performance and content improvements."],
+          paragraphs: ["Basic Care covers updates where applicable, basic security checks, and backup verification where supported. Business Care adds minor content changes, performance checks, and priority request handling. Work and response scope are agreed; plans do not include staffed 24/7 support."],
         },
       ],
     },

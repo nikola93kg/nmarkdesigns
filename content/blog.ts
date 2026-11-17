@@ -147,6 +147,27 @@ export interface LocalizedBlogPost {
 
 export const blogPosts: readonly BlogPost[] = [
   {
+    id: "ai-business-check-2026",
+    slug: "da-li-ai-moze-da-pronadje-vas-biznis",
+    publishedOn: "2026-11-17",
+    title: {
+      sr: "Da li AI može da pronađe i preporuči vaš biznis?",
+      en: "Can AI Find and Recommend Your Business?",
+    },
+    seoTitle: {
+      sr: "Da li AI preporučuje vaš biznis? Proverite ChatGPT i Google",
+      en: "Can AI Find Your Business? Check ChatGPT and Google Visibility",
+    },
+    description: {
+      sr: "Praktična provera AI vidljivosti: pitanja za ChatGPT i Google, provera izvora, novi izveštaji i plan popravki koji povezuje vaš sajt sa stvarnim upitima.",
+      en: "Check your business visibility in AI: questions for ChatGPT and Google, source checks, current reporting tools and a repair plan focused on real enquiries.",
+    },
+    excerpt: {
+      sr: "AI zna naziv vaše firme — ali da li vas pronalazi klijent koji taj naziv ne zna? Evo kako da proverite odgovore, izvore i sledeće korake.",
+      en: "AI recognizes your business name. Can a customer who does not know that name discover you? Check the answers, sources and practical next steps.",
+    },
+  },
+  {
     id: "redesign-signs-2026",
     slug: "10-znakova-da-je-vreme-za-redizajn-sajta-2026",
     publishedOn: "2026-11-10",
@@ -256,7 +277,7 @@ export const blogPosts: readonly BlogPost[] = [
     id: "ai-search-google-overviews-chatgpt",
     slug: "ai-menja-google-pretragu-ai-overviews-chatgpt-ai-search",
     publishedOn: "2026-10-06",
-    updatedOn: "2026-10-06",
+    updatedOn: "2026-11-17",
     title: {
       sr: "AI menja Google pretragu: kako pripremiti sajt za AI Overviews, ChatGPT i AI Search",
       en: "AI is transforming Google Search: how to prepare your website for AI Overviews, ChatGPT, and AI Search",
@@ -300,13 +321,13 @@ export const blogPosts: readonly BlogPost[] = [
     id: "website-pricing-serbia-2026",
     slug: "koliko-kosta-izrada-web-sajta-u-srbiji-2026",
     publishedOn: "2026-09-22",
-    updatedOn: "2026-09-22",
+    updatedOn: "2026-11-17",
     title: {
       sr: "Koliko košta izrada web sajta u Srbiji 2026?",
       en: "How much does website development cost in Serbia in 2026?",
     },
     seoTitle: {
-      sr: "Cena Izrade Web Sajta u Srbiji 2026: Koliko Košta Sajt i Vodič",
+      sr: "Koliko košta izrada sajta u Srbiji? Cene i troškovi 2026",
       en: "Website development cost in Serbia 2026: prices and guide",
     },
     description: {
