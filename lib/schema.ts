@@ -35,6 +35,7 @@ export function siteSchema(): JsonValue {
           "Search Engine Optimization (SEO)",
           "Core Web Vitals",
           "AI Chatbot Integration",
+          "Hostinger Cloud & Web Infrastructure",
         ],
       },
       {
