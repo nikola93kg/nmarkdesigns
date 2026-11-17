@@ -19,10 +19,24 @@ export function siteSchema(): JsonValue {
       {
         "@type": "Organization", "@id": organizationId,
         name: site.name, url: canonicalUrl(localizedPath("home", "sr")),
+        description: "Boutique studio za izradu modernih, brzih web sajtova, e-commerce prodavnica i Next.js aplikacija.",
         logo: { "@type": "ImageObject", url: canonicalUrl("/logo/nmark-seal.png"), width: 1000, height: 1000 },
         email: site.email, telephone: site.phone.href.slice(4),
         sameAs: [site.instagramUrl],
         founder: { "@type": "Person", "@id": founderId, name: "Nikola Marković" },
+        knowsAbout: [
+          "Next.js",
+          "React",
+          "TypeScript",
+          "Tailwind CSS",
+          "WordPress Development",
+          "Web Design",
+          "UI/UX Design",
+          "Search Engine Optimization (SEO)",
+          "Core Web Vitals",
+          "AI Chatbot Integration",
+          "Hostinger Cloud & Web Infrastructure",
+        ],
       },
       {
         "@type": "WebSite", "@id": `${site.url}/#website`,
@@ -40,6 +54,15 @@ export function founderSchema(locale: Locale): JsonValue {
     url: canonicalUrl(localizedPath("about", locale)),
     image: canonicalUrl(founderPortrait.src),
     brand: { "@type": "Brand", name: site.name },
+    knowsAbout: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "WordPress Development",
+      "Web Performance",
+      "Search Engine Optimization (SEO)",
+    ],
   };
 }
 

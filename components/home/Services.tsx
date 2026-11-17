@@ -1,12 +1,22 @@
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { ServiceClickLink } from "@/components/services/ServiceClickLink";
 import { Container } from "@/components/ui/Container";
 import type { Dictionary } from "@/content/i18n/types";
+import { serviceDefinitions } from "@/content/services";
 import type { Locale } from "@/lib/i18n";
-import { localizedPath } from "@/lib/routes";
+import { localizedPath, localizedServicePath } from "@/lib/routes";
+
+const serviceKeyMap: Record<string, keyof typeof serviceDefinitions> = {
+  design: "design",
+  seo: "optimization",
+  responsive: "websites",
+};
 
 export function Services({ locale, copy }: { locale: Locale; copy: Dictionary["home"]["services"] }) {
+  const maintenanceHref = localizedServicePath(serviceDefinitions.maintenance.slugs[locale], locale);
+
   return (
     <section id="services" aria-labelledby="services-title" className="scroll-mt-8 bg-surface-muted py-section lg:py-24">
       <Container className="text-center lg:text-left">
@@ -39,20 +49,39 @@ export function Services({ locale, copy }: { locale: Locale; copy: Dictionary["h
               className="h-auto w-full rounded-card"
             />
             <div className="mt-5 border-t border-border pt-5">
-              <h3 className="text-subheading font-semibold text-ink">{copy.maintenance.title}</h3>
+              <h3 className="text-subheading font-semibold text-ink">
+                <Link href={maintenanceHref} className="hover:underline hover:text-brand transition-colors">
+                  {copy.maintenance.title}
+                </Link>
+              </h3>
               <p className="mx-auto mt-3 max-w-lg text-pretty text-muted lg:mx-0">{copy.maintenance.description}</p>
             </div>
           </div>
           <ol className="flex flex-col divide-y divide-border border-t border-border">
-            {copy.items.map((item, index) => (
-              <li key={item.id} className="flex-1 py-6 last:pb-0 lg:grid lg:grid-cols-[2rem_minmax(0,1fr)] lg:content-start lg:gap-x-4 lg:py-8 lg:first:pt-6">
-                <span aria-hidden="true" className="mb-2 block text-small font-medium text-muted tabular-nums lg:mb-0 lg:pt-1">{String(index + 1).padStart(2, "0")}</span>
-                <div>
-                  <h3 className="text-subheading font-semibold text-brand">{item.title}</h3>
-                  <p className="mx-auto mt-3 max-w-lg text-pretty text-muted lg:mx-0">{item.description}</p>
-                </div>
-              </li>
-            ))}
+            {copy.items.map((item, index) => {
+              const serviceKey = serviceKeyMap[item.id];
+              const targetHref = serviceKey
+                ? localizedServicePath(serviceDefinitions[serviceKey].slugs[locale], locale)
+                : undefined;
+
+              return (
+                <li key={item.id} className="flex-1 py-6 last:pb-0 lg:grid lg:grid-cols-[2rem_minmax(0,1fr)] lg:content-start lg:gap-x-4 lg:py-8 lg:first:pt-6">
+                  <span aria-hidden="true" className="mb-2 block text-small font-medium text-muted tabular-nums lg:mb-0 lg:pt-1">{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3 className="text-subheading font-semibold text-brand">
+                      {targetHref ? (
+                        <Link href={targetHref} className="hover:underline hover:text-focus transition-colors">
+                          {item.title}
+                        </Link>
+                      ) : (
+                        item.title
+                      )}
+                    </h3>
+                    <p className="mx-auto mt-3 max-w-lg text-pretty text-muted lg:mx-0">{item.description}</p>
+                  </div>
+                </li>
+              );
+            })}
           </ol>
         </div>
       </Container>

@@ -1,9 +1,11 @@
 import { ArrowDown, ArrowUpRight, Check } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import background from "@/components/ui/GridBackground.module.css";
 import type { Dictionary } from "@/content/i18n/types";
+import { site } from "@/content/site";
 import {
   additionalServices,
   carePlans,
@@ -371,6 +373,55 @@ export function PricingPage({ locale, copy }: PricingPageProps) {
                 </article>
               );
             })}
+          </div>
+
+          {/* Hostinger Partner Callout */}
+          <div className="mt-10 rounded-2xl border border-border bg-surface-muted/60 p-6 md:p-8">
+            <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+                <a
+                  href={site.hostingerPartnerUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 transition-opacity hover:opacity-90"
+                  title="Hostinger Verified Partner"
+                >
+                  <Image
+                    src="/logo/hostinger-logo/badge-brand-light-320x120.webp"
+                    alt="Hostinger Partner Badge"
+                    width={180}
+                    height={68}
+                    className="h-12 w-auto object-contain"
+                  />
+                </a>
+                <div className="max-w-xl">
+                  <h3 className="text-base font-bold text-ink">
+                    {locale === "sr"
+                      ? "Preporučeni cloud hosting za samostalan zakup"
+                      : "Recommended Cloud Hosting for Independent Setup"}
+                  </h3>
+                  <p className="mt-1 text-small text-muted">
+                    {locale === "sr"
+                      ? "Ukoliko želite samostalno vlasništvo nad hosting nalogom, obezbedili smo 20% popusta za naše klijente. Iskoristite kupon kod "
+                      : "If you prefer managing your own hosting account, we provide 20% off for our clients. Apply coupon code "}
+                    <span className="rounded bg-surface px-1.5 py-0.5 font-mono font-semibold text-brand border border-border">
+                      {site.hostingerCouponCode}
+                    </span>
+                    {locale === "sr" ? " na Hostingeru." : " at Hostinger checkout."}
+                  </p>
+                </div>
+              </div>
+              <Button
+                href={site.hostingerPartnerUrl}
+                variant="secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0"
+              >
+                {locale === "sr" ? "Preuzmite popust" : "Claim 20% discount"}
+                <ArrowUpRight aria-hidden="true" size={16} className="shrink-0" />
+              </Button>
+            </div>
           </div>
         </Container>
       </section>

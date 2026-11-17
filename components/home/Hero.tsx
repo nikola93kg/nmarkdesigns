@@ -1,9 +1,11 @@
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import { HeroArtwork } from "@/components/home/HeroArtwork";
 import { Button } from "@/components/ui/Button";
 import { CtaButton } from "@/components/ui/CtaButton";
 import { Container } from "@/components/ui/Container";
 import type { Dictionary } from "@/content/i18n/types";
+import { site } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
 import { navigationItem } from "@/lib/routes";
 import styles from "@/components/ui/GridBackground.module.css";
@@ -32,6 +34,26 @@ export function Hero({ locale, copy }: { locale: Locale; copy: Dictionary }) {
               {contact.label}<ArrowUpRight aria-hidden="true" size={18} className="shrink-0" />
             </CtaButton>
             <Button href={portfolio.href} external={portfolio.external} variant="secondary">{portfolio.label}</Button>
+          </div>
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3 border-t border-border/60 pt-5 lg:justify-start">
+            <span className="text-xs font-medium uppercase tracking-wider text-muted">
+              {locale === "sr" ? "Zvanični partner:" : "Official partner:"}
+            </span>
+            <a
+              href={site.hostingerPartnerUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Hostinger Verified Partner — NMark Designs"
+              className="inline-flex items-center transition-opacity hover:opacity-85 focus-visible:outline-accent"
+            >
+              <Image
+                src="/logo/hostinger-logo/badge-brand-light-320x120.webp"
+                alt="Hostinger Partner"
+                width={120}
+                height={45}
+                className="h-8 w-auto object-contain"
+              />
+            </a>
           </div>
         </div>
         <HeroArtwork />

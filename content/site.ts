@@ -8,6 +8,8 @@ export interface SiteContent {
   };
   instagramUrl: `https://${string}`;
   whatsappUrl: `https://${string}`;
+  hostingerPartnerUrl: string;
+  hostingerCouponCode: string;
 }
 
 export interface NavigationItem {
@@ -26,4 +28,6 @@ export const site = {
   },
   instagramUrl: "https://www.instagram.com/nmarkdesigns/",
   whatsappUrl: "https://wa.me/381643005654",
+  hostingerPartnerUrl: "https://www.hostinger.com?REFERRALCODE=JIPMARKOVUSK",
+  hostingerCouponCode: "JIPMARKOVUSK",
 } as const satisfies SiteContent;

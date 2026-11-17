@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Camera, Mail, MessageCircle, Phone } from "lucide-react";
 import { ContactDirectLink } from "@/components/layout/ContactDirectLink";
 import { CookieSettingsButton } from "@/components/layout/CookieSettingsButton";
@@ -70,6 +71,27 @@ export function Footer({
             <p className="mt-3 max-w-[400px] text-small font-medium leading-7 text-on-brand">
               {copy.footer.description}
             </p>
+
+            <div className="mt-5 flex flex-col items-center lg:items-start">
+              <span className="text-xs uppercase tracking-wider text-on-brand-muted font-medium mb-2">
+                {locale === "sr" ? "Zvanični partner" : "Official partner"}
+              </span>
+              <a
+                href={site.hostingerPartnerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Hostinger Partner — NMark Designs"
+                className="inline-flex items-center transition-opacity hover:opacity-90 focus-visible:outline-accent"
+              >
+                <Image
+                  src="/logo/hostinger-logo/badge-brand-dark-320x120.png"
+                  alt="Hostinger Partner"
+                  width={140}
+                  height={52}
+                  className="h-9 w-auto object-contain"
+                />
+              </a>
+            </div>
           </div>
 
           {/* Quick links */}
