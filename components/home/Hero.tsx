@@ -37,7 +37,7 @@ export function Hero({ locale, copy }: { locale: Locale; copy: Dictionary }) {
           </div>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-3 border-t border-border/60 pt-5 lg:justify-start">
             <span className="text-xs font-medium uppercase tracking-wider text-muted">
-              {locale === "sr" ? "Verifikovani partner:" : "Verified partner:"}
+              {locale === "sr" ? "Zvanični partner:" : "Official partner:"}
             </span>
             <a
               href={site.hostingerPartnerUrl}
