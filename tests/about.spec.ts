@@ -32,7 +32,7 @@ for (const locale of locales) {
       await expect.poll(() => portrait.evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0)).toBe(true);
       await expect(portrait).toHaveCSS("object-fit", "cover");
       const bounds = await portrait.boundingBox();
-      expect(bounds!.height / bounds!.width).toBeCloseTo(1.0, 1);
+      expect(bounds!.height / bounds!.width).toBeCloseTo(1024 / 824, 1);
       expect(bounds!.width).toBeGreaterThan(200);
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
       expect(await page.locator("main h1, main h2, main p, main li, main figcaption, header a:visible").evaluateAll((elements) =>
