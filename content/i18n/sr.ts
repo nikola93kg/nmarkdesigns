@@ -371,7 +371,7 @@ const sr = {
         "U praksi to znači promišljen korisnički doživljaj, čistu tipografiju i responzivan raspored, spojene sa brzom tehničkom osnovom — bilo da je optimalan izbor prilagođeni Next.js, WordPress sa namenskom temom ili WooCommerce prodavnica. Svaki sajt gradim sa naglaskom na čistom kodu, semantičkoj SEO strukturi i lakoći dugoročnog održavanja.",
         "NMark Designs zato nije zamišljen kao masovna agencija za gotove šablone, već kao pouzdan partner za izradu digitalnih rešenja po meri koja traju i donose stvarne rezultate.",
       ],
-      imageAlt: "NMark Designs logo na tamnoj teksturisanoj površini.",
+      imageAlt: "Nikola Marković, osnivač studija NMark Designs, ispred natpisa NMARK — Making your digital mark.",
       caption: "NMark Designs kao vizuelni potpis rada, ne kao velika agencijska priča.",
     },
     approach: {

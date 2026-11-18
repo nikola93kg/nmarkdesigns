@@ -371,7 +371,7 @@ const en = {
         "In practice, that means thoughtful user experience, refined typography, and responsive layouts paired with high-performance code — whether the right foundation is a custom Next.js application, a tailor-made WordPress build, or a WooCommerce store. Every site is built with clean maintainability, semantic SEO fundamentals, and longevity in mind.",
         "NMark Designs is not built around generic templates or agency volume. It is an independent studio focused on custom digital solutions that look serious, load fast, and remain easy to maintain over time.",
       ],
-      imageAlt: "NMark Designs logo on a dark textured surface.",
+      imageAlt: "Nikola Marković, founder of NMark Designs, standing in front of the NMARK — Making your digital mark sign.",
       caption: "NMark Designs as a visual signature for the work, not a large agency story.",
     },
     approach: {
