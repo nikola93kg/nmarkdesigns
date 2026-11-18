@@ -146,6 +146,7 @@ function ProjectTile({
       <div className={styles.projectOverlay}>
         <div className={styles.projectMeta}>
           <span>{number} / {totalLabel}</span>
+          <span className={styles.projectName} aria-hidden="true" translate="no">{project.title}</span>
           <span>{content.category}</span>
           {hasCaseStudy && (
             <span className={styles.caseStudyBadge}>{copy.caseStudyBadge}</span>
@@ -153,19 +154,7 @@ function ProjectTile({
         </div>
         <div className={styles.projectCopy}>
           <h2 id={`project-${project.slug}-title`} className={styles.projectTitle} translate="no">
-            {hasCaseStudy ? (
-              <CaseStudyClickLink
-                href={caseStudyHref}
-                projectSlug={project.slug}
-                position={index + 1}
-                locale={locale}
-                className={styles.titleLink}
-              >
-                {project.title}
-              </CaseStudyClickLink>
-            ) : (
-              project.title
-            )}
+            {project.title}
           </h2>
           <p className={styles.projectDescription}>{content.description}</p>
           {project.technologies?.length ? (

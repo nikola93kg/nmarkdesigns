@@ -1,5 +1,5 @@
 import type { Localized } from "@/lib/i18n";
-import { getCarePlanStartingPrice } from "@/content/pricing";
+import { getCarePlanStartingPrice, formatWebsiteStartingPrice } from "@/content/pricing";
 
 const maintenanceStartingPrice = getCarePlanStartingPrice("basic-care");
 
@@ -95,12 +95,12 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
       en: "High-performance business websites engineered for trust and inquiries",
     },
     heroDescription: {
-      sr: "Od sažetih Landing stranica do naprednih poslovnih portala. Gradimo brze, responzivne sajtove u modernom kodu bez glomaznih generičkih tema, sa jasnom strukturom koja posetioce pretvara u klijente.",
-      en: "From focused landing pages to comprehensive company websites. We build fast, responsive web solutions with clean modern code—free from generic templates—structured to turn visitors into qualified inquiries.",
+      sr: "Od sažetih Landing stranica do naprednih poslovnih portala. Gradim brze, responzivne sajtove u modernom kodu bez glomaznih generičkih tema, sa jasnom strukturom koja posetioce pretvara u klijente.",
+      en: "From focused landing pages to comprehensive company websites. I build fast, responsive web solutions with clean modern code—free from generic templates—structured to turn visitors into qualified inquiries.",
     },
     startingPrice: {
       sr: "Od 300 €",
-      en: "Starting from $500",
+      en: `Starting from ${formatWebsiteStartingPrice("landing-page", "en")}`,
     },
     pricingAnchor: "packages",
     relatedCaseStudySlug: "casovi-francuskog",
@@ -206,8 +206,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         en: "Technologies and architecture",
       },
       description: {
-        sr: "Biramo tehnologiju koja najbolje odgovara ciljevima projekta — bez gomilanja suvišnih dodataka koji usporavaju sajt.",
-        en: "We choose the architecture that best solves the task—avoiding bloated plugins that degrade speed and security.",
+        sr: "Biram tehnologiju koja najbolje odgovara ciljevima projekta — bez gomilanja suvišnih dodataka koji usporavaju sajt.",
+        en: "I choose the architecture that best solves the task—avoiding bloated plugins that degrade speed and security.",
       },
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Semantic HTML5", "WordPress (Clean Custom)"],
     },
@@ -229,7 +229,7 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
           },
           description: {
             sr: "Definišemo ciljeve sajta, ciljnu publiku, navigaciju i spisak neophodnih stranica i funkcionalnosti.",
-            en: "We clarify your primary business objectives, audience expectations, navigation flow, and required pages.",
+            en: "I clarify your primary business objectives, audience expectations, navigation flow, and required pages.",
           },
         },
         {
@@ -239,8 +239,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Design and content layout",
           },
           description: {
-            sr: "Oblikujemo vizuelni stil, tipografiju, sekcije i hijerarhiju poruka tako da posetilac lako razume vašu ponudu.",
-            en: "We establish typographic hierarchy, color palette, and section layouts so visitors immediately grasp your value proposition.",
+            sr: "Oblikujem vizuelni stil, tipografiju, sekcije i hijerarhiju poruka tako da posetilac lako razume vašu ponudu.",
+            en: "I establish typographic hierarchy, color palette, and section layouts so visitors immediately grasp your value proposition.",
           },
         },
         {
@@ -250,8 +250,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Engineering and optimization",
           },
           description: {
-            sr: "Pišemo čist, brz kod, optimizujemo slike, implementiramo forme, SEO tagove i bezbednosne mehanizme.",
-            en: "We write clean, semantic code, compress imagery, implement secure contact flows, and wire up technical SEO foundations.",
+            sr: "Pišem čist, brz kod, optimizujem slike, implementiram forme, SEO tagove i bezbednosne mehanizme.",
+            en: "I write clean, semantic code, compress imagery, implement secure contact flows, and wire up technical SEO foundations.",
           },
         },
         {
@@ -261,8 +261,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Testing and launch",
           },
           description: {
-            sr: "Verifikujemo prikaz na svim uređajima, proveravamo Core Web Vitals metrike, povezujemo domen i Google analitiku.",
-            en: "We test across real devices, confirm Core Web Vitals scores, configure domain DNS, and connect Google analytics.",
+            sr: "Verifikujem prikaz na svim uređajima, proveravam Core Web Vitals metrike, povezujem domen i Google analitiku.",
+            en: "I test across real devices, confirm Core Web Vitals scores, configure domain DNS, and connect Google analytics.",
           },
         },
       ],
@@ -292,11 +292,11 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         answer: {
           sr: [
             "U cenu ulazi kompletan proces: dizajn, responzivno kodiranje, tehnički SEO temelji, integracija kontakt formi, optimizacija brzine (Core Web Vitals), povezivanje domena i SSL sertifikata, kao i osnovno uputstvo za korišćenje.",
-            "Domen i hosting zakupljujete direktno kod pouzdanih provajdera uz našu pomoć pri izboru i podešavanju, bez skrivenih marži.",
+            "Domen i hosting zakupljujete direktno kod pouzdanih provajdera uz moju pomoć pri izboru i podešavanju, bez skrivenih marži.",
           ],
           en: [
             "The quote covers the full lifecycle: bespoke design, responsive engineering, technical SEO, contact workflows, Core Web Vitals optimization, domain configuration, and launch verification.",
-            "Domain and hosting are registered directly with your chosen provider—we guide the setup without inflated markups.",
+            "Domain and hosting are registered directly with your chosen provider—I guide the setup without inflated markups.",
           ],
         },
       },
@@ -307,7 +307,7 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         },
         answer: {
           sr: [
-            "Apsolutno. Svaki sajt izrađujemo mobile-first metodom sa posebnom pažnjom posvećenom brzini na mobilnim mrežama. Svaka stranica dobija semantičke meta opise, Open Graph kartice, XML sitemap i strukturirane podatke (Schema.org).",
+            "Apsolutno. Svaki sajt izrađujem mobile-first metodom sa posebnom pažnjom posvećenom brzini na mobilnim mrežama. Svaka stranica dobija semantičke meta opise, Open Graph kartice, XML sitemap i strukturirane podatke (Schema.org).",
           ],
           en: [
             "Yes, unconditionally. Every website is built mobile-first with dedicated testing on cellular bandwidth. Each page includes semantic meta descriptions, Open Graph cards, an automated XML sitemap, and Schema.org structured data.",
@@ -322,11 +322,11 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         answer: {
           sr: [
             "Da. U zavisnosti od izabrane arhitekture, sajt može imati intuitivan CMS panel (WordPress ili headless CMS) gde možete samostalno dodavati vesti, menjati cene i ažurirati fotografije bez programerskog znanja.",
-            "Ukoliko preferirate da mi brinemo o tehničkim i sadržajnim promenama, nudimo mesečne pakete održavanja.",
+            "Ukoliko preferirate da ja brinem o tehničkim i sadržajnim promenama, nudim mesečne pakete održavanja.",
           ],
           en: [
             "Yes. Depending on your workflow requirements, your website can be configured with an intuitive dashboard for updating articles, imagery, and text without touching code.",
-            "Alternatively, we offer ongoing maintenance plans if you prefer hands-off management.",
+            "Alternatively, I offer ongoing maintenance plans if you prefer hands-off management.",
           ],
         },
       },
@@ -359,12 +359,12 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
       en: "Reliable e-commerce storefronts built for conversion and easy operations",
     },
     heroDescription: {
-      sr: "Razvijamo WooCommerce prodavnice sa čistom strukturom kategorija, brzim procesom kupovine i potpunim vlasništvom nad vašim podacima i kupcima, bez mesečnih provizija na promet.",
-      en: "We engineer performant WooCommerce stores with structured catalogs, frictionless checkout flows, and full merchant ownership of your customer data—free from recurring transaction cuts.",
+      sr: "Razvijam WooCommerce prodavnice sa čistom strukturom kategorija, brzim procesom kupovine i potpunim vlasništvom nad vašim podacima i kupcima, bez mesečnih provizija na promet.",
+      en: "I engineer performant WooCommerce stores with structured catalogs, frictionless checkout flows, and full merchant ownership of your customer data—free from recurring transaction cuts.",
     },
     startingPrice: {
       sr: "Od 1.200 €",
-      en: "Starting from $1,800",
+      en: `Starting from ${formatWebsiteStartingPrice("ecommerce", "en")}`,
     },
     pricingAnchor: "packages",
     relatedCaseStudySlug: "anabelabebioprema",
@@ -470,8 +470,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         en: "E-commerce technology stack",
       },
       description: {
-        sr: "Gradimo na proverenom open-source rešenju, uz podešavanje bezbednosti, održavanja i dogovorenih pristupa bazi podataka.",
-        en: "We build on established open-source systems, with security, maintenance and data access configured for the agreed scope.",
+        sr: "Gradim na proverenom open-source rešenju, uz podešavanje bezbednosti, održavanja i dogovorenih pristupa bazi podataka.",
+        en: "I build on established open-source systems, with security, maintenance and data access configured for the agreed scope.",
       },
       technologies: ["WordPress", "WooCommerce", "MySQL", "PHP", "Tailwind CSS", "Next.js (Headless opciono)"],
     },
@@ -493,7 +493,7 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
           },
           description: {
             sr: "Definišemo kategorije, atribute artikala (boje, veličine), načine plaćanja i model obračuna dostave.",
-            en: "We map product categories, variant attributes, payment processors, and shipping logistics rules.",
+            en: "I map product categories, variant attributes, payment processors, and shipping logistics rules.",
           },
         },
         {
@@ -503,8 +503,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Storefront and product UI design",
           },
           description: {
-            sr: "Dizajniramo intuitivan katalog, kartice proizvoda sa jasnom cenom i dugmetom za kupovinu, i mobilnu korpu.",
-            en: "We design clean product cards, clear add-to-cart workflows, and responsive shopping cart screens.",
+            sr: "Dizajniram intuitivan katalog, kartice proizvoda sa jasnom cenom i dugmetom za kupovinu, i mobilnu korpu.",
+            en: "I design clean product cards, clear add-to-cart workflows, and responsive shopping cart screens.",
           },
         },
         {
@@ -514,8 +514,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Configuration and product entry",
           },
           description: {
-            sr: "Podešavamo WooCommerce, povezujemo platne prolaze, uvozimo početni asortiman artikala i konfigurišemo transakcione emailove.",
-            en: "We set up payment gateways, import initial product data, test transactional emails, and secure checkout endpoints.",
+            sr: "Podešavam WooCommerce, povezujem platne prolaze, uvozim početni asortiman artikala i konfigurišem transakcione emailove.",
+            en: "I set up payment gateways, import initial product data, test transactional emails, and secure checkout endpoints.",
           },
         },
         {
@@ -525,8 +525,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Live checkout test and training",
           },
           description: {
-            sr: "Prolazimo kroz kompletne testne porudžbine na računaru i telefonu, proveravamo zalihe i obučavamo vas za upravljanje narudžbinama.",
-            en: "We execute end-to-end test transactions, verify inventory adjustments, and train your team on order fulfillment.",
+            sr: "Prolazim kroz kompletne testne porudžbine na računaru i telefonu, proveravam zalihe i obučavam vas za upravljanje narudžbinama.",
+            en: "I execute end-to-end test transactions, verify inventory adjustments, and train your team on order fulfillment.",
           },
         },
       ],
@@ -539,24 +539,24 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         },
         answer: {
           sr: [
-            "WooCommerce nema veštačko ograničenje broja artikala. Može pouzdano da podrži od 50 do preko 20.000 artikala uz kvalitetan hosting i pravilno keširanje baze podataka, što smo dokazali na projektu Anabela Bebi Oprema sa hiljadama aktivnih artikala.",
+            "WooCommerce nema veštačko ograničenje broja artikala. Može pouzdano da podrži od 50 do preko 20.000 artikala uz kvalitetan hosting i pravilno keširanje baze podataka, što sam dokumentovao na projektu Anabela Bebi Oprema sa hiljadama aktivnih artikala.",
           ],
           en: [
-            "WooCommerce has no artificial item limit. With optimized database architecture and solid hosting, it reliably powers catalogs from 50 to 20,000+ SKUs—as demonstrated on our Anabela Bebi Oprema project.",
+            "WooCommerce has no artificial item limit. With optimized database architecture and solid hosting, it reliably powers catalogs from 50 to 20,000+ SKUs—as demonstrated on the Anabela Bebi Oprema project.",
           ],
         },
       },
       {
         question: {
-          sr: "Koje načine plaćanja možemo da ponudimo kupcima?",
-          en: "What payment options can we offer customers?",
+          sr: "Koje načine plaćanja moja prodavnica može da ponudi kupcima?",
+          en: "What payment options can my store offer customers?",
         },
         answer: {
           sr: [
-            "Najčešća kombinacija u Srbiji je plaćanje pouzećem (gotovinom kuriru pri preuzimanju) i uplatom na račun (virmanom). Takođe konfigurišemo plaćanje platnim karticama (Banca Intesa, AIK, ChipCard, Monri ili Stripe za inostrano tržište).",
+            "Najčešća kombinacija u Srbiji je plaćanje pouzećem (gotovinom kuriru pri preuzimanju) i uplatom na račun (virmanom). Takođe konfigurišem plaćanje platnim karticama (Banca Intesa, AIK, ChipCard, Monri ili Stripe za inostrano tržište).",
           ],
           en: [
-            "We integrate international card gateways (Stripe, PayPal) as well as domestic payment processors, direct bank transfers, and cash-on-delivery options depending on your operating geography.",
+            "I integrate international card gateways (Stripe, PayPal) as well as domestic payment processors, direct bank transfers, and cash-on-delivery options depending on your operating geography.",
           ],
         },
       },
@@ -567,7 +567,7 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         },
         answer: {
           sr: [
-            "Ne. Za razliku od platformi kao što je Shopify, WooCommerce je softver u vašem 100% vlasništvu. Ne plaćate nama niti platformi nikakve mesečne procente od prodate robe — plaćate samo standardnu proviziju vaše banke za kartične transakcije ukoliko koristite e-commerce kartično plaćanje.",
+            "Ne. Za razliku od platformi kao što je Shopify, WooCommerce je softver u vašem 100% vlasništvu. Ne plaćate meni niti platformi nikakve mesečne procente od prodate robe — plaćate samo standardnu proviziju vaše banke za kartične transakcije ukoliko koristite e-commerce kartično plaćanje.",
           ],
           en: [
             "No. Unlike proprietary platforms like Shopify, WooCommerce is open-source software you own outright. You pay zero platform fees on order volume—only your merchant bank's standard interchange rate on card transactions.",
@@ -603,8 +603,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
       en: "Bespoke Next.js and React software engineered for scale and speed",
     },
     heroDescription: {
-      sr: "Kada gotovi šabloni i univerzalni WordPress plugini više ne mogu da podrže vaše poslovanje. Razvijamo modularan softver od nule: korisničke portale, kalkulatore, sisteme rezervacija i interne alate sa direktnim API integracijama.",
-      en: "When off-the-shelf templates and generic plugins reach their limits. We architect bespoke software from scratch: authenticated client portals, interactive calculators, booking systems, and internal operational tools.",
+      sr: "Kada gotovi šabloni i univerzalni WordPress plugini više ne mogu da podrže vaše poslovanje. Razvijam modularan softver od nule: korisničke portale, kalkulatore, sisteme rezervacija i interne alate sa direktnim API integracijama.",
+      en: "When off-the-shelf templates and generic plugins reach their limits. I architect bespoke software from scratch: authenticated client portals, interactive calculators, booking systems, and internal operational tools.",
     },
     startingPrice: {
       sr: "Po ponudi",
@@ -721,7 +721,7 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
     },
     process: {
       title: {
-        sr: "Kako razvijamo custom softver",
+        sr: "Kako razvijam custom softver",
         en: "Custom software lifecycle",
       },
       description: {
@@ -736,8 +736,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Technical specification & data model",
           },
           description: {
-            sr: "Mapiramo entitete, korisničke uloge, eksterne integracije i logiku poslovnih procesa u preciznu specifikaciju.",
-            en: "We document user flows, schema models, external integration points, and edge cases in a formal specification.",
+            sr: "Mapiram entitete, korisničke uloge, eksterne integracije i logiku poslovnih procesa u preciznu specifikaciju.",
+            en: "I document user flows, schema models, external integration points, and edge cases in a formal specification.",
           },
         },
         {
@@ -747,8 +747,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Architecture & UI prototyping",
           },
           description: {
-            sr: "Definišemo modularnu arhitekturu, bezbednosne granice i izrađujemo wireframe modele ključnih ekrana aplikacije.",
-            en: "We design component hierarchies, security perimeters, and high-fidelity screen layouts for approval.",
+            sr: "Definišem modularnu arhitekturu, bezbednosne granice i izrađujem wireframe modele ključnih ekrana aplikacije.",
+            en: "I design component hierarchies, security perimeters, and high-fidelity screen layouts for approval.",
           },
         },
         {
@@ -758,8 +758,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Iterative development & checkpoints",
           },
           description: {
-            sr: "Gradimo aplikaciju u definisanim etapama uz redovne preglede i testno okruženje gde možete isprobati napredak.",
-            en: "We engineer features in staged milestones with private preview environments for your continuous verification.",
+            sr: "Gradim aplikaciju u definisanim etapama uz redovne preglede i testno okruženje gde možete isprobati napredak.",
+            en: "I engineer features in staged milestones with private preview environments for your continuous verification.",
           },
         },
         {
@@ -769,8 +769,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Automated QA & production deployment",
           },
           description: {
-            sr: "Izvršavamo rigorozne testove performansi i bezbednosti, konfigurišemo server i predajemo uredno dokumentovan kod.",
-            en: "We run end-to-end regression suites, verify Core Web Vitals, execute server provisioning, and provide clean documentation.",
+            sr: "Izvršavam rigorozne testove performansi i bezbednosti, konfigurišem server i predajem uredno dokumentovan kod.",
+            en: "I run end-to-end regression suites, verify Core Web Vitals, execute server provisioning, and provide clean documentation.",
           },
         },
       ],
@@ -835,8 +835,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
       en: "Strategic web design and redesign that turns visitors into clients",
     },
     heroDescription: {
-      sr: "Dizajn ne posmatramo kao površinsku dekoraciju, već kao strateški alat koji jasno objašnjava vašu vrednost. Radimo nov dizajn od nule ili temeljan redizajn postojećeg sajta uz očuvanje stečenih Google pozicija.",
-      en: "We treat design not as cosmetic decoration, but as a strategic asset that communicates your value instantly. We create fresh designs from scratch or execute comprehensive redesigns while protecting your hard-won SEO equity.",
+      sr: "Dizajn ne posmatram kao površinsku dekoraciju, već kao strateški alat koji jasno objašnjava vašu vrednost. Radim nov dizajn od nule ili temeljan redizajn postojećeg sajta uz očuvanje stečenih Google pozicija.",
+      en: "I treat design not as cosmetic decoration, but as a strategic asset that communicates your value instantly. I create fresh designs from scratch or execute comprehensive redesigns while protecting your hard-won SEO equity.",
     },
     startingPrice: {
       sr: "Od 400 €",
@@ -884,8 +884,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Existing website UX audit",
           },
           description: {
-            sr: "Identifikujemo gde posetioci odustaju, šta zbunjuje korisnike i koje sekcije ne doprinose konverziji.",
-            en: "We pinpoint where visitors drop off, eliminate confusing navigation patterns, and prune dead weight.",
+            sr: "Identifikujem gde posetioci odustaju, šta zbunjuje korisnike i koje sekcije ne doprinose konverziji.",
+            en: "I pinpoint where visitors drop off, eliminate confusing navigation patterns, and prune dead weight.",
           },
         },
         {
@@ -914,7 +914,7 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Showcase presentation design",
           },
           description: {
-            sr: "Dizajniramo sekcije radova sa velikim, jasnim fotografijama i konkretnim rezultatima koji grade poverenje.",
+            sr: "Dizajniram sekcije radova sa velikim, jasnim fotografijama i konkretnim rezultatima koji grade poverenje.",
             en: "Large, crisp imagery and structured case studies showcasing your past work and authentic business credibility.",
           },
         },
@@ -924,8 +924,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "SEO equity protection",
           },
           description: {
-            sr: "Pazimo na postojeće URL-ove, naslove i preusmeravanja kako redizajn ne bi naškodio vašim Google pozicijama.",
-            en: "We map historical URLs, headings, and metadata with 308 redirects to ensure zero loss of organic search rank.",
+            sr: "Pazim na postojeće URL-ove, naslove i preusmeravanja kako redizajn ne bi naškodio vašim Google pozicijama.",
+            en: "I map historical URLs, headings, and metadata with 308 redirects to ensure zero loss of organic search rank.",
           },
         },
       ],
@@ -936,7 +936,7 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         en: "Design principles",
       },
       description: {
-        sr: "Radimo umeren, moderan stil baziran na dizajnerskim tokenima koji se prirodno prenosi u čist kod.",
+        sr: "Radim umeren, moderan stil baziran na dizajnerskim tokenima koji se prirodno prenosi u čist kod.",
         en: "Restrained, purposeful design systems built on strict tokens that translate 1:1 into clean production code.",
       },
       technologies: ["Design Tokens", "Responsive Layouts", "Next/Font", "CSS Variables", "Tailwind CSS", "Semantic UI"],
@@ -958,8 +958,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Current site audit",
           },
           description: {
-            sr: "Pregledamo postojeći sajt, izdvajamo šta funkcioniše, a šta mora da se promeni da bi sajt izgledao savremeno.",
-            en: "We review what currently works, what causes friction, and what needs structural reimagining.",
+            sr: "Pregledam postojeći sajt, izdvajam šta funkcioniše, a šta mora da se promeni da bi sajt izgledao savremeno.",
+            en: "I review what currently works, what causes friction, and what needs structural reimagining.",
           },
         },
         {
@@ -970,7 +970,7 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
           },
           description: {
             sr: "Definišemo novi raspored sekcija, redosled poruka i jasan tok od naslova do kontakt forme.",
-            en: "We map the sequence of arguments, section hierarchy, and the seamless path to conversion.",
+            en: "I map the sequence of arguments, section hierarchy, and the seamless path to conversion.",
           },
         },
         {
@@ -980,8 +980,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Visual system & styling",
           },
           description: {
-            sr: "Kreiramo konačan izgled stranica sa paletom boja, tipografijom i pripremljenim fotografijama.",
-            en: "We craft the final visual presentation with bespoke typography, cohesive colors, and image art direction.",
+            sr: "Kreiram konačan izgled stranica sa paletom boja, tipografijom i pripremljenim fotografijama.",
+            en: "I craft the final visual presentation with bespoke typography, cohesive colors, and image art direction.",
           },
         },
         {
@@ -991,8 +991,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Zero-downtime implementation",
           },
           description: {
-            sr: "Novi dizajn prenosimo u produkcioni kod uz očuvanje rada vašeg trenutnog sajta sve do dana lansiranja.",
-            en: "We develop the new design in a parallel environment, deploying seamlessly with zero interruption to your live business.",
+            sr: "Novi dizajn prenosim u produkcioni kod uz očuvanje rada vašeg trenutnog sajta sve do dana lansiranja.",
+            en: "I develop the new design in a parallel environment, deploying seamlessly with zero interruption to your live business.",
           },
         },
       ],
@@ -1005,10 +1005,10 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         },
         answer: {
           sr: [
-            "Ne, pod uslovom da se redizajn radi stručno. Mi pažljivo mapiramo sve stare URL-ove sa 308 trajnim preusmeravanjima, čuvamo ključne tekstualne celine i poboljšavamo tehničku semantiku i brzinu, što pretraživači gotovo uvek nagrade skokom pozicija.",
+            "Ne, pod uslovom da se redizajn radi stručno. Pažljivo mapiram sve stare URL-ove sa 308 trajnim preusmeravanjima, čuvam ključne tekstualne celine i poboljšavam tehničku semantiku i brzinu, što pretraživači gotovo uvek nagrade skokom pozicija.",
           ],
           en: [
-            "No, provided it is handled with architectural discipline. We map all legacy URLs with permanent 308 redirects, preserve topical content integrity, and elevate Core Web Vitals speed—which typically leads to improved rankings.",
+            "No, provided it is handled with architectural discipline. I map all legacy URLs with permanent 308 redirects, preserve topical content integrity, and elevate Core Web Vitals speed—which typically leads to improved rankings.",
           ],
         },
       },
@@ -1019,10 +1019,10 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         },
         answer: {
           sr: [
-            "Zadržavamo sve što je kvalitetno i relevantno, ali predlažemo skraćivanje i reorganizaciju delova koji su nejasni ili preobimni za čitanje na mobilnom telefonu.",
+            "Zadržavam sve što je kvalitetno i relevantno, ali predlažem skraćivanje i reorganizaciju delova koji su nejasni ili preobimni za čitanje na mobilnom telefonu.",
           ],
           en: [
-            "We preserve everything that performs well, while restructuring or refining copy and imagery that causes mobile reading fatigue.",
+            "I preserve everything that performs well, while restructuring or refining copy and imagery that causes mobile reading fatigue.",
           ],
         },
       },
@@ -1055,8 +1055,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
       en: "Technical SEO, Core Web Vitals speed, and practical AI assistants",
     },
     heroDescription: {
-      sr: "Unapređujemo tehničku osnovu za posetioce i pretraživače: semantički HTML, merljive Core Web Vitals performanse, jasne odgovore, strukturirane podatke usklađene sa vidljivim sadržajem i praktične AI asistente.",
-      en: "We improve technical foundations for visitors and search engines: semantic HTML, measured Core Web Vitals improvements, clear answers, structured data that matches visible content, and practical AI assistants.",
+      sr: "Unapređujem tehničku osnovu za posetioce i pretraživače: semantički HTML, merljive Core Web Vitals performanse, jasne odgovore, strukturirane podatke usklađene sa vidljivim sadržajem i praktične AI asistente.",
+      en: "I improve technical foundations for visitors and search engines: semantic HTML, measured Core Web Vitals improvements, clear answers, structured data that matches visible content, and practical AI assistants.",
     },
     startingPrice: {
       sr: "Od 100 €",
@@ -1156,14 +1156,14 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
         en: "Standards & diagnostic tools",
       },
       description: {
-        sr: "Koristimo zvanične industrijske alate za dijagnostiku i verifikaciju rezultata.",
-        en: "We benchmark exclusively against official performance and search diagnostic tools.",
+        sr: "Koristim zvanične industrijske alate za dijagnostiku i verifikaciju rezultata.",
+        en: "I benchmark exclusively against official performance and search diagnostic tools.",
       },
       technologies: ["Google PageSpeed Insights", "Lighthouse", "Core Web Vitals", "Schema.org JSON-LD", "Cloudflare Turnstile", "AI RAG Integrations"],
     },
     process: {
       title: {
-        sr: "Kako sprovodimo optimizaciju",
+        sr: "Kako sprovodim optimizaciju",
         en: "Optimization workflow",
       },
       description: {
@@ -1178,8 +1178,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Baseline diagnostic audit",
           },
           description: {
-            sr: "Snimamo početno stanje brzine na mobilnom i desktopu, identifikujemo uska grla i greške u indeksiranju.",
-            en: "We measure current mobile and desktop performance, identify blocking scripts, and log crawl warnings.",
+            sr: "Snimam početno stanje brzine na mobilnom i desktopu, identifikujem uska grla i greške u indeksiranju.",
+            en: "I measure current mobile and desktop performance, identify blocking scripts, and log crawl warnings.",
           },
         },
         {
@@ -1189,8 +1189,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Code refinement & asset speedup",
           },
           description: {
-            sr: "Uklanjamo suvišan kod, optimizujemo medije, podešavamo keširanje i rešavamo probleme sa indeksiranjem.",
-            en: "We refactor heavy assets, implement modern image sizing, configure server headers, and clean up redirects.",
+            sr: "Uklanjam suvišan kod, optimizujem medije, podešavam keširanje i rešavam probleme sa indeksiranjem.",
+            en: "I refactor heavy assets, implement modern image sizing, configure server headers, and clean up redirects.",
           },
         },
         {
@@ -1200,8 +1200,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Structured data & AI grounding",
           },
           description: {
-            sr: "Dodajemo strukturirane podatke koji odgovaraju vidljivom sadržaju. Ako je dogovorena integracija AI asistenta, povezujemo ga sa proverenim informacijama o poslovanju.",
-            en: "We add structured data that matches visible content. If an AI assistant is included in the agreed scope, we connect it to verified business information.",
+            sr: "Dodajem strukturirane podatke koji odgovaraju vidljivom sadržaju. Ako je dogovorena integracija AI asistenta, povezujem ga sa proverenim informacijama o poslovanju.",
+            en: "I add structured data that matches visible content. If an AI assistant is included in the agreed scope, I connect it to verified business information.",
           },
         },
         {
@@ -1211,8 +1211,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Evidence & verification",
           },
           description: {
-            sr: "Ponovo merimo performanse na PageSpeed Insights i prijavljujemo ažurirani sitemap i URL-ove u Google Search Console.",
-            en: "We run final PageSpeed and Lighthouse audits, verify schema validity, and resubmit fresh sitemaps to Google.",
+            sr: "Ponovo merim performanse na PageSpeed Insights i prijavljujem ažurirani sitemap i URL-ove u Google Search Console.",
+            en: "I run final PageSpeed and Lighthouse audits, verify schema validity, and resubmit fresh sitemaps to Google.",
           },
         },
       ],
@@ -1337,8 +1337,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Backup verification",
           },
           description: {
-            sr: "Proveravamo raspoložive rezervne kopije gde postojeća postavka to podržava. Učestalost, mesto čuvanja i postupak oporavka definišu se prema okruženju i dogovorenom obimu.",
-            en: "We verify available backups where the setup supports it. Backup frequency, storage location, and recovery procedures depend on the environment and agreed scope.",
+            sr: "Proveravam raspoložive rezervne kopije gde postojeća postavka to podržava. Učestalost, mesto čuvanja i postupak oporavka definišu se prema okruženju i dogovorenom obimu.",
+            en: "I verify available backups where the setup supports it. Backup frequency, storage location, and recovery procedures depend on the environment and agreed scope.",
           },
         },
         {
@@ -1347,8 +1347,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Website health and availability checks",
           },
           description: {
-            sr: "Redovno proveravamo zdravlje i dostupnost sajta. Automatska upozorenja zavise od podešenog nadzora; rok i način intervencije ugovaraju se zasebno. Planovi ne uključuju 24/7 dežurstvo.",
-            en: "We regularly check website health and availability. Automated alerts depend on the monitoring setup; response times and intervention scope are agreed separately. Plans do not include staffed 24/7 support.",
+            sr: "Redovno proveravam zdravlje i dostupnost sajta. Automatska upozorenja zavise od podešenog nadzora; rok i način intervencije ugovaraju se zasebno. Planovi ne uključuju 24/7 dežurstvo.",
+            en: "I regularly check website health and availability. Automated alerts depend on the monitoring setup; response times and intervention scope are agreed separately. Plans do not include staffed 24/7 support.",
           },
         },
         {
@@ -1401,8 +1401,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Onboarding health check",
           },
           description: {
-            sr: "Pregledamo sajt, verzije softvera i raspoložive rezervne kopije. Dogovaramo odabrani plan, podržano okruženje i način praćenja dostupnosti.",
-            en: "We inspect the website, software versions, and available backups. We agree on the plan, supported environment, and availability checks.",
+            sr: "Pregledam sajt, verzije softvera i raspoložive rezervne kopije. Dogovaramo odabrani plan, podržano okruženje i način praćenja dostupnosti.",
+            en: "I inspect the website, software versions, and available backups. I agree on the plan, supported environment, and availability checks.",
           },
         },
         {
@@ -1412,8 +1412,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Monthly upkeep routines",
           },
           description: {
-            sr: "Vršimo ažuriranja gde je primenjivo, osnovne bezbednosne provere i proveru rezervnih kopija gde je podržana. Business Care uključuje i mesečni pregled tehničkog stanja.",
-            en: "We perform updates where applicable, basic security checks, and backup verification where supported. Business Care also includes a monthly technical overview.",
+            sr: "Vršim ažuriranja gde je primenjivo, osnovne bezbednosne provere i proveru rezervnih kopija gde je podržana. Business Care uključuje i mesečni pregled tehničkog stanja.",
+            en: "I perform updates where applicable, basic security checks, and backup verification where supported. Business Care also includes a monthly technical overview.",
           },
         },
         {
@@ -1434,7 +1434,7 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
             en: "Handling technical requests",
           },
           description: {
-            sr: "Manje tehničke smetnje rešavamo u okviru ugovorenog plana. Business Care ima prioritet u odnosu na Basic Care; odziv i veće intervencije definišu se dogovorom.",
+            sr: "Manje tehničke smetnje rešavam u okviru ugovorenog plana. Business Care ima prioritet u odnosu na Basic Care; odziv i veće intervencije definišu se dogovorom.",
             en: "Minor technical issues are handled within the agreed plan. Business Care has priority over Basic Care; response times and larger interventions are agreed separately.",
           },
         },

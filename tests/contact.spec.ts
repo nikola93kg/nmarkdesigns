@@ -186,7 +186,9 @@ for (const width of [375, 1440]) {
     await page.keyboard.press("Enter");
     await expect(page.getByRole("main")).toBeFocused();
     await page.keyboard.press("Tab");
-    await expect(page.locator('main a[href="mailto:info@nmarkdesigns.com"]')).toBeFocused();
+    await expect(page.getByRole("link", { name: sr.contact.intro.primaryAction, exact: true })).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(page).toHaveURL(/#contact-form$/);
     await page.locator('[name="name"]').focus();
     for (const field of ["email", "phone", "message"]) {
       await page.keyboard.press("Tab");

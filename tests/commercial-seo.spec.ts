@@ -24,12 +24,12 @@ for (const locale of locales) {
       for (const pkg of Object.values(copy.pricing.websiteDevelopment.packages)) {
         await expect(table).toContainText(pkg.price);
       }
-      await expect(page.locator('header time[datetime="2026-11-17"]')).toBeVisible();
+      await expect(page.locator('header time[datetime="2026-11-18"]')).toBeVisible();
       const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
       const nodes = schemas.flatMap((text) => (JSON.parse(text) as { "@graph"?: Array<Record<string, unknown>> })["@graph"] ?? []);
       const article = nodes.find((node) => node["@type"] === "BlogPosting");
       expect(article?.datePublished).toBe("2026-09-22");
-      expect(article?.dateModified).toBe("2026-11-17");
+      expect(article?.dateModified).toBe("2026-11-18");
       await page.locator(`main a[href="${pricingPath}#packages"]`).click();
       await expect(page).toHaveURL((url) => url.pathname === pricingPath && url.hash === "#packages");
       const resources = page.getByRole("navigation", { name: copy.pricing.websiteDevelopment.resourcesLabel });
@@ -60,7 +60,7 @@ test("site entity uses the domain and sitemap dates reflect real editorial chang
   for (const locale of locales) {
     const path = localizedBlogPostPath(guideSlug, locale);
     const entry = sitemap.split("<url>").find((item) => item.includes(`<loc>${site.url}${path}</loc>`));
-    expect(entry).toContain("<lastmod>2026-11-17</lastmod>");
+    expect(entry).toContain("<lastmod>2026-11-18</lastmod>");
   }
   const home = sitemap.split("<url>").find((item) => item.includes(`<loc>${site.url}/sr/</loc>`));
   expect(home).not.toContain("<lastmod>");

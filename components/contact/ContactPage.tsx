@@ -3,6 +3,7 @@ import { ContactDirectLink } from "@/components/layout/ContactDirectLink";
 import { submitContact } from "@/app/[locale]/[page]/actions";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
 import background from "@/components/ui/GridBackground.module.css";
 import type { Dictionary } from "@/content/i18n/types";
 import { site } from "@/content/site";
@@ -25,11 +26,17 @@ export function ContactPage({ locale, copy }: { locale: Locale; copy: Dictionary
             <p className="mb-4 text-small font-medium text-on-brand-muted">{copy.intro.eyebrow}</p>
             <h1 id="contact-title" className="text-display font-bold">{copy.intro.title}</h1>
           </div>
-          <p className="mx-auto max-w-lg text-pretty text-on-brand-muted lg:mx-0">{copy.intro.description}</p>
+          <div>
+            <p className="mx-auto max-w-lg text-pretty text-on-brand-muted lg:mx-0">{copy.intro.description}</p>
+            <Button href="#contact-form" variant="secondary" className="mt-6">{copy.intro.primaryAction}</Button>
+          </div>
         </Container>
       </section>
       <Container className="grid gap-12 py-section text-center lg:grid-cols-[1fr_1.4fr] lg:gap-24 lg:text-left">
-        <section aria-labelledby="contact-details-title">
+        <div className="min-w-0 lg:order-2">
+          <ContactForm key={locale} copy={copy.form} action={submitContact.bind(null, locale)} permalink={localizedPath("contact", locale)} deliveryAvailable={contactDelivery.isAvailable()} />
+        </div>
+        <section aria-labelledby="contact-details-title" className="lg:order-1">
           <h2 id="contact-details-title" className="text-subheading font-bold">{copy.details.title}</h2>
           <p className="mx-auto mt-4 max-w-sm text-pretty text-muted lg:mx-0">{copy.details.description}</p>
           <address className="mt-8 not-italic">
@@ -54,7 +61,6 @@ export function ContactPage({ locale, copy }: { locale: Locale; copy: Dictionary
             </ul>
           </address>
         </section>
-        <ContactForm key={locale} copy={copy.form} action={submitContact.bind(null, locale)} permalink={localizedPath("contact", locale)} deliveryAvailable={contactDelivery.isAvailable()} />
       </Container>
     </>
   );

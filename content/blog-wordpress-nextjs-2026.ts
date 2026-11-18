@@ -1,3 +1,4 @@
+import { formatWebsiteStartingPrice } from "@/content/pricing";
 import type { BlogSection } from "@/content/blog";
 import type { Editorial } from "@/content/blog-editorial";
 import { getHostingerCopy, hostingerPartner } from "@/content/partners";
@@ -242,7 +243,7 @@ const en: readonly BlogSection[] = [
     heading: "Development cost: initial investment, hosting and future changes",
     paragraphs: [
       "Both projects use open-source software; there is no mandatory software licence simply to use WordPress or Next.js. You pay for design, content, development, testing and infrastructure. Existing WordPress features can reduce initial work. With Next.js, extra work often covers content modelling, administration and connecting services. This is a budgeting pattern, not a rule that every Next.js website costs more.",
-      "The existing NMark Designs price list starts business websites at €550 and advanced websites at €900. These are starting prices based on scope, rather than separate WordPress and Next.js tariffs. The basic business package excludes a CMS, blog, additional languages and advanced integrations. A website without administration should not be compared with a proposal already covering an editorial system, training and article migration.",
+      `The NMark Designs US price list starts business websites at ${formatWebsiteStartingPrice("business-website", "en")} and advanced websites at ${formatWebsiteStartingPrice("advanced-website", "en")}. These are starting prices based on scope, rather than separate WordPress and Next.js tariffs. The basic business package excludes a CMS, blog, additional languages and advanced integrations. A website without administration should not be compared with a proposal already covering an editorial system, training and article migration. The illustrative cost comparisons below use EUR and do not represent these US packages.`,
       "Use a simple ownership calculation: development + migration + three years of hosting, domain, licences and support + subsequent development. Hosting provides infrastructure; maintenance provides agreed work on the website. Neither automatically includes writing articles, translating pages or adding new features. Ask what you can edit yourself and what requires paid assistance.",
     ],
     media: [{

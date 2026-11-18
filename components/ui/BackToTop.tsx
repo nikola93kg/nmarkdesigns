@@ -51,6 +51,7 @@ export function BackToTop() {
 
     return (
         <button
+            data-back-to-top
             type="button"
             onClick={scrollToTop}
             aria-label="Nazad na vrh stranice"

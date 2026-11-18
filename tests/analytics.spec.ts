@@ -163,10 +163,17 @@ test.describe("Phase 5B: Analytics, Consent Mode v2 & Conversion Tracking", () =
     const modal = page.getByRole("dialog", { name: consentCopy.sr.modalTitle });
     await expect(modal).toBeVisible();
     await expect(modal.getByText(consentCopy.sr.statusGranted)).toBeVisible();
+    const close = modal.getByRole("button", { name: consentCopy.sr.close, exact: true });
+    await expect(close).toBeFocused();
+    await page.keyboard.press("Shift+Tab");
+    await expect(modal.getByRole("button", { name: consentCopy.sr.accept })).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(close).toBeFocused();
 
     // Test Escape key closes modal
     await page.keyboard.press("Escape");
     await expect(modal).not.toBeVisible();
+    await expect(footerBtn).toBeFocused();
 
     // Reopen and switch to Decline
     await footerBtn.click();
@@ -333,26 +340,31 @@ test.describe("Phase 5B: Analytics, Consent Mode v2 & Conversion Tracking", () =
   });
 
   for (const locale of locales) {
-    test(`${locale} consent UI conforms to responsive layout and accessible touch targets at 320px`, async ({ page }) => {
-      await page.setViewportSize({ width: 320, height: 600 });
-      await page.goto(localizedPath("home", locale));
+    for (const width of [320, 375]) {
+      test(`${locale} consent UI conforms to responsive layout and accessible touch targets at ${width}px`, async ({ page }) => {
+        await page.setViewportSize({ width, height: 600 });
+        await page.goto(localizedPath("home", locale));
 
-      const banner = page.locator(`aside[role="region"]`);
-      await expect(banner).toBeVisible();
+        const banner = page.locator(`aside[role="region"]`);
+        await expect(banner).toBeVisible();
 
-      // Check buttons meet minimum 44px touch target height
-      const buttons = banner.locator("button");
-      const count = await buttons.count();
-      for (let i = 0; i < count; i++) {
-        const box = await buttons.nth(i).boundingBox();
-        expect(box).not.toBeNull();
-        expect(box!.height).toBeGreaterThanOrEqual(44);
-      }
+        // Check buttons meet minimum 44px touch target height
+        const buttons = banner.locator("button");
+        const count = await buttons.count();
+        for (let i = 0; i < count; i++) {
+          const box = await buttons.nth(i).boundingBox();
+          expect(box).not.toBeNull();
+          expect(box!.height).toBeGreaterThanOrEqual(44);
+        }
 
-      // Check horizontal overflow
-      const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
-      expect(scrollWidth).toBeLessThanOrEqual(320);
-    });
+        // Check horizontal overflow
+        const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+        expect(scrollWidth).toBeLessThanOrEqual(width);
+        await page.locator("footer").scrollIntoViewIfNeeded();
+        await banner.getByRole("button", { name: consentCopy[locale].preferences, exact: true }).click();
+        await expect(page.getByRole("dialog", { name: consentCopy[locale].modalTitle })).toBeVisible();
+      });
+    }
   }
 });
 

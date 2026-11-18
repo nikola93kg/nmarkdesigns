@@ -4,6 +4,41 @@ import sr from "@/content/i18n/sr";
 import en from "@/content/i18n/en";
 import { localizedPath } from "@/lib/routes";
 
+test("US package prices stay consistent across pages, inquiries and machine-readable content", async ({ page, request }) => {
+  const prices = [
+    { id: "landing-page", price: "$750" },
+    { id: "business-website", price: "$1,500" },
+    { id: "advanced-website", price: "$2,500" },
+    { id: "ecommerce", price: "$3,500" },
+  ];
+  await page.goto("/en/pricing/");
+  await expect(page).toHaveTitle(/from \$750/);
+  const metadata = page.locator('meta[name="description"]');
+  for (const { price } of prices) await expect(metadata).toHaveAttribute("content", new RegExp(price.replace(/\$/g, "\\$")));
+
+  for (const { id, price } of prices) {
+    await page.goto(`/en/contact/?service=${id}#contact-form`);
+    await expect(page.locator('[name="message"]')).toHaveValue(`Hi Nikola, I'm interested in ${
+      id === "landing-page" ? "Landing Page website development"
+        : id === "business-website" ? "Business Website development"
+          : id === "advanced-website" ? "Advanced Website development"
+            : "E-commerce online store development"
+    } (from ${price}).`);
+  }
+
+  for (const [slug, price] of [["website-development", "$750"], ["ecommerce-development", "$3,500"]]) {
+    await page.goto(`/en/services/${slug}/`);
+    await expect(page.getByText(`Starting from ${price}`, { exact: true })).toBeVisible();
+    const nodes = (await page.locator('script[type="application/ld+json"]').allTextContents())
+      .flatMap((text) => (JSON.parse(text) as { "@graph"?: Array<{ "@type": string; offers?: { priceCurrency: string; description: string } }> })["@graph"] ?? []);
+    expect(nodes.find((node) => node["@type"] === "Service")?.offers).toMatchObject({ priceCurrency: "USD", description: `Starting from ${price}` });
+  }
+
+  const llms = await (await request.get("/llms.txt")).text();
+  for (const { price } of prices) expect(llms).toContain(price);
+  expect(llms).not.toContain("€300 / $350");
+});
+
 for (const locale of ["sr", "en"] as const) {
   const dictionary = { sr, en }[locale];
   const copy = dictionary.pricing;
@@ -32,10 +67,10 @@ for (const locale of ["sr", "en"] as const) {
             { name: "Web prodavnica", price: "Od 1.200 €" },
           ]
         : [
-            { name: "Landing Page", price: "From €300" },
-            { name: "Business Website", price: "From €550" },
-            { name: "Advanced Website", price: "From €900" },
-            { name: "E-commerce Website", price: "From €1,200" },
+            { name: "Landing Page", price: "From $750" },
+            { name: "Business Website", price: "From $1,500" },
+            { name: "Advanced Website", price: "From $2,500" },
+            { name: "E-commerce Website", price: "From $3,500" },
           ];
 
       for (let i = 0; i < expectedWebsitePackages.length; i++) {

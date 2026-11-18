@@ -213,6 +213,7 @@ export const blogPosts: readonly BlogPost[] = [
     id: "wordpress-vs-nextjs-poslovni-sajt",
     slug: "wordpress-vs-nextjs-poslovni-sajt",
     publishedOn: "2026-10-27",
+    updatedOn: "2026-11-18",
     title: {
       sr: "WordPress ili Next.js u 2026: šta je bolji izbor za poslovni web sajt?",
       en: "WordPress or Next.js in 2026: Which Is Better for a Business Website?",
@@ -321,7 +322,7 @@ export const blogPosts: readonly BlogPost[] = [
     id: "website-pricing-serbia-2026",
     slug: "koliko-kosta-izrada-web-sajta-u-srbiji-2026",
     publishedOn: "2026-09-22",
-    updatedOn: "2026-11-17",
+    updatedOn: "2026-11-18",
     title: {
       sr: "Koliko košta izrada web sajta u Srbiji 2026?",
       en: "How much does website development cost in Serbia in 2026?",

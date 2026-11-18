@@ -204,7 +204,17 @@ export function ServicesPage({ locale, copy }: { locale: Locale; copy: Dictionar
             <p className="mb-4 text-small font-medium text-on-brand-muted">{services.intro.eyebrow}</p>
             <h1 id="services-page-title" className="text-display font-bold">{services.intro.title}</h1>
           </div>
-          <p className="mx-auto max-w-lg text-pretty text-on-brand-muted lg:mx-0">{services.intro.description}</p>
+          <div>
+            <p className="mx-auto max-w-lg text-pretty text-on-brand-muted lg:mx-0">{services.intro.description}</p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3 lg:justify-start">
+              <CtaButton href={contact} variant="secondary" ctaName="request_quote" ctaLocation="services_intro" locale={locale}>
+                {services.intro.primaryAction}<ArrowUpRight aria-hidden="true" size={18} />
+              </CtaButton>
+              <Link href={pricing} className="inline-flex min-h-12 items-center px-4 font-semibold text-on-brand underline underline-offset-4 hover:text-accent focus-visible:outline-accent">
+                {services.intro.secondaryAction}
+              </Link>
+            </div>
+          </div>
         </Container>
       </section>
 

@@ -22,7 +22,8 @@
   - Serbian: https://nmarkdesigns.com/sr/usluge/izrada-web-sajtova/
   - English: https://nmarkdesigns.com/en/services/website-development/
 - **Description**: High-performance landing pages, corporate, and business websites built for maximum speed, SEO indexing, and lead generation.
-- **Starting Price**: From €300 / $350 (Landing page) to €900+ / $1,000+ (Advanced corporate).
+- **Serbian Website Packages (EUR)**: Landing page from €300, business website from €550, advanced website from €900.
+- **US Website Packages (USD)**: Landing page from $750, business website from $1,500, advanced website from $2,500. These are US market prices, not currency conversions of the Serbian offer.
 - **Featured Case Study**: OŠ Dule Karaklajić (https://nmarkdesigns.com/sr/portfolio/os-dule-karaklajic/)
 
 ### 2. Web Prodavnice (E-commerce) / E-Commerce Development
@@ -30,7 +31,7 @@
   - Serbian: https://nmarkdesigns.com/sr/usluge/web-prodavnice/
   - English: https://nmarkdesigns.com/en/services/ecommerce-development/
 - **Description**: Fast, conversion-optimized WooCommerce and custom online stores with seamless payment gateways, inventory management, and zero layout shift.
-- **Starting Price**: From €1,200 / $1,350.
+- **Starting Price**: Serbian offer from €1,200; US offer from $3,500. The final quote depends on the agreed scope.
 - **Featured Case Studies**: Tripoli Sweets (https://nmarkdesigns.com/sr/portfolio/tripolisweets/), Anabela Bebi Oprema (https://nmarkdesigns.com/sr/portfolio/anabelabebioprema/)
 
 ### 3. Custom Web Aplikacije / Custom Web Applications

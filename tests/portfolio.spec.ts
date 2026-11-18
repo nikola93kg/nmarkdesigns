@@ -47,13 +47,13 @@ for (const locale of locales) {
 
         if (project.status === "inactive") {
           if (project.caseStudy) {
-            await expect(section.locator(`a[href="${localizedProjectPath(project.slug, locale)}"]`)).toHaveCount(3);
+            await expect(section.locator(`a[href="${localizedProjectPath(project.slug, locale)}"]`)).toHaveCount(2);
           }
           await expect(section.locator(`a[href="${project.websiteUrl}"]`)).toHaveCount(0);
           await expect(section.getByText(copy.portfolio.historicalProject, { exact: false })).toBeVisible();
         } else if (project.websiteUrl) {
           if (project.caseStudy) {
-            await expect(section.locator(`a[href="${localizedProjectPath(project.slug, locale)}"]`)).toHaveCount(3);
+            await expect(section.locator(`a[href="${localizedProjectPath(project.slug, locale)}"]`)).toHaveCount(2);
             await expect(section.locator(`a[href="${project.websiteUrl}"]`)).toHaveCount(1);
           } else {
             await expect(section.locator(`a[href="${project.websiteUrl}"]`)).toHaveCount(project.featuredImage ? 2 : 1);
@@ -64,7 +64,7 @@ for (const locale of locales) {
       }
 
       const clippedText = await page.locator("main h1, main h2, main p, header a:visible").evaluateAll((elements) =>
-        elements.filter((element) => element.scrollWidth > element.clientWidth + 1).map((element) => element.textContent),
+        elements.filter((element) => getComputedStyle(element).clipPath === "none" && element.scrollWidth > element.clientWidth + 1).map((element) => element.textContent),
       );
       expect(clippedText).toEqual([]);
       const languageNav = page.getByRole("navigation", { name: copy.accessibility.languageNavigation });
@@ -200,7 +200,7 @@ test("project index uses local details and only verified optional metadata", asy
         await expect(entry.getByText(copy.portfolio.contentNeeded.website, { exact: true })).toBeVisible();
       }
     }
-    await expect(page.locator(`main a[href^="/${locale}/portfolio/"]`)).toHaveCount(caseStudyProjects.length * 3);
+    await expect(page.locator(`main a[href^="/${locale}/portfolio/"]`)).toHaveCount(caseStudyProjects.length * 2);
   }
 });
 

@@ -177,6 +177,10 @@
   line-height: 0.96;
 }
 
+.projectName {
+  display: none;
+}
+
 .titleLink {
   color: inherit;
   pointer-events: auto;
@@ -389,6 +393,21 @@
 }
 
 @media (min-width: 64rem) {
+  .projectName {
+    display: inline;
+  }
+
+  .projectTitle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
   .introInner,
   .projectOverlay,
   .archiveTile {

@@ -1,7 +1,10 @@
 import type { Dictionary } from "./types";
-import { getCarePlanStartingPrice, getWebsiteStartingPrice } from "@/content/pricing";
+import { getCarePlanStartingPrice, formatWebsiteStartingPrice } from "@/content/pricing";
 
-const landingStartingPrice = getWebsiteStartingPrice("landing-page");
+const landingStartingPrice = formatWebsiteStartingPrice("landing-page", "en");
+const businessStartingPrice = formatWebsiteStartingPrice("business-website", "en");
+const advancedStartingPrice = formatWebsiteStartingPrice("advanced-website", "en");
+const ecommerceStartingPrice = formatWebsiteStartingPrice("ecommerce", "en");
 
 const hostingStartingPrice = getCarePlanStartingPrice("hosting");
 const basicCareStartingPrice = getCarePlanStartingPrice("basic-care");
@@ -46,7 +49,7 @@ const en = {
     intro: {
       eyebrow: "Selected work",
       title: "Portfolio",
-      description: "Websites for different industries and different needs. Each project reflects our approach to design and the individual needs of the client.",
+      description: "Websites for different industries and different needs. Each project reflects my approach to design and the individual needs of the client.",
     },
     allProjects: "All projects",
     defaultCategory: "Website",
@@ -82,7 +85,7 @@ const en = {
     cta: {
       eyebrow: "Free website check",
       title: "Send your website and get 3 practical improvements",
-      description: "If you want a fast, actionable next step, send your URL and we will point out what can improve mobile usability, trust, and enquiries first.",
+      description: "If you want a fast, actionable next step, send your URL and I will point out what can improve mobile usability, trust, and enquiries first.",
       label: "Request a free website review",
     },
   },
@@ -99,7 +102,7 @@ const en = {
       secondaryAction: "View pricing",
     },
     overview: {
-      eyebrow: "What we do",
+      eyebrow: "What I do",
       title: "Services shaped around real project needs",
       description: "Each project starts with what the website needs to achieve. Structure, design, development, and support are then planned around that goal.",
       items: [
@@ -146,7 +149,7 @@ const en = {
         {
           id: "website-build",
           title: "Website creation",
-          description: "We build modern marketing, business, and advanced websites that showcase your services, communicate your value clearly, and turn visitors into inquiries.",
+          description: "I build modern marketing, business, and advanced websites that showcase your services, communicate your value clearly, and turn visitors into inquiries.",
           when: "This is the right fit when launching a new business or when your current website no longer reflects your professional standards.",
           includes: [
             "Landing Page, Business Website, or Advanced Website tiers",
@@ -154,13 +157,13 @@ const en = {
             "clean engineering without bloated generic templates",
             "conversion-focused contact forms and clear calls to action",
           ],
-          startingPrice: "From €300 (~$350)",
+          startingPrice: `From ${landingStartingPrice}`,
           pricingAnchor: "packages",
         },
         {
           id: "ecommerce",
           title: "Online stores (E-commerce)",
-          description: "We develop reliable WooCommerce stores tailored to shoppers, with structured product catalogs, logical categories, and dependable checkout.",
+          description: "I develop reliable WooCommerce stores tailored to shoppers, with structured product catalogs, logical categories, and dependable checkout.",
           when: "Ideal for merchants and brands looking to sell products online with complete ownership of their store and customer data.",
           includes: [
             "WooCommerce platform setup and tailored configuration",
@@ -168,13 +171,13 @@ const en = {
             "configured cart, categories, and agreed payment gateway",
             "e-commerce SEO baseline and checkout flow testing",
           ],
-          startingPrice: "From €1,200 (~$1,350)",
+          startingPrice: `From ${ecommerceStartingPrice}`,
           pricingAnchor: "packages",
         },
         {
           id: "development-options",
           title: "Custom web applications",
-          description: "When off-the-shelf platforms and WordPress templates cannot support your business operations. We build custom web software from scratch in Next.js and TypeScript.",
+          description: "When off-the-shelf platforms and WordPress templates cannot support your business operations. I build custom web software from scratch in Next.js and TypeScript.",
           when: "Essential when you need internal tools, authenticated client portals, booking systems, dashboards, or complex third-party API integrations.",
           includes: [
             "custom high-performance Next.js and React frontend",
@@ -188,7 +191,7 @@ const en = {
         {
           id: "design-ux",
           title: "Web design and redesign",
-          description: "We treat design as a strategic tool, not decoration: helping visitors quickly understand your offer, trust your brand, and take the next step. Covers new design or full site redesigns.",
+          description: "I treat design as a strategic tool, not decoration: helping visitors quickly understand your offer, trust your brand, and take the next step. Covers new design or full site redesigns.",
           when: "Important when you have great products or services, but the existing website looks outdated, cluttered, or difficult to use on phones.",
           includes: [
             "visual modernization and responsive layout restructuring",
@@ -202,7 +205,7 @@ const en = {
         {
           id: "seo-performance",
           title: "SEO, speed optimization, and AI",
-          description: "We put solid technical foundations in place for search engines and users: semantic HTML, Core Web Vitals speed, lean code, and practical AI assistants.",
+          description: "I put solid technical foundations in place for search engines and users: semantic HTML, Core Web Vitals speed, lean code, and practical AI assistants.",
           when: "Needed when you want stable Google indexability, lightning-fast load times, or a tailored AI chatbot to assist website visitors.",
           includes: [
             "technical SEO audits and indexability verification",
@@ -232,7 +235,7 @@ const en = {
     audience: {
       eyebrow: "Who it is for",
       title: "For businesses that need a clear, reliable online presence",
-      description: "We usually work with clients whose website needs to explain a service, present work, make contact easier, or support sales.",
+      description: "I usually work with clients whose website needs to explain a service, present work, make contact easier, or support sales.",
       items: [
         "small businesses and local brands",
         "entrepreneurs and freelancers",
@@ -249,7 +252,7 @@ const en = {
         {
           id: "inquiry",
           title: "Initial inquiry",
-          description: "Send us key details about your business, website goals, and expectations through the contact form.",
+          description: "Send me key details about your business, website goals, and expectations through the contact form.",
         },
         {
           id: "scope",
@@ -269,7 +272,7 @@ const en = {
         {
           id: "build",
           title: "Design and development",
-          description: "We craft custom designs, develop fast and clean code, optimize for mobile screens, and test all features.",
+          description: "I craft custom designs, develop fast and clean code, optimize for mobile screens, and test all features.",
         },
         {
           id: "handover",
@@ -280,7 +283,7 @@ const en = {
     },
     principles: {
       eyebrow: "Working standard",
-      title: "What we consider on every project",
+      title: "What I consider on every project",
       description: "These are not decorative promises. They are practical criteria that affect how useful, fast, and maintainable the website is.",
       items: [
         {
@@ -319,8 +322,8 @@ const en = {
         {
           id: "packages",
           title: "Website development packages",
-          price: `From €${getWebsiteStartingPrice("landing-page")}`,
-          description: "Landing Page (€300), Business Website (€550), Advanced Website (€900), or E-commerce Website (€1,200).",
+          price: `From ${landingStartingPrice}`,
+          description: `US website packages: Landing Page (${landingStartingPrice}), Business Website (${businessStartingPrice}), Advanced Website (${advancedStartingPrice}), or E-commerce Website (${ecommerceStartingPrice}).`,
           anchor: "packages",
           actionLabel: "View packages",
         },
@@ -353,7 +356,7 @@ const en = {
     cta: {
       eyebrow: "Next step",
       title: "Have a project in mind?",
-      description: "Briefly describe what you need, and we can talk through the best approach for your website.",
+      description: "Briefly describe what you need, and I can suggest the best approach for your website.",
       label: "Request a quote",
     },
   },
@@ -385,7 +388,7 @@ const en = {
       title: "How Collaboration Works",
       description: "A good website does not start with effects. It starts with understanding who it speaks to, what it needs to explain and which next step the visitor should take.",
       principles: [
-        "Initial inquiry and requirements: we review your project goals, audience, and key needs.",
+        "Initial inquiry and requirements: I review your project goals, audience, and key needs.",
         "Scope and structure definition: we align on content, features, and the right technology.",
         "Transparent plan and proposal: a clear outline of deliverables with no hidden complexity.",
         "Design and frontend development: custom visual styling, clean code, and fast performance.",
@@ -401,15 +404,16 @@ const en = {
     },
     intro: {
       eyebrow: "Let's start a conversation",
-      title: "Contact us",
-      description: "Have a question about our services, want to discuss working together or need help maintaining your website? We're here to help.",
+      primaryAction: "Send an inquiry",
+      title: "Contact me",
+      description: "Have a question about my services, want to discuss working together or need help maintaining your website? I'm here to help.",
     },
     details: {
-      title: "We're here for you",
-      description: "Have a question, an idea or a request for a quote? Give us a call or write to us.",
+      title: "I'm here for you",
+      description: "Have a question, an idea or a request for a quote? Give me a call or write to me.",
       email: "Email",
       phone: "Phone",
-      whatsapp: "Message us on WhatsApp",
+      whatsapp: "Message me on WhatsApp",
     },
     form: {
       title: "Interested in working together?",
@@ -418,8 +422,8 @@ const en = {
       required: "Required fields are marked with an asterisk (*).",
       submit: "Send message",
       pending: "Processing message…",
-      unavailableNotice: "Form delivery is not currently available. Please contact us directly by email, phone or WhatsApp.",
-      reassurance: "We review every inquiry and get in touch with proposed next steps or a tailored project assessment.",
+      unavailableNotice: "Form delivery is not currently available. Please contact me directly by email, phone or WhatsApp.",
+      reassurance: "I review every inquiry and get in touch with proposed next steps or a tailored project assessment.",
       validation: {
         required: "Complete this field.",
         tooLong: "This entry exceeds the allowed length. Please shorten it.",
@@ -432,21 +436,21 @@ const en = {
       },
       status: {
         invalid: "Check the marked fields. Your message has not been sent.",
-        unavailable: "Your message has not been sent. Form delivery is not available yet. Please email us directly or give us a call.",
-        error: "Your message could not be sent. Please try again or contact us directly.",
+        unavailable: "Your message has not been sent. Form delivery is not available yet. Please email me directly or give me a call.",
+        error: "Your message could not be sent. Please try again or contact me directly.",
         success: "Your message has been accepted for sending.",
       },
     },
   },
   pricing: {
     metadata: {
-      title: `Website development pricing — packages from €${landingStartingPrice} | NMark Designs`,
-      description: "Current NMark Designs packages: landing pages from €300, business websites from €550, advanced sites from €900 and online stores from €1,200. Compare scope and costs.",
+      title: `Website development pricing — packages from ${landingStartingPrice} | NMark Designs`,
+      description: `US website packages: landing pages from ${landingStartingPrice}, business websites from ${businessStartingPrice}, advanced sites from ${advancedStartingPrice} and online stores from ${ecommerceStartingPrice}. Compare scope and costs.`,
     },
     intro: {
       eyebrow: "Digital Services Pricing",
       title: "Website development pricing and services",
-      description: "Review NMark Designs starting prices and what each package includes. Your final quote depends on features, content and project scope; hosting, maintenance and licences are agreed separately.",
+      description: "Review NMark Designs website packages for US clients, priced in USD. Your final quote depends on features, content and project scope. Additional services, hosting and maintenance retain their stated currencies and are agreed separately.",
       primaryAction: "Request a Quote",
       secondaryAction: "Explore Packages",
     },
@@ -464,7 +468,7 @@ const en = {
       packages: {
         "landing-page": {
           name: "Landing Page",
-          price: `From €${getWebsiteStartingPrice("landing-page")}`,
+          price: `From ${landingStartingPrice}`,
           description: "A professional single-page website for showcasing a specific service, product, marketing campaign, or focused offer.",
           features: [
             "One professionally designed page",
@@ -479,7 +483,7 @@ const en = {
         },
         "business-website": {
           name: "Business Website",
-          price: `From €${getWebsiteStartingPrice("business-website")}`,
+          price: `From ${businessStartingPrice}`,
           description: "A professional multi-page website for small businesses, independent professionals, and local brands.",
           features: [
             "Up to 5 standard content pages",
@@ -494,7 +498,7 @@ const en = {
         },
         "advanced-website": {
           name: "Advanced Website",
-          price: `From €${getWebsiteStartingPrice("advanced-website")}`,
+          price: `From ${advancedStartingPrice}`,
           description: "A more sophisticated website with custom components, content management (CMS), or additional interactive functionality.",
           features: [
             "Advanced visual and functional specifications",
@@ -508,7 +512,7 @@ const en = {
         },
         ecommerce: {
           name: "E-commerce Website",
-          price: `From €${new Intl.NumberFormat("en").format(getWebsiteStartingPrice("ecommerce"))}`,
+          price: `From ${ecommerceStartingPrice}`,
           description: "An online store for businesses that need a professional product catalog and reliable ordering workflow.",
           features: [
             "Store setup and configuration (WooCommerce)",
@@ -684,7 +688,7 @@ const en = {
     guideBanner: {
       eyebrow: "2026 Pricing Guide",
       title: "Looking for an in-depth breakdown of website costs in Serbia?",
-      description: "Read our comprehensive guide analyzing pricing ranges for landing pages, business websites, online stores, and recurring domain/hosting costs.",
+      description: "Read my comprehensive guide analyzing pricing ranges for landing pages, business websites, online stores, and recurring domain/hosting costs.",
       label: "Read the 2026 guide",
     },
     faq: {
@@ -696,7 +700,7 @@ const en = {
           id: "fixed-prices",
           question: "Are the listed prices fixed?",
           paragraphs: [
-            "The advertised prices are transparent starting prices ('from €X') for the baseline scope of each package. Every project is unique — if your requirements are simpler or more specific, I prepare an exact quote based on the agreed scope before work starts.",
+            "Website packages show US starting prices in USD for a defined baseline scope. Additional services and care plans use their stated currencies. Every project is unique — if your requirements are simpler or more specific, I prepare an exact quote based on the agreed scope before work starts.",
           ],
         },
         {
@@ -793,7 +797,7 @@ const en = {
     services: "Services",
     technologies: "Technologies and tools",
     challenge: "Challenge",
-    approach: "Our Approach",
+    approach: "My Approach",
     solution: "The Solution",
     technicalHighlights: "Technical Highlights",
     results: "Results & Deliverables",
@@ -802,7 +806,7 @@ const en = {
     navigation: "Project navigation",
     nextProject: "Next project",
     contactTitle: "Looking for a similar solution for your business?",
-    contactDescription: "Whether you need an e-commerce store, a custom Next.js web application, or a complete redesign, we can evaluate your goals and suggest a clear roadmap.",
+    contactDescription: "Whether you need an e-commerce store, a custom Next.js web application, or a complete redesign, I can evaluate your goals and suggest a clear roadmap.",
     contactAction: "Request a Free Quote",
   },
   home: {
@@ -821,7 +825,7 @@ const en = {
     },
     projects: {
       eyebrow: "Selected work",
-      title: "Projects that shape our approach to design and development",
+      title: "Projects that shape my approach to design and development",
       description: "Real websites for different industries, selected for the way they bring structure, visual identity, and technical foundations together.",
     },
     services: {
@@ -839,24 +843,24 @@ const en = {
         {
           id: "seo",
           title: "Search engine optimization",
-          description: "Our approach to SEO helps improve your brand's visibility in search results and connect you with the right audience.",
+          description: "My approach to SEO helps improve your brand's visibility in search results and connect you with the right audience.",
         },
         {
           id: "responsive",
           title: "Made for every device",
-          description: "Our designs adapt to phones, tablets, and computers. We want every visitor to have a great experience on your website, whatever their screen size.",
+          description: "My designs adapt to phones, tablets, and computers. I want every visitor to have a great experience on your website, whatever their screen size.",
         },
       ],
       maintenance: {
         id: "maintenance",
         title: "Maintenance and updates",
-        description: "The web keeps changing, and we keep up with it for you. We regularly update your website, with technical support and security checks.",
+        description: "The web keeps changing, and I keep up with it for you. I regularly update your website, with technical support and security checks.",
       },
     },
     cta: {
       eyebrow: "Don't let your business go unseen",
       title: "A website that works for you",
-      description: "Get in touch for a free consultation and find out how we can improve your online presence together.",
+      description: "Get in touch for a free consultation and find out how I can help improve your online presence.",
     },
     faq: {
       eyebrow: "Help center",
@@ -866,7 +870,7 @@ const en = {
         {
           id: "pricing",
           question: "How much does website development cost?",
-          paragraphs: ["Pricing depends on the project scope and functional requirements. Starting prices are €300 for landing pages, €550 for business websites, €900 for advanced websites, and €1,200 for online stores. Custom web applications and specialized requirements are quoted based on technical specifications."],
+          paragraphs: [`Pricing depends on the project scope and functional requirements. US starting prices are ${landingStartingPrice} for landing pages, ${businessStartingPrice} for business websites, ${advancedStartingPrice} for advanced websites, and ${ecommerceStartingPrice} for online stores. Custom web applications and specialized requirements are quoted based on technical specifications.`],
         },
         {
           id: "services",
@@ -876,7 +880,7 @@ const en = {
         {
           id: "wordpress-vs-custom",
           question: "What is the difference between WordPress and custom development?",
-          paragraphs: ["The choice depends on project requirements, workflow, and budget. WordPress is a practical option when you need an accessible CMS to edit articles, copy, and product catalogs independently. We develop custom Next.js solutions when projects demand a tailored frontend, specific interactive flows, focused resource optimization, or an architecture free from reliance on third-party plugins."],
+          paragraphs: ["The choice depends on project requirements, workflow, and budget. WordPress is a practical option when you need an accessible CMS to edit articles, copy, and product catalogs independently. I develop custom Next.js solutions when projects demand a tailored frontend, specific interactive flows, focused resource optimization, or an architecture free from reliance on third-party plugins."],
         },
         {
           id: "timeline",
@@ -891,7 +895,7 @@ const en = {
         {
           id: "redesign",
           question: "When is a website redesign worthwhile?",
-          paragraphs: ["A redesign is worthwhile when your existing website fails to generate enquiries, performs sluggishly on mobile devices, looks outdated, or no longer reflects your current service offerings. Our goal is clearer messaging, faster speed, and a direct conversion path."],
+          paragraphs: ["A redesign is worthwhile when your existing website fails to generate enquiries, performs sluggishly on mobile devices, looks outdated, or no longer reflects your current service offerings. My goal is clearer messaging, faster speed, and a direct conversion path."],
         },
         {
           id: "process",

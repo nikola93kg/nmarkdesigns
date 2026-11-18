@@ -1,0 +1,1518 @@
+{
+  "checkedOn": "2026-11-18",
+  "target": "https://nmarkdesigns.com",
+  "limitations": [
+    "Single testing IP, not verified crawler IPs",
+    "HTTP availability does not establish index status",
+    "No completed live form submission",
+    "PSI API returned 429; no new CWV measurement"
+  ],
+  "sitemapPages": [
+    {
+      "path": "/sr/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/",
+        "en": "https://nmarkdesigns.com/en/",
+        "x-default": "https://nmarkdesigns.com/sr/"
+      }
+    },
+    {
+      "path": "/sr/portfolio/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/portfolio/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/",
+        "en": "https://nmarkdesigns.com/en/portfolio/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/"
+      }
+    },
+    {
+      "path": "/sr/blog/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/blog/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/",
+        "en": "https://nmarkdesigns.com/en/blog/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/"
+      }
+    },
+    {
+      "path": "/sr/usluge/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/usluge/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/usluge/",
+        "en": "https://nmarkdesigns.com/en/services/",
+        "x-default": "https://nmarkdesigns.com/sr/usluge/"
+      }
+    },
+    {
+      "path": "/sr/o-nama/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/o-nama/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/o-nama/",
+        "en": "https://nmarkdesigns.com/en/about/",
+        "x-default": "https://nmarkdesigns.com/sr/o-nama/"
+      }
+    },
+    {
+      "path": "/sr/kontakt/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/kontakt/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/kontakt/",
+        "en": "https://nmarkdesigns.com/en/contact/",
+        "x-default": "https://nmarkdesigns.com/sr/kontakt/"
+      }
+    },
+    {
+      "path": "/sr/cenovnik/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/cenovnik/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/cenovnik/",
+        "en": "https://nmarkdesigns.com/en/pricing/",
+        "x-default": "https://nmarkdesigns.com/sr/cenovnik/"
+      }
+    },
+    {
+      "path": "/sr/blog/da-li-ai-moze-da-pronadje-vas-biznis/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/blog/da-li-ai-moze-da-pronadje-vas-biznis/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/da-li-ai-moze-da-pronadje-vas-biznis/",
+        "en": "https://nmarkdesigns.com/en/blog/da-li-ai-moze-da-pronadje-vas-biznis/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/da-li-ai-moze-da-pronadje-vas-biznis/"
+      }
+    },
+    {
+      "path": "/sr/blog/10-znakova-da-je-vreme-za-redizajn-sajta-2026/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/blog/10-znakova-da-je-vreme-za-redizajn-sajta-2026/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/10-znakova-da-je-vreme-za-redizajn-sajta-2026/",
+        "en": "https://nmarkdesigns.com/en/blog/10-znakova-da-je-vreme-za-redizajn-sajta-2026/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/10-znakova-da-je-vreme-za-redizajn-sajta-2026/"
+      }
+    },
+    {
+      "path": "/sr/blog/seo-aeo-geo-razlike-2026/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/blog/seo-aeo-geo-razlike-2026/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/seo-aeo-geo-razlike-2026/",
+        "en": "https://nmarkdesigns.com/en/blog/seo-aeo-geo-razlike-2026/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/seo-aeo-geo-razlike-2026/"
+      }
+    },
+    {
+      "path": "/sr/blog/wordpress-vs-nextjs-poslovni-sajt/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/blog/wordpress-vs-nextjs-poslovni-sajt/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/wordpress-vs-nextjs-poslovni-sajt/",
+        "en": "https://nmarkdesigns.com/en/blog/wordpress-vs-nextjs-poslovni-sajt/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/wordpress-vs-nextjs-poslovni-sajt/"
+      }
+    },
+    {
+      "path": "/sr/blog/ai-chatbot-za-sajt-cena-isplativost-2026/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/blog/ai-chatbot-za-sajt-cena-isplativost-2026/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/ai-chatbot-za-sajt-cena-isplativost-2026/",
+        "en": "https://nmarkdesigns.com/en/blog/ai-chatbot-za-sajt-cena-isplativost-2026/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/ai-chatbot-za-sajt-cena-isplativost-2026/"
+      }
+    },
+    {
+      "path": "/sr/blog/google-ai-sadrzaj-2026-chatgpt-seo/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/blog/google-ai-sadrzaj-2026-chatgpt-seo/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/google-ai-sadrzaj-2026-chatgpt-seo/",
+        "en": "https://nmarkdesigns.com/en/blog/google-ai-sadrzaj-2026-chatgpt-seo/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/google-ai-sadrzaj-2026-chatgpt-seo/"
+      }
+    },
+    {
+      "path": "/sr/blog/ai-menja-google-pretragu-ai-overviews-chatgpt-ai-search/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/blog/ai-menja-google-pretragu-ai-overviews-chatgpt-ai-search/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/ai-menja-google-pretragu-ai-overviews-chatgpt-ai-search/",
+        "en": "https://nmarkdesigns.com/en/blog/ai-menja-google-pretragu-ai-overviews-chatgpt-ai-search/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/ai-menja-google-pretragu-ai-overviews-chatgpt-ai-search/"
+      }
+    },
+    {
+      "path": "/sr/blog/gta-vi-website-web-dizajn-core-web-vitals/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/blog/gta-vi-website-web-dizajn-core-web-vitals/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/gta-vi-website-web-dizajn-core-web-vitals/",
+        "en": "https://nmarkdesigns.com/en/blog/gta-vi-website-web-dizajn-core-web-vitals/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/gta-vi-website-web-dizajn-core-web-vitals/"
+      }
+    },
+    {
+      "path": "/sr/blog/koliko-kosta-izrada-web-sajta-u-srbiji-2026/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/blog/koliko-kosta-izrada-web-sajta-u-srbiji-2026/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/koliko-kosta-izrada-web-sajta-u-srbiji-2026/",
+        "en": "https://nmarkdesigns.com/en/blog/koliko-kosta-izrada-web-sajta-u-srbiji-2026/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/koliko-kosta-izrada-web-sajta-u-srbiji-2026/"
+      }
+    },
+    {
+      "path": "/sr/blog/iphone-duo-responsive-web-dizajn/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/blog/iphone-duo-responsive-web-dizajn/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/iphone-duo-responsive-web-dizajn/",
+        "en": "https://nmarkdesigns.com/en/blog/iphone-duo-responsive-web-dizajn/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/iphone-duo-responsive-web-dizajn/"
+      }
+    },
+    {
+      "path": "/sr/blog/homepage-checklist-za-lokalni-biznis/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/blog/homepage-checklist-za-lokalni-biznis/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/homepage-checklist-za-lokalni-biznis/",
+        "en": "https://nmarkdesigns.com/en/blog/homepage-checklist-za-lokalni-biznis/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/homepage-checklist-za-lokalni-biznis/"
+      }
+    },
+    {
+      "path": "/sr/blog/kako-da-radite-brzi-audit-sajta/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/blog/kako-da-radite-brzi-audit-sajta/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/kako-da-radite-brzi-audit-sajta/",
+        "en": "https://nmarkdesigns.com/en/blog/kako-da-radite-brzi-audit-sajta/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/kako-da-radite-brzi-audit-sajta/"
+      }
+    },
+    {
+      "path": "/sr/blog/kako-da-portfolio-donosi-kvalitetne-upite/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/blog/kako-da-portfolio-donosi-kvalitetne-upite/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/kako-da-portfolio-donosi-kvalitetne-upite/",
+        "en": "https://nmarkdesigns.com/en/blog/kako-da-portfolio-donosi-kvalitetne-upite/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/kako-da-portfolio-donosi-kvalitetne-upite/"
+      }
+    },
+    {
+      "path": "/sr/portfolio/buy-pallet-jacks/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/portfolio/buy-pallet-jacks/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/buy-pallet-jacks/",
+        "en": "https://nmarkdesigns.com/en/portfolio/buy-pallet-jacks/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/buy-pallet-jacks/"
+      }
+    },
+    {
+      "path": "/sr/portfolio/ilic-enterijer/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/portfolio/ilic-enterijer/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/ilic-enterijer/",
+        "en": "https://nmarkdesigns.com/en/portfolio/ilic-enterijer/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/ilic-enterijer/"
+      }
+    },
+    {
+      "path": "/sr/portfolio/os-dule-karaklajic/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/portfolio/os-dule-karaklajic/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/os-dule-karaklajic/",
+        "en": "https://nmarkdesigns.com/en/portfolio/os-dule-karaklajic/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/os-dule-karaklajic/"
+      }
+    },
+    {
+      "path": "/sr/portfolio/powder-brows-vienna/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/portfolio/powder-brows-vienna/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/powder-brows-vienna/",
+        "en": "https://nmarkdesigns.com/en/portfolio/powder-brows-vienna/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/powder-brows-vienna/"
+      }
+    },
+    {
+      "path": "/sr/portfolio/tripolisweets/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/portfolio/tripolisweets/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/tripolisweets/",
+        "en": "https://nmarkdesigns.com/en/portfolio/tripolisweets/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/tripolisweets/"
+      }
+    },
+    {
+      "path": "/sr/portfolio/casovi-francuskog/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/portfolio/casovi-francuskog/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/casovi-francuskog/",
+        "en": "https://nmarkdesigns.com/en/portfolio/casovi-francuskog/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/casovi-francuskog/"
+      }
+    },
+    {
+      "path": "/sr/portfolio/coolfridgeguys/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/portfolio/coolfridgeguys/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/coolfridgeguys/",
+        "en": "https://nmarkdesigns.com/en/portfolio/coolfridgeguys/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/coolfridgeguys/"
+      }
+    },
+    {
+      "path": "/sr/portfolio/ladekor/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/portfolio/ladekor/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/ladekor/",
+        "en": "https://nmarkdesigns.com/en/portfolio/ladekor/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/ladekor/"
+      }
+    },
+    {
+      "path": "/sr/portfolio/anabelabebioprema/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/portfolio/anabelabebioprema/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/anabelabebioprema/",
+        "en": "https://nmarkdesigns.com/en/portfolio/anabelabebioprema/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/anabelabebioprema/"
+      }
+    },
+    {
+      "path": "/sr/portfolio/alma-balcanica/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/portfolio/alma-balcanica/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/alma-balcanica/",
+        "en": "https://nmarkdesigns.com/en/portfolio/alma-balcanica/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/alma-balcanica/"
+      }
+    },
+    {
+      "path": "/sr/portfolio/krajina-gordana-jp/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/portfolio/krajina-gordana-jp/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/krajina-gordana-jp/",
+        "en": "https://nmarkdesigns.com/en/portfolio/krajina-gordana-jp/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/krajina-gordana-jp/"
+      }
+    },
+    {
+      "path": "/sr/usluge/izrada-web-sajtova/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/usluge/izrada-web-sajtova/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/usluge/izrada-web-sajtova/",
+        "en": "https://nmarkdesigns.com/en/services/website-development/",
+        "x-default": "https://nmarkdesigns.com/sr/usluge/izrada-web-sajtova/"
+      }
+    },
+    {
+      "path": "/sr/usluge/web-prodavnice/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/usluge/web-prodavnice/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/usluge/web-prodavnice/",
+        "en": "https://nmarkdesigns.com/en/services/ecommerce-development/",
+        "x-default": "https://nmarkdesigns.com/sr/usluge/web-prodavnice/"
+      }
+    },
+    {
+      "path": "/sr/usluge/custom-web-aplikacije/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/usluge/custom-web-aplikacije/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/usluge/custom-web-aplikacije/",
+        "en": "https://nmarkdesigns.com/en/services/custom-web-applications/",
+        "x-default": "https://nmarkdesigns.com/sr/usluge/custom-web-aplikacije/"
+      }
+    },
+    {
+      "path": "/sr/usluge/web-dizajn-i-redizajn/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/usluge/web-dizajn-i-redizajn/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/usluge/web-dizajn-i-redizajn/",
+        "en": "https://nmarkdesigns.com/en/services/web-design-and-redesign/",
+        "x-default": "https://nmarkdesigns.com/sr/usluge/web-dizajn-i-redizajn/"
+      }
+    },
+    {
+      "path": "/sr/usluge/seo-i-optimizacija-brzine/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/usluge/seo-i-optimizacija-brzine/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/usluge/seo-i-optimizacija-brzine/",
+        "en": "https://nmarkdesigns.com/en/services/seo-and-speed-optimization/",
+        "x-default": "https://nmarkdesigns.com/sr/usluge/seo-i-optimizacija-brzine/"
+      }
+    },
+    {
+      "path": "/sr/usluge/odrzavanje-i-hosting/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/sr/usluge/odrzavanje-i-hosting/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/usluge/odrzavanje-i-hosting/",
+        "en": "https://nmarkdesigns.com/en/services/website-maintenance/",
+        "x-default": "https://nmarkdesigns.com/sr/usluge/odrzavanje-i-hosting/"
+      }
+    },
+    {
+      "path": "/en/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/",
+        "en": "https://nmarkdesigns.com/en/",
+        "x-default": "https://nmarkdesigns.com/sr/"
+      }
+    },
+    {
+      "path": "/en/portfolio/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/portfolio/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/",
+        "en": "https://nmarkdesigns.com/en/portfolio/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/"
+      }
+    },
+    {
+      "path": "/en/blog/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/blog/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/",
+        "en": "https://nmarkdesigns.com/en/blog/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/"
+      }
+    },
+    {
+      "path": "/en/services/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/services/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/usluge/",
+        "en": "https://nmarkdesigns.com/en/services/",
+        "x-default": "https://nmarkdesigns.com/sr/usluge/"
+      }
+    },
+    {
+      "path": "/en/about/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/about/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/o-nama/",
+        "en": "https://nmarkdesigns.com/en/about/",
+        "x-default": "https://nmarkdesigns.com/sr/o-nama/"
+      }
+    },
+    {
+      "path": "/en/contact/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/contact/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/kontakt/",
+        "en": "https://nmarkdesigns.com/en/contact/",
+        "x-default": "https://nmarkdesigns.com/sr/kontakt/"
+      }
+    },
+    {
+      "path": "/en/pricing/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/pricing/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/cenovnik/",
+        "en": "https://nmarkdesigns.com/en/pricing/",
+        "x-default": "https://nmarkdesigns.com/sr/cenovnik/"
+      }
+    },
+    {
+      "path": "/en/blog/da-li-ai-moze-da-pronadje-vas-biznis/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/blog/da-li-ai-moze-da-pronadje-vas-biznis/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/da-li-ai-moze-da-pronadje-vas-biznis/",
+        "en": "https://nmarkdesigns.com/en/blog/da-li-ai-moze-da-pronadje-vas-biznis/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/da-li-ai-moze-da-pronadje-vas-biznis/"
+      }
+    },
+    {
+      "path": "/en/blog/10-znakova-da-je-vreme-za-redizajn-sajta-2026/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/blog/10-znakova-da-je-vreme-za-redizajn-sajta-2026/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/10-znakova-da-je-vreme-za-redizajn-sajta-2026/",
+        "en": "https://nmarkdesigns.com/en/blog/10-znakova-da-je-vreme-za-redizajn-sajta-2026/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/10-znakova-da-je-vreme-za-redizajn-sajta-2026/"
+      }
+    },
+    {
+      "path": "/en/blog/seo-aeo-geo-razlike-2026/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/blog/seo-aeo-geo-razlike-2026/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/seo-aeo-geo-razlike-2026/",
+        "en": "https://nmarkdesigns.com/en/blog/seo-aeo-geo-razlike-2026/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/seo-aeo-geo-razlike-2026/"
+      }
+    },
+    {
+      "path": "/en/blog/wordpress-vs-nextjs-poslovni-sajt/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/blog/wordpress-vs-nextjs-poslovni-sajt/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/wordpress-vs-nextjs-poslovni-sajt/",
+        "en": "https://nmarkdesigns.com/en/blog/wordpress-vs-nextjs-poslovni-sajt/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/wordpress-vs-nextjs-poslovni-sajt/"
+      }
+    },
+    {
+      "path": "/en/blog/ai-chatbot-za-sajt-cena-isplativost-2026/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/blog/ai-chatbot-za-sajt-cena-isplativost-2026/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/ai-chatbot-za-sajt-cena-isplativost-2026/",
+        "en": "https://nmarkdesigns.com/en/blog/ai-chatbot-za-sajt-cena-isplativost-2026/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/ai-chatbot-za-sajt-cena-isplativost-2026/"
+      }
+    },
+    {
+      "path": "/en/blog/google-ai-sadrzaj-2026-chatgpt-seo/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/blog/google-ai-sadrzaj-2026-chatgpt-seo/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/google-ai-sadrzaj-2026-chatgpt-seo/",
+        "en": "https://nmarkdesigns.com/en/blog/google-ai-sadrzaj-2026-chatgpt-seo/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/google-ai-sadrzaj-2026-chatgpt-seo/"
+      }
+    },
+    {
+      "path": "/en/blog/ai-menja-google-pretragu-ai-overviews-chatgpt-ai-search/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/blog/ai-menja-google-pretragu-ai-overviews-chatgpt-ai-search/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/ai-menja-google-pretragu-ai-overviews-chatgpt-ai-search/",
+        "en": "https://nmarkdesigns.com/en/blog/ai-menja-google-pretragu-ai-overviews-chatgpt-ai-search/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/ai-menja-google-pretragu-ai-overviews-chatgpt-ai-search/"
+      }
+    },
+    {
+      "path": "/en/blog/gta-vi-website-web-dizajn-core-web-vitals/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/blog/gta-vi-website-web-dizajn-core-web-vitals/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/gta-vi-website-web-dizajn-core-web-vitals/",
+        "en": "https://nmarkdesigns.com/en/blog/gta-vi-website-web-dizajn-core-web-vitals/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/gta-vi-website-web-dizajn-core-web-vitals/"
+      }
+    },
+    {
+      "path": "/en/blog/koliko-kosta-izrada-web-sajta-u-srbiji-2026/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/blog/koliko-kosta-izrada-web-sajta-u-srbiji-2026/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/koliko-kosta-izrada-web-sajta-u-srbiji-2026/",
+        "en": "https://nmarkdesigns.com/en/blog/koliko-kosta-izrada-web-sajta-u-srbiji-2026/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/koliko-kosta-izrada-web-sajta-u-srbiji-2026/"
+      }
+    },
+    {
+      "path": "/en/blog/iphone-duo-responsive-web-dizajn/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/blog/iphone-duo-responsive-web-dizajn/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/iphone-duo-responsive-web-dizajn/",
+        "en": "https://nmarkdesigns.com/en/blog/iphone-duo-responsive-web-dizajn/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/iphone-duo-responsive-web-dizajn/"
+      }
+    },
+    {
+      "path": "/en/blog/homepage-checklist-za-lokalni-biznis/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/blog/homepage-checklist-za-lokalni-biznis/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/homepage-checklist-za-lokalni-biznis/",
+        "en": "https://nmarkdesigns.com/en/blog/homepage-checklist-za-lokalni-biznis/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/homepage-checklist-za-lokalni-biznis/"
+      }
+    },
+    {
+      "path": "/en/blog/kako-da-radite-brzi-audit-sajta/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/blog/kako-da-radite-brzi-audit-sajta/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/kako-da-radite-brzi-audit-sajta/",
+        "en": "https://nmarkdesigns.com/en/blog/kako-da-radite-brzi-audit-sajta/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/kako-da-radite-brzi-audit-sajta/"
+      }
+    },
+    {
+      "path": "/en/blog/kako-da-portfolio-donosi-kvalitetne-upite/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/blog/kako-da-portfolio-donosi-kvalitetne-upite/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/blog/kako-da-portfolio-donosi-kvalitetne-upite/",
+        "en": "https://nmarkdesigns.com/en/blog/kako-da-portfolio-donosi-kvalitetne-upite/",
+        "x-default": "https://nmarkdesigns.com/sr/blog/kako-da-portfolio-donosi-kvalitetne-upite/"
+      }
+    },
+    {
+      "path": "/en/portfolio/buy-pallet-jacks/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/portfolio/buy-pallet-jacks/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/buy-pallet-jacks/",
+        "en": "https://nmarkdesigns.com/en/portfolio/buy-pallet-jacks/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/buy-pallet-jacks/"
+      }
+    },
+    {
+      "path": "/en/portfolio/ilic-enterijer/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/portfolio/ilic-enterijer/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/ilic-enterijer/",
+        "en": "https://nmarkdesigns.com/en/portfolio/ilic-enterijer/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/ilic-enterijer/"
+      }
+    },
+    {
+      "path": "/en/portfolio/os-dule-karaklajic/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/portfolio/os-dule-karaklajic/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/os-dule-karaklajic/",
+        "en": "https://nmarkdesigns.com/en/portfolio/os-dule-karaklajic/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/os-dule-karaklajic/"
+      }
+    },
+    {
+      "path": "/en/portfolio/powder-brows-vienna/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/portfolio/powder-brows-vienna/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/powder-brows-vienna/",
+        "en": "https://nmarkdesigns.com/en/portfolio/powder-brows-vienna/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/powder-brows-vienna/"
+      }
+    },
+    {
+      "path": "/en/portfolio/tripolisweets/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/portfolio/tripolisweets/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/tripolisweets/",
+        "en": "https://nmarkdesigns.com/en/portfolio/tripolisweets/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/tripolisweets/"
+      }
+    },
+    {
+      "path": "/en/portfolio/casovi-francuskog/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/portfolio/casovi-francuskog/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/casovi-francuskog/",
+        "en": "https://nmarkdesigns.com/en/portfolio/casovi-francuskog/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/casovi-francuskog/"
+      }
+    },
+    {
+      "path": "/en/portfolio/coolfridgeguys/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/portfolio/coolfridgeguys/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/coolfridgeguys/",
+        "en": "https://nmarkdesigns.com/en/portfolio/coolfridgeguys/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/coolfridgeguys/"
+      }
+    },
+    {
+      "path": "/en/portfolio/ladekor/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/portfolio/ladekor/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/ladekor/",
+        "en": "https://nmarkdesigns.com/en/portfolio/ladekor/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/ladekor/"
+      }
+    },
+    {
+      "path": "/en/portfolio/anabelabebioprema/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/portfolio/anabelabebioprema/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/anabelabebioprema/",
+        "en": "https://nmarkdesigns.com/en/portfolio/anabelabebioprema/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/anabelabebioprema/"
+      }
+    },
+    {
+      "path": "/en/portfolio/alma-balcanica/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/portfolio/alma-balcanica/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/alma-balcanica/",
+        "en": "https://nmarkdesigns.com/en/portfolio/alma-balcanica/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/alma-balcanica/"
+      }
+    },
+    {
+      "path": "/en/portfolio/krajina-gordana-jp/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/portfolio/krajina-gordana-jp/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/portfolio/krajina-gordana-jp/",
+        "en": "https://nmarkdesigns.com/en/portfolio/krajina-gordana-jp/",
+        "x-default": "https://nmarkdesigns.com/sr/portfolio/krajina-gordana-jp/"
+      }
+    },
+    {
+      "path": "/en/services/website-development/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/services/website-development/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/usluge/izrada-web-sajtova/",
+        "en": "https://nmarkdesigns.com/en/services/website-development/",
+        "x-default": "https://nmarkdesigns.com/sr/usluge/izrada-web-sajtova/"
+      }
+    },
+    {
+      "path": "/en/services/ecommerce-development/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/services/ecommerce-development/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/usluge/web-prodavnice/",
+        "en": "https://nmarkdesigns.com/en/services/ecommerce-development/",
+        "x-default": "https://nmarkdesigns.com/sr/usluge/web-prodavnice/"
+      }
+    },
+    {
+      "path": "/en/services/custom-web-applications/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/services/custom-web-applications/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/usluge/custom-web-aplikacije/",
+        "en": "https://nmarkdesigns.com/en/services/custom-web-applications/",
+        "x-default": "https://nmarkdesigns.com/sr/usluge/custom-web-aplikacije/"
+      }
+    },
+    {
+      "path": "/en/services/web-design-and-redesign/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/services/web-design-and-redesign/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/usluge/web-dizajn-i-redizajn/",
+        "en": "https://nmarkdesigns.com/en/services/web-design-and-redesign/",
+        "x-default": "https://nmarkdesigns.com/sr/usluge/web-dizajn-i-redizajn/"
+      }
+    },
+    {
+      "path": "/en/services/seo-and-speed-optimization/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/services/seo-and-speed-optimization/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/usluge/seo-i-optimizacija-brzine/",
+        "en": "https://nmarkdesigns.com/en/services/seo-and-speed-optimization/",
+        "x-default": "https://nmarkdesigns.com/sr/usluge/seo-i-optimizacija-brzine/"
+      }
+    },
+    {
+      "path": "/en/services/website-maintenance/",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://nmarkdesigns.com/en/services/website-maintenance/"
+      ],
+      "alternates": {
+        "sr": "https://nmarkdesigns.com/sr/usluge/odrzavanje-i-hosting/",
+        "en": "https://nmarkdesigns.com/en/services/website-maintenance/",
+        "x-default": "https://nmarkdesigns.com/sr/usluge/odrzavanje-i-hosting/"
+      }
+    }
+  ],
+  "botRequests": [
+    {
+      "path": "/robots.txt",
+      "userAgent": "OAI-SearchBot",
+      "status": 200,
+      "error": null
+    },
+    {
+      "path": "/robots.txt",
+      "userAgent": "ChatGPT-User",
+      "status": 200,
+      "error": null
+    },
+    {
+      "path": "/robots.txt",
+      "userAgent": "GPTBot",
+      "status": 200,
+      "error": null
+    },
+    {
+      "path": "/robots.txt",
+      "userAgent": "PerplexityBot",
+      "status": 200,
+      "error": null
+    },
+    {
+      "path": "/robots.txt",
+      "userAgent": "ClaudeBot",
+      "status": 200,
+      "error": null
+    },
+    {
+      "path": "/robots.txt",
+      "userAgent": "Googlebot",
+      "status": 403,
+      "error": null
+    },
+    {
+      "path": "/sr/portfolio/ilic-enterijer/",
+      "userAgent": "OAI-SearchBot",
+      "status": 200,
+      "error": null
+    },
+    {
+      "path": "/sr/portfolio/ilic-enterijer/",
+      "userAgent": "ChatGPT-User",
+      "status": 200,
+      "error": null
+    },
+    {
+      "path": "/sr/portfolio/ilic-enterijer/",
+      "userAgent": "GPTBot",
+      "status": 200,
+      "error": null
+    },
+    {
+      "path": "/sr/portfolio/ilic-enterijer/",
+      "userAgent": "PerplexityBot",
+      "status": 200,
+      "error": null
+    },
+    {
+      "path": "/sr/portfolio/ilic-enterijer/",
+      "userAgent": "ClaudeBot",
+      "status": 200,
+      "error": null
+    },
+    {
+      "path": "/sr/portfolio/ilic-enterijer/",
+      "userAgent": "Googlebot",
+      "status": 403,
+      "error": null
+    },
+    {
+      "path": "/sr/blog/10-znakova-da-je-vreme-za-redizajn-sajta-2026/",
+      "userAgent": "OAI-SearchBot",
+      "status": 200,
+      "error": null
+    },
+    {
+      "path": "/sr/blog/10-znakova-da-je-vreme-za-redizajn-sajta-2026/",
+      "userAgent": "ChatGPT-User",
+      "status": 200,
+      "error": null
+    },
+    {
+      "path": "/sr/blog/10-znakova-da-je-vreme-za-redizajn-sajta-2026/",
+      "userAgent": "GPTBot",
+      "status": 200,
+      "error": null
+    },
+    {
+      "path": "/sr/blog/10-znakova-da-je-vreme-za-redizajn-sajta-2026/",
+      "userAgent": "PerplexityBot",
+      "status": 200,
+      "error": null
+    },
+    {
+      "path": "/sr/blog/10-znakova-da-je-vreme-za-redizajn-sajta-2026/",
+      "userAgent": "ClaudeBot",
+      "status": 200,
+      "error": null
+    },
+    {
+      "path": "/sr/blog/10-znakova-da-je-vreme-za-redizajn-sajta-2026/",
+      "userAgent": "Googlebot",
+      "status": 403,
+      "error": null
+    }
+  ],
+  "responsiveChecks": [
+    {
+      "path": "/sr/",
+      "width": 375,
+      "scrollWidth": 375,
+      "h1": "Izrada modernih web sajtova",
+      "cta": [
+        {
+          "text": "Zatražite besplatnu ponudu",
+          "top": 455,
+          "bottom": 503
+        },
+        {
+          "text": "Pogledajte portfolio",
+          "top": 515,
+          "bottom": 563
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/",
+      "width": 430,
+      "scrollWidth": 430,
+      "h1": "Izrada modernih web sajtova",
+      "cta": [
+        {
+          "text": "Zatražite besplatnu ponudu",
+          "top": 428,
+          "bottom": 476
+        },
+        {
+          "text": "Pogledajte portfolio",
+          "top": 488,
+          "bottom": 536
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/",
+      "width": 768,
+      "scrollWidth": 768,
+      "h1": "Izrada modernih web sajtova",
+      "cta": [
+        {
+          "text": "Zatražite besplatnu ponudu",
+          "top": 427,
+          "bottom": 475
+        },
+        {
+          "text": "Pogledajte portfolio",
+          "top": 427,
+          "bottom": 475
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "h1": "Izrada modernih web sajtova",
+      "cta": [
+        {
+          "text": "Zatražite besplatnu ponudu",
+          "top": 592,
+          "bottom": 640
+        },
+        {
+          "text": "Pogledajte portfolio",
+          "top": 592,
+          "bottom": 640
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "h1": "Izrada modernih web sajtova",
+      "cta": [
+        {
+          "text": "Zatražite besplatnu ponudu",
+          "top": 546,
+          "bottom": 594
+        },
+        {
+          "text": "Pogledajte portfolio",
+          "top": 546,
+          "bottom": 594
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/",
+      "width": 1920,
+      "scrollWidth": 1920,
+      "h1": "Izrada modernih web sajtova",
+      "cta": [
+        {
+          "text": "Zatražite besplatnu ponudu",
+          "top": 546,
+          "bottom": 594
+        },
+        {
+          "text": "Pogledajte portfolio",
+          "top": 546,
+          "bottom": 594
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/cenovnik/",
+      "width": 375,
+      "scrollWidth": 375,
+      "h1": "Cenovnik izrade sajtova i web usluga",
+      "cta": [
+        {
+          "text": "Zatražite ponudu",
+          "top": 515,
+          "bottom": 563
+        },
+        {
+          "text": "Zatražite ponudu",
+          "top": 1840,
+          "bottom": 1888
+        },
+        {
+          "text": "Zatražite ponudu",
+          "top": 2585,
+          "bottom": 2633
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/cenovnik/",
+      "width": 430,
+      "scrollWidth": 430,
+      "h1": "Cenovnik izrade sajtova i web usluga",
+      "cta": [
+        {
+          "text": "Zatražite ponudu",
+          "top": 448,
+          "bottom": 496
+        },
+        {
+          "text": "Zatražite ponudu",
+          "top": 1660,
+          "bottom": 1708
+        },
+        {
+          "text": "Zatražite ponudu",
+          "top": 2389,
+          "bottom": 2437
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/cenovnik/",
+      "width": 768,
+      "scrollWidth": 768,
+      "h1": "Cenovnik izrade sajtova i web usluga",
+      "cta": [
+        {
+          "text": "Zatražite ponudu",
+          "top": 458,
+          "bottom": 506
+        },
+        {
+          "text": "Zatražite ponudu",
+          "top": 1669,
+          "bottom": 1717
+        },
+        {
+          "text": "Zatražite ponudu",
+          "top": 1669,
+          "bottom": 1717
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/cenovnik/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "h1": "Cenovnik izrade sajtova i web usluga",
+      "cta": [
+        {
+          "text": "Zatražite ponudu",
+          "top": 464,
+          "bottom": 532
+        },
+        {
+          "text": "Zatražite ponudu",
+          "top": 1616,
+          "bottom": 1664
+        },
+        {
+          "text": "Zatražite ponudu",
+          "top": 1616,
+          "bottom": 1664
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/cenovnik/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "h1": "Cenovnik izrade sajtova i web usluga",
+      "cta": [
+        {
+          "text": "Zatražite ponudu",
+          "top": 420,
+          "bottom": 468
+        },
+        {
+          "text": "Zatražite ponudu",
+          "top": 1841,
+          "bottom": 1889
+        },
+        {
+          "text": "Zatražite ponudu",
+          "top": 1841,
+          "bottom": 1889
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/cenovnik/",
+      "width": 1920,
+      "scrollWidth": 1920,
+      "h1": "Cenovnik izrade sajtova i web usluga",
+      "cta": [
+        {
+          "text": "Zatražite ponudu",
+          "top": 420,
+          "bottom": 468
+        },
+        {
+          "text": "Zatražite ponudu",
+          "top": 1841,
+          "bottom": 1889
+        },
+        {
+          "text": "Zatražite ponudu",
+          "top": 1841,
+          "bottom": 1889
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/usluge/",
+      "width": 375,
+      "scrollWidth": 375,
+      "h1": "Izrada web sajtova, namenski razvoj i tehnička podrška",
+      "cta": [
+        {
+          "text": "Zatražite ponudu",
+          "top": 14701,
+          "bottom": 14749
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/usluge/",
+      "width": 430,
+      "scrollWidth": 430,
+      "h1": "Izrada web sajtova, namenski razvoj i tehnička podrška",
+      "cta": [
+        {
+          "text": "Zatražite ponudu",
+          "top": 14117,
+          "bottom": 14165
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/usluge/",
+      "width": 768,
+      "scrollWidth": 768,
+      "h1": "Izrada web sajtova, namenski razvoj i tehnička podrška",
+      "cta": [
+        {
+          "text": "Zatražite ponudu",
+          "top": 13564,
+          "bottom": 13612
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/usluge/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "h1": "Izrada web sajtova, namenski razvoj i tehnička podrška",
+      "cta": [
+        {
+          "text": "Zatražite ponudu",
+          "top": 9230,
+          "bottom": 9278
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/usluge/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "h1": "Izrada web sajtova, namenski razvoj i tehnička podrška",
+      "cta": [
+        {
+          "text": "Zatražite ponudu",
+          "top": 8696,
+          "bottom": 8744
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/usluge/",
+      "width": 1920,
+      "scrollWidth": 1920,
+      "h1": "Izrada web sajtova, namenski razvoj i tehnička podrška",
+      "cta": [
+        {
+          "text": "Zatražite ponudu",
+          "top": 8696,
+          "bottom": 8744
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/sr/kontakt/",
+      "width": 375,
+      "scrollWidth": 375,
+      "h1": "Kontaktirajte nas",
+      "formTop": 1042.125,
+      "cta": [],
+      "errors": []
+    },
+    {
+      "path": "/sr/kontakt/",
+      "width": 430,
+      "scrollWidth": 430,
+      "h1": "Kontaktirajte nas",
+      "formTop": 1014.9375,
+      "cta": [],
+      "errors": []
+    },
+    {
+      "path": "/sr/kontakt/",
+      "width": 768,
+      "scrollWidth": 768,
+      "h1": "Kontaktirajte nas",
+      "formTop": 1099.890625,
+      "cta": [],
+      "errors": []
+    },
+    {
+      "path": "/sr/kontakt/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "h1": "Kontaktirajte nas",
+      "formTop": 535.59375,
+      "cta": [],
+      "errors": []
+    },
+    {
+      "path": "/sr/kontakt/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "h1": "Kontaktirajte nas",
+      "formTop": 470.796875,
+      "cta": [],
+      "errors": []
+    },
+    {
+      "path": "/sr/kontakt/",
+      "width": 1920,
+      "scrollWidth": 1920,
+      "h1": "Kontaktirajte nas",
+      "formTop": 470.796875,
+      "cta": [],
+      "errors": []
+    },
+    {}
+  ],
+  "accessibility": [
+    {
+      "path": "/sr/",
+      "violations": []
+    },
+    {
+      "path": "/sr/kontakt/",
+      "violations": []
+    },
+    {
+      "cookieFocus": {
+        "active": "<body class=\"flex min-h-dvh flex-col\"><div hidden=\"\"><!--$--><!--/$--></div><a href=\"#main-content\" class=\"fixed top-4 left-gutter z-50 -translate-y-32 rounded-control bg-brand px-5 py-3 text-on-brand",
+        "modal": false,
+        "inert": false
+      }
+    }
+  ],
+  "sampleResponseHeaders": {
+    "Vary": "Accept-Encoding",
+    "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+    "platform": "hostinger",
+    "Server": "hcdn",
+    "alt-svc": "h3=\":443\"; ma=86400",
+    "x-hcdn-cache-status": "DYNAMIC"
+  },
+  "compression": {
+    "requestAcceptEncoding": "br, gzip",
+    "responseContentEncoding": "gzip"
+  },
+  "checks": {
+    "eslint": "passed",
+    "typecheck": "passed",
+    "build": "not run",
+    "existingE2ESuite": "not run"
+  }
+}

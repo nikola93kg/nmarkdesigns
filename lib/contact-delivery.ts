@@ -55,9 +55,8 @@ export function createSmtpTransport(config: SmtpConfig): Transporter {
       user: config.user,
       pass: config.password,
     },
-    tls: {
-      rejectUnauthorized: false,
-    },
+    tls: { rejectUnauthorized: true, minVersion: "TLSv1.2" },
+    requireTLS: true,
     // Prevent hanging connections in serverless or Node environments
     connectionTimeout: 10_000, // 10 seconds
     greetingTimeout: 10_000,

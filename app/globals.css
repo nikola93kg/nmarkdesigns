@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Keep the privacy choice unobstructed, including during keyboard navigation. */
+body:has([data-consent-banner]) [data-back-to-top] {
+  visibility: hidden;
+}
+
 @theme {
   --color-brand: #110024;
   --color-brand-hover: #2b1642;

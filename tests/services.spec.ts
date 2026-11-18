@@ -42,7 +42,8 @@ for (const locale of locales) {
         await expect(page.getByRole("link", { name: copy.actions.viewProject, exact: true }).and(page.locator(`[href="${localizedProjectPath(project.slug, locale)}"]`))).toHaveCount(1);
       }
       await expect(page.getByRole("link", { name: copy.services.pricing.label, exact: true })).toHaveAttribute("href", localizedPath("pricing", locale));
-      await expect(page.getByRole("link", { name: copy.services.cta.label, exact: true })).toHaveAttribute("href", localizedPath("contact", locale));
+      await expect(page.locator('section[aria-labelledby="services-page-title"]').getByRole("link", { name: copy.services.intro.primaryAction, exact: true })).toHaveAttribute("href", localizedPath("contact", locale));
+      await expect(page.getByRole("link", { name: copy.services.cta.label, exact: true }).last()).toHaveAttribute("href", localizedPath("contact", locale));
 
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
       const clipped = await page.locator("main h1, main h2, main h3, main p, main li, main a, header a:visible").evaluateAll((elements) =>

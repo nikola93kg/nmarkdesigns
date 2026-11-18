@@ -25,7 +25,7 @@ const sr = {
   },
   actions: {
     quote: "Zatražite ponudu",
-    contact: "Kontaktirajte nas",
+    contact: "Kontaktirajte me",
     allProjects: "Svi projekti",
     viewProject: "Pogledajte projekat",
   },
@@ -46,7 +46,7 @@ const sr = {
     intro: {
       eyebrow: "Odabrani projekti",
       title: "Portfolio",
-      description: "Web sajtovi za različite delatnosti i različite potrebe. Svaki projekat odražava naš pristup dizajnu i individualne potrebe klijenta.",
+      description: "Web sajtovi za različite delatnosti i različite potrebe. Svaki projekat odražava moj pristup dizajnu i individualne potrebe klijenta.",
     },
     allProjects: "Svi projekti",
     defaultCategory: "Web sajt",
@@ -99,7 +99,7 @@ const sr = {
       secondaryAction: "Pogledajte cenovnik",
     },
     overview: {
-      eyebrow: "Šta radimo",
+      eyebrow: "Šta radim",
       title: "Usluge organizovane oko stvarnih potreba projekta",
       description: "Svaki projekat počinje pitanjem šta sajt treba da postigne, a zatim se oko toga oblikuju struktura, dizajn, razvoj i podrška.",
       items: [
@@ -146,7 +146,7 @@ const sr = {
         {
           id: "website-build",
           title: "Izrada web sajtova",
-          description: "Kreiramo moderne prezentacione, poslovne i napredne sajtove koji jasno predstavljaju vaše usluge, radove ili organizaciju na pregledan i profesionalan način.",
+          description: "Kreiram moderne prezentacione, poslovne i napredne sajtove koji jasno predstavljaju vaše usluge, radove ili organizaciju na pregledan i profesionalan način.",
           when: "Ovo je pravi izbor kada pokrećete novi posao, lansirate brend ili postojeći sajt više ne predstavlja dobro vaš nivo poslovanja.",
           includes: [
             "Landing Page, Poslovni sajt ili Napredni sajt",
@@ -160,7 +160,7 @@ const sr = {
         {
           id: "ecommerce",
           title: "Web prodavnice (E-commerce)",
-          description: "Razvijamo pouzdane WooCommerce prodavnice prilagođene kupcima, sa preglednim katalogom artikala, logičnim kategorijama i sigurnim procesom naručivanja.",
+          description: "Razvijam pouzdane WooCommerce prodavnice prilagođene kupcima, sa preglednim katalogom artikala, logičnim kategorijama i sigurnim procesom naručivanja.",
           when: "Idealan izbor za trgovce i brendove koji žele direktnu online prodaju svojih proizvoda uz stabilnu platformu i potpunu kontrolu nad podacima.",
           includes: [
             "instalaciju i namensko podešavanje WooCommerce platforme",
@@ -174,7 +174,7 @@ const sr = {
         {
           id: "development-options",
           title: "Custom web aplikacije",
-          description: "Kada gotove platforme i WordPress šabloni ne odgovaraju specifičnostima vašeg poslovanja. Razvijamo namenska softverska rešenja od nule u Next.js i TypeScript tehnologijama.",
+          description: "Kada gotove platforme i WordPress šabloni ne odgovaraju specifičnostima vašeg poslovanja. Razvijam namenska softverska rešenja od nule u Next.js i TypeScript tehnologijama.",
           when: "Neophodno kada su vam potrebni interni poslovni alati, korisnički portali sa autentifikacijom, sistemi rezervacija ili kompleksne API razmene.",
           includes: [
             "custom Next.js i React frontend rešenja visokih performansi",
@@ -188,7 +188,7 @@ const sr = {
         {
           id: "design-ux",
           title: "Web dizajn i redizajn",
-          description: "Dizajn ne posmatramo kao dekoraciju, već kao strateški način da posetilac brzo razume ponudu, prepozna brend i napravi sledeći korak. Radimo novi dizajn ili temeljan redizajn postojećeg sajta.",
+          description: "Dizajn ne posmatram kao dekoraciju, već kao strateški način da posetilac brzo razume ponudu, prepozna brend i napravi sledeći korak. Radim novi dizajn ili temeljan redizajn postojećeg sajta.",
           when: "Posebno je važno kada imate dobar proizvod ili uslugu, ali stranica deluje zastarelo, konfuzno ili vizuelno neusklađeno.",
           includes: [
             "redizajn postojećeg sajta i modernizaciju izgleda",
@@ -232,7 +232,7 @@ const sr = {
     audience: {
       eyebrow: "Za koga je",
       title: "Za biznise kojima treba jasan i pouzdan online nastup",
-      description: "Najčešće radimo sa klijentima kojima sajt treba da objasni uslugu, predstavi rad, olakša kontakt ili podrži prodaju.",
+      description: "Najčešće radim sa klijentima kojima sajt treba da objasni uslugu, predstavi rad, olakša kontakt ili podrži prodaju.",
       items: [
         "mali biznisi i lokalni brendovi",
         "preduzetnici i frilenseri",
@@ -249,7 +249,7 @@ const sr = {
         {
           id: "inquiry",
           title: "Inicijalni upit",
-          description: "Pošaljite nam osnovne informacije o vašem poslu, ciljevima sajta i okvirnim očekivanjima putem kontakt forme.",
+          description: "Pošaljite mi osnovne informacije o vašem poslu, ciljevima sajta i okvirnim očekivanjima putem kontakt forme.",
         },
         {
           id: "scope",
@@ -269,7 +269,7 @@ const sr = {
         {
           id: "build",
           title: "Dizajn i tehnička izrada",
-          description: "Kreiramo prilagođen dizajn, razvijamo čist i brz kod, optimizujemo prikaz za sve ekrane i testiramo funkcije.",
+          description: "Kreiram prilagođen dizajn, razvijam čist i brz kod, optimizujem prikaz za sve ekrane i testiram funkcije.",
         },
         {
           id: "handover",
@@ -280,7 +280,7 @@ const sr = {
     },
     principles: {
       eyebrow: "Standard rada",
-      title: "Šta razmatramo tokom svakog projekta",
+      title: "Šta razmatram tokom svakog projekta",
       description: "Ovo nisu dekorativne stavke, već praktični kriterijumi koji utiču na to koliko je sajt koristan, brz i održiv.",
       items: [
         {
@@ -353,7 +353,7 @@ const sr = {
     cta: {
       eyebrow: "Sledeći korak",
       title: "Imate projekat na umu?",
-      description: "Kratko nam opišite šta vam je potrebno i možemo da razgovaramo o najboljem pristupu za vaš sajt.",
+      description: "Kratko mi opišite šta vam je potrebno i možemo da razgovaramo o najboljem pristupu za vaš sajt.",
       label: "Zatražite ponudu",
     },
   },
@@ -397,16 +397,17 @@ const sr = {
   contact: {
     metadata: {
       title: "Kontakt — Zatražite ponudu za izradu sajta",
-      description: "Kontaktirajte NMark Designs za izradu novog sajta, redizajn ili tehničko održavanje. Dostupni za saradnju u Beogradu, širom Srbije i online.",
+      description: "Kontaktirajte NMark Designs za izradu novog sajta, redizajn ili tehničko održavanje. Dostupan za saradnju u Beogradu, širom Srbije i online.",
     },
     intro: {
       eyebrow: "Započnimo priču",
-      title: "Kontaktirajte nas",
-      description: "Imate pitanja o našim uslugama, želite da razgovaramo o saradnji ili vam je potrebna podrška oko održavanja sajta? Tu smo da pomognemo.",
+      primaryAction: "Pošaljite upit",
+      title: "Kontaktirajte me",
+      description: "Imate pitanja o uslugama koje nudim, želite da razgovaramo o saradnji ili vam je potrebna podrška oko održavanja sajta? Tu sam da pomognem.",
     },
     details: {
-      title: "Tu smo za vas",
-      description: "Dostupni za saradnju sa klijentima u Beogradu, širom Srbije i online sa partnerima iz inostranstva. Pozovite nas ili pošaljite poruku za besplatnu konsultaciju.",
+      title: "Tu sam za vas",
+      description: "Dostupan za saradnju sa klijentima u Beogradu, širom Srbije i online sa partnerima iz inostranstva. Pozovite me ili pošaljite poruku za besplatnu konsultaciju.",
       email: "Email",
       phone: "Telefon",
       whatsapp: "Pišite na WhatsApp",
@@ -418,8 +419,8 @@ const sr = {
       required: "Obavezna polja su označena zvezdicom (*).",
       submit: "Pošaljite poruku",
       pending: "Obrada poruke…",
-      unavailableNotice: "Slanje putem formulara trenutno nije dostupno. Kontaktirajte nas direktno putem emaila, telefona ili WhatsApp-a.",
-      reassurance: "Pregledamo svaki upit i javljamo se sa predlogom sledećih koraka ili okvirnom procenom za vaš projekat.",
+      unavailableNotice: "Slanje putem formulara trenutno nije dostupno. Kontaktirajte me direktno putem emaila, telefona ili WhatsApp-a.",
+      reassurance: "Pregledam svaki upit i javljam se sa predlogom sledećih koraka ili okvirnom procenom za vaš projekat.",
       validation: {
         required: "Popunite ovo polje.",
         tooLong: "Unos prelazi dozvoljenu dužinu. Skratite tekst.",
@@ -432,8 +433,8 @@ const sr = {
       },
       status: {
         invalid: "Proverite označena polja. Poruka nije poslata.",
-        unavailable: "Poruka nije poslata. Slanje putem formulara još nije dostupno. Pišite nam direktno ili nas pozovite.",
-        error: "Poruku nije moguće poslati. Pokušajte ponovo ili nas kontaktirajte direktno.",
+        unavailable: "Poruka nije poslata. Slanje putem formulara još nije dostupno. Pišite mi direktno ili me pozovite.",
+        error: "Poruku nije moguće poslati. Pokušajte ponovo ili me kontaktirajte direktno.",
         success: "Vaša poruka je prihvaćena za slanje.",
       },
     },
@@ -684,7 +685,7 @@ const sr = {
     guideBanner: {
       eyebrow: "Vodič kroz cene 2026",
       title: "Želite detaljniji uvid u troškove izrade sajta u Srbiji?",
-      description: "Pročitajte naš vodič sa analizom tržišnih raspona cena za landing stranice, poslovne sajtove, web prodavnice i prateće troškove domena i hostinga.",
+      description: "Pročitajte moj vodič sa analizom tržišnih raspona cena za landing stranice, poslovne sajtove, web prodavnice i prateće troškove domena i hostinga.",
       label: "Pročitajte vodič za 2026.",
     },
     faq: {
@@ -821,7 +822,7 @@ const sr = {
     },
     projects: {
       eyebrow: "Odabrani projekti",
-      title: "Projekti koji oblikuju naš pristup dizajnu i razvoju",
+      title: "Projekti koji oblikuju moj pristup dizajnu i razvoju",
       description: "Stvarni web sajtovi za različite delatnosti, izabrani zbog načina na koji spajaju jasnu strukturu, vizuelni identitet i tehničku osnovu.",
     },
     services: {
@@ -839,24 +840,24 @@ const sr = {
         {
           id: "seo",
           title: "SEO optimizacija",
-          description: "Strategijskom SEO optimizacijom poboljšavamo prisutnost vašeg brenda u rezultatima pretraživača i povezujemo vas sa ciljanom publikom.",
+          description: "Strategijskom SEO optimizacijom poboljšavam prisutnost vašeg brenda u rezultatima pretraživača i povezujem vas sa ciljanom publikom.",
         },
         {
           id: "responsive",
           title: "Prilagođeno svakom uređaju",
-          description: "Naš dizajn prilagođava se svakom ekranu, bilo da je to telefon, tablet ili kompjuter. Želimo da svako ima odlično iskustvo na vašem sajtu.",
+          description: "Moj dizajn prilagođava se svakom ekranu, bilo da je to telefon, tablet ili kompjuter. Želim da svako ima odlično iskustvo na vašem sajtu.",
         },
       ],
       maintenance: {
         id: "maintenance",
         title: "Održavanje i ažuriranje",
-        description: "Web svet se neprestano menja, a mi držimo korak sa tim promenama za vas. Redovno ažuriramo vaš sajt, uz tehničku podršku i sigurnosne provere.",
+        description: "Web svet se neprestano menja, a ja držim korak sa tim promenama za vas. Redovno ažuriram vaš sajt, uz tehničku podršku i sigurnosne provere.",
       },
     },
     cta: {
       eyebrow: "Razgovarajmo o vašem sajtu",
       title: "Web sajt koji radi za vaš biznis",
-      description: "Planirate novi sajt ili redizajn postojećeg? Javite nam se za besplatnu konsultaciju i okvirnu procenu za vaš projekat u Beogradu ili online.",
+      description: "Planirate novi sajt ili redizajn postojećeg? Javite mi se za besplatnu konsultaciju i okvirnu procenu za vaš projekat u Beogradu ili online.",
     },
     faq: {
       eyebrow: "Centar za pomoć",
@@ -866,7 +867,7 @@ const sr = {
         {
           id: "pricing",
           question: "Koliko košta izrada web sajta?",
-          paragraphs: ["Cena zavisi od tipa projekta i potrebnih mogućnosti. Početne cene su 300 € za landing stranice, 550 € za poslovne sajtove, 900 € za napredne sajtove i 1.200 € za web prodavnice. Za custom web aplikacije i specifične zahteve radimo procenu na osnovu specifikacije."],
+          paragraphs: ["Cena zavisi od tipa projekta i potrebnih mogućnosti. Početne cene su 300 € za landing stranice, 550 € za poslovne sajtove, 900 € za napredne sajtove i 1.200 € za web prodavnice. Za custom web aplikacije i specifične zahteve radim procenu na osnovu specifikacije."],
         },
         {
           id: "services",
@@ -876,7 +877,7 @@ const sr = {
         {
           id: "wordpress-vs-custom",
           question: "Koja je razlika između WordPress-a i custom razvoja?",
-          paragraphs: ["Izbor zavisi od vaših potreba, načina rada i budžeta. WordPress je praktično rešenje kada vam je potreban pristupačan CMS za samostalno uređivanje sadržaja, blog ili standardan katalog. Custom Next.js rešenja biramo kada projekat zahteva namenski frontend, specifične interakcije, visoke zahteve za optimizacijom resursa ili arhitekturu bez zavisnosti od eksternih dodataka (pluginova)."],
+          paragraphs: ["Izbor zavisi od vaših potreba, načina rada i budžeta. WordPress je praktično rešenje kada vam je potreban pristupačan CMS za samostalno uređivanje sadržaja, blog ili standardan katalog. Custom Next.js rešenja biram kada projekat zahteva namenski frontend, specifične interakcije, visoke zahteve za optimizacijom resursa ili arhitekturu bez zavisnosti od eksternih dodataka (pluginova)."],
         },
         {
           id: "timeline",

@@ -1,6 +1,6 @@
 import type { Editorial } from "@/content/blog-editorial";
 import type { BlogSection } from "@/content/blog";
-import { getWebsiteStartingPrice } from "@/content/pricing";
+import { getWebsiteStartingPrice, formatWebsiteStartingPrice } from "@/content/pricing";
 
 const prices = {
   landing: getWebsiteStartingPrice("landing-page"),
@@ -38,15 +38,15 @@ const currentOfferSr: BlogSection = {
 const currentOfferEn: BlogSection = {
   heading: "Current NMark Designs starting prices",
   paragraphs: [
-    "These are NMark Designs packages, checked on November 17, 2026. The broader budgeting ranges below help compare scope. They are not our price list, an official Serbian market average or evidence of any portfolio project's budget.",
+    "These are NMark Designs US website packages in USD. The broader budgeting ranges below describe the Serbian market in EUR and help compare scope. They are separate from the US offer and are not an official market average or evidence of any portfolio project's budget.",
     "Starting prices cover the baseline package scope. Your final quote depends on content, languages, features and integrations. Domain, hosting, licences and maintenance are considered separately; the proposal defines the actual scope and costs.",
   ],
   blocks: [
     { type: "table", caption: "NMark Designs starting prices — baseline scope", columns: ["Package", "Starting price", "Baseline scope"], rows: [
-      ["Landing page", `From €${prices.landing}`, "One page for a focused service, product or campaign"],
-      ["Business website", `From €${prices.business}`, "Up to five standard content pages"],
-      ["Advanced website", `From €${prices.advanced}`, "More demanding layouts, CMS or interactivity as specified"],
-      ["Online store", `From €${new Intl.NumberFormat("en").format(prices.ecommerce)}`, "A baseline WooCommerce store with agreed catalogue and ordering scope"],
+      ["Landing page", `From ${formatWebsiteStartingPrice("landing-page", "en")}`, "One page for a focused service, product or campaign"],
+      ["Business website", `From ${formatWebsiteStartingPrice("business-website", "en")}`, "Up to five standard content pages"],
+      ["Advanced website", `From ${formatWebsiteStartingPrice("advanced-website", "en")}`, "More demanding layouts, CMS or interactivity as specified"],
+      ["Online store", `From ${formatWebsiteStartingPrice("ecommerce", "en")}`, "A baseline WooCommerce store with agreed catalogue and ordering scope"],
       ["Custom web application", "Quoted individually", "Custom features, user accounts or integrations"],
     ] },
     { type: "linkList", title: "Choose your next step", items: [
@@ -129,7 +129,7 @@ export const websitePricingSerbia2026 = {
   },
   answer: {
     sr: `Cena izrade sajta zavisi od obima, sadržaja i funkcija. U NMark Designs početne cene su ${prices.landing} € za landing stranicu, ${prices.business} € za poslovni sajt, ${prices.advanced} € za napredni sajt i ${new Intl.NumberFormat("sr-RS").format(prices.ecommerce)} € za web prodavnicu. To su naši osnovni paketi, ne prosek cena u Srbiji. U nastavku razdvajamo aktuelnu ponudu, orijentacione tržišne raspone i troškove posle izrade.`,
-    en: `Website cost depends on scope, content and features. NMark Designs starting prices are €${prices.landing} for a landing page, €${prices.business} for a business website, €${prices.advanced} for an advanced site and €${new Intl.NumberFormat("en").format(prices.ecommerce)} for an online store. These are our baseline packages, not Serbian market averages. This guide separates our current offer, indicative market ranges and ongoing costs.`,
+    en: `Website cost depends on scope, content and features. NMark Designs starting prices are ${formatWebsiteStartingPrice("landing-page", "en")} for a landing page, ${formatWebsiteStartingPrice("business-website", "en")} for a business website, ${formatWebsiteStartingPrice("advanced-website", "en")} for an advanced site and ${formatWebsiteStartingPrice("ecommerce", "en")} for an online store. These are US baseline packages in USD. The Serbian market examples below remain in EUR. This guide separates our current offer, indicative market ranges and ongoing costs.`,
   },
   sections: {
     sr: [

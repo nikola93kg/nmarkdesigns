@@ -148,7 +148,7 @@ export interface Dictionary {
   };
   contact: {
     metadata: { title: string; description: string };
-    intro: SectionCopy;
+    intro: SectionCopy & { primaryAction: string };
     details: {
       title: string;
       description: string;

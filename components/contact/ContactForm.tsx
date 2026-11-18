@@ -5,6 +5,7 @@ import Script from "next/script";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import type { Dictionary } from "@/content/i18n/types";
+import { formatWebsiteStartingPrice } from "@/content/pricing";
 import { trackEvent } from "@/lib/analytics";
 import { contactFields, contactLimits, initialContactState, type ContactFormState } from "@/lib/contact";
 
@@ -21,19 +22,19 @@ const inputClass =
 const serviceMessages: Record<string, { sr: string; en: string }> = {
   "landing-page": {
     sr: "Pozdrav Nikola, zanima me izrada Landing Page sajta (od 300 €).",
-    en: "Hi Nikola, I'm interested in Landing Page website development (from €300).",
+    en: `Hi Nikola, I'm interested in Landing Page website development (from ${formatWebsiteStartingPrice("landing-page", "en")}).`,
   },
   "business-website": {
     sr: "Pozdrav Nikola, zanima me izrada poslovnog sajta (od 550 €).",
-    en: "Hi Nikola, I'm interested in Business Website development (from €550).",
+    en: `Hi Nikola, I'm interested in Business Website development (from ${formatWebsiteStartingPrice("business-website", "en")}).`,
   },
   "advanced-website": {
     sr: "Pozdrav Nikola, zanima me izrada naprednog sajta (od 900 €).",
-    en: "Hi Nikola, I'm interested in Advanced Website development (from €900).",
+    en: `Hi Nikola, I'm interested in Advanced Website development (from ${formatWebsiteStartingPrice("advanced-website", "en")}).`,
   },
   ecommerce: {
     sr: "Pozdrav Nikola, zanima me izrada web prodavnice (od 1.200 €).",
-    en: "Hi Nikola, I'm interested in E-commerce online store development (from €1,200).",
+    en: `Hi Nikola, I'm interested in E-commerce online store development (from ${formatWebsiteStartingPrice("ecommerce", "en")}).`,
   },
   "custom-development": {
     sr: "Pozdrav Nikola, potreban mi je razvoj custom web aplikacije.",
@@ -152,7 +153,7 @@ export function ContactForm({ copy, action, permalink, deliveryAvailable }: Cont
       noValidate
       aria-labelledby="contact-form-title"
       aria-describedby={deliveryAvailable ? "contact-required" : "contact-required contact-availability"}
-      className="mx-auto w-full max-w-2xl lg:max-w-none"
+      className="mx-auto w-full max-w-2xl scroll-mt-28 lg:max-w-none"
     >
       <h2 id="contact-form-title" className="mx-auto max-w-xl text-heading font-bold lg:mx-0">
         {copy.title}
