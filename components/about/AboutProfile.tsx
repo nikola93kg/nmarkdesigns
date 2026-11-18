@@ -13,7 +13,7 @@ export function AboutProfile({ copy }: { copy: Dictionary["about"]["profile"] })
             alt={copy.imageAlt}
             sizes="(min-width: 1024px) 520px, (min-width: 768px) 70vw, calc(100vw - 40px)"
             quality={88}
-            className="aspect-square h-auto w-full rounded-card object-cover"
+            className="h-auto w-full rounded-card object-cover"
           />
           <figcaption className="mt-4 text-small text-muted">{copy.caption}</figcaption>
         </figure>

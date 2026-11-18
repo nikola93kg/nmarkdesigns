@@ -12,7 +12,7 @@ export const aboutHeroImage = {
 } as const;
 
 export const aboutIdentityImage = {
-  src: "/about/about1.webp",
-  width: 1254,
-  height: 1254,
+  src: "/about/nikola-nmark.webp",
+  width: 824,
+  height: 1024,
 } as const;
