@@ -20,12 +20,14 @@ export interface WebsitePackage {
 export interface AdditionalService {
   id: AdditionalServiceId;
   startingPrice: number;
+  usStartingPrice: number;
   inquiryKey: AdditionalServiceId;
 }
 
 export interface CarePlan {
   id: CarePlanId;
   startingPrice?: number;
+  usStartingPrice?: number;
   period?: "year" | "month";
   isQuote?: boolean;
   inquiryKey: CarePlanId;
@@ -52,16 +54,16 @@ export function formatWebsiteStartingPrice(id: WebsitePackageId, locale: Locale)
 }
 
 export const additionalServices: readonly AdditionalService[] = [
-  { id: "redesign", startingPrice: 400, inquiryKey: "redesign" },
-  { id: "seo", startingPrice: 150, inquiryKey: "seo" },
-  { id: "performance", startingPrice: 100, inquiryKey: "performance" },
-  { id: "ai-chatbot", startingPrice: 350, inquiryKey: "ai-chatbot" },
+  { id: "redesign", startingPrice: 400, usStartingPrice: 600, inquiryKey: "redesign" },
+  { id: "seo", startingPrice: 150, usStartingPrice: 200, inquiryKey: "seo" },
+  { id: "performance", startingPrice: 100, usStartingPrice: 150, inquiryKey: "performance" },
+  { id: "ai-chatbot", startingPrice: 350, usStartingPrice: 450, inquiryKey: "ai-chatbot" },
 ] as const;
 
 export const carePlans: readonly CarePlan[] = [
-  { id: "hosting", startingPrice: 30, period: "year", inquiryKey: "hosting" },
-  { id: "basic-care", startingPrice: 25, period: "month", inquiryKey: "basic-care" },
-  { id: "business-care", startingPrice: 50, period: "month", inquiryKey: "business-care" },
+  { id: "hosting", startingPrice: 30, usStartingPrice: 50, period: "year", inquiryKey: "hosting" },
+  { id: "basic-care", startingPrice: 25, usStartingPrice: 40, period: "month", inquiryKey: "basic-care" },
+  { id: "business-care", startingPrice: 50, usStartingPrice: 75, period: "month", inquiryKey: "business-care" },
   { id: "custom-support", isQuote: true, inquiryKey: "custom-support" },
 ] as const;
 
@@ -82,3 +84,27 @@ export const pricingAnchors = {
   maintenance: "maintenance",
   faq: "faq",
 } as const;
+
+/** Market prices are explicit commercial amounts, never FX conversions. */
+export function pricingCurrency(locale: Locale): "EUR" | "USD" { return locale === "sr" ? "EUR" : "USD"; }
+export function formatMoney(value: number, locale: Locale): string {
+  return locale === "sr" ? `${new Intl.NumberFormat("sr").format(value)} €` : new Intl.NumberFormat("en-US", {style:"currency",currency:"USD",maximumFractionDigits:0}).format(value);
+}
+export function getAdditionalStartingPrice(id: AdditionalServiceId, locale: Locale): number {
+  const item=additionalServices.find(item=>item.id===id);
+  if(!item)throw new Error(`Missing additional service: ${id}`);
+  return locale==="en"?item.usStartingPrice:item.startingPrice;
+}
+export function formatAdditionalStartingPrice(id: AdditionalServiceId, locale: Locale): string {
+  return `${locale==="en"?"From":"Od"} ${formatMoney(getAdditionalStartingPrice(id,locale),locale)}`;
+}
+export function getCarePlanMarketPrice(id: Exclude<CarePlanId,"custom-support">,locale:Locale):number {
+  const item=carePlans.find(item=>item.id===id),price=locale==="en"?item?.usStartingPrice:item?.startingPrice;
+  if(price===undefined)throw new Error(`Missing care plan market price: ${id}`);
+  return price;
+}
+export function formatCarePlanStartingPrice(id: Exclude<CarePlanId,"custom-support">,locale:Locale):string {
+  const plan=carePlans.find(item=>item.id===id)!;
+  const period=locale==="en"?(plan.period==="year"?"year":"month"):(plan.period==="year"?"god.":"mes.");
+  return `${locale==="en"?"From":"Od"} ${formatMoney(getCarePlanMarketPrice(id,locale),locale)}/${period}`;
+}

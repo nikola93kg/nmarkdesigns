@@ -1,0 +1,1 @@
+ALTER TABLE `chat_messages` ADD `policy_version` varchar(32);

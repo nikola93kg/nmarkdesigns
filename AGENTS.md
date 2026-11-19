@@ -521,6 +521,17 @@ Respect `prefers-reduced-motion`.
 
 # Internationalization
 
+### Market pricing — owner decision, 2026-11-19
+
+- Serbian (`sr`) targets the Serbian market and uses **EUR** prices.
+- English (`en`) targets the US market and uses **USD** prices.
+- USD amounts are market-specific approved prices, not automatic conversions of EUR amounts.
+- Provider API usage/budgets are a separate USD ledger in both admin locales; do not convert that ledger when aligning public service prices.
+- This supersedes the earlier conversation decision to use identical EUR prices on both locales.
+- Use the typed pricing registry and verified existing values. Never invent missing USD prices.
+- The owner subsequently authorized full market-price alignment: EN packages $750 / $1,500 / $2,500 / $3,500; redesign $600; SEO $200; speed $150; AI integration $450. Under the delegated US price increase, hosting is $50/year, Basic Care $40/month and Business Care $75/month. SR prices remain unchanged.
+- Public pages, inquiry prefills, structured data, chatbot knowledge and /llms.txt must derive current offers from content/pricing.ts. Research articles about the Serbian market retain explicitly contextualized EUR research figures.
+
 The website supports two languages:
 
 - Serbian (`sr`)
@@ -746,6 +757,10 @@ Contact form infrastructure will be implemented intentionally.
 ---
 
 ## Git Discipline
+
+### Chatbot branch workflow (owner instruction, 2026-11-19)
+
+On `feature/chatbot`, the owner authorizes commits and pushes of completed chatbot changes after validation without asking for approval each time. Keep this branch current with `main` as needed. This standing authorization applies only to `feature/chatbot`; commits/pushes to `main` and merging into `main` still require explicit owner approval. Never include unrelated pre-existing working-tree changes in chatbot commits. No production deployment is authorized by this Git workflow.
 
 Make focused changes.
 

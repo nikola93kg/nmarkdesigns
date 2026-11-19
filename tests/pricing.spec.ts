@@ -16,6 +16,20 @@ test("US package prices stay consistent across pages, inquiries and machine-read
   const metadata = page.locator('meta[name="description"]');
   for (const { price } of prices) await expect(metadata).toHaveAttribute("content", new RegExp(price.replace(/\$/g, "\\$")));
 
+  const extras = [
+    { id: "redesign", price: "$600" }, { id: "seo", price: "$200" },
+    { id: "performance", price: "$150" }, { id: "ai-chatbot", price: "$450" },
+    { id: "hosting", price: "$50/year" }, { id: "basic-care", price: "$40/month" },
+    { id: "business-care", price: "$75/month" },
+  ];
+  const pricingText = await page.locator("main").innerText();
+  expect(pricingText).not.toMatch(/€|EUR/);
+  for (const { price } of [...prices, ...extras]) expect(pricingText).toContain(`From ${price}`);
+  for (const { id, price } of extras) {
+    await page.goto(`/en/contact/?service=${id}#contact-form`);
+    await expect(page.locator('[name="message"]')).toHaveValue(new RegExp(`from ${price.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`));
+  }
+
   for (const { id, price } of prices) {
     await page.goto(`/en/contact/?service=${id}#contact-form`);
     await expect(page.locator('[name="message"]')).toHaveValue(`Hi Nikola, I'm interested in ${
@@ -26,17 +40,28 @@ test("US package prices stay consistent across pages, inquiries and machine-read
     } (from ${price}).`);
   }
 
-  for (const [slug, price] of [["website-development", "$750"], ["ecommerce-development", "$3,500"]]) {
+  for (const [slug, price] of [["website-development", "$750"], ["ecommerce-development", "$3,500"], ["web-design-and-redesign", "$600"], ["seo-and-speed-optimization", "$150"], ["website-maintenance", "$40/month"]]) {
     await page.goto(`/en/services/${slug}/`);
-    await expect(page.getByText(`Starting from ${price}`, { exact: true })).toBeVisible();
+    const label = ["website-development", "ecommerce-development"].includes(slug) ? `Starting from ${price}` : `From ${price}`;
+    await expect(page.getByText(label, { exact: true })).toBeVisible();
+    expect(await page.locator("main").innerText()).not.toMatch(/€|EUR/);
     const nodes = (await page.locator('script[type="application/ld+json"]').allTextContents())
       .flatMap((text) => (JSON.parse(text) as { "@graph"?: Array<{ "@type": string; offers?: { priceCurrency: string; description: string } }> })["@graph"] ?? []);
-    expect(nodes.find((node) => node["@type"] === "Service")?.offers).toMatchObject({ priceCurrency: "USD", description: `Starting from ${price}` });
+    expect(nodes.find((node) => node["@type"] === "Service")?.offers).toMatchObject({ priceCurrency: "USD", description: label });
   }
 
   const llms = await (await request.get("/llms.txt")).text();
-  for (const { price } of prices) expect(llms).toContain(price);
+  for (const { price } of [...prices,...extras]) expect(llms).toContain(price);
   expect(llms).not.toContain("€300 / $350");
+  for (const [slug, expected] of [
+    ["ai-chatbot-za-sajt-cena-isplativost-2026", "NMark Designs offers AI chatbot integration from $450"],
+    ["10-znakova-da-je-vreme-za-redizajn-sajta-2026", "At NMark Designs, website redesign packages start from $600"],
+    ["google-ai-sadrzaj-2026-chatgpt-seo", "NMark Designs SEO audits start from $200"],
+    ["wordpress-vs-nextjs-poslovni-sajt", "NMark Designs Basic Care starts from $40/month"],
+  ]) {
+    await page.goto(`/en/blog/${slug}/`);
+    await expect(page.locator("main")).toContainText(expected);
+  }
 });
 
 for (const locale of ["sr", "en"] as const) {

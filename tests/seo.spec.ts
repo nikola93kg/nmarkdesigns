@@ -181,7 +181,8 @@ test("complete sitemap, unique metadata and preview robots", async ({ page, requ
   expect(productionRobots.status()).toBe(200);
   expect(productionRobotsSource).toContain("Allow: /");
   expect(productionRobotsSource).toContain("Sitemap: https://nmarkdesigns.com/sitemap.xml");
-  expect(productionRobotsSource).not.toContain("Disallow:");
+  expect(productionRobotsSource).not.toMatch(/^Disallow: \/$/m);
+  expect(productionRobotsSource).toContain("Disallow: /admin/");
   expect(productionRobots.headers()["x-robots-tag"]).toBeUndefined();
 });
 
@@ -243,7 +244,7 @@ test("crawl policy is canonical-host scoped and structured data serialization is
     expect(robotsForHost(host)).toEqual({ rules: { userAgent: "*", disallow: "/" } });
   }
   expect(isIndexableHost("nmarkdesigns.com")).toBe(true);
-  expect(robotsForHost("nmarkdesigns.com")).toEqual({ rules: { userAgent: "*", allow: "/" }, sitemap: "https://nmarkdesigns.com/sitemap.xml" });
+  expect(robotsForHost("nmarkdesigns.com")).toEqual({ rules: { userAgent: "*", allow: "/", disallow: ["/admin/", "/api/admin/", "/api/auth/"] }, sitemap: "https://nmarkdesigns.com/sitemap.xml" });
   const value = { name: '</script><script>alert("x")</script>\u2028\u2029' };
   const serialized = serializeJsonLd(value);
   expect(serialized).not.toContain("<");

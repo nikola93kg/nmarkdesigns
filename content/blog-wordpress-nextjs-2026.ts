@@ -1,4 +1,4 @@
-import { formatWebsiteStartingPrice } from "@/content/pricing";
+import { formatWebsiteStartingPrice, formatCarePlanStartingPrice } from "@/content/pricing";
 import type { BlogSection } from "@/content/blog";
 import type { Editorial } from "@/content/blog-editorial";
 import { getHostingerCopy, hostingerPartner } from "@/content/partners";
@@ -266,7 +266,7 @@ const en: readonly BlogSection[] = [
           paragraphs: [
             "WordPress can run without paid plugins, although multilingual publishing, advanced forms or a particular theme may bring annual licence costs. Request a list explaining what is paid, who owns each account and whether renewal covers updates, support or both. Plugin count alone is not a useful quality measure; purpose, quality and compatibility matter more.",
             "Next.js content might live in code, a free CMS tier or paid administration software. Check limits on editors, languages, media and publishing. If an employee needs a developer to change a price, include that work in the budget. If content changes only twice a year, agreed individual updates may be simpler than a separate CMS.",
-            "NMark Designs Basic Care starts at €25 per month. Business Care starts at €50 and covers minor content changes within an agreed scope. More demanding Next.js applications and WooCommerce systems receive a tailored support quote. Managed hosting from €30 annually applies to supported lightweight websites; it is not a universal price for every architecture.",
+            `NMark Designs Basic Care starts ${formatCarePlanStartingPrice("basic-care", "en").toLowerCase()}. Business Care starts ${formatCarePlanStartingPrice("business-care", "en").toLowerCase()} and covers minor content changes within an agreed scope. More demanding Next.js applications and WooCommerce systems receive a tailored support quote. Managed hosting ${formatCarePlanStartingPrice("hosting", "en").toLowerCase()} applies to supported lightweight websites; it is not a universal price for every architecture.`,
           ],
         },
       ] },

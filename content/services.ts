@@ -1,5 +1,5 @@
 import type { Localized } from "@/lib/i18n";
-import { getCarePlanStartingPrice, formatWebsiteStartingPrice } from "@/content/pricing";
+import { getCarePlanStartingPrice, formatCarePlanStartingPrice, formatAdditionalStartingPrice, formatWebsiteStartingPrice } from "@/content/pricing";
 
 const maintenanceStartingPrice = getCarePlanStartingPrice("basic-care");
 
@@ -42,7 +42,6 @@ export interface ServiceDetailDefinition {
     sr: string;
     en: string;
   };
-  priceCurrency?: "EUR" | "USD";
   pricingAnchor: string;
   relatedCaseStudySlug: string;
   audience: {
@@ -99,7 +98,7 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
       en: "From focused landing pages to comprehensive company websites. I build fast, responsive web solutions with clean modern code—free from generic templates—structured to turn visitors into qualified inquiries.",
     },
     startingPrice: {
-      sr: "Od 300 €",
+      sr: `Od ${formatWebsiteStartingPrice("landing-page","sr")}`,
       en: `Starting from ${formatWebsiteStartingPrice("landing-page", "en")}`,
     },
     pricingAnchor: "packages",
@@ -363,7 +362,7 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
       en: "I engineer performant WooCommerce stores with structured catalogs, frictionless checkout flows, and full merchant ownership of your customer data—free from recurring transaction cuts.",
     },
     startingPrice: {
-      sr: "Od 1.200 €",
+      sr: `Od ${formatWebsiteStartingPrice("ecommerce","sr")}`,
       en: `Starting from ${formatWebsiteStartingPrice("ecommerce", "en")}`,
     },
     pricingAnchor: "packages",
@@ -839,8 +838,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
       en: "I treat design not as cosmetic decoration, but as a strategic asset that communicates your value instantly. I create fresh designs from scratch or execute comprehensive redesigns while protecting your hard-won SEO equity.",
     },
     startingPrice: {
-      sr: "Od 400 €",
-      en: "Starting from $600",
+      sr: formatAdditionalStartingPrice("redesign","sr"),
+      en: formatAdditionalStartingPrice("redesign","en"),
     },
     pricingAnchor: "additional-services",
     relatedCaseStudySlug: "os-dule-karaklajic",
@@ -1059,8 +1058,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
       en: "I improve technical foundations for visitors and search engines: semantic HTML, measured Core Web Vitals improvements, clear answers, structured data that matches visible content, and practical AI assistants.",
     },
     startingPrice: {
-      sr: "Od 100 €",
-      en: "Starting from $150",
+      sr: formatAdditionalStartingPrice("performance","sr"),
+      en: formatAdditionalStartingPrice("performance","en"),
     },
     pricingAnchor: "additional-services",
     relatedCaseStudySlug: "ilic-enterijer",
@@ -1282,9 +1281,8 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
     },
     startingPrice: {
       sr: `Od ${maintenanceStartingPrice} € / mes.`,
-      en: `From €${maintenanceStartingPrice} / mo.`,
+      en: formatCarePlanStartingPrice("basic-care","en"),
     },
-    priceCurrency: "EUR",
     pricingAnchor: "maintenance",
     relatedCaseStudySlug: "coolfridgeguys",
     audience: {

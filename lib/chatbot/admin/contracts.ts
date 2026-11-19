@@ -1,0 +1,14 @@
+import { z } from "zod";
+import { leadStatuses } from "../lead-contracts";
+export const adminLocale = z.enum(["sr", "en"]);
+export const rangeSchema = z.enum(["7d", "30d"]).default("7d");
+const day = z.iso.date().optional();
+export const listFilters = z.object({ cursor: z.string().max(512).optional(), from: day, to: day, locale: adminLocale.optional(), hasLead: z.enum(["yes", "no"]).optional() }).strict().refine((value) => !value.from || !value.to || value.from <= value.to);
+export const leadFilters = z.object({ cursor: z.string().max(512).optional(), from: day, to: day, status: z.enum(leadStatuses).optional(), delivery: z.enum(["attention"]).optional() }).strict().refine((value) => !value.from || !value.to || value.from <= value.to);
+export const leadUpdate = z.object({ status: z.enum(leadStatuses), internalNote: z.string().trim().max(4000) }).strict();
+export const deleteInput = z.object({ confirm: z.literal(true) }).strict();
+export const retryNotification = z.object({ verifiedNotDelivered: z.literal(true) }).strict();
+export const idSchema = z.uuid();
+export type ConversationFilters = z.infer<typeof listFilters>;
+export type LeadFilters = z.infer<typeof leadFilters>;
+export type LeadUpdate = z.infer<typeof leadUpdate>;

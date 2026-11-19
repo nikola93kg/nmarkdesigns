@@ -1,11 +1,16 @@
 import type { Dictionary } from "./types";
-import { getCarePlanStartingPrice, getWebsiteStartingPrice } from "@/content/pricing";
+import { getCarePlanStartingPrice, getWebsiteStartingPrice, getAdditionalStartingPrice } from "@/content/pricing";
 
 const landingStartingPrice = getWebsiteStartingPrice("landing-page");
 
 const hostingStartingPrice = getCarePlanStartingPrice("hosting");
 const basicCareStartingPrice = getCarePlanStartingPrice("basic-care");
 const businessCareStartingPrice = getCarePlanStartingPrice("business-care");
+
+const redesignStartingPrice = getAdditionalStartingPrice("redesign","sr");
+const seoStartingPrice = getAdditionalStartingPrice("seo","sr");
+const performanceStartingPrice = getAdditionalStartingPrice("performance","sr");
+const aiStartingPrice = getAdditionalStartingPrice("ai-chatbot","sr");
 
 const sr = {
   navigation: {
@@ -196,7 +201,7 @@ const sr = {
             "jasnu vizuelnu hijerarhiju i raspored sekcija bez zagušenja",
             "prilagođavanje korisničkog iskustva na mobilnim ekranima",
           ],
-          startingPrice: "Od 400 €",
+          startingPrice: `Od ${redesignStartingPrice} €`,
           pricingAnchor: "additional-services",
         },
         {
@@ -210,7 +215,7 @@ const sr = {
             "semantičke meta tagove, Open Graph i JSON-LD šeme",
             "integraciju prilagođenog AI chatbota sa poznavanjem poslovanja",
           ],
-          startingPrice: "Od 100 €",
+          startingPrice: `Od ${performanceStartingPrice} €`,
           pricingAnchor: "additional-services",
         },
         {
@@ -335,8 +340,8 @@ const sr = {
         {
           id: "additional-services",
           title: "Pojedinačne usluge",
-          price: "Od 100 €",
-          description: "Redizajn (400 €), SEO audit (150 €), Ubrzanje (100 €) i integracija AI chatbota (350 €).",
+          price: `Od ${performanceStartingPrice} €`,
+          description: `Redizajn (${redesignStartingPrice} €), SEO audit (${seoStartingPrice} €), Ubrzanje (${performanceStartingPrice} €) i integracija AI chatbota (${aiStartingPrice} €).`,
           anchor: "additional-services",
           actionLabel: "Detalji usluga",
         },
@@ -555,22 +560,22 @@ const sr = {
       services: {
         redesign: {
           name: "Redizajn web sajta",
-          price: "Od 400 €",
+          price: `Od ${redesignStartingPrice} €`,
           description: "Modernizacija izgleda postojećeg sajta, poboljšanje responzivnosti za telefone, jasnija tipografija i privlačniji korisnički doživljaj. Odnosi se na vizuelno osveženje i reorganizaciju strukture; kompletna migracija baze ili platforme ugovara se zasebno.",
         },
         seo: {
           name: "SEO audit i osnovna optimizacija",
-          price: "Od 150 €",
+          price: `Od ${seoStartingPrice} €`,
           description: "Tehnički pregled sajta, analiza meta podataka, strukture naslova i indeksabilnosti na pretraživačima, uz izveštaj sa prioritetnim preporukama i implementaciju dogovorenih osnovnih izmena. Bez nerealnih garancija pozicija.",
         },
         performance: {
           name: "Optimizacija brzine sajta",
-          price: "Od 100 €",
+          price: `Od ${performanceStartingPrice} €`,
           description: "Analiza performansi, kompresija slika, detektovanje sporih skripti i resursa, uz preporuke za keširanje i merenje pre i posle optimizacije. Bez veštačkog jurcanja za teoretskim ocenama testova.",
         },
         "ai-chatbot": {
           name: "Integracija AI chatbota",
-          price: "Od 350 €",
+          price: `Od ${aiStartingPrice} €`,
           description: "Implementacija prilagođenog AI asistenta na sajt sa poznavanjem vašeg poslovanja, FAQ odgovorima i usmeravanjem posetilaca na kontakt formu. Mesečni troškovi korišćenja modela (API) i eksternih servisa plaćaju se zasebno.",
         },
       },
@@ -739,7 +744,7 @@ const sr = {
           id: "redesign-service",
           question: "Možete li da redizajnirate moj postojeći sajt?",
           paragraphs: [
-            "Da. Usluga redizajna počinje od 400 € i obuhvata vizuelnu modernizaciju, prilagođavanje za mobilne uređaje i poboljšanje korisničkog iskustva. Ukoliko postojeći sajt zahteva potpunu promenu tehnologije ili prenos velike baze podataka, to se definiše kao nov projekat.",
+            `Da. Usluga redizajna počinje od ${redesignStartingPrice} € i obuhvata vizuelnu modernizaciju, prilagođavanje za mobilne uređaje i poboljšanje korisničkog iskustva. Ukoliko postojeći sajt zahteva potpunu promenu tehnologije ili prenos velike baze podataka, to se definiše kao nov projekat.`,
           ],
         },
         {
@@ -753,7 +758,7 @@ const sr = {
           id: "ai-integration",
           question: "Možete li da integrišete AI asistenta na sajt?",
           paragraphs: [
-            "Da. Nudim integraciju praktičnog AI chatbota (od 350 €) obučenog na podacima vašeg poslovanja koji odgovara na najčešća pitanja posetilaca i vodi ih ka kontaktu. Napominjem da su mesečni troškovi korišćenja AI modela i infrastrukture odvojeni.",
+            `Da. Nudim integraciju praktičnog AI chatbota (od ${aiStartingPrice} €) obučenog na podacima vašeg poslovanja koji odgovara na najčešća pitanja posetilaca i vodi ih ka kontaktu. Napominjem da su mesečni troškovi korišćenja AI modela i infrastrukture odvojeni.`,
           ],
         },
         {

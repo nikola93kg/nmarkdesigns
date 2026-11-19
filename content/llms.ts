@@ -1,4 +1,7 @@
-# NMark Designs
+import { formatWebsiteStartingPrice, formatAdditionalStartingPrice, formatCarePlanStartingPrice } from "./pricing";
+
+/** Generated from the same market-price registry as the public pages and chatbot. */
+export const llmsText = `# NMark Designs
 
 > Boutique web development and design studio founded by Nikola Marković. Specialized in high-performance Next.js web applications, custom business websites, e-commerce, and technical SEO for clients in Serbia, Europe, and the United States.
 
@@ -7,7 +10,7 @@
 - **Studio Name**: NMark Designs
 - **Founder & Lead Developer**: Nikola Marković
 - **Website**: https://nmarkdesigns.com
-- **Languages**: Serbian (Primary, `/sr/`), English (`/en/`)
+- **Languages**: Serbian (Primary, \`/sr/\`), English (\`/en/\`)
 - **Key Stack**: Next.js (App Router), React, TypeScript, Tailwind CSS, WordPress (Headless / Monolith), Cloudflare, Node.js
 - **Partnership**: Official Hostinger Partner. The partner offer provides 20% off the first term of eligible new hosting plans with subscriptions of at least 12 months. Domain services, renewals and previously purchased services are excluded; additional promo codes cannot be combined. Renewals use regular pricing. Check current eligibility and final pricing with Hostinger before purchase. NMark Designs may earn a commission through the partner link.
 - **Partner Offer Details**: https://nmarkdesigns.com/sr/cenovnik/#hostinger-partner (SR) | https://nmarkdesigns.com/en/pricing/#hostinger-partner (EN)
@@ -22,8 +25,8 @@
   - Serbian: https://nmarkdesigns.com/sr/usluge/izrada-web-sajtova/
   - English: https://nmarkdesigns.com/en/services/website-development/
 - **Description**: High-performance landing pages, corporate, and business websites built for maximum speed, SEO indexing, and lead generation.
-- **Serbian Website Packages (EUR)**: Landing page from €300, business website from €550, advanced website from €900.
-- **US Website Packages (USD)**: Landing page from $750, business website from $1,500, advanced website from $2,500. These are US market prices, not currency conversions of the Serbian offer.
+- **Serbian Website Packages (EUR)**: Landing page from ${formatWebsiteStartingPrice("landing-page","sr")}, business website from ${formatWebsiteStartingPrice("business-website","sr")}, advanced website from ${formatWebsiteStartingPrice("advanced-website","sr")}.
+- **US Website Packages (USD)**: Landing page from ${formatWebsiteStartingPrice("landing-page","en")}, business website from ${formatWebsiteStartingPrice("business-website","en")}, advanced website from ${formatWebsiteStartingPrice("advanced-website","en")}. These are US market prices, not currency conversions of the Serbian offer.
 - **Featured Case Study**: OŠ Dule Karaklajić (https://nmarkdesigns.com/sr/portfolio/os-dule-karaklajic/)
 
 ### 2. Web Prodavnice (E-commerce) / E-Commerce Development
@@ -31,7 +34,7 @@
   - Serbian: https://nmarkdesigns.com/sr/usluge/web-prodavnice/
   - English: https://nmarkdesigns.com/en/services/ecommerce-development/
 - **Description**: Fast, conversion-optimized WooCommerce and custom online stores with seamless payment gateways, inventory management, and zero layout shift.
-- **Starting Price**: Serbian offer from €1,200; US offer from $3,500. The final quote depends on the agreed scope.
+- **Starting Price**: Serbian offer from ${formatWebsiteStartingPrice("ecommerce","sr")}; US offer from ${formatWebsiteStartingPrice("ecommerce","en")}. The final quote depends on the agreed scope.
 - **Featured Case Studies**: Tripoli Sweets (https://nmarkdesigns.com/sr/portfolio/tripolisweets/), Anabela Bebi Oprema (https://nmarkdesigns.com/sr/portfolio/anabelabebioprema/)
 
 ### 3. Custom Web Aplikacije / Custom Web Applications
@@ -47,7 +50,7 @@
   - Serbian: https://nmarkdesigns.com/sr/usluge/web-dizajn-i-redizajn/
   - English: https://nmarkdesigns.com/en/services/web-design-and-redesign/
 - **Description**: Modern UI/UX visual identity and technical restructuring of legacy websites into fast, responsive, mobile-first digital experiences.
-- **Starting Price**: From €400 / $450.
+- **Starting Price**: Serbian offer: ${formatAdditionalStartingPrice("redesign","sr")}; US offer: ${formatAdditionalStartingPrice("redesign","en")}.
 - **Featured Case Study**: OŠ Dule Karaklajić
 
 ### 5. SEO i Optimizacija Brzine / SEO & Speed Optimization
@@ -55,7 +58,7 @@
   - Serbian: https://nmarkdesigns.com/sr/usluge/seo-i-optimizacija-brzine/
   - English: https://nmarkdesigns.com/en/services/seo-and-speed-optimization/
 - **Description**: Technical SEO audits, Core Web Vitals optimization, Schema.org semantic graphs, and AI Chatbot integration.
-- **Starting Price**: Audits from €150 / $170, Speed optimization from €100 / $120, AI integrations from €350 / $400.
+- **Starting Price**: Serbian offer: SEO ${formatAdditionalStartingPrice("seo","sr")}, speed ${formatAdditionalStartingPrice("performance","sr")}, AI ${formatAdditionalStartingPrice("ai-chatbot","sr")}. US offer: SEO ${formatAdditionalStartingPrice("seo","en")}, speed ${formatAdditionalStartingPrice("performance","en")}, AI ${formatAdditionalStartingPrice("ai-chatbot","en")}.
 - **Featured Case Study**: Ilić Enterijer (https://nmarkdesigns.com/sr/portfolio/ilic-enterijer/)
 
 ### 6. Održavanje i Hosting / Website Maintenance & Hosting
@@ -63,7 +66,7 @@
   - Serbian: https://nmarkdesigns.com/sr/usluge/odrzavanje-i-hosting/
   - English: https://nmarkdesigns.com/en/services/website-maintenance/
 - **Description**: Managed hosting and scoped Basic Care / Business Care plans: routine updates, basic security checks, and backup verification where supported. Content changes and priority request handling depend on the selected plan and agreement.
-- **Starting Price**: Hosting from €30/year, Maintenance care plans from €25/month.
+- **Starting Price**: Serbian offer: hosting ${formatCarePlanStartingPrice("hosting","sr")}, Basic Care ${formatCarePlanStartingPrice("basic-care","sr")}, Business Care ${formatCarePlanStartingPrice("business-care","sr")}. US offer: hosting ${formatCarePlanStartingPrice("hosting","en")}, Basic Care ${formatCarePlanStartingPrice("basic-care","en")}, Business Care ${formatCarePlanStartingPrice("business-care","en")}.
 
 ---
 
@@ -102,3 +105,4 @@
 - **Online Form**: https://nmarkdesigns.com/sr/kontakt/ (SR) | https://nmarkdesigns.com/en/contact/ (EN)
 - **Pricing Hub**: https://nmarkdesigns.com/sr/cenovnik/ (SR) | https://nmarkdesigns.com/en/pricing/ (EN)
 - **Instagram**: https://www.instagram.com/nmarkdesigns/
+`;

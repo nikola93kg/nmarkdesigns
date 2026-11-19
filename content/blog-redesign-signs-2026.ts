@@ -1,3 +1,4 @@
+import { formatAdditionalStartingPrice } from "@/content/pricing";
 import type { BlogSection } from "@/content/blog";
 import type { Editorial } from "@/content/blog-editorial";
 import { getHostingerCopy, hostingerPartner } from "@/content/partners";
@@ -349,7 +350,7 @@ const sectionsEn: readonly BlogSection[] = [
         title: "Helpful tools and resources for redesign planning",
         items: [
           {
-            label: "NMark Designs pricing — website redesign packages starting from €400",
+            label: `NMark Designs pricing — website redesign packages ${formatAdditionalStartingPrice("redesign", "en").toLowerCase()}`,
             href: "/en/pricing/#additional-services",
           },
           {
@@ -379,7 +380,7 @@ const sectionsEn: readonly BlogSection[] = [
           {
             question: "How much does a website redesign cost in 2026?",
             answer:
-              "At NMark Designs, website redesign packages start from €400 for structural and visual modernizations. More elaborate projects involving database migrations, e-commerce re-platforming, or custom Next.js applications are quoted based on specific scope.",
+              `At NMark Designs, website redesign packages start ${formatAdditionalStartingPrice("redesign", "en").toLowerCase()} for structural and visual modernizations. More elaborate projects involving database migrations, e-commerce re-platforming, or custom Next.js applications are quoted based on specific scope.`,
           },
           {
             question: "Will my current site go down while the new design is being built?",

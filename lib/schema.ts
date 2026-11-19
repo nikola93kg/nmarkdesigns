@@ -1,3 +1,4 @@
+import { pricingCurrency } from "@/content/pricing";
 import { founderPortrait } from "@/content/about";
 import { site } from "@/content/site";
 import type { Dictionary } from "@/content/i18n/types";
@@ -112,7 +113,7 @@ export function serviceDetailSchema(
         serviceType: service.eyebrow[locale],
         offers: {
           "@type": "Offer",
-          priceCurrency: service.priceCurrency ?? (locale === "sr" ? "EUR" : "USD"),
+          priceCurrency: pricingCurrency(locale),
           description: service.startingPrice[locale],
         },
       },

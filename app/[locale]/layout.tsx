@@ -11,6 +11,9 @@ import { isLocale, locales, localeSettings } from "@/lib/i18n";
 import { pageRobots } from "@/lib/seo-config";
 import "../globals.css";
 import { BackToTop } from "@/components/ui/BackToTop";
+import { ChatLauncher } from "@/components/chatbot/ChatLauncher";
+import { chatEnabled, chatPreviewEnabled, privacyUrl } from "@/lib/chatbot/config";
+import { recommendedLinks } from "@/content/chatbot/knowledge";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 
 const dmSans = DM_Sans({
@@ -81,6 +84,7 @@ window.gtag('consent', 'default', {
         </main>
         <Footer locale={locale} copy={copy} />
         <BackToTop />
+        {chatEnabled() && <ChatLauncher locale={locale} previewLinks={chatPreviewEnabled() ? recommendedLinks("portfolio projects projekti", locale) : undefined} privacyUrls={{ sr: privacyUrl("sr"), en: privacyUrl("en") }} />}
         <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         <CookieConsent locale={locale} />
       </body>

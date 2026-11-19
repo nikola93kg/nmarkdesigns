@@ -1,14 +1,19 @@
 import type { Dictionary } from "./types";
-import { getCarePlanStartingPrice, formatWebsiteStartingPrice } from "@/content/pricing";
+import { formatCarePlanStartingPrice, formatAdditionalStartingPrice, formatWebsiteStartingPrice } from "@/content/pricing";
 
 const landingStartingPrice = formatWebsiteStartingPrice("landing-page", "en");
 const businessStartingPrice = formatWebsiteStartingPrice("business-website", "en");
 const advancedStartingPrice = formatWebsiteStartingPrice("advanced-website", "en");
 const ecommerceStartingPrice = formatWebsiteStartingPrice("ecommerce", "en");
 
-const hostingStartingPrice = getCarePlanStartingPrice("hosting");
-const basicCareStartingPrice = getCarePlanStartingPrice("basic-care");
-const businessCareStartingPrice = getCarePlanStartingPrice("business-care");
+const hostingStartingPrice = formatCarePlanStartingPrice("hosting","en");
+const basicCareStartingPrice = formatCarePlanStartingPrice("basic-care","en");
+const businessCareStartingPrice = formatCarePlanStartingPrice("business-care","en");
+
+const redesignStartingPrice = formatAdditionalStartingPrice("redesign","en");
+const seoStartingPrice = formatAdditionalStartingPrice("seo","en");
+const performanceStartingPrice = formatAdditionalStartingPrice("performance","en");
+const aiStartingPrice = formatAdditionalStartingPrice("ai-chatbot","en");
 
 const en = {
   navigation: {
@@ -199,7 +204,7 @@ const en = {
             "clear visual hierarchy and frictionless section flow",
             "mobile user experience optimization and touch target polish",
           ],
-          startingPrice: "From €400 (~$450)",
+          startingPrice: redesignStartingPrice,
           pricingAnchor: "additional-services",
         },
         {
@@ -213,7 +218,7 @@ const en = {
             "semantic metadata, Open Graph, and JSON-LD structured data",
             "custom AI chatbot integration trained on business FAQs",
           ],
-          startingPrice: "From €100 (~$120)",
+          startingPrice: performanceStartingPrice,
           pricingAnchor: "additional-services",
         },
         {
@@ -227,7 +232,7 @@ const en = {
             "backup verification where supported by the existing setup",
             "minor content changes, performance checks, and priority request handling through Business Care",
           ],
-          startingPrice: `From €${basicCareStartingPrice} / mo.`,
+          startingPrice: basicCareStartingPrice,
           pricingAnchor: "maintenance",
         },
       ],
@@ -338,16 +343,16 @@ const en = {
         {
           id: "additional-services",
           title: "Individual services",
-          price: "From €100",
-          description: "Redesign (from €400), SEO audits (from €150), Speed optimization (from €100), and AI chatbots (from €350).",
+          price: performanceStartingPrice,
+          description: `Redesign (${redesignStartingPrice.toLowerCase()}), SEO audits (${seoStartingPrice.toLowerCase()}), speed optimization (${performanceStartingPrice.toLowerCase()}), and AI chatbots (${aiStartingPrice.toLowerCase()}).`,
           anchor: "additional-services",
           actionLabel: "View services",
         },
         {
           id: "maintenance",
           title: "Hosting and maintenance",
-          price: `From €${basicCareStartingPrice} / mo.`,
-          description: `Managed hosting (from €${hostingStartingPrice}/yr), Basic Care (from €${basicCareStartingPrice}/mo), and Business Care (from €${businessCareStartingPrice}/mo) support plans.`,
+          price: basicCareStartingPrice,
+          description: `Managed hosting (${hostingStartingPrice.toLowerCase()}), Basic Care (${basicCareStartingPrice.toLowerCase()}), and Business Care (${businessCareStartingPrice.toLowerCase()}) support plans.`,
           anchor: "maintenance",
           actionLabel: "Care plans",
         },
@@ -450,7 +455,7 @@ const en = {
     intro: {
       eyebrow: "Digital Services Pricing",
       title: "Website development pricing and services",
-      description: "Review NMark Designs website packages for US clients, priced in USD. Your final quote depends on features, content and project scope. Additional services, hosting and maintenance retain their stated currencies and are agreed separately.",
+      description: "Review NMark Designs website packages for US clients, priced in USD. Your final quote depends on features, content and project scope. Additional services, hosting and maintenance also use US market prices in USD and are agreed separately.",
       primaryAction: "Request a Quote",
       secondaryAction: "Explore Packages",
     },
@@ -558,22 +563,22 @@ const en = {
       services: {
         redesign: {
           name: "Website Redesign",
-          price: "From €400",
+          price: redesignStartingPrice,
           description: "Modernize the look of an existing website, improve mobile responsiveness, refine typography, and enhance user experience. Covers visual and structural redesign; complete platform migrations are scoped separately.",
         },
         seo: {
           name: "SEO Audit & Basic Optimization",
-          price: "From €150",
+          price: seoStartingPrice,
           description: "Technical SEO review, metadata audit, heading structure, and Google indexability checks, paired with prioritized recommendations and basic agreed implementation. Does not promise search rankings or ongoing traffic growth.",
         },
         performance: {
           name: "Website Speed Optimization",
-          price: "From €100",
+          price: performanceStartingPrice,
           description: "Performance audit, image compression and optimization, detection of slow-loading scripts, caching recommendations, and before/after measurements where feasible. No guaranteed benchmark scores.",
         },
         "ai-chatbot": {
           name: "AI Chatbot Integration",
-          price: "From €350",
+          price: aiStartingPrice,
           description: "Integration of a tailored AI assistant trained on your business knowledge to answer FAQs and guide visitors toward contact. Recurring AI API usage and third-party hosting fees are separate.",
         },
       },
@@ -588,7 +593,7 @@ const en = {
         hosting: {
           name: "Managed Hosting",
           target: "For eligible lightweight business websites",
-          price: `From €${hostingStartingPrice}/year`,
+          price: hostingStartingPrice,
           features: [
             "Optimized shared infrastructure for eligible lightweight websites",
             "Server setup and configuration",
@@ -600,7 +605,7 @@ const en = {
         "basic-care": {
           name: "Basic Care",
           target: "For stable business websites",
-          price: `From €${basicCareStartingPrice}/month`,
+          price: basicCareStartingPrice,
           features: [
             "Routine CMS and plugin updates where applicable",
             "Regular website health and availability checks",
@@ -613,7 +618,7 @@ const en = {
         "business-care": {
           name: "Business Care",
           target: "For active websites requiring priority response",
-          price: `From €${businessCareStartingPrice}/month`,
+          price: businessCareStartingPrice,
           features: [
             "All activities from the Basic Care plan",
             "Minor content updates (text, images)",
@@ -700,7 +705,7 @@ const en = {
           id: "fixed-prices",
           question: "Are the listed prices fixed?",
           paragraphs: [
-            "Website packages show US starting prices in USD for a defined baseline scope. Additional services and care plans use their stated currencies. Every project is unique — if your requirements are simpler or more specific, I prepare an exact quote based on the agreed scope before work starts.",
+            "Website packages show US starting prices in USD for a defined baseline scope. Additional services and care plans also use USD market prices. Every project is unique — if your requirements are simpler or more specific, I prepare an exact quote based on the agreed scope before work starts.",
           ],
         },
         {
@@ -728,7 +733,7 @@ const en = {
           id: "domain-and-hosting",
           question: "Are domain and hosting included in the price?",
           paragraphs: [
-            `Domain and hosting are not automatically included in the development price because requirements vary. I assist with selection and setup, and you can choose NMark Designs Managed Hosting (from €${hostingStartingPrice}/year for lightweight sites) or use an independent hosting provider.`,
+            `Domain and hosting are not automatically included in the development price because requirements vary. I assist with selection and setup, and you can choose NMark Designs Managed Hosting (${hostingStartingPrice.toLowerCase()} for lightweight sites) or use an independent hosting provider.`,
           ],
         },
         {
@@ -742,21 +747,21 @@ const en = {
           id: "redesign-service",
           question: "Can you redesign my existing website?",
           paragraphs: [
-            "Yes. Website redesign starts from €400 and covers visual modernization, mobile responsiveness, typography, and UX improvements. If the project requires moving to an entirely new technology platform or migrating large databases, it is scoped as a new website build.",
+            `Yes. Website redesign starts ${redesignStartingPrice.toLowerCase()} and covers visual modernization, mobile responsiveness, typography, and UX improvements. If the project requires moving to an entirely new technology platform or migrating large databases, it is scoped as a new website build.`,
           ],
         },
         {
           id: "maintenance-options",
           question: "Do you offer ongoing website maintenance?",
           paragraphs: [
-            `Yes. Basic Care (from €${basicCareStartingPrice}/month) includes updates where applicable, basic security checks, and backup verification where supported. Business Care (from €${businessCareStartingPrice}/month) adds minor content changes, performance checks, and priority request handling. Custom Support covers complex applications and WooCommerce stores. Work and response scope are agreed; plans do not include staffed 24/7 support.`,
+            `Yes. Basic Care (${basicCareStartingPrice.toLowerCase()}) includes updates where applicable, basic security checks, and backup verification where supported. Business Care (${businessCareStartingPrice.toLowerCase()}) adds minor content changes, performance checks, and priority request handling. Custom Support covers complex applications and WooCommerce stores. Work and response scope are agreed; plans do not include staffed 24/7 support.`,
           ],
         },
         {
           id: "ai-integration",
           question: "Can you integrate an AI assistant into my website?",
           paragraphs: [
-            "Yes. I offer custom AI chatbot integration (from €350) trained on your business knowledge to answer customer FAQs and route leads. Recurring model API usage and third-party hosting fees are billed separately.",
+            `Yes. I offer custom AI chatbot integration (${aiStartingPrice.toLowerCase()}) trained on your business knowledge to answer customer FAQs and route leads. Recurring model API usage and third-party hosting fees are billed separately.`,
           ],
         },
         {
