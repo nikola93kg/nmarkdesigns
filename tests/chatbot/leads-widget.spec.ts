@@ -17,7 +17,6 @@ for (const locale of ["sr", "en"] as const) {
       await page.locator('[data-consent-banner] button').nth(1).click();
       await page.getByRole("button", { name: copy.open }).click();
       const panel = page.getByRole("dialog", { name: "NMark Assistant" });
-      await panel.getByRole("button", { name: copy.accept }).click();
       const message = locale === "sr" ? "Treba mi sajt za stolare" : "I need a website for my furniture business";
       await panel.getByLabel(copy.input).fill(message); await panel.getByRole("button", { name: copy.send, exact: true }).click();
       await expect(panel.getByRole("complementary", { name: lead.open })).toBeVisible();
@@ -62,7 +61,7 @@ for(const locale of ["sr","en"] as const){
     await page.route("**/api/chat/session/",route=>route.fulfill({status:route.request().method()==="GET"?401:201,json:{}}));
     await page.route("**/api/chat/",route=>{requests++;const events=requests===1?[{type:"delta",text:"Business reply"},{type:"lead_offer"},{type:"done",messageId:"first",status:"completed"}]:[{type:"delta",text:"Please ask about NMark web services."},{type:"links",links:[]},{type:"done",messageId:"second",status:"completed"}];return route.fulfill({contentType:"text/event-stream",body:events.map(event=>`data: ${JSON.stringify(event)}\n\n`).join("")})});
     await page.goto(`/${locale}/`);await page.locator('[data-consent-banner] button').nth(1).click();await page.getByRole("button",{name:copy.open}).click();
-    const panel=page.getByRole("dialog",{name:"NMark Assistant"});await panel.getByRole("button",{name:copy.accept}).click();
+    const panel=page.getByRole("dialog",{name:"NMark Assistant"});
     await panel.getByLabel(copy.input).fill("I need a website");await panel.getByRole("button",{name:copy.send,exact:true}).click();
     await expect(panel.getByRole("complementary",{name:lead.open})).toBeVisible();
     await panel.getByLabel(copy.input).fill("How do I make pancakes?");await panel.getByRole("button",{name:copy.send,exact:true}).click();

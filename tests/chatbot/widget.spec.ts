@@ -1,5 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
+import { CHAT_CONSENT_VERSION } from "@/lib/chatbot/contracts";
 import { chatCopy } from "@/content/chatbot/copy";
 
 async function dismissCookies(page: Page) {
@@ -15,8 +16,11 @@ for (const locale of ["sr", "en"] as const) {
   for (const width of [320, 375, 430, 768, 1024, 1440, 1920]) {
     test(`${locale} consent and keyboard at ${width}px`, async ({ page }, testInfo) => {
       const copy = chatCopy[locale];
-      let aiCalls = 0;
-      await mockSession(page);
+      let aiCalls = 0; let sessions = 0;
+      await page.route("**/api/chat/session/", async route => {
+        if (route.request().method() === "GET") await route.fulfill({status:401,json:{code:"SESSION_EXPIRED"}});
+        else { sessions++; expect(route.request().postDataJSON()).toEqual({locale,consent:true,consentVersion:CHAT_CONSENT_VERSION}); await route.fulfill({status:201,json:{sessionId:"fixture"}}); }
+      });
       await page.route("**/api/chat/", async (route) => { aiCalls++; await route.fulfill({ status: 503, json: { code: "UNAVAILABLE" } }); });
       await page.setViewportSize({ width, height: 850 });
       await page.goto(`/${locale}/`);
@@ -26,15 +30,16 @@ for (const locale of ["sr", "en"] as const) {
       await page.getByRole("button", { name: copy.open }).click();
       const panel = page.getByRole("dialog", { name: "NMark Assistant" });
       await expect(panel).toBeVisible();
-      await expect(panel.getByText(copy.consent)).toBeVisible();
-      await expect(page.locator('#chat-message')).toHaveCount(0);
+      await expect(panel.getByText(copy.consent, { exact: false })).toBeVisible();
+      await expect(panel.getByText(copy.firstMessageConsent, {exact:false})).toBeVisible();
+      await expect(panel.getByLabel(copy.input)).toBeEnabled();
+      expect(sessions).toBe(0);
       await expect(panel.getByRole("link", { name: copy.privacy })).toHaveAttribute("rel", "noopener noreferrer");
       expect(aiCalls).toBe(0);
       const box = await panel.boundingBox();
       expect(box!.x).toBeGreaterThanOrEqual(0);
       expect(box!.x + box!.width).toBeLessThanOrEqual(width);
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
-      await panel.getByRole("button", { name: copy.accept }).click();
       await expect(panel.getByLabel(copy.input)).toBeEnabled();
       await expect(panel.getByRole("button", { name: copy.quickActions[0], exact: true })).toBeVisible();
       expect(aiCalls).toBe(0);
@@ -49,6 +54,11 @@ for (const locale of ["sr", "en"] as const) {
           expect(await panel.evaluate((element) => element.contains(document.activeElement))).toBe(true);
         }
       }
+      await panel.getByLabel(copy.input).fill(locale === "sr" ? "Želim sajt" : "I need a website");
+      expect(sessions).toBe(0); expect(aiCalls).toBe(0);
+      await panel.getByRole("button", {name:copy.send,exact:true}).click();
+      await expect(panel.getByRole("alert")).toContainText(copy.errors.UNAVAILABLE);
+      expect(sessions).toBe(1); expect(aiCalls).toBe(1);
       await panel.getByRole("button", { name: copy.close }).click();
       await expect(page.getByRole("button", { name: copy.open })).toBeFocused();
     });
@@ -67,7 +77,6 @@ test("streaming renders safe text, verified cards and retries the same client me
   });
   await page.goto("/sr/"); await dismissCookies(page);
   await page.getByRole("button", { name: copy.open }).click();
-  await page.getByRole("button", { name: copy.accept }).click();
   await page.getByLabel(copy.input).fill("Koliko košta poslovni sajt?"); await page.getByLabel(copy.input).press("Enter");
   await expect(page.locator("[data-chat-panel]").getByRole("alert")).toContainText(copy.errors.STREAM_ERROR);
   await page.getByRole("button", { name: copy.retry }).click();

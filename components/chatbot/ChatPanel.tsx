@@ -23,6 +23,8 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
   const preview = previewLinks !== undefined;
   const localTest = !preview && Boolean(privacyUrls[locale]?.includes("/api/chat/local-notice/"));
   const lead = leadCopy[locale];
+  const privacyHref = privacyUrls[locale];
+  const blocked = !preview && !privacyHref;
   const [offerLead, setOfferLead] = useState(false);
   const [leadDeclined, setLeadDeclined] = useState(false);
   const [showLead, setShowLead] = useState(false);
@@ -41,7 +43,7 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
   const [draft, setDraft] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [pendingConsent, setPendingConsent] = useState(false);
-  const [restoring, setRestoring] = useState(!preview);
+  const [restoring, setRestoring] = useState(!preview && Boolean(privacyHref));
   const busy = phase === "sending" || phase === "streaming";
 
   useEffect(() => {
@@ -62,7 +64,7 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
   }, [open]);
 
   useEffect(() => {
-    if (preview) return () => controller.current?.abort();
+    if (preview || !privacyHref) return () => controller.current?.abort();
     const abort = new AbortController();
     fetch("/api/chat/session/", { cache: "no-store", signal: abort.signal })
       .then(async (response) => {
@@ -73,49 +75,53 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
         setConsented(true); setPhase("idle");
       }).catch(() => undefined).finally(() => { if (!abort.signal.aborted) setRestoring(false); });
     return () => { abort.abort(); controller.current?.abort(); };
-  }, [preview]);
+  }, [preview, privacyHref]);
 
   useEffect(() => {
     if (follow.current && transcript.current) transcript.current.scrollTop = transcript.current.scrollHeight;
   }, [messages, open, error]);
 
-  async function accept() {
-    if (pendingConsent || (!preview && !privacyUrls[locale])) return;
-    if (preview) { setConsented(true); setPhase("idle"); requestAnimationFrame(() => input.current?.focus()); return; }
-    setPendingConsent(true); setError(null);
-    try {
-      const response = await fetch("/api/chat/session/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ locale, consent: true, consentVersion: CHAT_CONSENT_VERSION }) });
-      if (!response.ok) {
-        const data = await response.json() as { code: string };
-        throw new Error(data.code);
-      }
-      setConsented(true); setPhase("idle"); requestAnimationFrame(() => input.current?.focus());
-    } catch (err) { setError(err instanceof Error ? err.message : "UNAVAILABLE"); }
-    finally { setPendingConsent(false); }
+  async function ensureSession(signal: AbortSignal) {
+    if (consented) return;
+    if (!preview) {
+      setPendingConsent(true);
+      try {
+        const response = await fetch("/api/chat/session/", { method: "POST", signal, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ locale, consent: true, consentVersion: CHAT_CONSENT_VERSION }) });
+        if (!response.ok) {
+          const data = await response.json() as { code: string };
+          throw new Error(data.code);
+        }
+      } finally { setPendingConsent(false); }
+    }
+    setConsented(true);
   }
 
   function restart() {
     if (busyRef.current) return;
     setShowLead(false); setOfferLead(false); setLeadDeclined(false); setLeadReceived(false);
     setMessages([]); setConsented(false); setPhase("welcome"); setError(null); setDraft(""); setLastAttempt(null);
-    // A new cookie/session is created only after the visitor explicitly accepts again.
+    // The next first-message submission records the renewed notice acceptance.
   }
 
-  async function send(attempt: Attempt) {
-    if (busyRef.current || !consented || !attempt.message.trim()) return;
+  async function send(attempt: Attempt, quickAction = false) {
+    if (busyRef.current || restoring || blocked || !attempt.message.trim()) return;
     busyRef.current = true;
     setLastAttempt(attempt);
     setOfferLead(false);
     const abort = new AbortController(); controller.current = abort;
     const assistantId = `assistant:${attempt.clientMessageId}`;
-    setError(null); setPhase("sending"); setDraft(""); follow.current = true;
-    setMessages((previous) => [
-      ...previous.filter((m) => !(m.role === "assistant" && m.clientMessageId === attempt.clientMessageId)),
-      ...(!previous.some((m) => m.role === "user" && m.clientMessageId === attempt.clientMessageId) ? [{ id: attempt.clientMessageId, role: "user" as const, content: attempt.message, status: "completed" as const, clientMessageId: attempt.clientMessageId }] : []),
-      { id: assistantId, role: "assistant", content: "", status: "pending", clientMessageId: attempt.clientMessageId },
-    ]);
+    setError(null); setPhase("sending"); follow.current = true;
     let finished = false;
     try {
+      await ensureSession(abort.signal);
+      if (abort.signal.aborted) throw new Error("CANCELLED");
+      if (!preview && quickAction) trackChatInteraction("quick_action_click", locale);
+      setDraft("");
+      setMessages((previous) => [
+        ...previous.filter((m) => !(m.role === "assistant" && m.clientMessageId === attempt.clientMessageId)),
+        ...(!previous.some((m) => m.role === "user" && m.clientMessageId === attempt.clientMessageId) ? [{ id: attempt.clientMessageId, role: "user" as const, content: attempt.message, status: "completed" as const, clientMessageId: attempt.clientMessageId }] : []),
+        { id: assistantId, role: "assistant", content: "", status: "pending", clientMessageId: attempt.clientMessageId },
+      ]);
       let events: AsyncIterable<unknown>;
       if (preview) {
         events = previewEvents(copy.preview.response, previewLinks, abort.signal);
@@ -180,16 +186,10 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
       <div ref={transcript} className="min-h-0 flex-1 space-y-5 overflow-y-auto overscroll-contain p-5" onScroll={(event) => { const el = event.currentTarget; follow.current = el.scrollHeight - el.scrollTop - el.clientHeight < 72; }}>
         {localTest && <p className="text-small text-muted" data-chat-local-test>{copy.local.notice}</p>}
         {showLead ? <LeadForm locale={locale} preview={preview} privacyUrl={privacyUrls[locale]} service={suggestedService(lastAttempt?.message ?? "")} onBusyChange={setLeadSubmitting} description={messages.filter((message) => message.role === "user").slice(-3).map((message) => message.content).join("\n")} onCancel={() => { setShowLead(false); if (!leadReceived) declineLead(); }} onReceived={() => { setLeadReceived(true); setOfferLead(false); }} /> : <>
-        {preview && consented && <p className="text-small text-muted">{copy.preview.notice}</p>}
+        {preview && <p className="text-small text-muted">{copy.preview.notice}</p>}
         <p className="text-small leading-relaxed">{copy.welcome}</p>
-        {!consented && <div className="space-y-4 border-t border-border pt-4">
-          <p className="text-small text-muted">{preview ? copy.preview.notice : copy.consent}</p>
-          {!preview && privacyUrls[locale] && <a href={privacyUrls[locale] ?? undefined} target="_blank" rel="noopener noreferrer" className="text-small font-medium text-brand underline underline-offset-4">{localTest ? copy.local.link : copy.privacy}</a>}
-          <Button onClick={() => void accept()} disabled={pendingConsent || restoring || (!preview && !privacyUrls[locale])} className="w-full">{pendingConsent || restoring ? copy.busy : preview ? copy.preview.start : copy.accept}</Button>
-          {!preview && !privacyUrls[locale] && <p role="status" className="text-small">{copy.errors.UNAVAILABLE}</p>}
-          <button type="button" onClick={onClose} className="min-h-11 w-full text-small underline underline-offset-4">{copy.decline}</button>
-        </div>}
-        {consented && messages.length === 0 && <div className="flex flex-wrap gap-2">{copy.quickActions.map((text) => <button key={text} type="button" onClick={() => { if (!preview) trackChatInteraction("quick_action_click",locale); void send({ message: text, clientMessageId: crypto.randomUUID() }); }} disabled={busy} className="min-h-11 rounded-control border border-border px-3 py-2 text-left text-small hover:bg-accent-soft disabled:opacity-50">{text}</button>)}</div>}
+        {pendingConsent && <p className="text-small text-muted">{copy.starting}</p>}
+        {messages.length === 0 && <div className="flex flex-wrap gap-2">{copy.quickActions.map((text) => <button key={text} type="button" onClick={() => { void send({ message: text, clientMessageId: crypto.randomUUID() }, true); }} disabled={busy || restoring || blocked} className="min-h-11 rounded-control border border-border px-3 py-2 text-left text-small hover:bg-accent-soft disabled:opacity-50">{text}</button>)}</div>}
         <div role="log" aria-label="NMark Assistant" aria-live="off" className="space-y-5">
           {messages.map((m) => <article key={m.id} className={m.role === "user" ? "ml-7 rounded-control bg-accent-soft p-3" : "mr-2"}>
             <p className="mb-1 text-small font-semibold text-brand">{m.role === "user" ? copy.you : "NMark Assistant"}</p>
@@ -209,16 +209,21 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
         </>}
       </div>
       <footer className="shrink-0 border-t border-border bg-surface px-4 pt-3 pb-4">
-        <p role="status" className="sr-only">{busy ? copy.busy : error ? copy.errors[error] ?? copy.cancelled : messages.at(-1)?.role === "assistant" && messages.at(-1)?.status === "completed" ? messages.at(-1)?.content : ""}</p>
-        {consented && !showLead && <form onSubmit={submit}>
+        <p role="status" className="sr-only">{pendingConsent ? copy.starting : busy ? copy.busy : error ? copy.errors[error] ?? copy.cancelled : messages.at(-1)?.role === "assistant" && messages.at(-1)?.status === "completed" ? messages.at(-1)?.content : ""}</p>
+        {!showLead && <form onSubmit={submit}>
           <label htmlFor="chat-message" className="sr-only">{copy.input}</label>
           <div className="flex items-end gap-2 rounded-control border border-border p-2 focus-within:border-focus">
-            <textarea ref={input} id="chat-message" value={draft} maxLength={MESSAGE_LIMIT} rows={2} disabled={busy} placeholder={copy.input} className="min-w-0 flex-1 resize-none bg-transparent p-1 text-small focus:outline-none disabled:opacity-50"
+            <textarea ref={input} id="chat-message" value={draft} maxLength={MESSAGE_LIMIT} rows={2} disabled={busy} aria-describedby="chat-privacy-notice" placeholder={copy.input} className="min-w-0 flex-1 resize-none bg-transparent p-1 text-small focus:outline-none disabled:opacity-50"
               onChange={(event) => setDraft(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); if (draft.trim()) void send({ message: draft.trim(), clientMessageId: crypto.randomUUID() }); } }} />
             {busy ? <button type="button" aria-label={copy.stop} onClick={() => controller.current?.abort()} className={`${control} bg-brand text-on-brand`}><Square className="size-4" aria-hidden="true" /></button>
-              : <button type="submit" aria-label={copy.send} disabled={!draft.trim()} className={`${control} bg-brand text-on-brand`}><ArrowUp className="size-5" aria-hidden="true" /></button>}
+              : <button type="submit" aria-label={copy.send} disabled={!draft.trim() || restoring || blocked} className={`${control} bg-brand text-on-brand`}><ArrowUp className="size-5" aria-hidden="true" /></button>}
           </div>
           <p className="mt-1 text-right text-xs text-muted">{draft.length}/{MESSAGE_LIMIT}</p>
+          <p id="chat-privacy-notice" className="mt-2 text-xs leading-relaxed text-muted">
+            {!preview && <>{copy.consent} {!consented && copy.firstMessageConsent} </>}
+            <a href={privacyHref ?? localizedPath("privacy", locale)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-6 items-center font-medium text-brand underline underline-offset-4">{localTest ? copy.local.link : copy.privacy}</a>
+          </p>
+          {blocked && <p role="status" className="mt-2 text-small text-muted">{copy.errors.UNAVAILABLE}</p>}
         </form>}
         {consented && !showLead && !busy && !leadReceived && <button type="button" onClick={openLead} className="mr-3 min-h-11 text-small font-semibold text-brand underline underline-offset-4">{lead.open}</button>}
         {leadReceived && !showLead && <p className="text-small text-muted">{preview ? lead.previewSuccess : lead.received}</p>}

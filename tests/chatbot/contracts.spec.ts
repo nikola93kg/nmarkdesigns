@@ -7,7 +7,7 @@ import { publicPages } from "@/lib/public-pages";
 const id = "50e4cfc6-3471-4db1-8ae6-a1d59851f531";
 test("consent and messages reject missing consent, stale versions, spoofed session IDs and oversized input", () => {
   expect(sessionInput.safeParse({ locale: "sr", consent: true, consentVersion: CHAT_CONSENT_VERSION }).success).toBe(true);
-  for (const input of [ { locale: "sr", consent: false, consentVersion: CHAT_CONSENT_VERSION }, { locale: "en", consent: true, consentVersion: "old" }, { locale: "sr" } ]) expect(sessionInput.safeParse(input).success).toBe(false);
+  for (const input of [ { locale: "sr", consent: false, consentVersion: CHAT_CONSENT_VERSION }, { locale: "en", consent: true, consentVersion: "old" }, { locale: "sr", consent: true, consentVersion: "2026-11-19-v1-draft" }, { locale: "sr" } ]) expect(sessionInput.safeParse(input).success).toBe(false);
   expect(messageInput.parse({ locale: "en", message: " hello ", clientMessageId: id }).message).toBe("hello");
   for (const input of [ { message: " ", locale: "sr", clientMessageId: id }, { message: "x".repeat(2001), locale: "sr", clientMessageId: id }, { message: "hi", locale: "de", clientMessageId: id }, { message: "hi", locale: "sr", clientMessageId: id, sessionId: id } ]) expect(messageInput.safeParse(input).success).toBe(false);
 });

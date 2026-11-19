@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const CHAT_CONSENT_VERSION = "2026-11-19-v1-draft";
+export const CHAT_CONSENT_VERSION = "2026-11-19-v2-first-message";
 export const MESSAGE_LIMIT = 2000;
 export const localeSchema = z.enum(["sr", "en"]);
 export const sessionInput = z.object({

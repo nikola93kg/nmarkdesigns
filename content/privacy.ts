@@ -40,7 +40,7 @@ export const privacyCopy: Localized<PrivacyContent> = {
       ] },
       { id: "svrhe", title: "Svrhe i predloženi pravni osnovi", paragraphs: [
         "Podaci iz upita služe za odgovor, razumevanje zahteva i pripremu ponude. Predloženi osnov je postupanje na vaš zahtev pre zaključenja ugovora. Predloženi osnov za bezbednost, sprečavanje spama i administraciju je legitimni interes za pouzdan rad sajta, uz procenu uticaja na vaša prava.",
-        "Korišćenje AI razgovora zahteva poseban prihvat obaveštenja pre prve poruke. Analitika ima zaseban izbor saglasnosti: odbijanje analitike ne sprečava slanje upita ili korišćenje chatbota. Izbor možete promeniti kroz podešavanja kolačića. Konačni osnovi, svrhe i procena legitimnog interesa zahtevaju potvrdu rukovaoca pre objave.",
+        "Pre prve poruke prikazuje se kratko obaveštenje sa linkom ka detaljima. Slanje prve poruke predstavlja jasno označen pristanak na opisanu obradu; ne zahteva se posebno dugme za prihvatanje politike. Analitika ima zaseban izbor saglasnosti: odbijanje analitike ne sprečava slanje upita ili korišćenje chatbota. Izbor možete promeniti kroz podešavanja kolačića. Konačni osnovi, svrhe i procena legitimnog interesa zahtevaju potvrdu rukovaoca pre objave.",
       ] },
       { id: "ai", title: "Kako radi AI asistent", paragraphs: [
         "NMark Assistant je AI asistent, a ne lično obraćanje Nikole. Za proveru teme i sastavljanje odgovora aplikacija prosleđuje OpenAI API-ju tekst pitanja, potrebni deo prethodnog razgovora i javne informacije o NMark Designs uslugama. Razgovor se čuva i u bazi sajta radi nastavka komunikacije i obrade upita.",
@@ -88,7 +88,7 @@ export const privacyCopy: Localized<PrivacyContent> = {
       ] },
       { id: "purposes", title: "Purposes and proposed legal grounds", paragraphs: [
         "Inquiry information is used to reply, understand your requirements and prepare a quote. The proposed basis is taking steps at your request before entering a contract. The proposed basis for security, spam prevention and administration is the legitimate interest in operating a reliable website, subject to an assessment of your rights.",
-        "AI chat requires a separate acceptance of the notice before the first message. Analytics has an independent consent choice: declining analytics does not prevent inquiries or chatbot use. You can change your choice through cookie settings. The controller must confirm the final purposes, grounds and legitimate-interest assessment before publication.",
+        "A short notice and link to details appear before the first message. Sending that message is the clearly identified consent action for the described processing; there is no separate policy-acceptance button. Analytics has an independent consent choice: declining analytics does not prevent inquiries or chatbot use. You can change your choice through cookie settings. The controller must confirm the final purposes, grounds and legitimate-interest assessment before publication.",
       ] },
       { id: "ai", title: "How the AI assistant works", paragraphs: [
         "NMark Assistant is an AI assistant, rather than Nikola replying personally. To check relevance and generate an answer, the application sends the question, relevant conversation history and public NMark Designs service information to the OpenAI API. Conversations are also stored in the website database to support continuity and inquiries.",
