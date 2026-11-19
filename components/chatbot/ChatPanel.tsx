@@ -21,6 +21,7 @@ const control = "inline-flex min-h-11 min-w-11 items-center justify-center round
 export default function ChatPanel({ locale, open, onClose, privacyUrls, previewLinks }: Props) {
   const copy = chatCopy[locale];
   const preview = previewLinks !== undefined;
+  const localTest = !preview && Boolean(privacyUrls[locale]?.includes("/api/chat/local-notice/"));
   const lead = leadCopy[locale];
   const [offerLead, setOfferLead] = useState(false);
   const [leadDeclined, setLeadDeclined] = useState(false);
@@ -171,17 +172,18 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
       }}
       className="chat-panel fixed m-0 flex-col overflow-hidden rounded-card bg-surface p-0 text-ink shadow-xl backdrop:bg-brand/30">
       <header className="flex shrink-0 items-center justify-between gap-2 bg-brand px-4 py-3 text-on-brand">
-        <div><h2 id="chat-title" className="text-body font-semibold" tabIndex={-1} autoFocus>NMark Assistant</h2><p className="text-small text-on-brand-muted">{preview ? copy.preview.label : copy.ai}</p></div>
+        <div><h2 id="chat-title" className="text-body font-semibold" tabIndex={-1} autoFocus>NMark Assistant</h2><p className="text-small text-on-brand-muted">{preview ? copy.preview.label : localTest ? copy.local.label : copy.ai}</p></div>
         <div className="flex"><button type="button" aria-label={copy.restart} title={copy.restart} disabled={busy || pendingConsent || restoring || leadSubmitting} onClick={restart} className={control}><RotateCcw className="size-4" aria-hidden="true" /></button>
           <button type="button" aria-label={copy.close} onClick={onClose} className={control}><X className="size-5" aria-hidden="true" /></button></div>
       </header>
       <div ref={transcript} className="min-h-0 flex-1 space-y-5 overflow-y-auto overscroll-contain p-5" onScroll={(event) => { const el = event.currentTarget; follow.current = el.scrollHeight - el.scrollTop - el.clientHeight < 72; }}>
+        {localTest && <p className="text-small text-muted" data-chat-local-test>{copy.local.notice}</p>}
         {showLead ? <LeadForm locale={locale} preview={preview} privacyUrl={privacyUrls[locale]} service={suggestedService(lastAttempt?.message ?? "")} onBusyChange={setLeadSubmitting} description={messages.filter((message) => message.role === "user").slice(-3).map((message) => message.content).join("\n")} onCancel={() => { setShowLead(false); if (!leadReceived) declineLead(); }} onReceived={() => { setLeadReceived(true); setOfferLead(false); }} /> : <>
         {preview && consented && <p className="text-small text-muted">{copy.preview.notice}</p>}
         <p className="text-small leading-relaxed">{copy.welcome}</p>
         {!consented && <div className="space-y-4 border-t border-border pt-4">
           <p className="text-small text-muted">{preview ? copy.preview.notice : copy.consent}</p>
-          {!preview && privacyUrls[locale] && <a href={privacyUrls[locale] ?? undefined} target="_blank" rel="noopener noreferrer" className="text-small font-medium text-brand underline underline-offset-4">{copy.privacy}</a>}
+          {!preview && privacyUrls[locale] && <a href={privacyUrls[locale] ?? undefined} target="_blank" rel="noopener noreferrer" className="text-small font-medium text-brand underline underline-offset-4">{localTest ? copy.local.link : copy.privacy}</a>}
           <Button onClick={() => void accept()} disabled={pendingConsent || restoring || (!preview && !privacyUrls[locale])} className="w-full">{pendingConsent || restoring ? copy.busy : preview ? copy.preview.start : copy.accept}</Button>
           {!preview && !privacyUrls[locale] && <p role="status" className="text-small">{copy.errors.UNAVAILABLE}</p>}
           <button type="button" onClick={onClose} className="min-h-11 w-full text-small underline underline-offset-4">{copy.decline}</button>

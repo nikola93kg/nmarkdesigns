@@ -78,6 +78,7 @@ test("streaming renders safe text, verified cards and retries the same client me
   expect(ids).toHaveLength(2); expect(ids[0]).toBe(ids[1]);
 });
 test("unconfigured server fails closed without database or provider access", async ({ request }) => {
+  expect((await request.get("/api/chat/local-notice/?locale=sr")).status()).toBe(404);
   for (const endpoint of ["/api/chat/", "/api/chat/session/"]) {
     const response = await request.post(endpoint, { headers: { Origin: "https://evil.example" }, data: { message: "hello" } });
     expect(response.status()).toBe(503);

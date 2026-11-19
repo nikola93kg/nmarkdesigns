@@ -27,7 +27,18 @@ export function chatConfig() {
     maxOutputTokens: positiveInt(process.env.CHAT_MAX_OUTPUT_TOKENS, 600, 1200),
   };
 }
+/** Explicit development-only opt-in; never substitutes a production privacy policy. */
+export function localTestOrigin(): string | null {
+  if (process.env.NODE_ENV !== "development" || process.env.CHAT_LOCAL_TEST !== "true") return null;
+  try {
+    const url = new URL(process.env.CHAT_ORIGIN ?? "");
+    if (url.protocol === "http:" && ["localhost", "127.0.0.1", "[::1]"].includes(url.hostname) && !url.username && !url.password && url.pathname === "/" && !url.search && !url.hash) return url.origin;
+  } catch { /* invalid local origin fails closed */ }
+  return null;
+}
 export function privacyUrl(locale: "sr" | "en"): string | null {
+  const localOrigin = localTestOrigin();
+  if (localOrigin) return `${localOrigin}/api/chat/local-notice/?locale=${locale}`;
   const value = process.env[`CHAT_PRIVACY_URL_${locale.toUpperCase()}`];
   try {
     const url = new URL(value ?? "");

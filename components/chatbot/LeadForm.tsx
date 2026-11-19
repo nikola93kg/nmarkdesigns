@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
+import { chatCopy } from "@/content/chatbot/copy";
 import { leadCopy } from "@/content/chatbot/lead-copy";
 import { CONTACT_CONSENT_VERSION, leadInput, serviceIds, type LeadService, type LeadReceipt } from "@/lib/chatbot/lead-contracts";
 import type { Locale } from "@/lib/i18n";
@@ -79,7 +80,7 @@ export function LeadForm({ locale, preview, privacyUrl, service, description, on
           <div className="hidden" aria-hidden="true"><label htmlFor="lead-extra">Extra</label><input id="lead-extra" name="extra" tabIndex={-1} autoComplete="off" value={values.honeypot} onChange={(event) => update("honeypot", event.target.value)} /></div>
           <label className="flex min-h-11 items-start gap-3 text-small"><input type="checkbox" checked={values.privacyConsent} onChange={(event) => update("privacyConsent", event.target.checked)} aria-invalid={Boolean(errors.privacyConsent)} aria-describedby={errors.privacyConsent ? "lead-consent-error" : undefined} className="mt-1 size-4 shrink-0 accent-brand" /><span>{copy.consent}</span></label>
           {errors.privacyConsent && <p id="lead-consent-error" className="text-small text-brand">{errors.privacyConsent}</p>}
-          {!preview && privacyUrl && <a href={privacyUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-small text-brand underline underline-offset-4">{copy.policy}</a>}
+          {!preview && privacyUrl && <a href={privacyUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-small text-brand underline underline-offset-4">{privacyUrl.includes("/api/chat/local-notice/") ? chatCopy[locale].local.link : copy.policy}</a>}
         </>}
       </fieldset>
       {failure && <p role="alert" className="text-small text-brand">{copy.errors[failure] ?? copy.errors.UNAVAILABLE}</p>}

@@ -111,3 +111,7 @@ Auth.js email-link sign-in, MySQL sessions, private SR/EN dashboard/lists/transc
 ## Iteration 4 — data lifecycle, permanent metrics and cost limits
 
 Owner-approved 90/365-day retention, seven-day technical grace cleanup, idempotent historical backfill, permanent daily aggregates and atomic daily/monthly USD reservations are implemented. The admin overview now includes usage against the approved USD 0.50/day and USD 4/month limits. See [operations.md](operations.md) for event semantics, pricing, protected cron operation, local migration/backfill and validation. This supersedes the earlier pending-retention/metrics/budget entries. Hostinger scheduling, staging/production database work and launch/privacy gates remain unperformed.
+
+## Local real-provider review
+
+The owner requested switching this workspace from demo to real localhost chat. The private configuration, development-only processing notice and browser/provider/DB verification are documented in [local-testing.md](local-testing.md). Production policy requirements are preserved; no hosting deployment is implied.

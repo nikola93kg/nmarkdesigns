@@ -12,8 +12,8 @@ export default defineConfig({
       : process.env.CHAT_DEMO_TEST === "true"
       ? "CHAT_ENABLED= CHAT_PREVIEW= npm run dev -- --webpack --hostname 127.0.0.1 --port 3110"
       : process.env.CHAT_UI_PRODUCTION_TEST === "true"
-      ? "CHAT_ENABLED=true CHAT_PREVIEW=false CHAT_ORIGIN=http://127.0.0.1:3110 CHAT_PRIVACY_URL_SR=https://nmarkdesigns.com/sr/ CHAT_PRIVACY_URL_EN=https://nmarkdesigns.com/en/ npm run start -- --hostname 127.0.0.1 --port 3110"
-      : "CHAT_ENABLED=true CHAT_PREVIEW=false CHAT_ORIGIN=http://127.0.0.1:3110 CHAT_PRIVACY_URL_SR=https://nmarkdesigns.com/sr/ CHAT_PRIVACY_URL_EN=https://nmarkdesigns.com/en/ npm run dev -- --webpack --hostname 127.0.0.1 --port 3110",
+      ? "CHAT_ENABLED=true CHAT_PREVIEW=false OPENAI_API_KEY= CHAT_IDENTITY_SECRET= CHAT_ORIGIN=http://127.0.0.1:3110 CHAT_PRIVACY_URL_SR=https://nmarkdesigns.com/sr/ CHAT_PRIVACY_URL_EN=https://nmarkdesigns.com/en/ npm run start -- --hostname 127.0.0.1 --port 3110"
+      : "CHAT_ENABLED=true CHAT_PREVIEW=false OPENAI_API_KEY= CHAT_IDENTITY_SECRET= CHAT_ORIGIN=http://127.0.0.1:3110 CHAT_PRIVACY_URL_SR=https://nmarkdesigns.com/sr/ CHAT_PRIVACY_URL_EN=https://nmarkdesigns.com/en/ npm run dev -- --webpack --hostname 127.0.0.1 --port 3110",
     url: "http://127.0.0.1:3110/sr/", reuseExistingServer: false, timeout: 120000,
   },
 });
