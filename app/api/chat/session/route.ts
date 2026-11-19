@@ -1,7 +1,8 @@
 import { randomBytes, randomUUID } from "node:crypto";
 import { cookies } from "next/headers";
 import { chatDb } from "@/lib/chatbot/db";
-import { chatSessions } from "@/lib/chatbot/schema";
+import { eq } from "drizzle-orm";
+import { chatLeads, chatSessions } from "@/lib/chatbot/schema";
 import { sessionInput } from "@/lib/chatbot/contracts";
 import { apiError, assertOrigin, hashToken, limiterIdentity, ownedSession, parseBody, SESSION_COOKIE } from "@/lib/chatbot/security";
 import { consumeLimit, history } from "@/lib/chatbot/store";
@@ -11,8 +12,8 @@ export async function GET() {
   const requestId = randomUUID();
   try {
     const session = await ownedSession();
-    const messages = await history(session.id);
-    return Response.json({ sessionId: session.id, messages, requestId }, { headers: { "Cache-Control": "private, no-store", "X-Robots-Tag": "noindex, nofollow" } });
+    const [messages, leads] = await Promise.all([history(session.id), chatDb().select({ id: chatLeads.id }).from(chatLeads).where(eq(chatLeads.sessionId, session.id)).limit(1)]);
+    return Response.json({ sessionId: session.id, leadDeclined: Boolean(session.leadDeclinedAt), leadReceived: leads.length > 0, messages, requestId }, { headers: { "Cache-Control": "private, no-store", "X-Robots-Tag": "noindex, nofollow" } });
   } catch (error) { return apiError(error, requestId); }
 }
 export async function POST(request: Request) {

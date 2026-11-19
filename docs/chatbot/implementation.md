@@ -99,3 +99,7 @@ Development now defaults to a visible widget and local demo. `CHAT_ENABLED=false
 Demo QA: `CHAT_DEMO_TEST=true npm run test:chatbot -- demo.spec.ts`. The normal chatbot suite explicitly disables demo mode and continues testing the actual client/server contract with mocked responses.
 
 Branch-review validation: ESLint, TypeScript and production build passed; the four SR/EN mobile/desktop demo tests (including no-backend-request assertions and axe checks) passed, and all 21 existing chatbot contract/widget tests passed again with demo disabled. The earlier MySQL and pricing/customer-journey results above still describe the unchanged backend/pricing implementation.
+
+## Iteration 2 — inquiry and notifications
+
+The lead form, qualification/suppression, cookie-owned API, transactional lead/outbox migration and cron email worker are implemented. See [lead-delivery.md](lead-delivery.md) for operation, SMTP ambiguity handling, the real OpenAI smoke check, validation and remaining release gates. This supersedes the earlier list entry describing the lead form/outbox as wholly unimplemented. Admin, retention, analytics and monetary budget accounting are still pending.

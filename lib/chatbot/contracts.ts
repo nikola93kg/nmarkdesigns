@@ -19,6 +19,7 @@ export type ChatEvent =
   | { type: "start"; requestId: string }
   | { type: "delta"; text: string }
   | { type: "links"; links: ChatLink[] }
+  | { type: "lead_offer" }
   | { type: "done"; messageId: string; status: FinishStatus }
   | { type: "error"; code: string; requestId: string };
 export type ChatMessage = {

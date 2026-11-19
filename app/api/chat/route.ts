@@ -4,6 +4,7 @@ import { apiError, assertOrigin, limiterIdentity, ownedSession, parseBody } from
 import { finishTurn, modelHistory, reserveTurn } from "@/lib/chatbot/store";
 import { responseStream } from "@/lib/chatbot/provider";
 import { chatConfig } from "@/lib/chatbot/config";
+import { shouldOfferLead } from "@/lib/chatbot/qualification";
 import { recommendedLinks } from "@/content/chatbot/knowledge";
 
 export const runtime = "nodejs";
@@ -57,7 +58,10 @@ export async function POST(request: Request) {
         try {
           // Do not report completed until the transcript has been durably persisted.
           await finishTurn(session.id, turn.assistantId, turn.generationId, content, status, links);
-          if (status === "completed") send({ type: "links", links });
+          if (status === "completed") {
+            send({ type: "links", links });
+            if (shouldOfferLead(input.message, Boolean(session.leadDeclinedAt))) send({ type: "lead_offer" });
+          }
           if (status === "error") send({ type: "error", code: "STREAM_ERROR", requestId });
           send({ type: "done", messageId: turn.assistantId, status });
         } catch { send({ type: "error", code: "UNAVAILABLE", requestId }); }

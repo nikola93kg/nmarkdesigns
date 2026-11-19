@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowUp, RotateCcw, Square, X, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { LeadForm } from "./LeadForm";
+import { leadCopy } from "@/content/chatbot/lead-copy";
+import { shouldOfferLead, suggestedService } from "@/lib/chatbot/qualification";
 import { Button } from "@/components/ui/Button";
 import { chatCopy } from "@/content/chatbot/copy";
 import { CHAT_CONSENT_VERSION, MESSAGE_LIMIT, readEvents, type ChatEvent, type ChatMessage, type ChatLink } from "@/lib/chatbot/contracts";
@@ -17,6 +20,12 @@ const control = "inline-flex min-h-11 min-w-11 items-center justify-center round
 export default function ChatPanel({ locale, open, onClose, privacyUrls, previewLinks }: Props) {
   const copy = chatCopy[locale];
   const preview = previewLinks !== undefined;
+  const lead = leadCopy[locale];
+  const [offerLead, setOfferLead] = useState(false);
+  const [leadDeclined, setLeadDeclined] = useState(false);
+  const [showLead, setShowLead] = useState(false);
+  const [leadReceived, setLeadReceived] = useState(false);
+  const [leadSubmitting, setLeadSubmitting] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
   const transcript = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLTextAreaElement>(null);
@@ -47,13 +56,14 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
   }, [open]);
 
   useEffect(() => {
-    if (preview) return;
+    if (preview) return () => controller.current?.abort();
     const abort = new AbortController();
     fetch("/api/chat/session/", { cache: "no-store", signal: abort.signal })
       .then(async (response) => {
         if (!response.ok) return;
-        const data = await response.json() as { messages: ChatMessage[] };
+        const data = await response.json() as { messages: ChatMessage[]; leadDeclined: boolean; leadReceived: boolean };
         setMessages(data.messages.map((m) => ({ ...m, status: m.status === "pending" ? "error" : m.status })));
+        setLeadDeclined(Boolean(data.leadDeclined)); setLeadReceived(Boolean(data.leadReceived));
         setConsented(true); setPhase("idle");
       }).catch(() => undefined).finally(() => { if (!abort.signal.aborted) setRestoring(false); });
     return () => { abort.abort(); controller.current?.abort(); };
@@ -80,6 +90,7 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
 
   function restart() {
     if (busyRef.current) return;
+    setShowLead(false); setOfferLead(false); setLeadDeclined(false); setLeadReceived(false);
     setMessages([]); setConsented(false); setPhase("welcome"); setError(null); setDraft(""); setLastAttempt(null);
     // A new cookie/session is created only after the visitor explicitly accepts again.
   }
@@ -116,6 +127,8 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
           setMessages((previous) => previous.map((m) => m.id === assistantId ? { ...m, content: m.content + event.text } : m));
         } else if (event.type === "links") {
           setMessages((previous) => previous.map((m) => m.id === assistantId ? { ...m, links: event.links } : m));
+        } else if (event.type === "lead_offer") {
+          setOfferLead(true);
         } else if (event.type === "error") throw new Error(event.code);
         else if (event.type === "done") {
           finished = true;
@@ -124,6 +137,7 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
         }
       }
       if (!finished) throw new Error("STREAM_ERROR");
+      if (preview && shouldOfferLead(attempt.message, leadDeclined)) setOfferLead(true);
       setPhase("idle");
     } catch (err) {
       const cancelled = abort.signal.aborted;
@@ -133,6 +147,11 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
     } finally { busyRef.current = false; controller.current = null; }
   }
 
+  function declineLead() {
+    setOfferLead(false); setLeadDeclined(true);
+    if (!preview) void fetch("/api/chat/lead/preference/", { method: "POST", keepalive: true, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ declined: true }) }).catch(() => undefined);
+  }
+  function openLead() { setShowLead(true); follow.current = false; requestAnimationFrame(() => { if (transcript.current) transcript.current.scrollTop = 0; }); }
   function submit(event: FormEvent) { event.preventDefault(); void send({ message: draft.trim(), clientMessageId: crypto.randomUUID() }); }
   return (
     <dialog ref={dialog} data-chat-panel data-chat-preview={preview || undefined} aria-labelledby="chat-title" onCancel={(event) => { event.preventDefault(); onClose(); }}
@@ -147,10 +166,11 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
       className="chat-panel fixed m-0 flex-col overflow-hidden rounded-card bg-surface p-0 text-ink shadow-xl backdrop:bg-brand/30">
       <header className="flex shrink-0 items-center justify-between gap-2 bg-brand px-4 py-3 text-on-brand">
         <div><h2 id="chat-title" className="text-body font-semibold" tabIndex={-1} autoFocus>NMark Assistant</h2><p className="text-small text-on-brand-muted">{preview ? copy.preview.label : copy.ai}</p></div>
-        <div className="flex"><button type="button" aria-label={copy.restart} title={copy.restart} disabled={busy || pendingConsent || restoring} onClick={restart} className={control}><RotateCcw className="size-4" aria-hidden="true" /></button>
+        <div className="flex"><button type="button" aria-label={copy.restart} title={copy.restart} disabled={busy || pendingConsent || restoring || leadSubmitting} onClick={restart} className={control}><RotateCcw className="size-4" aria-hidden="true" /></button>
           <button type="button" aria-label={copy.close} onClick={onClose} className={control}><X className="size-5" aria-hidden="true" /></button></div>
       </header>
       <div ref={transcript} className="min-h-0 flex-1 space-y-5 overflow-y-auto overscroll-contain p-5" onScroll={(event) => { const el = event.currentTarget; follow.current = el.scrollHeight - el.scrollTop - el.clientHeight < 72; }}>
+        {showLead ? <LeadForm locale={locale} preview={preview} privacyUrl={privacyUrls[locale]} service={suggestedService(lastAttempt?.message ?? "")} onBusyChange={setLeadSubmitting} description={messages.filter((message) => message.role === "user").slice(-3).map((message) => message.content).join("\n")} onCancel={() => { setShowLead(false); if (!leadReceived) declineLead(); }} onReceived={() => { setLeadReceived(true); setOfferLead(false); }} /> : <>
         {preview && consented && <p className="text-small text-muted">{copy.preview.notice}</p>}
         <p className="text-small leading-relaxed">{copy.welcome}</p>
         {!consented && <div className="space-y-4 border-t border-border pt-4">
@@ -176,10 +196,12 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
           {error === "SESSION_EXPIRED" ? <button type="button" className="min-h-11 font-semibold underline" onClick={restart}>{copy.restart}</button>
             : lastAttempt && <button type="button" disabled={busy} className="min-h-11 font-semibold underline" onClick={() => { if (lastAttempt) void send(lastAttempt); }}>{copy.retry}</button>}
         </div>}
+        {offerLead && !leadReceived && !busy && <aside className="space-y-2 border-t border-border pt-4" aria-label={lead.open}><p className="text-small">{lead.offer}</p><Button onClick={openLead}>{lead.open}</Button><button type="button" onClick={declineLead} className="ml-3 min-h-11 text-small text-brand underline">{lead.decline}</button></aside>}
+        </>}
       </div>
       <footer className="shrink-0 border-t border-border bg-surface px-4 pt-3 pb-4">
         <p role="status" className="sr-only">{busy ? copy.busy : error ? copy.errors[error] ?? copy.cancelled : messages.at(-1)?.role === "assistant" && messages.at(-1)?.status === "completed" ? messages.at(-1)?.content : ""}</p>
-        {consented && <form onSubmit={submit}>
+        {consented && !showLead && <form onSubmit={submit}>
           <label htmlFor="chat-message" className="sr-only">{copy.input}</label>
           <div className="flex items-end gap-2 rounded-control border border-border p-2 focus-within:border-focus">
             <textarea ref={input} id="chat-message" value={draft} maxLength={MESSAGE_LIMIT} rows={2} disabled={busy} placeholder={copy.input} className="min-w-0 flex-1 resize-none bg-transparent p-1 text-small focus:outline-none disabled:opacity-50"
@@ -189,6 +211,8 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
           </div>
           <p className="mt-1 text-right text-xs text-muted">{draft.length}/{MESSAGE_LIMIT}</p>
         </form>}
+        {consented && !showLead && !busy && !leadReceived && <button type="button" onClick={openLead} className="mr-3 min-h-11 text-small font-semibold text-brand underline underline-offset-4">{lead.open}</button>}
+        {leadReceived && !showLead && <p className="text-small text-muted">{preview ? lead.previewSuccess : lead.received}</p>}
         <Link href={localizedPath("contact", locale)} onClick={onClose} className="inline-flex min-h-11 items-center text-small font-medium text-brand underline underline-offset-4">{copy.contact}<ArrowUpRight className="ml-1 size-4" aria-hidden="true" /></Link>
       </footer>
     </dialog>
