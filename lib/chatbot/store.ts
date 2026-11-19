@@ -1,7 +1,8 @@
 import "server-only";
+import { CHAT_POLICY_VERSION } from "./topic-policy";
 import { recordMetric, syncSessionMetrics } from "./analytics";
 import { randomUUID } from "node:crypto";
-import { and, count, desc, eq, sql } from "drizzle-orm";
+import { and, count, desc, eq, or, sql } from "drizzle-orm";
 import { chatDb } from "./db";
 import { chatCounters, chatMessages, chatSessions } from "./schema";
 import { hashToken, ChatError } from "./security";
@@ -36,12 +37,10 @@ export async function reserveTurn(sessionId: string, clientMessageId: string, me
     const user = previous.find((m) => m.role === "user");
     const assistant = previous.find((m) => m.role === "assistant");
     if (user && user.content !== message) throw new ChatError("INVALID_INPUT", 409);
-    if (assistant?.status === "completed") return { replay: assistant, assistantId: assistant.id, generationId: "replay" };
+    if (assistant?.status === "completed" && assistant.policyVersion === CHAT_POLICY_VERSION) return { replay: assistant, assistantId: assistant.id, generationId: "replay" };
     if (session.activeUntil && session.activeUntil > new Date()) throw new ChatError("BUSY", 409);
     await consumeLimit(tx, ipHash, "chat", 20, 900);
     await consumeLimit(tx, sessionId, "chat", 100, 86400);
-    await consumeLimit(tx, "global", "day", config.daily, 86400);
-    await consumeLimit(tx, `global:${new Date().toISOString().slice(0, 7)}`, "month", config.monthly, 32 * 86400);
     const now = new Date();
     const assistantId = assistant?.id ?? randomUUID();
     const generationId = randomUUID();
@@ -65,11 +64,11 @@ export async function finishTurn(sessionId: string, id: string, generationId: st
     const [session] = await tx.select().from(chatSessions).where(eq(chatSessions.id, sessionId)).for("update");
     if (!session || session.activeGenerationId !== generationId) throw new ChatError("STREAM_ERROR");
     if (status === "completed" || status === "error") await recordMetric(tx, sessionId, session.locale, status === "completed" ? "response_completed" : "response_error", id);
-    await tx.update(chatMessages).set({ content, status, links, completedAt: new Date() }).where(eq(chatMessages.id, id));
+    await tx.update(chatMessages).set({ content, status, links, policyVersion: CHAT_POLICY_VERSION, completedAt: new Date() }).where(eq(chatMessages.id, id));
     await tx.update(chatSessions).set({ activeGenerationId: null, activeUntil: null, lastActivityAt: new Date() }).where(eq(chatSessions.id, sessionId));
   });
 }
 export async function modelHistory(sessionId: string, assistantId: string) {
-  const rows = await chatDb().select().from(chatMessages).where(and(eq(chatMessages.sessionId, sessionId), eq(chatMessages.status, "completed"))).orderBy(desc(chatMessages.createdAt)).limit(12);
+  const rows = await chatDb().select().from(chatMessages).where(and(eq(chatMessages.sessionId, sessionId), eq(chatMessages.status, "completed"), or(eq(chatMessages.role,"user"),eq(chatMessages.policyVersion,CHAT_POLICY_VERSION)))).orderBy(desc(chatMessages.createdAt)).limit(12);
   return rows.filter((r) => r.id !== assistantId).reverse().map((r) => ({ role: r.role, content: r.content.slice(0, 2000) }));
 }

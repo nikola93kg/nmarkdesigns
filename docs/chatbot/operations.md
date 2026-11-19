@@ -1,5 +1,7 @@
 # Data lifecycle, durable metrics and API budget — iteration 4
 
+Update: [topic-policy.md](topic-policy.md) adds separately metered scope checks. Global paid-call counts now live in budget buckets and include both classification and answers; sentence verification also limits which partial text is persisted.
+
 2026-11-19, `feature/chatbot`. The owner approved 90/365-day retention, seven-day technical grace periods, and **USD 0.50 per UTC day / USD 4 per UTC calendar month**. The screenshot's USD 4.98 credit is a provider account balance, not the application's budget; the app does not query or replenish it. No hosting, production database or scheduled Hostinger job was changed.
 
 ## Local review

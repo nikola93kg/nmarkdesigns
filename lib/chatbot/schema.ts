@@ -21,6 +21,7 @@ export const chatMessages = mysqlTable("chat_messages", {
   sessionId: varchar("session_id", { length: 36 }).notNull().references(() => chatSessions.id, { onDelete: "cascade" }),
   role: varchar("role", { length: 16 }).$type<"user" | "assistant">().notNull(),
   content: text("content").notNull(),
+  policyVersion: varchar("policy_version", { length: 32 }),
   status: varchar("status", { length: 16 }).$type<"pending" | "completed" | "cancelled" | "error">().notNull(),
   clientMessageId: varchar("client_message_id", { length: 36 }).notNull(),
   links: json("links").$type<ChatLink[]>(),
@@ -120,6 +121,7 @@ export const chatMetricReceipts = mysqlTable("chat_metric_receipts", {
 });
 export const chatBudgetBuckets = mysqlTable("chat_budget_buckets", {
   key: varchar("bucket_key", { length: 16 }).primaryKey(),
+  calls: int("calls").notNull().default(0),
   committedMicros: bigint("committed_micros", { mode: "number" }).notNull().default(0),
   reservedMicros: bigint("reserved_micros", { mode: "number" }).notNull().default(0),
 });

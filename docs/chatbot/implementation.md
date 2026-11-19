@@ -115,3 +115,7 @@ Owner-approved 90/365-day retention, seven-day technical grace cleanup, idempote
 ## Local real-provider review
 
 The owner requested switching this workspace from demo to real localhost chat. The private configuration, development-only processing notice and browser/provider/DB verification are documented in [local-testing.md](local-testing.md). Production policy requirements are preserved; no hosting deployment is implied.
+
+## Topic policy and knowledge relevance
+
+Live review prompted a stricter topic gate, controlled project-facet retrieval, verified numeric price sentences, policy-versioned model history/replay and reset of old proactive inquiry offers. Both classification and answer calls are covered by atomic monetary and paid-call limits. See [topic-policy.md](topic-policy.md) for behavior, knowledge maintenance, validation and local-only migrations.

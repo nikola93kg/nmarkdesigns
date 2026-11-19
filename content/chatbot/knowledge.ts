@@ -11,7 +11,7 @@ export interface KnowledgeEntry extends ChatLink {
   lastReviewedAt: string;
   keywords: readonly string[];
 }
-export const KNOWLEDGE_VERSION = "2026-11-19.1";
+export const KNOWLEDGE_VERSION = "2026-11-19.2";
 const reviewed = "2026-11-19";
 const names = {
   sr: { pricing: "Početne cene", services: "Usluge", contact: "Kontakt sa Nikolom", portfolio: "Portfolio" },
@@ -34,6 +34,7 @@ export function knowledgeRegistry(locale: Locale): KnowledgeEntry[] {
         ...websitePackages.map((p) => `${p.id}: ${formatWebsiteStartingPrice(p.id, locale)} (starting price, not a fixed quote)`),
         ...additionalServices.map((s) => `${s.id}: from ${s.startingPrice} EUR${s.id === "ai-chatbot" ? "; API and infrastructure billed separately" : ""}`),
         ...carePlans.map((p) => `${p.id}: ${p.startingPrice === undefined ? "by quotation" : `from ${p.startingPrice} EUR / ${p.period}`}`),
+        "The generic redesign starting price is not an existing-shop redesign quote. New ecommerce is a different service. Existing-shop redesign has no separate approved starting tier. Never calculate a custom quote from pages/features or combine these prices. Delivery deadlines require individual scope review.",
         "Custom web applications: by quotation. No guaranteed deadlines, discounts, rankings or results.",
       ] },
     { ...base, id: "services", title: copy.services, category: "services", url: `${site.url}${localizedPath("services", locale)}`,
@@ -51,31 +52,56 @@ export function knowledgeRegistry(locale: Locale): KnowledgeEntry[] {
       ...base, id: `project:${p.slug}`, title: p.title, category: "project",
       url: `${site.url}${localizedProjectPath(p.slug, locale)}`,
       description: p.shortDescription?.[locale] ?? p.title,
-      keywords: [p.title, p.slug, p.category?.[locale] ?? "", p.shortDescription?.[locale] ?? ""],
+      keywords: [p.title, p.slug, ...(projectTopics[p.slug] ?? [])],
       facts: [p.shortDescription?.[locale] ?? p.title, ...(p.technologies ?? []),
         ...(p.status === "inactive" || p.status === "archived" || p.slug === "tripolisweets" ? ["Historical portfolio project; do not claim its external website is currently available."] : [])],
     })),
   ];
 }
 const normalize = (text: string) => text.toLowerCase().normalize("NFD").replace(/\p{M}/gu, "").replace(/đ/g, "dj");
-
-export function selectKnowledge(message: string, locale: Locale): KnowledgeEntry[] {
-  const tokens = normalize(message).split(/[^a-z0-9]+/).filter((s) => s.length > 2);
-  return knowledgeRegistry(locale).map((entry) => {
-    const haystack = normalize(entry.keywords.join(" "));
-    let score = tokens.reduce((sum, word) => sum + (haystack.includes(word) ? 1 : 0), 0);
-    if (entry.id === "project:ilic-enterijer" && /stolar|namestaj|furniture|carpent|kitchen/.test(normalize(message))) score += 10;
-    if (entry.id === "project:anabelabebioprema" && /prodavnic|ecommerce|e-commerce|online store/.test(normalize(message))) score += 5;
-    return { entry, score };
-  }).sort((a, b) => b.score - a.score).filter(({ score, entry }) => score > 0 || ["services", "pricing", "contact"].includes(entry.id)).slice(0, 7).map(({ entry }) => entry);
+const stopWords=new Set("kako what which kako koji koja koje kazite kazi please molim treba zelim hocu planiram existing postojeci sajta site website websites sajt sajtova radim imam ima neki neka nesto about with this that your have from neki sada mogu moze da li sam for the and are you can have how ima uglavnom where how why tell give make prave pravi mene meni moj nas online".split(" "));
+const words=(text:string)=>normalize(text).split(/[^a-z0-9]+/).filter(word=>word.length>=3&&!stopWords.has(word));
+// Explicit project facets, not accidental substrings in whole descriptions.
+const projectTopics:Record<string,readonly string[]>={
+  "ilic-enterijer":["stolar","stolare","stolarija","namestaj","furniture","carpentry","carpenter","kitchen"],
+  "anabelabebioprema":["prodavnica","prodavnice","prodavnicu","ecommerce","e-commerce","shop","store","bebi","baby"],
+  "tripolisweets":["poslasticarnica","poslasticarnicu","sweets","baklava","confectionery"],
+  "powder-brows-vienna":["kozmetika","kozmeticki","beauty","pmu","brows"],
+  "coolfridgeguys":["appliances","appliance","fridge","refrigerator","bela tehnika"],
+  "buy-pallet-jacks":["pallet","warehouse","skladiste","paletni"],
+  "casovi-francuskog":["francuski","francuskog","french","tutoring","casovi"],
+  "os-dule-karaklajic":["skola","school","osnovna"],
+};
+function ranked(message:string,locale:Locale){
+  const tokens=words(message),normalized=normalize(message);
+  return knowledgeRegistry(locale).map(entry=>{
+    const terms=new Set(entry.keywords.flatMap(words));
+    const phrase=(value:string)=>normalize(value).replace(/[^a-z0-9]+/g," ").trim();
+    const padded=` ${phrase(message)} `;
+    let score=entry.category==="project"
+      ? entry.keywords.reduce((sum,term)=>sum+(phrase(term)&&padded.includes(` ${phrase(term)} `)?1:0),0)
+      : tokens.reduce((sum,word)=>sum+(terms.has(word)?1:0),0);
+    if(entry.category==="project"&&normalized.includes(normalize(entry.title)))score+=10;
+    if(entry.id==="project:ilic-enterijer"&&/\b(?:stolar\w*|namestaj\w*|furniture|carpent\w*|kitchen)\b/.test(normalized))score+=10;
+    if(entry.id==="project:anabelabebioprema"&&/\b(?:prodavnic\w*|ecommerce|e-commerce|shop|store)\b/.test(normalized))score+=5;
+    return {entry,score};
+  }).sort((a,b)=>b.score-a.score);
 }
-
-/** Only this server-derived selection can become clickable UI; model prose never becomes a URL. */
+export function selectKnowledge(message: string, locale: Locale): KnowledgeEntry[] {
+  return ranked(message,locale).filter(({score,entry})=>score>0||["services","pricing","contact"].includes(entry.id)).slice(0,7).map(item=>item.entry);
+}
+/** Called only after scope approval. Links still need positive, explicit topic evidence. */
 export function recommendedLinks(message: string, locale: Locale): ChatLink[] {
-  const selected = selectKnowledge(message, locale);
-  const projects = selected.filter((e) => e.category === "project").slice(0, 2);
-  const topic = selected.filter((e) => e.category !== "project" && e.keywords.some((k) => normalize(message).includes(normalize(k)))).slice(0, 2);
-  return [...topic, ...projects].map(({ id, title, description, url, category }) => ({ id, title, description, url, category }));
+  const selected=ranked(message,locale).filter(item=>item.score>0);
+  const projectLinks=selected.filter(item=>item.entry.category==="project").slice(0,2);
+  const normalized=normalize(message);
+  const topicIds=new Set<string>();
+  if(/\b(?:cen\w*|kost\w*|price\w*|cost\w*|budget|budzet|eur)\b/.test(normalized))topicIds.add("pricing");
+  if(/\b(?:sajt\w*|website\w*|wordpress|seo|redizajn|redesign|prodavnic\w*|ecommerce|e-commerce|chatbot|maintenance|odrzavanj\w*)\b/.test(normalized))topicIds.add("services");
+  if(/\b(?:ponud\w*|kontakt\w*|quote|contact|rok|deadline|sarad\w*|availability|nikola)\b/.test(normalized))topicIds.add("contact");
+  if(/\b(?:portfolio|projekti|projects|radovi|examples)\b/.test(normalized))topicIds.add("portfolio");
+  const topics=knowledgeRegistry(locale).filter(entry=>topicIds.has(entry.id)).slice(0,2);
+  return [...topics,...projectLinks.map(item=>item.entry)].map(({id,title,description,url,category})=>({id,title,description,url,category}));
 }
 
 export function isKnowledgeUrl(url: string, locale: Locale): boolean {

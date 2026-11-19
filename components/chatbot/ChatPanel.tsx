@@ -105,6 +105,7 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
     if (busyRef.current || !consented || !attempt.message.trim()) return;
     busyRef.current = true;
     setLastAttempt(attempt);
+    setOfferLead(false);
     const abort = new AbortController(); controller.current = abort;
     const assistantId = `assistant:${attempt.clientMessageId}`;
     setError(null); setPhase("sending"); setDraft(""); follow.current = true;

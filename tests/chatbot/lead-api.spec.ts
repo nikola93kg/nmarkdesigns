@@ -40,6 +40,14 @@ test("real HTTP cookie ownership, explicit consent, durable receipt, replay and 
     const restored = await (await owner.get("/api/chat/session/")).json();
     expect(restored).toMatchObject({ leadReceived: true, leadDeclined: true });
     expect(JSON.stringify(restored)).not.toContain("http@example.test");
+    const [beforeStatic] = await db.execute<mysql.RowDataPacket[]>("SELECT COUNT(*) AS total FROM chat_usage");
+    for(const message of ["kazi mi kako se prave palacinke","da li sapunjas macora?"]){
+      const reply=await owner.post("/api/chat/",{data:{message,locale:"sr",clientMessageId:randomUUID()}});expect(reply.status()).toBe(200);
+      const events=(await reply.text()).split("\n").filter(line=>line.startsWith("data: ")).map(line=>JSON.parse(line.slice(6)) as {type:string;links?:unknown[];text?:string;status?:string});
+      expect(events.find(event=>event.type==="done")?.status).toBe("completed");expect(events.some(event=>event.type==="lead_offer")).toBe(false);
+      expect(events.find(event=>event.type==="links")?.links).toEqual([]);expect(events.filter(event=>event.type==="delta").map(event=>event.text).join("")).toContain("NMark Designs");
+    }
+    const [afterStatic] = await db.execute<mysql.RowDataPacket[]>("SELECT COUNT(*) AS total FROM chat_usage");expect(afterStatic[0].total).toBe(beforeStatic[0].total);
     const interaction = { event: "quick_action_click", eventId: randomUUID(), locale: "sr", analyticsConsent: true };
     expect((await stranger.post("/api/chat/events/",{data:interaction})).status()).toBe(401);
     expect((await owner.post("/api/chat/events/",{data:interaction,headers:{Origin:"https://evil.example"}})).status()).toBe(403);

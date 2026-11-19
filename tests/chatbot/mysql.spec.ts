@@ -15,7 +15,7 @@ test("MySQL migrations, concurrent generation, replay, retry, quotas and cascade
   });
   const { chatDb } = await import("@/lib/chatbot/db");
   const { chatSessions, chatMessages, chatCounters } = await import("@/lib/chatbot/schema");
-  const { reserveTurn, finishTurn, consumeLimit } = await import("@/lib/chatbot/store");
+  const { reserveTurn, finishTurn, consumeLimit, modelHistory } = await import("@/lib/chatbot/store");
   const { hashToken, assertOrigin, parseBody } = await import("@/lib/chatbot/security");
   const { messageInput } = await import("@/lib/chatbot/contracts");
   expect(() => assertOrigin(new Request("http://127.0.0.1:3110/api/chat/", { headers: { Origin: "https://evil.example" } }))).toThrow("FORBIDDEN");
@@ -43,6 +43,11 @@ test("MySQL migrations, concurrent generation, replay, retry, quotas and cascade
     const replay = await reserveTurn(sessionId, clientId, "Koliko košta poslovni sajt?", identity);
     expect(replay.replay?.content).toBe("Od 550 €.");
     expect((await db.select().from(chatMessages).where(eq(chatMessages.sessionId, sessionId)))).toHaveLength(2);
+    await db.update(chatMessages).set({ policyVersion: null, content: "Legacy unsupported quote: 800 EUR" }).where(eq(chatMessages.id,turn.assistantId));
+    expect(JSON.stringify(await modelHistory(sessionId,randomUUID()))).not.toContain("800 EUR");
+    const refreshed = await reserveTurn(sessionId,clientId,"Koliko košta poslovni sajt?",identity);
+    expect(refreshed.replay).toBeNull();expect(refreshed.assistantId).toBe(turn.assistantId);
+    await finishTurn(sessionId,refreshed.assistantId,refreshed.generationId,"Od 550 €.","completed",[]);
     await expect(reserveTurn(sessionId, clientId, "Different content", identity)).rejects.toMatchObject({ code: "INVALID_INPUT" });
     const retryId = randomUUID();
     const failed = await reserveTurn(sessionId, retryId, "Treba mi sajt", identity);

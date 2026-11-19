@@ -144,3 +144,33 @@ test("technical cleanup observes seven-day grace and commits stale usage without
     await db.delete(schema.adminUsers).where(eq(schema.adminUsers.id,userId));await db.delete(schema.adminVerificationTokens).where(eq(schema.adminVerificationTokens.identifier,userId));
   }
 });
+
+test("semantic scope check is structured, budgeted and fails closed on malformed output",async()=>{
+  const {createServer}=await import("node:http");const {classifyScope}=await import("@/lib/chatbot/provider");
+  let requests=0,malformed=false;const ids:string[]=[];
+  const server=createServer(async(req,res)=>{
+    let raw="";for await(const chunk of req)raw+=chunk;const body=JSON.parse(raw) as Record<string,unknown>;
+    res.setHeader("Content-Type","application/json");
+    if(req.url==="/v1/responses/input_tokens"){res.end(JSON.stringify({object:"response.input_tokens",input_tokens:100}));return}
+    requests++;expect(body.store).toBe(false);expect(body.stream).toBeUndefined();expect(body).toHaveProperty("text.format.type","json_schema");
+    const text=malformed?'{"decision":"anything"}':'{"decision":"off_topic"}';
+    res.end(JSON.stringify({object:"response",status:"completed",output:[{type:"message",role:"assistant",content:[{type:"output_text",text,annotations:[]}]}],usage:{input_tokens:100,output_tokens:5}}));
+  });
+  await new Promise<void>(resolve=>server.listen(0,"127.0.0.1",resolve));const address=server.address();if(!address||typeof address==="string")throw new Error("No fixture port");
+  process.env.OPENAI_BASE_URL=`http://127.0.0.1:${address.port}/v1`;
+  try{
+    expect(await classifyScope("cao brt",[],AbortSignal.timeout(5000),randomUUID())).toBe("greeting");expect(requests).toBe(0);
+    const first=randomUUID();ids.push(first);expect(await classifyScope("What is the capital of France?",[],AbortSignal.timeout(5000),first)).toBe("off_topic");
+    malformed=true;const second=randomUUID();ids.push(second);await expect(classifyScope("Invent arbitrary facts",[],AbortSignal.timeout(5000),second)).rejects.toThrow();
+    for(const id of ids){const [usage]=await db.select().from(schema.chatUsage).where(eq(schema.chatUsage.id,id));expect(usage).toMatchObject({status:"settled",inputTokens:100,outputTokens:5})}
+  }finally{delete process.env.OPENAI_BASE_URL;await new Promise<void>(resolve=>server.close(()=>resolve()))}
+});
+test("actual classifier/answer reservations share paid-call ceilings",async()=>{
+  const {reserveBudget,settleBudget}=await import("@/lib/chatbot/budget");const oldDay=process.env.CHAT_MAX_CALLS_DAY,oldMonth=process.env.CHAT_MAX_CALLS_MONTH;
+  try{
+    process.env.CHAT_MAX_CALLS_DAY="1";process.env.CHAT_MAX_CALLS_MONTH="1";const id=randomUUID(),at=new Date("2029-04-10T00:00:00Z");
+    await reserveBudget(id,10,10,at);await settleBudget(id,{input_tokens:10,output_tokens:5});
+    await expect(reserveBudget(randomUUID(),10,10,at)).rejects.toMatchObject({code:"RATE_LIMITED"});
+    await expect(reserveBudget(randomUUID(),10,10,new Date("2029-04-11T00:00:00Z"))).rejects.toMatchObject({code:"RATE_LIMITED"});
+  }finally{process.env.CHAT_MAX_CALLS_DAY=oldDay;process.env.CHAT_MAX_CALLS_MONTH=oldMonth}
+});

@@ -14,7 +14,9 @@ export function usdMicros(value: string | undefined): number {
 export function budgetConfig() {
   const model = process.env.OPENAI_MODEL;
   if (!model || model.length > 120 || process.env.CHAT_PRICE_MODEL !== model) throw new Error("BUDGET_UNAVAILABLE");
-  return { model, daily: usdMicros(process.env.CHAT_BUDGET_DAY_USD), monthly: usdMicros(process.env.CHAT_BUDGET_MONTH_USD),
+  const dailyCalls=Number(process.env.CHAT_MAX_CALLS_DAY),monthlyCalls=Number(process.env.CHAT_MAX_CALLS_MONTH);
+  if(!Number.isSafeInteger(dailyCalls)||dailyCalls<=0||!Number.isSafeInteger(monthlyCalls)||monthlyCalls<=0)throw new Error("BUDGET_UNAVAILABLE");
+  return { model, dailyCalls:Math.min(dailyCalls,10000),monthlyCalls:Math.min(monthlyCalls,100000), daily: usdMicros(process.env.CHAT_BUDGET_DAY_USD), monthly: usdMicros(process.env.CHAT_BUDGET_MONTH_USD),
     inputRate: usdMicros(process.env.CHAT_PRICE_INPUT_USD_PER_MILLION), outputRate: usdMicros(process.env.CHAT_PRICE_OUTPUT_USD_PER_MILLION) };
 }
 export function tokenCost(input: number, output: number, inputRate: number, outputRate: number) {
@@ -34,11 +36,11 @@ export async function reserveBudget(id: string, inputTokens: number, maxOutput: 
   return chatDb().transaction(async (tx) => {
     const [old] = await tx.select().from(chatUsage).where(eq(chatUsage.id, id));
     if (old) throw new ChatError("BUSY", 409);
-    for (const [key, limit] of [[dayKey, config.daily], [monthKey, config.monthly]] as const) {
+    for (const [key, limit, calls] of [[dayKey, config.daily,config.dailyCalls], [monthKey, config.monthly,config.monthlyCalls]] as const) {
       await tx.insert(chatBudgetBuckets).values({ key }).onDuplicateKeyUpdate({ set: { key } });
       const [bucket] = await tx.select().from(chatBudgetBuckets).where(eq(chatBudgetBuckets.key, key)).for("update");
-      if (bucket.committedMicros + bucket.reservedMicros + amount > limit) throw new ChatError("RATE_LIMITED", 429, 3600);
-      await tx.update(chatBudgetBuckets).set({ reservedMicros: sql`${chatBudgetBuckets.reservedMicros} + ${amount}` }).where(eq(chatBudgetBuckets.key, key));
+      if (bucket.calls >= calls || bucket.committedMicros + bucket.reservedMicros + amount > limit) throw new ChatError("RATE_LIMITED", 429, 3600);
+      await tx.update(chatBudgetBuckets).set({ calls: sql`${chatBudgetBuckets.calls} + 1`, reservedMicros: sql`${chatBudgetBuckets.reservedMicros} + ${amount}` }).where(eq(chatBudgetBuckets.key, key));
     }
     await tx.insert(chatUsage).values({ id, dayKey, monthKey, model: config.model, inputRate: config.inputRate, outputRate: config.outputRate, reservedMicros: amount, status: "reserved", createdAt: now });
     return amount;
