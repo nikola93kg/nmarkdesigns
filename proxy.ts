@@ -1,3 +1,4 @@
+import { privacyPublication } from "@/content/privacy";
 import { NextResponse, type NextRequest } from "next/server";
 import { publicPages } from "@/lib/public-pages";
 import { legacyRedirects } from "@/lib/legacy-redirects";
@@ -115,8 +116,9 @@ export function proxy(request: NextRequest) {
     return response;
   }
   const normalized = path.endsWith("/") ? path : `${path}/`;
+  const isPrivacyDraft = !privacyPublication.approved && publicPages.some(page => page.route === "privacy" && page.path === normalized);
   const protect = (response: NextResponse, force = false) => {
-    if (force || !isIndexableHost(request.headers.get("host"))) {
+    if (force || isPrivacyDraft || !isIndexableHost(request.headers.get("host"))) {
       response.headers.set("X-Robots-Tag", "noindex, nofollow");
     }
     return response;

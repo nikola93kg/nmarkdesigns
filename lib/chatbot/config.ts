@@ -1,5 +1,6 @@
 import "server-only";
 
+import { privacyPublication, privacySegments } from "../../content/privacy";
 import { budgetConfig } from "./budget";
 
 export function chatEnabled() {
@@ -42,6 +43,8 @@ export function privacyUrl(locale: "sr" | "en"): string | null {
   const value = process.env[`CHAT_PRIVACY_URL_${locale.toUpperCase()}`];
   try {
     const url = new URL(value ?? "");
+    const normalizedPath = `${url.pathname.replace(/\/$/, "")}/`;
+    if (!privacyPublication.approved && Object.entries(privacySegments).map(([language, segment]) => `/${language}/${segment}/`).includes(normalizedPath)) return null;
     return url.protocol === "https:" && url.hostname === "nmarkdesigns.com" && !url.username && !url.password && !url.search && !url.hash ? url.href : null;
   } catch { return null; }
 }

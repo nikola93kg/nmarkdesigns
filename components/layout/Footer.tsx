@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Camera, Mail, MessageCircle, Phone } from "lucide-react";
 import { ContactDirectLink } from "@/components/layout/ContactDirectLink";
 import { CookieSettingsButton } from "@/components/layout/CookieSettingsButton";
@@ -182,7 +183,10 @@ export function Footer({
               <span translate="no">nmarkdesigns</span>{" "}
               &copy; {copy.footer.copyright}
             </p>
-            <CookieSettingsButton locale={locale} />
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1">
+              <Link href={localizedPath("privacy", locale)} className="inline-flex min-h-11 items-center py-2 text-small text-on-brand-muted underline underline-offset-4 hover:text-on-brand focus-visible:outline-accent">{copy.navigation.privacy}</Link>
+              <CookieSettingsButton locale={locale} />
+            </div>
           </Container>
         </div>
       </footer>

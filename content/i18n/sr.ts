@@ -14,6 +14,7 @@ const aiStartingPrice = getAdditionalStartingPrice("ai-chatbot","sr");
 
 const sr = {
   navigation: {
+    privacy: "Politika privatnosti",
     home: "Početna", portfolio: "Portfolio", services: "Usluge",
     blog: "Blog", about: "O meni", contact: "Kontakt", pricing: "Cenovnik",
   },

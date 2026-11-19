@@ -1,6 +1,9 @@
 "use client";
 
 import { useActionState, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { localizedPath } from "@/lib/routes";
+import { consentCopy } from "@/content/consent";
 import Script from "next/script";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -290,6 +293,7 @@ export function ContactForm({ copy, action, permalink, deliveryAvailable }: Cont
           </div>
         )}
 
+        <Link href={localizedPath("privacy", locale)} className="inline-flex min-h-11 items-center py-2 text-small text-brand underline underline-offset-4 focus-visible:outline-accent">{consentCopy[locale].privacyLink}</Link>
         <Button type="submit" disabled={pending} className="mt-1 justify-self-center lg:justify-self-start">
           {pending ? copy.pending : copy.submit}
           <ArrowUpRight aria-hidden="true" size={18} className="shrink-0" />

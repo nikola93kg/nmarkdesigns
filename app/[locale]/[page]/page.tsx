@@ -1,3 +1,5 @@
+import { PrivacyPage } from "@/components/privacy/PrivacyPage";
+import { privacyCopy, privacyPublication } from "@/content/privacy";
 import { notFound } from "next/navigation";
 import { AboutApproach } from "@/components/about/AboutApproach";
 import { AboutIntro } from "@/components/about/AboutIntro";
@@ -30,6 +32,12 @@ async function resolvePage(params: PageProps<"/[locale]/[page]">["params"]) {
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/[page]">) {
   const { locale, route, copy } = await resolvePage(params);
+  if (route === "privacy") {
+    return {
+      ...createPageMetadata({ title: privacyCopy[locale].title, description: privacyCopy[locale].description, locale, route }),
+      ...(!privacyPublication.approved ? { robots: { index: false, follow: false } } : {}),
+    };
+  }
   return createPageMetadata({
     ...copy[route].metadata,
     locale,
@@ -44,6 +52,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/[page]">
 
 export default async function CorePage({ params }: PageProps<"/[locale]/[page]">) {
   const { locale, route, copy } = await resolvePage(params);
+  if (route === "privacy") return <PrivacyPage locale={locale} />;
   if (route === "services") {
     return (
       <>

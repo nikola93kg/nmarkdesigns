@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { localizedPath } from "@/lib/routes";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { X } from "lucide-react";
 import { consentCopy } from "@/content/consent";
@@ -205,6 +207,7 @@ export function CookieConsent({ locale }: CookieConsentProps) {
             </p>
           </div>
 
+          <Link href={localizedPath("privacy", locale)} onClick={() => setShowModal(false)} className="mt-4 inline-flex min-h-11 items-center py-2 text-small text-brand underline underline-offset-4 focus-visible:outline-accent">{copy.privacyLink}</Link>
           <div className="mt-6 flex flex-wrap items-center justify-end gap-3 border-t border-border pt-4">
             <button
               type="button"

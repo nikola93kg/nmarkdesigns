@@ -24,6 +24,7 @@ const pairs = [
   ...servicePairs,
 ];
 const paths = pairs.flat();
+const draftPaths = ["/sr/politika-privatnosti/", "/en/privacy-policy/"];
 
 for (const pair of pairs) {
   for (const [index, path] of pair.entries()) {
@@ -72,7 +73,7 @@ for (const pair of pairs) {
         expect(link.href).not.toMatch(/^https?:\/\/(www\.)?nmarkdesigns\.com/);
         if (link.href.startsWith("/") || link.href.startsWith("#")) {
           const target = new URL(link.href, `http://127.0.0.1:3100${path}`);
-          expect(paths, link.href).toContain(target.pathname);
+          expect([...paths,...draftPaths], link.href).toContain(target.pathname);
           if (target.hash && target.pathname === path) await expect(page.locator(`[id="${target.hash.slice(1)}"]`)).toHaveCount(1);
         }
         if (link.target === "_blank") expect(link.rel).toMatch(/noopener|noreferrer/);
@@ -144,7 +145,9 @@ for (const pair of pairs) {
 }
 
 test("complete sitemap, unique metadata and preview robots", async ({ page, request }) => {
-  expect(publicPages.map((entry) => entry.path).sort()).toEqual([...paths].sort());
+  // This checks every public page serially, rather than a single page interaction.
+  test.setTimeout(120_000);
+  expect(publicPages.map((entry) => entry.path).sort()).toEqual([...paths,...draftPaths].sort());
   const response = await request.get("/sitemap.xml");
   expect(response.status()).toBe(200);
   const source = await response.text();
