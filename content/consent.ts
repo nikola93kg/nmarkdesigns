@@ -5,6 +5,7 @@ export interface ConsentCopy {
   decline: string;
   preferences: string;
   footerLink: string;
+  privacyLink: string;
   modalTitle: string;
   essentialTitle: string;
   essentialDesc: string;
@@ -28,6 +29,7 @@ export const consentCopy: Record<"sr" | "en", ConsentCopy> = {
     decline: "Odbij",
     preferences: "Detalji",
     footerLink: "Podešavanja kolačića",
+    privacyLink: "Politika privatnosti",
     modalTitle: "Podešavanja kolačića i privatnosti",
     essentialTitle: "Neophodni kolačići",
     essentialDesc:
@@ -51,6 +53,7 @@ export const consentCopy: Record<"sr" | "en", ConsentCopy> = {
     decline: "Decline",
     preferences: "Details",
     footerLink: "Cookie settings",
+    privacyLink: "Privacy policy",
     modalTitle: "Cookie & Privacy Preferences",
     essentialTitle: "Essential cookies",
     essentialDesc:

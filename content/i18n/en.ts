@@ -17,6 +17,7 @@ const aiStartingPrice = formatAdditionalStartingPrice("ai-chatbot","en");
 
 const en = {
   navigation: {
+    privacy: "Privacy policy",
     home: "Home", portfolio: "Portfolio", services: "Services",
     blog: "Blog", about: "About me", contact: "Contact", pricing: "Pricing",
   },
