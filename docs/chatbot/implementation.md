@@ -15,6 +15,8 @@ The user's direct request authorizes local implementation; the brief's closing s
 
 ## User decision
 
+**Superseded by the owner on 2026-11-19:** SR uses EUR; EN targets the US market and uses approved USD prices. The full pricing consistency review is deferred. See [qa-followup.md](qa-followup.md). The paragraph below records the earlier decision only.
+
 Both locales use the same EUR starting prices, confirmed by the user during implementation. `content/pricing.ts` is the numeric source for website packages and chatbot knowledge. English pricing, service displays, metadata/JSON-LD, inquiry templates (derived), pricing article and `public/llms.txt` were aligned. Existing external-provider USD pricing in editorial articles was preserved.
 
 ## Implemented

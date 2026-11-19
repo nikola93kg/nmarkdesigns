@@ -521,6 +521,16 @@ Respect `prefers-reduced-motion`.
 
 # Internationalization
 
+### Market pricing — owner decision, 2026-11-19
+
+- Serbian (`sr`) targets the Serbian market and uses **EUR** prices.
+- English (`en`) targets the US market and uses **USD** prices.
+- USD amounts are market-specific approved prices, not automatic conversions of EUR amounts.
+- Provider API usage/budgets are a separate USD ledger in both admin locales; do not convert that ledger when aligning public service prices.
+- This supersedes the earlier conversation decision to use identical EUR prices on both locales.
+- Use the typed pricing registry and verified existing values. Never invent missing USD prices.
+- The owner has explicitly deferred the full English pricing-page consistency review to a later task. Restoring package USD prices does not mean all English pricing sections are synchronized.
+
 The website supports two languages:
 
 - Serbian (`sr`)

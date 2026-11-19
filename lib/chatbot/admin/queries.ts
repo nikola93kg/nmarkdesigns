@@ -29,7 +29,8 @@ export async function conversations(filters: ConversationFilters) {
     ...(after ? [or(lt(chatSessions.createdAt, after.createdAt), and(eq(chatSessions.createdAt, after.createdAt), lt(chatSessions.id, after.id)))!] : [])];
   const rows = await db.select({ id: chatSessions.id, locale: chatSessions.locale, createdAt: chatSessions.createdAt, lastActivityAt: chatSessions.lastActivityAt,
     expiresAt: chatSessions.expiresAt, activeUntil: chatSessions.activeUntil,
-    messageCount: sql<number>`(select count(*) from ${chatMessages} where ${chatMessages.sessionId} = ${chatSessions.id})`.mapWith(Number),
+    // Explicit identifiers preserve correlation when Drizzle strips column qualifiers in a single-table selection.
+    messageCount: sql<number>`(select count(*) from ${chatMessages} where ${chatMessages}.${sql.identifier(chatMessages.sessionId.name)} = ${chatSessions}.${sql.identifier(chatSessions.id.name)})`.mapWith(Number),
     hasLead: sql<boolean>`${leadExists}`.mapWith((value) => Number(value) > 0),
   }).from(chatSessions).where(and(...conditions)).orderBy(desc(chatSessions.createdAt), desc(chatSessions.id)).limit(21);
   return { items: rows.slice(0, 20), nextCursor: rows.length > 20 ? nextCursor(rows[19]) : null };

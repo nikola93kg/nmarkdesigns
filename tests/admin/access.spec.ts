@@ -57,7 +57,12 @@ test("Auth.js consumes email links once, rejects expired/non-owner tokens and pi
 test("owner metrics, private lists, audited edits, notification reconciliation and cascade deletion", async ({ playwright }) => {
   await db.execute("DELETE FROM chat_daily_metrics");
   const client = await api(playwright); const fixture = await seedConversation(db);
+  const empty = await seedConversation(db,false);
+  await db.execute("DELETE FROM chat_messages WHERE session_id=?",[empty.id]);
   try {
+    const all = (await (await client.get("/api/admin/conversations/?locale=sr")).json()).data;
+    expect(all.items.find((item:{id:string})=>item.id===fixture.id)).toMatchObject({messageCount:4,hasLead:true});
+    expect(all.items.find((item:{id:string})=>item.id===empty.id)).toMatchObject({messageCount:0,hasLead:false});
     const sync = await client.post("/api/chat/cleanup/",{headers:{Authorization:"Bearer local-admin-cron-secret-at-least-32-characters"}}); expect(sync.status()).toBe(200);
     const metricResponse = await client.get("/api/admin/metrics/?range=7d"); expect(metricResponse.status()).toBe(200);
     const metric = (await metricResponse.json()).data;
@@ -89,7 +94,7 @@ test("owner metrics, private lists, audited edits, notification reconciliation a
     expect((await client.delete(`/api/admin/conversations/${fixture.id}/`, { data: { confirm: true } })).status()).toBe(200);
     expect((await client.get(`/api/admin/conversations/${fixture.id}/`)).status()).toBe(404);
     const [messages] = await db.execute<mysql.RowDataPacket[]>("SELECT id FROM chat_messages WHERE session_id=?", [fixture.id]); expect(messages).toHaveLength(0);
-  } finally { await cleanup(fixture.id); await client.dispose(); }
+  } finally { await cleanup(fixture.id); await cleanup(empty.id); await client.dispose(); }
 });
 
 test("keyset pagination has no duplicate conversations; login POST requires origin and Auth.js CSRF", async ({ playwright, request }) => {
