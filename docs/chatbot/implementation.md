@@ -103,3 +103,7 @@ Branch-review validation: ESLint, TypeScript and production build passed; the fo
 ## Iteration 2 — inquiry and notifications
 
 The lead form, qualification/suppression, cookie-owned API, transactional lead/outbox migration and cron email worker are implemented. See [lead-delivery.md](lead-delivery.md) for operation, SMTP ambiguity handling, the real OpenAI smoke check, validation and remaining release gates. This supersedes the earlier list entry describing the lead form/outbox as wholly unimplemented. Admin, retention, analytics and monetary budget accounting are still pending.
+
+## Iteration 3 — owner administration
+
+Auth.js email-link sign-in, MySQL sessions, private SR/EN dashboard/lists/transcripts/details, status/note updates, notification reconciliation and audited deletion are implemented. See [admin.md](admin.md) for local review, authentication limits, metric definitions and remaining gates. The owner's explicit admin-email confirmation is recorded in private local configuration; no secrets are committed. Retention, durable analytics, monetary budget controls and production operation remain pending.

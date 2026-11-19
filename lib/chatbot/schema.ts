@@ -1,4 +1,4 @@
-import { mysqlTable, varchar, timestamp, text, int, uniqueIndex, index, json } from "drizzle-orm/mysql-core";
+import { mysqlTable, varchar, timestamp, text, int, uniqueIndex, index, json, primaryKey } from "drizzle-orm/mysql-core";
 import type { ChatLink } from "./contracts";
 
 export const chatSessions = mysqlTable("chat_sessions", {
@@ -13,7 +13,7 @@ export const chatSessions = mysqlTable("chat_sessions", {
   leadDeclinedAt: timestamp("lead_declined_at", { mode: "date", fsp: 3 }),
   activeGenerationId: varchar("active_generation_id", { length: 36 }),
   activeUntil: timestamp("active_until", { mode: "date", fsp: 3 }),
-}, (t) => [index("sessions_expiry_idx").on(t.expiresAt)]);
+}, (t) => [index("sessions_expiry_idx").on(t.expiresAt), index("sessions_admin_created_idx").on(t.createdAt, t.id)]);
 export const chatMessages = mysqlTable("chat_messages", {
   id: varchar("id", { length: 36 }).primaryKey(),
   sessionId: varchar("session_id", { length: 36 }).notNull().references(() => chatSessions.id, { onDelete: "cascade" }),
@@ -24,7 +24,7 @@ export const chatMessages = mysqlTable("chat_messages", {
   links: json("links").$type<ChatLink[]>(),
   createdAt: timestamp("created_at", { mode: "date", fsp: 3 }).notNull(),
   completedAt: timestamp("completed_at", { mode: "date", fsp: 3 }),
-}, (t) => [uniqueIndex("messages_idempotency_idx").on(t.sessionId, t.clientMessageId, t.role), index("messages_session_idx").on(t.sessionId, t.createdAt)]);
+}, (t) => [uniqueIndex("messages_idempotency_idx").on(t.sessionId, t.clientMessageId, t.role), index("messages_session_idx").on(t.sessionId, t.createdAt), index("messages_role_date_idx").on(t.role, t.createdAt, t.sessionId)]);
 export const chatCounters = mysqlTable("chat_rate_limit_counters", {
   keyHash: varchar("key_hash", { length: 64 }).primaryKey(),
   count: int("count").notNull(),
@@ -67,3 +67,39 @@ export const leadNotifications = mysqlTable("chat_lead_notifications", {
   sentAt: timestamp("sent_at", { mode: "date", fsp: 3 }),
   createdAt: timestamp("created_at", { mode: "date", fsp: 3 }).notNull(),
 }, (t) => [index("notifications_due_idx").on(t.status, t.nextRetryAt)]);
+
+// Auth.js owns token/session generation; these are its standard database-adapter fields.
+export const adminUsers = mysqlTable("chat_admin_users", {
+  id: varchar("id", { length: 255 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+  name: varchar("name", { length: 255 }),
+  email: varchar("email", { length: 255 }).unique(),
+  emailVerified: timestamp("email_verified", { mode: "date", fsp: 3 }),
+  image: varchar("image", { length: 255 }),
+});
+export const adminAccounts = mysqlTable("chat_admin_accounts", {
+  userId: varchar("user_id", { length: 255 }).notNull().references(() => adminUsers.id, { onDelete: "cascade" }),
+  type: varchar("type", { length: 255 }).$type<import("next-auth/adapters").AdapterAccountType>().notNull(),
+  provider: varchar("provider", { length: 255 }).notNull(),
+  providerAccountId: varchar("provider_account_id", { length: 255 }).notNull(),
+  refresh_token: varchar("refresh_token", { length: 255 }), access_token: varchar("access_token", { length: 255 }),
+  expires_at: int("expires_at"), token_type: varchar("token_type", { length: 255 }), scope: varchar("scope", { length: 255 }),
+  id_token: varchar("id_token", { length: 2048 }), session_state: varchar("session_state", { length: 255 }),
+}, (t) => [primaryKey({ columns: [t.provider, t.providerAccountId] })]);
+export const adminSessions = mysqlTable("chat_admin_sessions", {
+  sessionToken: varchar("session_token", { length: 255 }).primaryKey(),
+  userId: varchar("user_id", { length: 255 }).notNull().references(() => adminUsers.id, { onDelete: "cascade" }),
+  expires: timestamp("expires", { mode: "date", fsp: 3 }).notNull(),
+});
+export const adminVerificationTokens = mysqlTable("chat_admin_verification_tokens", {
+  identifier: varchar("identifier", { length: 255 }).notNull(),
+  token: varchar("token", { length: 255 }).notNull(),
+  expires: timestamp("expires", { mode: "date", fsp: 3 }).notNull(),
+}, (t) => [primaryKey({ columns: [t.identifier, t.token] })]);
+export const adminAuditLogs = mysqlTable("chat_admin_audit_logs", {
+  id: varchar("id", { length: 36 }).primaryKey(),
+  adminIdentity: varchar("admin_identity", { length: 255 }).notNull(),
+  action: varchar("action", { length: 64 }).notNull(),
+  targetType: varchar("target_type", { length: 32 }).notNull(),
+  targetId: varchar("target_id", { length: 36 }).notNull(),
+  createdAt: timestamp("created_at", { mode: "date", fsp: 3 }).notNull(),
+}, (t) => [index("admin_audit_created_idx").on(t.createdAt)]);

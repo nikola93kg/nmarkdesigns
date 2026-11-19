@@ -96,6 +96,18 @@ export function proxy(request: NextRequest) {
   }
 
   const path = request.nextUrl.pathname;
+  if (path === "/admin" || path.startsWith("/admin/") || path === "/api/admin" || path.startsWith("/api/admin/") || path === "/api/auth" || path.startsWith("/api/auth/")) {
+    const response = addSecurityHeaders(NextResponse.next());
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
+    response.headers.set("Cache-Control", "private, no-store");
+    response.headers.set("Referrer-Policy", "no-referrer");
+    response.headers.set("Content-Security-Policy", [
+      "default-src 'self'", `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""}`,
+      "style-src 'self' 'unsafe-inline'", "font-src 'self'", "img-src 'self' data:", "connect-src 'self'",
+      "frame-ancestors 'none'", "form-action 'self'", "base-uri 'none'", "object-src 'none'",
+    ].join("; "));
+    return response;
+  }
   if (path === "/api/chat" || path.startsWith("/api/chat/")) {
     const response = addSecurityHeaders(NextResponse.next());
     response.headers.set("X-Robots-Tag", "noindex, nofollow");

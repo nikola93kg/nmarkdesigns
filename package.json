@@ -14,14 +14,17 @@
     "test:e2e": "playwright test",
     "test:chatbot": "playwright test --config playwright.chatbot.config.ts",
     "chat:db:generate": "drizzle-kit generate",
-    "chat:db:migrate:dev": "node --env-file=.env.local lib/chatbot/migrate.mjs"
+    "chat:db:migrate:dev": "node --env-file=.env.local lib/chatbot/migrate.mjs",
+    "test:admin": "playwright test --config playwright.admin.config.ts"
   },
   "dependencies": {
+    "@auth/drizzle-adapter": "1.11.3",
     "@tailwindcss/postcss": "4.3.3",
     "drizzle-orm": "^0.45.4",
     "lucide-react": "1.42.0",
     "mysql2": "^3.24.6",
     "next": "16.4.6",
+    "next-auth": "5.0.0-beta.32",
     "nodemailer": "^10.5.0",
     "openai": "^7.60.0",
     "react": "19.2.8",
@@ -49,6 +52,7 @@
     "minimatch": "^11.0.5",
     "@esbuild-kit/core-utils": {
       "esbuild": "^0.25.0"
-    }
+    },
+    "nodemailer": "$nodemailer"
   }
 }

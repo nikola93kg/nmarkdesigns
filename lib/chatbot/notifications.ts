@@ -5,6 +5,7 @@ import { createSmtpTransport, getSmtpConfig } from "../contact-delivery";
 import { site } from "../../content/site";
 import { chatDb } from "./db";
 import { chatLeads, leadNotifications } from "./schema";
+import { adminConfig, adminReady } from "./admin/config";
 import { ChatError } from "./security";
 
 type Lead = typeof chatLeads.$inferSelect;
@@ -18,6 +19,7 @@ export function authorizeMaintenance(request: Request) {
   if (!expected || expected.length < 32 || !timingSafeEqual(hash(`Bearer ${expected}`), hash(supplied))) throw new ChatError("FORBIDDEN", 403);
 }
 export function notificationMessage(lead: Lead, from: string, recipient: string) {
+  const adminOrigin = adminReady() ? adminConfig().origin : null;
   const unavailable = lead.locale === "sr" ? "Nije navedeno" : "Not provided";
   const line = (value: string) => value || unavailable;
   return {
@@ -33,6 +35,7 @@ export function notificationMessage(lead: Lead, from: string, recipient: string)
       `Budget: ${line(lead.budgetRange)}`, `Timeframe: ${line(lead.timeframe)}`, `Preferred contact: ${lead.preferredContactMethod}`,
       "", "Project description (reviewed by visitor, no AI additions):", line(lead.projectDescription),
       "", `Contact consent: ${lead.consentVersion} / ${lead.privacyConsentAt.toISOString()}`,
+      ...(adminOrigin ? ["", `Admin (sign-in required): ${adminOrigin}/admin/${lead.locale}/leads/${lead.id}/`, `Transcript (sign-in required): ${adminOrigin}/admin/${lead.locale}/conversations/${lead.sessionId}/`] : []),
     ].join("\n"),
     disableFileAccess: true, disableUrlAccess: true,
   };

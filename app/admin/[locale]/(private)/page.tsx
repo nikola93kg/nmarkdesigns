@@ -1,0 +1,16 @@
+import { requireOwnerPage } from "@/lib/chatbot/admin/access";
+import { notFound } from "next/navigation";
+import { adminCopy } from "@/content/chatbot/admin-copy";
+import { metrics } from "@/lib/chatbot/admin/queries";
+import { rangeSchema } from "@/lib/chatbot/admin/contracts";
+import { isLocale } from "@/lib/i18n";
+import { Button } from "@/components/ui/Button";
+export default async function Overview({ params, searchParams }: { params: Promise<{ locale: string }>; searchParams: Promise<{ range?: string }> }) {
+  const { locale } = await params; if (!isLocale(locale)) notFound(); await requireOwnerPage(locale); const copy = adminCopy[locale];
+  const range = rangeSchema.catch("7d").parse((await searchParams).range); const data = await metrics(range);
+  const values = [data.chatStarts, data.engagedSessions, data.leadsSubmitted, `${data.conversionRate.toFixed(1)}%`, data.chatErrors, data.notificationFailures];
+  return <><div className="flex flex-wrap items-start justify-between gap-5"><div><h1 className="text-heading font-semibold text-brand">{copy.overview}</h1><p className="mt-2 text-small text-muted">{copy.timezone}</p><p className="mt-2 max-w-prose text-small text-muted">{copy.metricsNote}</p></div><form className="flex flex-wrap items-end gap-3"><label className="text-small">{copy.period}<select name="range" defaultValue={range} className="mt-1 block min-h-12 rounded-control border border-border bg-surface px-3"><option value="7d">{copy.days7}</option><option value="30d">{copy.days30}</option></select></label><Button type="submit">{copy.filter}</Button></form></div>
+    <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 border-y border-border py-8 lg:grid-cols-3">{copy.metricLabels.map((label, index) => <div key={label}><dt className="text-small text-muted">{label}</dt><dd className="mt-2 text-heading font-semibold tabular-nums text-brand">{values[index]}</dd></div>)}</dl>
+    <section aria-labelledby="daily-title" className="mt-10"><h2 id="daily-title" className="text-subheading font-semibold text-brand">{copy.trend}</h2><div className="mt-4 overflow-x-auto rounded-control bg-surface"><table className="w-full text-left text-small"><thead><tr className="border-b border-border text-brand"><th scope="col" className="p-4">{copy.date}</th><th scope="col" className="p-4">{copy.conversations}</th><th scope="col" className="p-4">{copy.leads}</th></tr></thead><tbody>{data.daily.map((item) => <tr key={item.day} className="border-b border-border last:border-0"><th scope="row" className="p-4 font-normal">{item.day}</th><td className="p-4 tabular-nums">{item.chats}</td><td className="p-4 tabular-nums">{item.leads}</td></tr>)}</tbody></table></div></section>
+  </>;
+}

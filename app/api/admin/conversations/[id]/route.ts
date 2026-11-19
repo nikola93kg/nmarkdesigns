@@ -1,0 +1,10 @@
+import { adminResponse } from "@/lib/chatbot/admin/http";
+import { deleteInput, idSchema } from "@/lib/chatbot/admin/contracts";
+import { assertAdminOrigin, requireOwner } from "@/lib/chatbot/admin/access";
+import { conversation } from "@/lib/chatbot/admin/queries";
+import { deleteRecord } from "@/lib/chatbot/admin/mutations";
+import { parseBody } from "@/lib/chatbot/security";
+export const runtime = "nodejs";
+type Context = { params: Promise<{ id: string }> };
+export const GET = (_request: Request, context: Context) => adminResponse(async () => { await requireOwner(); return conversation(idSchema.parse((await context.params).id)); });
+export const DELETE = (request: Request, context: Context) => adminResponse(async () => { await requireOwner(); assertAdminOrigin(request); await parseBody(request, deleteInput); await deleteRecord("conversation", idSchema.parse((await context.params).id)); return { status: "deleted" }; });
