@@ -96,6 +96,12 @@ export function proxy(request: NextRequest) {
   }
 
   const path = request.nextUrl.pathname;
+  if (path === "/api/chat" || path.startsWith("/api/chat/")) {
+    const response = addSecurityHeaders(NextResponse.next());
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
+    response.headers.set("Cache-Control", "private, no-store");
+    return response;
+  }
   const normalized = path.endsWith("/") ? path : `${path}/`;
   const protect = (response: NextResponse, force = false) => {
     if (force || !isIndexableHost(request.headers.get("host"))) {

@@ -840,7 +840,7 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
     },
     startingPrice: {
       sr: "Od 400 €",
-      en: "Starting from $600",
+      en: "Starting from €400",
     },
     pricingAnchor: "additional-services",
     relatedCaseStudySlug: "os-dule-karaklajic",
@@ -1060,7 +1060,7 @@ export const serviceDefinitions: Record<ServiceKey, ServiceDetailDefinition> = {
     },
     startingPrice: {
       sr: "Od 100 €",
-      en: "Starting from $150",
+      en: "Starting from €100",
     },
     pricingAnchor: "additional-services",
     relatedCaseStudySlug: "ilic-enterijer",

@@ -13,7 +13,6 @@ export type ServiceInquiryId =
 export interface WebsitePackage {
   id: WebsitePackageId;
   startingPrice: number;
-  usStartingPrice: number;
   inquiryKey: WebsitePackageId;
 }
 
@@ -32,22 +31,22 @@ export interface CarePlan {
 }
 
 export const websitePackages: readonly WebsitePackage[] = [
-  { id: "landing-page", startingPrice: 300, usStartingPrice: 750, inquiryKey: "landing-page" },
-  { id: "business-website", startingPrice: 550, usStartingPrice: 1500, inquiryKey: "business-website" },
-  { id: "advanced-website", startingPrice: 900, usStartingPrice: 2500, inquiryKey: "advanced-website" },
-  { id: "ecommerce", startingPrice: 1200, usStartingPrice: 3500, inquiryKey: "ecommerce" },
+  { id: "landing-page", startingPrice: 300, inquiryKey: "landing-page" },
+  { id: "business-website", startingPrice: 550, inquiryKey: "business-website" },
+  { id: "advanced-website", startingPrice: 900, inquiryKey: "advanced-website" },
+  { id: "ecommerce", startingPrice: 1200, inquiryKey: "ecommerce" },
 ] as const;
 
-export function getWebsiteStartingPrice(id: WebsitePackageId, locale: Locale = "sr"): number {
+export function getWebsiteStartingPrice(id: WebsitePackageId): number {
   const item = websitePackages.find((item) => item.id === id);
   if (!item) throw new Error(`Missing website starting price: ${id}`);
-  return locale === "en" ? item.usStartingPrice : item.startingPrice;
+  return item.startingPrice;
 }
 
 export function formatWebsiteStartingPrice(id: WebsitePackageId, locale: Locale): string {
-  const price = getWebsiteStartingPrice(id, locale);
+  const price = getWebsiteStartingPrice(id);
   return locale === "en"
-    ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(price)
+    ? new Intl.NumberFormat("en-US", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(price)
     : `${new Intl.NumberFormat("sr").format(price)} €`;
 }
 

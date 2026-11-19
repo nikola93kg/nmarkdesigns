@@ -747,6 +747,10 @@ Contact form infrastructure will be implemented intentionally.
 
 ## Git Discipline
 
+### Chatbot branch workflow (owner instruction, 2026-11-19)
+
+On `feature/chatbot`, the owner authorizes commits and pushes of completed chatbot changes after validation without asking for approval each time. Keep this branch current with `main` as needed. This standing authorization applies only to `feature/chatbot`; commits/pushes to `main` and merging into `main` still require explicit owner approval. Never include unrelated pre-existing working-tree changes in chatbot commits. No production deployment is authorized by this Git workflow.
+
 Make focused changes.
 
 Do not refactor unrelated working code while implementing a feature.

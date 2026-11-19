@@ -1,0 +1,1 @@
+ALTER TABLE `chat_sessions` ADD `active_generation_id` varchar(36);

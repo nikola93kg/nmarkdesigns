@@ -199,7 +199,7 @@ const en = {
             "clear visual hierarchy and frictionless section flow",
             "mobile user experience optimization and touch target polish",
           ],
-          startingPrice: "From €400 (~$450)",
+          startingPrice: "From €400",
           pricingAnchor: "additional-services",
         },
         {
@@ -213,7 +213,7 @@ const en = {
             "semantic metadata, Open Graph, and JSON-LD structured data",
             "custom AI chatbot integration trained on business FAQs",
           ],
-          startingPrice: "From €100 (~$120)",
+          startingPrice: "From €100",
           pricingAnchor: "additional-services",
         },
         {
@@ -323,7 +323,7 @@ const en = {
           id: "packages",
           title: "Website development packages",
           price: `From ${landingStartingPrice}`,
-          description: `US website packages: Landing Page (${landingStartingPrice}), Business Website (${businessStartingPrice}), Advanced Website (${advancedStartingPrice}), or E-commerce Website (${ecommerceStartingPrice}).`,
+          description: `Website packages: Landing Page (${landingStartingPrice}), Business Website (${businessStartingPrice}), Advanced Website (${advancedStartingPrice}), or E-commerce Website (${ecommerceStartingPrice}).`,
           anchor: "packages",
           actionLabel: "View packages",
         },
@@ -445,12 +445,12 @@ const en = {
   pricing: {
     metadata: {
       title: `Website development pricing — packages from ${landingStartingPrice} | NMark Designs`,
-      description: `US website packages: landing pages from ${landingStartingPrice}, business websites from ${businessStartingPrice}, advanced sites from ${advancedStartingPrice} and online stores from ${ecommerceStartingPrice}. Compare scope and costs.`,
+      description: `Website packages: landing pages from ${landingStartingPrice}, business websites from ${businessStartingPrice}, advanced sites from ${advancedStartingPrice} and online stores from ${ecommerceStartingPrice}. Compare scope and costs.`,
     },
     intro: {
       eyebrow: "Digital Services Pricing",
       title: "Website development pricing and services",
-      description: "Review NMark Designs website packages for US clients, priced in USD. Your final quote depends on features, content and project scope. Additional services, hosting and maintenance retain their stated currencies and are agreed separately.",
+      description: "Review NMark Designs website packages with starting prices in EUR. Your final quote depends on features, content and project scope. Hosting, maintenance and additional services are agreed separately.",
       primaryAction: "Request a Quote",
       secondaryAction: "Explore Packages",
     },
@@ -700,7 +700,7 @@ const en = {
           id: "fixed-prices",
           question: "Are the listed prices fixed?",
           paragraphs: [
-            "Website packages show US starting prices in USD for a defined baseline scope. Additional services and care plans use their stated currencies. Every project is unique — if your requirements are simpler or more specific, I prepare an exact quote based on the agreed scope before work starts.",
+            "Website packages show starting prices in EUR for a defined baseline scope. Additional services and care plans use their stated billing periods. Every project is unique — if your requirements are simpler or more specific, I prepare an exact quote based on the agreed scope before work starts.",
           ],
         },
         {
@@ -870,7 +870,7 @@ const en = {
         {
           id: "pricing",
           question: "How much does website development cost?",
-          paragraphs: [`Pricing depends on the project scope and functional requirements. US starting prices are ${landingStartingPrice} for landing pages, ${businessStartingPrice} for business websites, ${advancedStartingPrice} for advanced websites, and ${ecommerceStartingPrice} for online stores. Custom web applications and specialized requirements are quoted based on technical specifications.`],
+          paragraphs: [`Pricing depends on the project scope and functional requirements. Starting prices are ${landingStartingPrice} for landing pages, ${businessStartingPrice} for business websites, ${advancedStartingPrice} for advanced websites, and ${ecommerceStartingPrice} for online stores. Custom web applications and specialized requirements are quoted based on technical specifications.`],
         },
         {
           id: "services",

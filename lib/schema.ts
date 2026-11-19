@@ -112,7 +112,7 @@ export function serviceDetailSchema(
         serviceType: service.eyebrow[locale],
         offers: {
           "@type": "Offer",
-          priceCurrency: service.priceCurrency ?? (locale === "sr" ? "EUR" : "USD"),
+          priceCurrency: service.priceCurrency ?? "EUR",
           description: service.startingPrice[locale],
         },
       },

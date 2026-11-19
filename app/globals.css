@@ -241,3 +241,27 @@ body:has([data-consent-banner]) [data-back-to-top] {
     }
   }
 }
+
+/* Chat occupies its own space above the existing back-to-top control. */
+body:has([data-consent-banner]) [data-chat-launcher] { visibility: hidden; }
+.chat-panel {
+  inset: auto max(1.5rem, env(safe-area-inset-right)) max(1.5rem, env(safe-area-inset-bottom)) auto;
+  width: min(26rem, calc(100vw - 3rem));
+  height: min(42rem, calc(100dvh - 3rem));
+  max-height: none;
+  max-width: none;
+  z-index: 60;
+}
+.chat-panel[open] { display: flex; }
+.chat-panel:not([open]) { display: none; }
+@media (max-width: 639px) {
+  .chat-panel {
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    border-radius: 0;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  body:has(.chat-panel[open]) { overflow: hidden; }
+}
