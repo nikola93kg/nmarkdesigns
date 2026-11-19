@@ -1,3 +1,5 @@
+Update: the [first-message flow](first-message.md) replaces the separate start/accept button with a visible notice and first-message submission. Existing backend and private local-test requirements below still apply.
+
 # Real chatbot on localhost
 
 The owner requested live local testing on 2026-11-19. The widget in this workspace now uses the real OpenAI provider and persistent local MySQL instead of demo replies. Only private local configuration changed activation; other checkouts still default to the development demo, and production still requires explicit configuration and reviewed policy URLs.
