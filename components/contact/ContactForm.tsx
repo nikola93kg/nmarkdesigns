@@ -5,7 +5,7 @@ import Script from "next/script";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import type { Dictionary } from "@/content/i18n/types";
-import { formatWebsiteStartingPrice } from "@/content/pricing";
+import { formatWebsiteStartingPrice, formatAdditionalStartingPrice, formatCarePlanStartingPrice } from "@/content/pricing";
 import { trackEvent } from "@/lib/analytics";
 import { contactFields, contactLimits, initialContactState, type ContactFormState } from "@/lib/contact";
 
@@ -21,19 +21,19 @@ const inputClass =
 
 const serviceMessages: Record<string, { sr: string; en: string }> = {
   "landing-page": {
-    sr: "Pozdrav Nikola, zanima me izrada Landing Page sajta (od 300 €).",
+    sr: `Pozdrav Nikola, zanima me izrada Landing Page sajta (od ${formatWebsiteStartingPrice("landing-page","sr")}).`,
     en: `Hi Nikola, I'm interested in Landing Page website development (from ${formatWebsiteStartingPrice("landing-page", "en")}).`,
   },
   "business-website": {
-    sr: "Pozdrav Nikola, zanima me izrada poslovnog sajta (od 550 €).",
+    sr: `Pozdrav Nikola, zanima me izrada poslovnog sajta (od ${formatWebsiteStartingPrice("business-website","sr")}).`,
     en: `Hi Nikola, I'm interested in Business Website development (from ${formatWebsiteStartingPrice("business-website", "en")}).`,
   },
   "advanced-website": {
-    sr: "Pozdrav Nikola, zanima me izrada naprednog sajta (od 900 €).",
+    sr: `Pozdrav Nikola, zanima me izrada naprednog sajta (od ${formatWebsiteStartingPrice("advanced-website","sr")}).`,
     en: `Hi Nikola, I'm interested in Advanced Website development (from ${formatWebsiteStartingPrice("advanced-website", "en")}).`,
   },
   ecommerce: {
-    sr: "Pozdrav Nikola, zanima me izrada web prodavnice (od 1.200 €).",
+    sr: `Pozdrav Nikola, zanima me izrada web prodavnice (od ${formatWebsiteStartingPrice("ecommerce","sr")}).`,
     en: `Hi Nikola, I'm interested in E-commerce online store development (from ${formatWebsiteStartingPrice("ecommerce", "en")}).`,
   },
   "custom-development": {
@@ -41,32 +41,32 @@ const serviceMessages: Record<string, { sr: string; en: string }> = {
     en: "Hi Nikola, I'm interested in Custom Web Application development.",
   },
   redesign: {
-    sr: "Pozdrav Nikola, zanima me redizajn postojećeg sajta (od 400 €).",
-    en: "Hi Nikola, I'm interested in Website Redesign (from €400).",
+    sr: `Pozdrav Nikola, zanima me redizajn postojećeg sajta (${formatAdditionalStartingPrice("redesign","sr").toLowerCase()}).`,
+    en: `Hi Nikola, I'm interested in Website Redesign (${formatAdditionalStartingPrice("redesign","en").toLowerCase()}).`,
   },
   seo: {
-    sr: "Pozdrav Nikola, potreban mi je SEO audit i optimizacija (od 150 €).",
-    en: "Hi Nikola, I'm interested in SEO Audit & Basic Optimization (from €150).",
+    sr: `Pozdrav Nikola, potreban mi je SEO audit i optimizacija (${formatAdditionalStartingPrice("seo","sr").toLowerCase()}).`,
+    en: `Hi Nikola, I'm interested in SEO Audit & Basic Optimization (${formatAdditionalStartingPrice("seo","en").toLowerCase()}).`,
   },
   performance: {
-    sr: "Pozdrav Nikola, zanima me optimizacija brzine sajta (od 100 €).",
-    en: "Hi Nikola, I'm interested in Website Speed Optimization (from €100).",
+    sr: `Pozdrav Nikola, zanima me optimizacija brzine sajta (${formatAdditionalStartingPrice("performance","sr").toLowerCase()}).`,
+    en: `Hi Nikola, I'm interested in Website Speed Optimization (${formatAdditionalStartingPrice("performance","en").toLowerCase()}).`,
   },
   "ai-chatbot": {
-    sr: "Pozdrav Nikola, zanima me integracija AI chatbota (od 350 €).",
-    en: "Hi Nikola, I'm interested in AI Chatbot Integration (from €350).",
+    sr: `Pozdrav Nikola, zanima me integracija AI chatbota (${formatAdditionalStartingPrice("ai-chatbot","sr").toLowerCase()}).`,
+    en: `Hi Nikola, I'm interested in AI Chatbot Integration (${formatAdditionalStartingPrice("ai-chatbot","en").toLowerCase()}).`,
   },
   hosting: {
-    sr: "Pozdrav Nikola, zanima me Managed hosting (od 30 € / god.).",
-    en: "Hi Nikola, I'm interested in Managed Hosting (from €30/year).",
+    sr: `Pozdrav Nikola, zanima me Managed hosting (${formatCarePlanStartingPrice("hosting","sr").toLowerCase()}).`,
+    en: `Hi Nikola, I'm interested in Managed Hosting (${formatCarePlanStartingPrice("hosting","en").toLowerCase()}).`,
   },
   "basic-care": {
-    sr: "Pozdrav Nikola, zanima me Basic Care tehničko održavanje (od 25 € / mes.).",
-    en: "Hi Nikola, I'm interested in Basic Care website maintenance (from €25/month).",
+    sr: `Pozdrav Nikola, zanima me Basic Care tehničko održavanje (${formatCarePlanStartingPrice("basic-care","sr").toLowerCase()}).`,
+    en: `Hi Nikola, I'm interested in Basic Care website maintenance (${formatCarePlanStartingPrice("basic-care","en").toLowerCase()}).`,
   },
   "business-care": {
-    sr: "Pozdrav Nikola, zanima me Business Care tehničko održavanje (od 50 € / mes.).",
-    en: "Hi Nikola, I'm interested in Business Care website maintenance (from €50/month).",
+    sr: `Pozdrav Nikola, zanima me Business Care tehničko održavanje (${formatCarePlanStartingPrice("business-care","sr").toLowerCase()}).`,
+    en: `Hi Nikola, I'm interested in Business Care website maintenance (${formatCarePlanStartingPrice("business-care","en").toLowerCase()}).`,
   },
   "custom-support": {
     sr: "Pozdrav Nikola, potrebna mi je namenska tehnička podrška (Custom Support).",

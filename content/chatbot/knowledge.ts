@@ -1,4 +1,4 @@
-import { websitePackages, additionalServices, carePlans, formatWebsiteStartingPrice } from "@/content/pricing";
+import { websitePackages, additionalServices, carePlans, formatWebsiteStartingPrice, formatAdditionalStartingPrice, formatCarePlanStartingPrice } from "@/content/pricing";
 import { projects } from "@/content/projects";
 import { site } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
@@ -11,7 +11,7 @@ export interface KnowledgeEntry extends ChatLink {
   lastReviewedAt: string;
   keywords: readonly string[];
 }
-export const KNOWLEDGE_VERSION = "2026-11-19.2";
+export const KNOWLEDGE_VERSION = "2026-11-19.4";
 const reviewed = "2026-11-19";
 const names = {
   sr: { pricing: "Početne cene", services: "Usluge", contact: "Kontakt sa Nikolom", portfolio: "Portfolio" },
@@ -29,11 +29,11 @@ export function knowledgeRegistry(locale: Locale): KnowledgeEntry[] {
   return [
     { ...base, id: "pricing", title: copy.pricing, category: "pricing", url: `${site.url}${localizedPath("pricing", locale)}`,
       description: locale === "sr" ? "Početne cene; konačna ponuda zavisi od obima." : "Starting prices; the final quote depends on scope.",
-      keywords: ["cena", "cene", "košta", "kosta", "price", "cost", "budget", "budžet", "eur"],
+      keywords: ["cena", "cene", "košta", "kosta", "price", "cost", "budget", "budžet", "eur", "usd", "dollar", "dollars"],
       facts: [
         ...websitePackages.map((p) => `${p.id}: ${formatWebsiteStartingPrice(p.id, locale)} (starting price, not a fixed quote)`),
-        ...additionalServices.map((s) => `${s.id}: from ${s.startingPrice} EUR${s.id === "ai-chatbot" ? "; API and infrastructure billed separately" : ""}`),
-        ...carePlans.map((p) => `${p.id}: ${p.startingPrice === undefined ? "by quotation" : `from ${p.startingPrice} EUR / ${p.period}`}`),
+        ...additionalServices.map((s) => `${s.id}: ${formatAdditionalStartingPrice(s.id,locale)}${s.id === "ai-chatbot" ? "; API and infrastructure billed separately" : ""}`),
+        ...carePlans.map((p) => `${p.id}: ${p.id === "custom-support" ? "by quotation" : formatCarePlanStartingPrice(p.id,locale)}`),
         "The generic redesign starting price is not an existing-shop redesign quote. New ecommerce is a different service. Existing-shop redesign has no separate approved starting tier. Never calculate a custom quote from pages/features or combine these prices. Delivery deadlines require individual scope review.",
         "Custom web applications: by quotation. No guaranteed deadlines, discounts, rankings or results.",
       ] },
@@ -96,7 +96,7 @@ export function recommendedLinks(message: string, locale: Locale): ChatLink[] {
   const projectLinks=selected.filter(item=>item.entry.category==="project").slice(0,2);
   const normalized=normalize(message);
   const topicIds=new Set<string>();
-  if(/\b(?:cen\w*|kost\w*|price\w*|cost\w*|budget|budzet|eur)\b/.test(normalized))topicIds.add("pricing");
+  if(/\b(?:cen\w*|kost\w*|price\w*|cost\w*|budget|budzet|eur|usd|dollar\w*)\b/.test(normalized))topicIds.add("pricing");
   if(/\b(?:sajt\w*|website\w*|wordpress|seo|redizajn|redesign|prodavnic\w*|ecommerce|e-commerce|chatbot|maintenance|odrzavanj\w*)\b/.test(normalized))topicIds.add("services");
   if(/\b(?:ponud\w*|kontakt\w*|quote|contact|rok|deadline|sarad\w*|availability|nikola)\b/.test(normalized))topicIds.add("contact");
   if(/\b(?:portfolio|projekti|projects|radovi|examples)\b/.test(normalized))topicIds.add("portfolio");

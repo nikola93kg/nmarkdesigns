@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { CHAT_CONSENT_VERSION, messageInput, readEvents, sessionInput } from "@/lib/chatbot/contracts";
 import { isKnowledgeUrl, knowledgeRegistry, recommendedLinks, selectKnowledge } from "@/content/chatbot/knowledge";
-import { websitePackages } from "@/content/pricing";
+import { websitePackages, additionalServices, carePlans, formatWebsiteStartingPrice, formatAdditionalStartingPrice, formatCarePlanStartingPrice } from "@/content/pricing";
 import { publicPages } from "@/lib/public-pages";
 
 const id = "50e4cfc6-3471-4db1-8ae6-a1d59851f531";
@@ -12,7 +12,7 @@ test("consent and messages reject missing consent, stale versions, spoofed sessi
   for (const input of [ { message: " ", locale: "sr", clientMessageId: id }, { message: "x".repeat(2001), locale: "sr", clientMessageId: id }, { message: "hi", locale: "de", clientMessageId: id }, { message: "hi", locale: "sr", clientMessageId: id, sessionId: id } ]) expect(messageInput.safeParse(input).success).toBe(false);
 });
 for (const locale of ["sr", "en"] as const) {
-  test(`${locale} registry uses real public routes, shared EUR prices and historical portfolio status`, () => {
+  test(`${locale} registry uses real public routes, shared locale prices and historical portfolio status`, () => {
     const registry = knowledgeRegistry(locale);
     expect(registry.filter((e) => e.category === "project")).toHaveLength(8);
     for (const entry of registry) {
@@ -22,8 +22,11 @@ for (const locale of ["sr", "en"] as const) {
       expect(entry.locale).toBe(locale);
     }
     const pricing = registry.find((e) => e.id === "pricing")!;
-    for (const price of websitePackages) expect(pricing.facts.some((f) => f.startsWith(`${price.id}:`) && f.includes("€"))).toBe(true);
-    expect(pricing.facts.join(" ")).not.toMatch(/USD|\$/);
+    for (const item of websitePackages) expect(pricing.facts).toContain(`${item.id}: ${formatWebsiteStartingPrice(item.id,locale)} (starting price, not a fixed quote)`);
+    for (const item of additionalServices) expect(pricing.facts.some(f=>f.startsWith(`${item.id}: ${formatAdditionalStartingPrice(item.id,locale)}`))).toBe(true);
+    for (const item of carePlans) if(item.id!=="custom-support") expect(pricing.facts).toContain(`${item.id}: ${formatCarePlanStartingPrice(item.id,locale)}`);
+    if (locale === "en") expect(pricing.facts.join(" ")).not.toMatch(/EUR|€/);
+    if (locale === "sr") expect(pricing.facts.join(" ")).not.toMatch(/USD|\$/);
     expect(registry.find((e) => e.id === "project:tripolisweets")?.facts.join(" ")).toContain("Historical");
     expect(isKnowledgeUrl("https://evil.example/", locale)).toBe(false);
     expect(isKnowledgeUrl("javascript:alert(1)", locale)).toBe(false);

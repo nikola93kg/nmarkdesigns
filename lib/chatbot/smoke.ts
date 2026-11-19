@@ -18,7 +18,7 @@ async function main() {
   if (!process.env.OPENAI_MODEL) throw new Error("Configure a priced OPENAI_MODEL first");
   const cases = [
     { locale: "sr" as const, message: "Koliko košta poslovni sajt? Odgovori kratko, početnom cenom iz cenovnika.", price: /550/, starting: /od |početn|pocetn|zavis/i },
-    { locale: "en" as const, message: "What is the starting price of an online store? Answer briefly using the approved price list.", price: /1[,.\s]?200/, starting: /start|from|scope|depend/i },
+    { locale: "en" as const, message: "What is the starting price of an online store? Answer briefly using the approved price list.", price: /3[,.\s]?500/, starting: /start|from|scope|depend/i },
   ];
   for (const item of cases) {
     const started = Date.now(); let text = ""; let deltaEvents = 0; let completed = false;

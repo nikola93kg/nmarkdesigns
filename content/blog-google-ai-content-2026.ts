@@ -1,3 +1,4 @@
+import { formatAdditionalStartingPrice } from "@/content/pricing";
 import type { BlogSection } from "@/content/blog";
 import type { Editorial } from "@/content/blog-editorial";
 
@@ -461,7 +462,7 @@ const sectionsEn: readonly BlogSection[] = [
       {
         type: "cta",
         title: "Have an AI-built website but do not know if it is ready for Google?",
-        body: "An SEO audit can reveal problems with metadata, canonical URLs, sitemaps, internal links, and basic indexability. NMark Designs SEO audits start at €150.",
+        body: `An SEO audit can reveal problems with metadata, canonical URLs, sitemaps, internal links, and basic indexability. NMark Designs SEO audits start ${formatAdditionalStartingPrice("seo", "en").toLowerCase()}.`,
         label: "View the SEO audit",
         href: "/en/pricing/#svc-seo",
       },

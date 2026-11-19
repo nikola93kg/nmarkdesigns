@@ -529,7 +529,8 @@ Respect `prefers-reduced-motion`.
 - Provider API usage/budgets are a separate USD ledger in both admin locales; do not convert that ledger when aligning public service prices.
 - This supersedes the earlier conversation decision to use identical EUR prices on both locales.
 - Use the typed pricing registry and verified existing values. Never invent missing USD prices.
-- The owner has explicitly deferred the full English pricing-page consistency review to a later task. Restoring package USD prices does not mean all English pricing sections are synchronized.
+- The owner subsequently authorized full market-price alignment: EN packages $750 / $1,500 / $2,500 / $3,500; redesign $600; SEO $200; speed $150; AI integration $450. Under the delegated US price increase, hosting is $50/year, Basic Care $40/month and Business Care $75/month. SR prices remain unchanged.
+- Public pages, inquiry prefills, structured data, chatbot knowledge and /llms.txt must derive current offers from content/pricing.ts. Research articles about the Serbian market retain explicitly contextualized EUR research figures.
 
 The website supports two languages:
 

@@ -66,10 +66,10 @@ test.describe("Phase 3C.1 Customer Journey & Conversion Optimization", () => {
         await expect(plans.nth(2)).toContainText("Od 900 €");
         await expect(plans.nth(3)).toContainText("Od 1.200 €");
       } else {
-        await expect(plans.nth(0)).toContainText("From €300");
-        await expect(plans.nth(1)).toContainText("From €550");
-        await expect(plans.nth(2)).toContainText("From €900");
-        await expect(plans.nth(3)).toContainText("From €1,200");
+        await expect(plans.nth(0)).toContainText("From $750");
+        await expect(plans.nth(1)).toContainText("From $1,500");
+        await expect(plans.nth(2)).toContainText("From $2,500");
+        await expect(plans.nth(3)).toContainText("From $3,500");
       }
 
       // 2. Verify pricing notes

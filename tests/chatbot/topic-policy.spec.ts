@@ -26,13 +26,17 @@ test("retrieval uses project facets instead of accidental description substrings
 });
 test("prices must come from the public registry, including localized thousands separators",()=>{
   for(const text of ["Od 400 EUR.","Starting at €1,200.","Od 1.200 €.","Od 550 evra.","25 EUR / mesec","Za sajt od 10 stranica potrebna je procena.","Cena je 400."])
-    expect(hasUnapprovedPrice(text),text).toBe(false);
-  for(const text of ["Redizajn od 800 EUR.","The price is €800.","Cena je 800.","Cena kreće od 800.","from $400","Od 800,00 evra.","€\n800","800\nEUR"])
-    expect(hasUnapprovedPrice(text),text).toBe(true);
+    expect(hasUnapprovedPrice(text,"sr"),text).toBe(false);
+  for(const text of ["Starting at $750.","From $1,500.","Starting at $3,500.","2,500 USD","Redesign from $600.","SEO from $200.","Speed from $150.","AI chatbot from $450.","Hosting from $50/year.","Basic Care from $40/month.","Business Care from $75/month."])
+    expect(hasUnapprovedPrice(text,"en"),text).toBe(false);
+  for(const text of ["Redizajn od 800 EUR.","The price is €800.","Cena je 800.","Cena kreće od 800.","from $400","from $750","Od 800,00 evra.","€\n800","800\nEUR"])
+    expect(hasUnapprovedPrice(text,"sr"),text).toBe(true);
+  for(const text of ["400 EUR for redesign.","From €600.","from $400","Redesign from $800.","The price is $1,200.","$\n800","800\nUSD"])
+    expect(hasUnapprovedPrice(text,"en"),text).toBe(true);
 });
 test("sentence stream never emits a forbidden price, including across network chunks",()=>{
   const guard=new VerifiedReply("sr");const output=[...guard.push("Redizajn od 8"),...guard.push("00 EUR. Konačna ponuda zavisi od obima."),guard.complete()].join("");
   expect(output).not.toContain("800");expect(output).toBe(priceFallback("sr"));
-  const good=new VerifiedReply("en");const safe=[...good.push("Starting at 1,"),...good.push("200 EUR. The scope needs a review."),good.complete()].join("");
-  expect(safe).toBe("Starting at 1,200 EUR. The scope needs a review.");
+  const good=new VerifiedReply("en");const safe=[...good.push("Starting at $3,"),...good.push("500. The scope needs a review."),good.complete()].join("");
+  expect(safe).toBe("Starting at $3,500. The scope needs a review.");
 });

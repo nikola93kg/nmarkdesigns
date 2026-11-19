@@ -1,7 +1,7 @@
 import { additionalServices, carePlans, websitePackages } from "../../content/pricing";
 import type { Locale } from "../i18n";
 
-export const CHAT_POLICY_VERSION = "nmark-scope-v2";
+export const CHAT_POLICY_VERSION = "nmark-scope-v4";
 export type TopicDecision = "business" | "off_topic" | "greeting" | "clarify";
 export const normalizeTopic = (value: string) => value.toLowerCase().normalize("NFD").replace(/\p{M}/gu, "").replace(/đ/g,"dj");
 /** Fast paths are deliberately narrow. Unknown questions get semantic classification, not keyword approval. */
@@ -18,17 +18,23 @@ const replies: Record<Exclude<TopicDecision,"business">,Record<Locale,string>> =
 };
 export function topicReply(decision: Exclude<TopicDecision,"business">,locale:Locale) { return replies[decision][locale]; }
 export function priceFallback(locale:Locale) { return locale==="sr" ? "Ne mogu da potvrdim takvu procenu. Važeće početne cene su u cenovniku; konačna cena i rok za konkretan projekat zahtevaju procenu obima." : "I cannot confirm that estimate. The price list contains the approved starting prices; a final price and timeline require a review of your project's scope."; }
-const approvedPrices=new Set([...websitePackages,...additionalServices,...carePlans].flatMap(item=>item.startingPrice===undefined?[]:[item.startingPrice]));
+const approvedEurPrices=new Set([...websitePackages,...additionalServices,...carePlans].flatMap(item=>item.startingPrice===undefined?[]:[item.startingPrice]));
+const approvedUsdPrices=new Set([...websitePackages,...additionalServices,...carePlans].flatMap(item=>item.usStartingPrice===undefined?[]:[item.usStartingPrice]));
 function amount(value:string) {
   const clean=value.replace(/[\s\u00a0]/g,"");
   const normalized=/^\d{1,3}(?:[.,]\d{3})+(?:[.,]\d{2})?$/.test(clean) ? clean.replace(/[.,](?=\d{3}(?:\D|$))/g,"").replace(",",".") : clean.replace(",",".");
   return Number(normalized);
 }
-export function hasUnapprovedPrice(text:string) {
-  if (/\$|\b(?:USD|dollars?)\b/i.test(text)) return true;
+export function hasUnapprovedPrice(text:string,locale:Locale="sr") {
   const number="(\\d+(?:[., \\u00a0]\\d{2,3})*)";
-  const patterns=[new RegExp(number+"\\s*(?:EUR\\b|€|evr[aou]?\\b|euros?\\b)","gi"),new RegExp("(?:€|EUR\\s+)\\s*"+number,"gi"),new RegExp("\\b(?:cena|price|cost)\\s*(?:je|is|iznosi|starts? at|kre[ćc]e od|od|from|:)\\s*"+number,"gi")];
-  return patterns.some(pattern=>[...text.matchAll(pattern)].some(match=>!approvedPrices.has(amount(match[1]))));
+  if (locale==="sr" && /\$|\b(?:USD|dollars?)\b/i.test(text)) return true;
+  if (locale==="en" && /€|\b(?:EUR|euros?|evr[aou]?)\b/i.test(text)) return true;
+  const usdPatterns=[new RegExp(number+"\\s*(?:USD\\b|dollars?\\b)","gi"),new RegExp("(?:\\$|USD\\s+)\\s*"+number,"gi")];
+  if (usdPatterns.some(pattern=>[...text.matchAll(pattern)].some(match=>!approvedUsdPrices.has(amount(match[1]))))) return true;
+  const eurPatterns=[new RegExp(number+"\\s*(?:EUR\\b|€|evr[aou]?\\b|euros?\\b)","gi"),new RegExp("(?:€|EUR\\s+)\\s*"+number,"gi")];
+  if (eurPatterns.some(pattern=>[...text.matchAll(pattern)].some(match=>!approvedEurPrices.has(amount(match[1]))))) return true;
+  const barePattern=new RegExp("\\b(?:cena|price|cost)\\s*(?:je|is|iznosi|starts? at|kre[ćc]e od|od|from|:)\\s*"+number,"gi");
+  return [...text.matchAll(barePattern)].some(match=>{const n=amount(match[1]);return !(locale==="sr"?approvedEurPrices:approvedUsdPrices).has(n)});
 }
 /** Sentence buffering preserves incremental display while never publishing an unverified price sentence. */
 export class VerifiedReply {
@@ -40,12 +46,12 @@ export class VerifiedReply {
     this.pending+=delta;const ready:string[]=[];
     while(true){const match=/[.!?]\s+(?=[A-ZČĆŽŠĐ])/.exec(this.pending);if(!match)break;
       const end=match.index+match[0].length;const sentence=this.pending.slice(0,end);this.pending=this.pending.slice(end);
-      if(hasUnapprovedPrice(sentence)){this.rejected=true;this.pending="";break}ready.push(sentence);
+      if(hasUnapprovedPrice(sentence,this.locale)){this.rejected=true;this.pending="";break}ready.push(sentence);
     }
     return ready;
   }
   complete():string {
-    if(this.rejected||hasUnapprovedPrice(this.pending)){this.pending="";return priceFallback(this.locale)}
+    if(this.rejected||hasUnapprovedPrice(this.pending,this.locale)){this.pending="";return priceFallback(this.locale)}
     const tail=this.pending;this.pending="";return tail;
   }
 }

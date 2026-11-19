@@ -1,5 +1,9 @@
 import type { BlogSection } from "@/content/blog";
 import type { Editorial } from "@/content/blog-editorial";
+import { formatAdditionalStartingPrice } from "@/content/pricing";
+
+const aiPriceSr = formatAdditionalStartingPrice("ai-chatbot", "sr").toLowerCase();
+const aiPriceEn = formatAdditionalStartingPrice("ai-chatbot", "en").toLowerCase();
 
 const sectionsSr: readonly BlogSection[] = [
   {
@@ -59,7 +63,7 @@ const sectionsSr: readonly BlogSection[] = [
   {
     heading: "Kolika je cena AI chatbota u 2026?",
     paragraphs: [
-      "Cena AI chatbota ima najmanje dva dela: početno postavljanje i redovne troškove rada. NMark Designs integraciju AI chatbota nudi od 350 €. Osnovni obim obuhvata asistenta sa informacijama o poslovanju, FAQ odgovorima i usmeravanjem ka kontakt formi. Mesečna API potrošnja i eksterni servisi plaćaju se zasebno.",
+      `Cena AI chatbota ima najmanje dva dela: početno postavljanje i redovne troškove rada. NMark Designs integraciju AI chatbota nudi ${aiPriceSr}. Osnovni obim obuhvata asistenta sa informacijama o poslovanju, FAQ odgovorima i usmeravanjem ka kontakt formi. Mesečna API potrošnja i eksterni servisi plaćaju se zasebno.`,
       "Pretraga kataloga u realnom vremenu, više povezanih sistema i složena obrada upita traže zasebnu procenu. Početna cena nije obećanje da svaka prodajna automatizacija staje u isti budžet.",
       "Gotove platforme imaju drugačiji obračun. Sledeći primeri provereni su 20. oktobra 2026. i služe za poređenje modela naplate. Iznosi su u originalnim valutama; konačan račun zavisi od važećih uslova, poreza i izabranih dodataka.",
     ],
@@ -69,7 +73,7 @@ const sectionsSr: readonly BlogSection[] = [
         caption: "Početna integracija i pretplate nisu isti trošak i ne pokrivaju isti obim.",
         columns: ["Primer", "Objavljena cena", "Šta proveriti"],
         rows: [
-          ["NMark Designs integracija", "Od 350 € za početnu implementaciju", "Dogovoreni obim; API i eksterni servisi odvojeno"],
+          ["NMark Designs integracija", `${aiPriceSr[0].toUpperCase()}${aiPriceSr.slice(1)} za početnu implementaciju`, "Dogovoreni obim; API i eksterni servisi odvojeno"],
           ["Chatbase Hobby", "32 USD mesečno uz godišnju naplatu", "700 kredita za poruke mesečno; krediti nisu broj celih razgovora"],
           ["Intercom Fin", "Od 0,99 USD po obračunatom ishodu", "Definicija ishoda, minimalna potrošnja i eventualne licence za tim"],
         ],
@@ -161,7 +165,7 @@ const sectionsSr: readonly BlogSection[] = [
     blocks: [{
       type: "faq",
       items: [
-        { question: "Koliko košta AI chatbot za sajt?", answer: "NMark Designs početnu integraciju nudi od 350 €, dok se API potrošnja i eksterni servisi plaćaju odvojeno. Katalog, CRM i napredna automatizacija procenjuju se prema obimu. Kod gotovih platformi posebno proverite pretplatu, limite i dodatke." },
+        { question: "Koliko košta AI chatbot za sajt?", answer: `NMark Designs početnu integraciju nudi ${aiPriceSr}, dok se API potrošnja i eksterni servisi plaćaju odvojeno. Katalog, CRM i napredna automatizacija procenjuju se prema obimu. Kod gotovih platformi posebno proverite pretplatu, limite i dodatke.` },
         { question: "Da li postoji besplatan chatbot za web sajt?", answer: "Pojedine platforme nude probne ili ograničene besplatne planove. Proverite rok trajanja, broj poruka, dozvoljene funkcije i ponašanje kada se limit potroši. Besplatno testiranje ne znači da su integracija, održavanje i buduća potrošnja besplatni." },
         { question: "Može li AI chatbot da radi na srpskom jeziku?", answer: "Može, uz izbor odgovarajućeg modela i proverene izvore. Pre objave testirajte poslovne termine, latinicu, ćirilicu i konkretna pitanja kupaca. Podrška jeziku sama po sebi nije potvrda tačnosti odgovora." },
         { question: "Može li da prikazuje aktuelne cene i proizvode?", answer: "Može ako je povezan sa ažurnim katalogom ili odgovarajućim API-jem. Sam pristup opisu proizvoda ili starom PDF-u ne obezbeđuje današnju cenu i dostupnost. Potrebno je definisati i šta prikazuje kada izvor nije dostupan." },
@@ -232,7 +236,7 @@ const sectionsEn: readonly BlogSection[] = [
   {
     heading: "How much does a website AI chatbot cost in 2026?",
     paragraphs: [
-      "There are at least two costs: initial implementation and ongoing operation. NMark Designs offers AI chatbot integration from €350. The starting scope covers business information, FAQ answers, and directing visitors to a contact form. Model API usage and external services are billed separately.",
+      `There are at least two costs: initial implementation and ongoing operation. NMark Designs offers AI chatbot integration ${aiPriceEn}. The starting scope covers business information, FAQ answers, and directing visitors to a contact form. Model API usage and external services are billed separately.`,
       "Live catalog search, multiple connected systems, and advanced enquiry handling require a separate scope estimate. The starting price does not mean every sales automation fits the same budget.",
       "Hosted platforms use different billing models. The examples below were checked on October 20, 2026, to illustrate those differences. Prices remain in their original currencies; applicable terms, taxes, and add-ons affect the final bill.",
     ],
@@ -242,7 +246,7 @@ const sectionsEn: readonly BlogSection[] = [
         caption: "Initial implementation and subscriptions cover different work and are separate costs.",
         columns: ["Example", "Published price", "What to check"],
         rows: [
-          ["NMark Designs integration", "Initial implementation from €350", "Agreed scope; API usage and external services billed separately"],
+          ["NMark Designs integration", `Initial implementation ${aiPriceEn}`, "Agreed scope; API usage and external services billed separately"],
           ["Chatbase Hobby", "$32 per month, billed annually", "700 message credits monthly; credits are not whole conversations"],
           ["Intercom Fin", "From $0.99 per billable outcome", "Outcome definition, minimum commitment, and any team seat costs"],
         ],
@@ -328,7 +332,7 @@ const sectionsEn: readonly BlogSection[] = [
     blocks: [{
       type: "faq",
       items: [
-        { question: "How much does a website AI chatbot cost?", answer: "NMark Designs offers initial integration from €350, with API usage and external services billed separately. Catalog search, CRM connections, and advanced automation need a scope estimate. For hosted platforms, check subscription limits and add-ons separately." },
+        { question: "How much does a website AI chatbot cost?", answer: `NMark Designs offers initial integration ${aiPriceEn}, with API usage and external services billed separately. Catalog search, CRM connections, and advanced automation need a scope estimate. For hosted platforms, check subscription limits and add-ons separately.` },
         { question: "Can I get a free website chatbot?", answer: "Some platforms offer trials or limited free plans. Check expiry, message allowances, included features, and what happens at the limit. Free testing does not make integration, maintenance, or future usage free." },
         { question: "Can an AI chatbot work in Serbian?", answer: "Yes, with a suitable model and reliable sources. Test business terminology, Latin and Cyrillic scripts, and actual customer questions before launch. Language support alone does not establish answer accuracy." },
         { question: "Can it display current prices and products?", answer: "Yes, when connected to an up-to-date catalog or appropriate API. Product descriptions or an old PDF do not establish current prices and availability. Define what happens when the data source is unavailable too." },
@@ -370,8 +374,8 @@ export const aiChatbotGuide2026: Editorial = {
   },
   topic: { sr: "AI chatbot i automatizacija upita", en: "AI chatbots and enquiry automation" },
   answer: {
-    sr: "AI chatbot za sajt može da odgovara na pitanja, pretražuje katalog i prikuplja upite ako ima pouzdane izvore i odgovarajuće integracije. U NMark Designs ponudi početna integracija košta od 350 €, dok se API potrošnja i eksterni servisi plaćaju zasebno. Napredne funkcije procenjuju se prema obimu. Isplativost zavisi od stvarno ušteđenog vremena, kvaliteta upita i ukupnih troškova; za mali broj jednostavnih pitanja dovoljan može biti dobar FAQ.",
-    en: "A website AI chatbot can answer questions, search a catalog, and collect enquiries when supported by reliable sources and suitable integrations. NMark Designs offers initial integration from €350, with API usage and external services billed separately. Advanced features need a scope estimate. Value depends on time actually saved, enquiry quality, and total costs; a good FAQ may be enough for a small number of simple questions.",
+    sr: `AI chatbot za sajt može da odgovara na pitanja, pretražuje katalog i prikuplja upite ako ima pouzdane izvore i odgovarajuće integracije. U NMark Designs ponudi početna integracija košta ${aiPriceSr}, dok se API potrošnja i eksterni servisi plaćaju zasebno. Napredne funkcije procenjuju se prema obimu. Isplativost zavisi od stvarno ušteđenog vremena, kvaliteta upita i ukupnih troškova; za mali broj jednostavnih pitanja dovoljan može biti dobar FAQ.`,
+    en: `A website AI chatbot can answer questions, search a catalog, and collect enquiries when supported by reliable sources and suitable integrations. NMark Designs offers initial integration ${aiPriceEn}, with API usage and external services billed separately. Advanced features need a scope estimate. Value depends on time actually saved, enquiry quality, and total costs; a good FAQ may be enough for a small number of simple questions.`,
   },
   sections: { sr: sectionsSr, en: sectionsEn },
   sources: [

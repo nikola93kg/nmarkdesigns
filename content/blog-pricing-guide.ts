@@ -38,7 +38,7 @@ const currentOfferSr: BlogSection = {
 const currentOfferEn: BlogSection = {
   heading: "Current NMark Designs starting prices",
   paragraphs: [
-    "These are NMark Designs starting prices in EUR. The broader budgeting ranges below describe the Serbian market and help compare scope. They are not an official market average or evidence of any portfolio project's budget.",
+    "These are NMark Designs US website packages in USD. The broader budgeting ranges below describe the Serbian market in EUR and help compare scope. They are separate from the US offer and are not an official market average or evidence of any portfolio project's budget.",
     "Starting prices cover the baseline package scope. Your final quote depends on content, languages, features and integrations. Domain, hosting, licences and maintenance are considered separately; the proposal defines the actual scope and costs.",
   ],
   blocks: [
@@ -129,7 +129,7 @@ export const websitePricingSerbia2026 = {
   },
   answer: {
     sr: `Cena izrade sajta zavisi od obima, sadržaja i funkcija. U NMark Designs početne cene su ${prices.landing} € za landing stranicu, ${prices.business} € za poslovni sajt, ${prices.advanced} € za napredni sajt i ${new Intl.NumberFormat("sr-RS").format(prices.ecommerce)} € za web prodavnicu. To su naši osnovni paketi, ne prosek cena u Srbiji. U nastavku razdvajamo aktuelnu ponudu, orijentacione tržišne raspone i troškove posle izrade.`,
-    en: `Website cost depends on scope, content and features. NMark Designs starting prices are ${formatWebsiteStartingPrice("landing-page", "en")} for a landing page, ${formatWebsiteStartingPrice("business-website", "en")} for a business website, ${formatWebsiteStartingPrice("advanced-website", "en")} for an advanced site and ${formatWebsiteStartingPrice("ecommerce", "en")} for an online store. These are baseline packages in EUR. The Serbian market examples below also use EUR. This guide separates our current offer, indicative market ranges and ongoing costs.`,
+    en: `Website cost depends on scope, content and features. NMark Designs starting prices are ${formatWebsiteStartingPrice("landing-page", "en")} for a landing page, ${formatWebsiteStartingPrice("business-website", "en")} for a business website, ${formatWebsiteStartingPrice("advanced-website", "en")} for an advanced site and ${formatWebsiteStartingPrice("ecommerce", "en")} for an online store. These are US baseline packages in USD. The Serbian market examples below remain in EUR. This guide separates our current offer, indicative market ranges and ongoing costs.`,
   },
   sections: {
     sr: [
