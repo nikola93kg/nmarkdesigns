@@ -53,3 +53,10 @@ Current offers in the English AI, redesign, SEO and WordPress/Next.js articles a
 - 16 chatbot contract/topic/lead/local-configuration checks passed without provider calls or database writes. They cover every current market price, cross-currency rejection and split-stream price checking.
 - English 375px and 1440px pricing screenshots were visually inspected. No layout/style redesign was needed.
 - No paid AI calls, real emails, production SQL, deployment or main changes were made during this alignment.
+
+
+## Owner-created database — follow-up
+
+The owner subsequently merged/deployed main and created `u540890623_nmark_chatbot` (the `_prod` suffix exceeded the panel limit). Their hPanel screenshot shows the database assigned, with external connections off. The earlier environment/database observations above describe the pre-creation state.
+
+[First-import instructions](sql/README.md) and [schema-only SQL](sql/hostinger-initial.sql) now provide a phpMyAdmin initialization path without changing the development migration guard. The export was tested on disposable local MySQL 8.4 databases: all 15 tables matched a separate native Drizzle migration run, all 10 ledger hashes/timestamps matched, a later native migrator made no changes, re-import failed at the existing ledger table, and Unicode roundtrip passed. Temporary test databases and the isolated QA container were removed. No production SQL has been executed by the agent. This file is for an empty database only; it does not implement upgrades of populated production databases.
