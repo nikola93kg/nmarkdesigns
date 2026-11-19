@@ -15,7 +15,9 @@ for (const locale of ["sr", "en"] as const) {
         await expect(page.getByRole("heading", { name: copy.overview, exact: true })).toBeVisible();
         await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow");
         expect((await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze()).violations).toEqual([]);
-        await page.screenshot({ path: testInfo.outputPath(`${locale}-${width}-dashboard.png`) });
+        await expect(page.getByRole("heading", { name: copy.usageTitle })).toBeVisible();
+        expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+        await page.screenshot({ path: testInfo.outputPath(`${locale}-${width}-dashboard.png`), fullPage: true });
         await page.goto(`/admin/${locale}/leads/`); await page.getByRole("link", { name: "Test Visitor", exact: true }).click();
         await expect(page.getByRole("heading", { name: copy.details })).toBeVisible();
         await page.getByLabel(copy.note, { exact: true }).fill("Test note"); await page.getByLabel(copy.status, { exact: true }).selectOption("contacted");

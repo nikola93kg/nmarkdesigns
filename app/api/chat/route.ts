@@ -1,6 +1,7 @@
+import { settleBudget } from "@/lib/chatbot/budget";
 import { randomUUID } from "node:crypto";
 import { messageInput, type ChatEvent, type FinishStatus } from "@/lib/chatbot/contracts";
-import { apiError, assertOrigin, limiterIdentity, ownedSession, parseBody } from "@/lib/chatbot/security";
+import { apiError, assertOrigin, ChatError, limiterIdentity, ownedSession, parseBody } from "@/lib/chatbot/security";
 import { finishTurn, modelHistory, reserveTurn } from "@/lib/chatbot/store";
 import { responseStream } from "@/lib/chatbot/provider";
 import { chatConfig } from "@/lib/chatbot/config";
@@ -38,14 +39,18 @@ export async function POST(request: Request) {
           request.signal.removeEventListener("abort", onAbort);
           controller.close(); return;
         }
+        const startedAt = Date.now();
+        let usage: { input_tokens: number; output_tokens: number } | undefined;
         let content = "";
         let status: FinishStatus = "error";
         let timedOut = false;
+        let errorCode = "STREAM_ERROR";
         const timeout = setTimeout(() => { timedOut = true; abort.abort(); }, chatConfig().timeoutMs);
         try {
           const history = await modelHistory(session.id, turn.assistantId);
-          const provider = await responseStream(input.message, input.locale, history, abort.signal);
+          const provider = await responseStream(input.message, input.locale, history, abort.signal, turn.generationId);
           for await (const event of provider) {
+            if (event.type === "response.completed" || event.type === "response.failed" || event.type === "response.incomplete") usage = event.response.usage ?? undefined;
             if (event.type === "response.output_text.delta") {
               content += event.delta;
               send({ type: "delta", text: event.delta });
@@ -53,16 +58,17 @@ export async function POST(request: Request) {
             else if (event.type === "response.failed" || event.type === "response.incomplete" || event.type === "error") throw new Error("STREAM_ERROR");
           }
           if (!content.trim()) status = "error";
-        } catch { status = abort.signal.aborted && !timedOut ? "cancelled" : "error"; }
+        } catch (error) { if (error instanceof ChatError && error.code === "RATE_LIMITED") errorCode = "RATE_LIMITED"; status = abort.signal.aborted && !timedOut ? "cancelled" : "error"; }
         finally { clearTimeout(timeout); request.signal.removeEventListener("abort", onAbort); }
         try {
+          await settleBudget(turn.generationId, usage, Date.now() - startedAt);
           // Do not report completed until the transcript has been durably persisted.
           await finishTurn(session.id, turn.assistantId, turn.generationId, content, status, links);
           if (status === "completed") {
             send({ type: "links", links });
             if (shouldOfferLead(input.message, Boolean(session.leadDeclinedAt))) send({ type: "lead_offer" });
           }
-          if (status === "error") send({ type: "error", code: "STREAM_ERROR", requestId });
+          if (status === "error") send({ type: "error", code: errorCode, requestId });
           send({ type: "done", messageId: turn.assistantId, status });
         } catch { send({ type: "error", code: "UNAVAILABLE", requestId }); }
         if (!disconnected) controller.close();

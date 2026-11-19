@@ -9,6 +9,7 @@ test("MySQL migrations, concurrent generation, replay, retry, quotas and cascade
   Object.assign(process.env, {
     CHAT_ENABLED: "true", CHAT_ORIGIN: "http://127.0.0.1:3110", CHAT_IDENTITY_SECRET: "local-database-test-identity-secret-only",
     OPENAI_MODEL: "test-model-no-provider-request", OPENAI_API_KEY: "test-key-no-provider-request",
+    CHAT_BUDGET_DAY_USD: "100", CHAT_BUDGET_MONTH_USD: "100", CHAT_PRICE_MODEL: "test-model-no-provider-request", CHAT_PRICE_INPUT_USD_PER_MILLION: "1", CHAT_PRICE_OUTPUT_USD_PER_MILLION: "2",
     CHAT_MAX_CALLS_DAY: "1000", CHAT_MAX_CALLS_MONTH: "1000",
     CHAT_PRIVACY_URL_SR: "https://nmarkdesigns.com/sr/", CHAT_PRIVACY_URL_EN: "https://nmarkdesigns.com/en/",
   });

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowUp, RotateCcw, Square, X, ArrowUpRight } from "lucide-react";
+import { trackChatInteraction } from "@/lib/chatbot/client-metrics";
 import Link from "next/link";
 import { LeadForm } from "./LeadForm";
 import { leadCopy } from "@/content/chatbot/lead-copy";
@@ -41,6 +42,10 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
   const [pendingConsent, setPendingConsent] = useState(false);
   const [restoring, setRestoring] = useState(!preview);
   const busy = phase === "sending" || phase === "streaming";
+
+  useEffect(() => {
+    if (open && consented && !preview) trackChatInteraction("chat_open",locale);
+  },[open,consented,preview,locale]);
 
   useEffect(() => {
     const element = dialog.current;
@@ -151,7 +156,8 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
     setOfferLead(false); setLeadDeclined(true);
     if (!preview) void fetch("/api/chat/lead/preference/", { method: "POST", keepalive: true, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ declined: true }) }).catch(() => undefined);
   }
-  function openLead() { setShowLead(true); follow.current = false; requestAnimationFrame(() => { if (transcript.current) transcript.current.scrollTop = 0; }); }
+  function openLead() {
+    if (!preview) trackChatInteraction("lead_form_open",locale); setShowLead(true); follow.current = false; requestAnimationFrame(() => { if (transcript.current) transcript.current.scrollTop = 0; }); }
   function submit(event: FormEvent) { event.preventDefault(); void send({ message: draft.trim(), clientMessageId: crypto.randomUUID() }); }
   return (
     <dialog ref={dialog} data-chat-panel data-chat-preview={preview || undefined} aria-labelledby="chat-title" onCancel={(event) => { event.preventDefault(); onClose(); }}
@@ -180,13 +186,13 @@ export default function ChatPanel({ locale, open, onClose, privacyUrls, previewL
           {!preview && !privacyUrls[locale] && <p role="status" className="text-small">{copy.errors.UNAVAILABLE}</p>}
           <button type="button" onClick={onClose} className="min-h-11 w-full text-small underline underline-offset-4">{copy.decline}</button>
         </div>}
-        {consented && messages.length === 0 && <div className="flex flex-wrap gap-2">{copy.quickActions.map((text) => <button key={text} type="button" onClick={() => void send({ message: text, clientMessageId: crypto.randomUUID() })} disabled={busy} className="min-h-11 rounded-control border border-border px-3 py-2 text-left text-small hover:bg-accent-soft disabled:opacity-50">{text}</button>)}</div>}
+        {consented && messages.length === 0 && <div className="flex flex-wrap gap-2">{copy.quickActions.map((text) => <button key={text} type="button" onClick={() => { if (!preview) trackChatInteraction("quick_action_click",locale); void send({ message: text, clientMessageId: crypto.randomUUID() }); }} disabled={busy} className="min-h-11 rounded-control border border-border px-3 py-2 text-left text-small hover:bg-accent-soft disabled:opacity-50">{text}</button>)}</div>}
         <div role="log" aria-label="NMark Assistant" aria-live="off" className="space-y-5">
           {messages.map((m) => <article key={m.id} className={m.role === "user" ? "ml-7 rounded-control bg-accent-soft p-3" : "mr-2"}>
             <p className="mb-1 text-small font-semibold text-brand">{m.role === "user" ? copy.you : "NMark Assistant"}</p>
             <p className="whitespace-pre-wrap break-words text-small leading-relaxed">{m.content || (m.status === "pending" ? copy.busy : copy.errors.STREAM_ERROR)}</p>
             {m.role === "assistant" && m.status === "cancelled" && <p className="mt-2 text-small text-muted">{copy.cancelled}</p>}
-            {m.links?.map((link) => <Link key={link.id} href={new URL(link.url).pathname} className="mt-3 flex items-start justify-between gap-2 border-t border-border pt-3 text-small text-brand underline-offset-4 hover:underline" onClick={onClose}>
+            {m.links?.map((link) => <Link key={link.id} href={new URL(link.url).pathname} className="mt-3 flex items-start justify-between gap-2 border-t border-border pt-3 text-small text-brand underline-offset-4 hover:underline" onClick={() => { if (!preview) trackChatInteraction("knowledge_link_click",locale); onClose(); }}>
               <span><span className="block font-semibold">{link.title}</span>{link.category === "project" && <span className="mt-1 block text-muted">{link.description}</span>}</span><ArrowUpRight className="mt-1 size-4 shrink-0" aria-hidden="true" />
             </Link>)}
           </article>)}

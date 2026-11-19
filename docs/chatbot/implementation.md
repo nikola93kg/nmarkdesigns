@@ -107,3 +107,7 @@ The lead form, qualification/suppression, cookie-owned API, transactional lead/o
 ## Iteration 3 — owner administration
 
 Auth.js email-link sign-in, MySQL sessions, private SR/EN dashboard/lists/transcripts/details, status/note updates, notification reconciliation and audited deletion are implemented. See [admin.md](admin.md) for local review, authentication limits, metric definitions and remaining gates. The owner's explicit admin-email confirmation is recorded in private local configuration; no secrets are committed. Retention, durable analytics, monetary budget controls and production operation remain pending.
+
+## Iteration 4 — data lifecycle, permanent metrics and cost limits
+
+Owner-approved 90/365-day retention, seven-day technical grace cleanup, idempotent historical backfill, permanent daily aggregates and atomic daily/monthly USD reservations are implemented. The admin overview now includes usage against the approved USD 0.50/day and USD 4/month limits. See [operations.md](operations.md) for event semantics, pricing, protected cron operation, local migration/backfill and validation. This supersedes the earlier pending-retention/metrics/budget entries. Hostinger scheduling, staging/production database work and launch/privacy gates remain unperformed.

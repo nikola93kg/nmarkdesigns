@@ -1,10 +1,11 @@
 import "server-only";
+import { recordMetric } from "./analytics";
 import { randomUUID, timingSafeEqual, createHash } from "node:crypto";
 import { and, asc, eq, lte, sql } from "drizzle-orm";
 import { createSmtpTransport, getSmtpConfig } from "../contact-delivery";
 import { site } from "../../content/site";
 import { chatDb } from "./db";
-import { chatLeads, leadNotifications } from "./schema";
+import { chatLeads, chatSessions, leadNotifications } from "./schema";
 import { adminConfig, adminReady } from "./admin/config";
 import { ChatError } from "./security";
 
@@ -69,8 +70,16 @@ export const deliverNotification: NotificationSender = async (lead) => {
 export async function runNotificationBatch(sender: NotificationSender = deliverNotification, limit = 2, now = new Date()) {
   const db = chatDb();
   const counts = { processed: 0, sent: 0, pending: 0, failed: 0, uncertain: 0 };
-  await db.update(leadNotifications).set({ status: "uncertain", lastErrorCode: "WORKER_ACCEPTANCE_UNKNOWN", claimId: null, leaseUntil: null })
-    .where(and(eq(leadNotifications.status, "processing"), lte(leadNotifications.leaseUntil, now)));
+  const stale = await db.select({ notification: leadNotifications, sessionId: chatLeads.sessionId, locale: chatLeads.locale }).from(leadNotifications)
+    .innerJoin(chatLeads,eq(chatLeads.id,leadNotifications.leadId)).where(and(eq(leadNotifications.status,"processing"),lte(leadNotifications.leaseUntil,now))).limit(100);
+  for (const item of stale) await db.transaction(async(tx) => {
+    const [session] = await tx.select().from(chatSessions).where(eq(chatSessions.id,item.sessionId)).for("update");
+    if (!session) return;
+    const [row] = await tx.select().from(leadNotifications).where(eq(leadNotifications.id,item.notification.id)).for("update");
+    if (row?.status!=="processing" || !row.leaseUntil || row.leaseUntil>now) return;
+    await tx.update(leadNotifications).set({status:"uncertain",lastErrorCode:"WORKER_ACCEPTANCE_UNKNOWN",claimId:null,leaseUntil:null}).where(eq(leadNotifications.id,row.id));
+    await recordMetric(tx,session.id,item.locale,"notification_failure",row.id,now);
+  });
   for (let i = 0; i < Math.min(limit, 2); i++) {
     const claimed = await db.transaction(async (tx) => {
       const [notification] = await tx.select().from(leadNotifications)
@@ -88,12 +97,19 @@ export async function runNotificationBatch(sender: NotificationSender = deliverN
     try { result = await sender(claimed.lead); }
     catch { result = { status: "uncertain", code: "DELIVERY_EXCEPTION" }; }
     const status = result.status === "sent" ? "sent" : result.status === "uncertain" ? "uncertain" : claimed.attempts >= 5 ? "failed" : "pending";
-    await db.update(leadNotifications).set({ status, claimId: null, leaseUntil: null,
+    await db.transaction(async (tx) => {
+      const [session] = await tx.select().from(chatSessions).where(eq(chatSessions.id, claimed.lead.sessionId)).for("update");
+      if (!session) return;
+      const [current] = await tx.select().from(leadNotifications).where(eq(leadNotifications.id, claimed.id)).for("update");
+      if (current?.claimId !== claimed.claimId) return;
+      if (result.status !== "sent") await recordMetric(tx, session.id, claimed.lead.locale, "notification_failure", claimed.id, now);
+    await tx.update(leadNotifications).set({ status, claimId: null, leaseUntil: null,
       lastErrorCode: result.status === "sent" ? null : result.code,
       providerMessageId: result.status === "sent" ? result.messageId : null,
       sentAt: result.status === "sent" ? new Date() : null,
       nextRetryAt: new Date(now.getTime() + Math.min(86400, 60 * 2 ** (claimed.attempts - 1)) * 1000),
     }).where(and(eq(leadNotifications.id, claimed.id), eq(leadNotifications.claimId, claimed.claimId)));
+    });
     counts.processed++; counts[status]++;
   }
   return counts;

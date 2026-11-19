@@ -1,4 +1,5 @@
 import "server-only";
+import { syncSessionMetrics } from "../analytics";
 import { randomUUID } from "node:crypto";
 import { eq } from "drizzle-orm";
 import { chatDb } from "../db";
@@ -30,6 +31,7 @@ export async function deleteRecord(kind: "lead" | "conversation", id: string) {
       const rows = await tx.select().from(leadNotifications).where(eq(leadNotifications.leadId, item.id)).for("update");
       if (rows.some((row) => row.status === "processing" && (!row.leaseUntil || row.leaseUntil > new Date()))) throw new ChatError("BUSY", 409);
     }
+    await syncSessionMetrics(tx, sessionId, session.locale);
     if (kind === "lead") await tx.delete(chatLeads).where(eq(chatLeads.id, id));
     else await tx.delete(chatSessions).where(eq(chatSessions.id, id));
     await tx.insert(adminAuditLogs).values({ id: randomUUID(), adminIdentity: owner, action: `${kind}.deleted`, targetType: kind, targetId: id, createdAt: new Date() });

@@ -1,4 +1,4 @@
-import { mysqlTable, varchar, timestamp, text, int, uniqueIndex, index, json, primaryKey } from "drizzle-orm/mysql-core";
+import { mysqlTable, varchar, timestamp, text, int, bigint, uniqueIndex, index, json, primaryKey } from "drizzle-orm/mysql-core";
 import type { ChatLink } from "./contracts";
 
 export const chatSessions = mysqlTable("chat_sessions", {
@@ -10,10 +10,12 @@ export const chatSessions = mysqlTable("chat_sessions", {
   createdAt: timestamp("created_at", { mode: "date", fsp: 3 }).notNull(),
   lastActivityAt: timestamp("last_activity_at", { mode: "date", fsp: 3 }).notNull(),
   expiresAt: timestamp("expires_at", { mode: "date", fsp: 3 }).notNull(),
+  metricsSynced: int("metrics_synced").notNull().default(0),
+  lastLeadAt: timestamp("last_lead_at", { mode: "date", fsp: 3 }),
   leadDeclinedAt: timestamp("lead_declined_at", { mode: "date", fsp: 3 }),
   activeGenerationId: varchar("active_generation_id", { length: 36 }),
   activeUntil: timestamp("active_until", { mode: "date", fsp: 3 }),
-}, (t) => [index("sessions_expiry_idx").on(t.expiresAt), index("sessions_admin_created_idx").on(t.createdAt, t.id)]);
+}, (t) => [index("sessions_expiry_idx").on(t.expiresAt), index("sessions_admin_created_idx").on(t.createdAt, t.id), index("sessions_retention_idx").on(t.lastLeadAt,t.lastActivityAt), index("sessions_metrics_idx").on(t.metricsSynced,t.lastActivityAt)]);
 export const chatMessages = mysqlTable("chat_messages", {
   id: varchar("id", { length: 36 }).primaryKey(),
   sessionId: varchar("session_id", { length: 36 }).notNull().references(() => chatSessions.id, { onDelete: "cascade" }),
@@ -52,7 +54,7 @@ export const chatLeads = mysqlTable("chat_leads", {
   status: varchar("status", { length: 16 }).$type<"new" | "contacted" | "qualified" | "closed_won" | "closed_lost">().notNull().default("new"),
   internalNote: text("internal_note"),
   createdAt: timestamp("created_at", { mode: "date", fsp: 3 }).notNull(),
-}, (t) => [uniqueIndex("leads_idempotency_idx").on(t.sessionId, t.clientSubmissionId), index("leads_created_idx").on(t.createdAt, t.status)]);
+}, (t) => [uniqueIndex("leads_idempotency_idx").on(t.sessionId, t.clientSubmissionId), index("leads_created_idx").on(t.createdAt, t.status), index("leads_session_date_idx").on(t.sessionId,t.createdAt)]);
 
 export const leadNotifications = mysqlTable("chat_lead_notifications", {
   id: varchar("id", { length: 36 }).primaryKey(),
@@ -103,3 +105,35 @@ export const adminAuditLogs = mysqlTable("chat_admin_audit_logs", {
   targetId: varchar("target_id", { length: 36 }).notNull(),
   createdAt: timestamp("created_at", { mode: "date", fsp: 3 }).notNull(),
 }, (t) => [index("admin_audit_created_idx").on(t.createdAt)]);
+
+// Aggregates contain no visitor IDs, message text, contact fields or URL parameters.
+export const chatDailyMetrics = mysqlTable("chat_daily_metrics", {
+  day: varchar("day", { length: 10 }).notNull(),
+  locale: varchar("locale", { length: 2 }).$type<"sr" | "en">().notNull(),
+  event: varchar("event", { length: 40 }).notNull(),
+  total: int("total").notNull(),
+}, (t) => [primaryKey({ columns: [t.day, t.locale, t.event] })]);
+export const chatMetricReceipts = mysqlTable("chat_metric_receipts", {
+  keyHash: varchar("key_hash", { length: 64 }).primaryKey(),
+  sessionId: varchar("session_id", { length: 36 }).notNull().references(() => chatSessions.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at", { mode: "date", fsp: 3 }).notNull(),
+});
+export const chatBudgetBuckets = mysqlTable("chat_budget_buckets", {
+  key: varchar("bucket_key", { length: 16 }).primaryKey(),
+  committedMicros: bigint("committed_micros", { mode: "number" }).notNull().default(0),
+  reservedMicros: bigint("reserved_micros", { mode: "number" }).notNull().default(0),
+});
+export const chatUsage = mysqlTable("chat_usage", {
+  id: varchar("id", { length: 36 }).primaryKey(),
+  dayKey: varchar("day_key", { length: 16 }).notNull(),
+  monthKey: varchar("month_key", { length: 16 }).notNull(),
+  model: varchar("model", { length: 120 }).notNull(),
+  inputRate: bigint("input_rate", { mode: "number" }).notNull(),
+  outputRate: bigint("output_rate", { mode: "number" }).notNull(),
+  inputTokens: int("input_tokens"), outputTokens: int("output_tokens"),
+  reservedMicros: bigint("reserved_micros", { mode: "number" }).notNull(),
+  chargedMicros: bigint("charged_micros", { mode: "number" }),
+  status: varchar("status", { length: 16 }).$type<"reserved" | "settled" | "uncertain" | "released">().notNull(),
+  latencyMs: int("latency_ms"),
+  createdAt: timestamp("created_at", { mode: "date", fsp: 3 }).notNull(),
+}, (t) => [index("usage_status_date_idx").on(t.status, t.createdAt)]);

@@ -1,5 +1,7 @@
 # Owner admin — iteration 3
 
+**Current behavior:** [iteration 4 operations](operations.md) supersedes the retained-record metric definitions and pending retention/budget items below. The overview now uses permanent daily aggregates and displays budget consumption.
+
 2026-11-19, `feature/chatbot`. Scope: passwordless owner authentication, private SR/EN administration, auditable edits/deletion, current-record metrics and notification reconciliation. No production database, hosting configuration or deployment was changed.
 
 ## Local review

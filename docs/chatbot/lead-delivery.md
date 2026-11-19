@@ -71,3 +71,5 @@ Owner-only Auth.js admin access and screens, audit/status/deletion flows, approv
 - Two real OpenAI streaming checks passed as described above; no actual email was sent. These checks are separate from the 34 distinct automated tests above.
 - Concurrent Playwright suites now use separate artifact directories. An initial artifact deletion collision was corrected; final runs passed with isolated outputs.
 - `git diff --check` passed. Temporary local MySQL test container was stopped/removed after validation; unrelated pre-existing files were preserved.
+
+Operational update: owner administration is covered by [admin.md](admin.md); approved retention, durable metrics and USD budget control are covered by [operations.md](operations.md). These supersede the corresponding earlier pending items; production scheduling and launch checks remain open.

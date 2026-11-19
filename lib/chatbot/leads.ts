@@ -1,4 +1,5 @@
 import "server-only";
+import { recordMetric } from "./analytics";
 import { randomUUID } from "node:crypto";
 import { and, eq } from "drizzle-orm";
 import { chatDb } from "./db";
@@ -30,7 +31,8 @@ export async function receiveLead(sessionId: string, input: LeadInput, identity:
       projectDescription: input.projectDescription, preferredContactMethod: input.preferredContactMethod,
       privacyConsentAt: now, consentVersion: input.consentVersion, createdAt: now });
     await tx.insert(leadNotifications).values({ id: randomUUID(), leadId: id, status: "pending", nextRetryAt: now, createdAt: now });
-    await tx.update(chatSessions).set({ lastActivityAt: now }).where(eq(chatSessions.id, sessionId));
+    await recordMetric(tx, sessionId, input.locale, "lead_submit_success", id, now);
+    await tx.update(chatSessions).set({ lastActivityAt: now, lastLeadAt: now }).where(eq(chatSessions.id, sessionId));
     return { leadId: id, status: "received", notificationStatus: "pending" };
   });
 }

@@ -1,6 +1,7 @@
 import "server-only";
+import { recordMetric, syncSessionMetrics } from "./analytics";
 import { randomUUID } from "node:crypto";
-import { and, desc, eq, sql } from "drizzle-orm";
+import { and, count, desc, eq, sql } from "drizzle-orm";
 import { chatDb } from "./db";
 import { chatCounters, chatMessages, chatSessions } from "./schema";
 import { hashToken, ChatError } from "./security";
@@ -30,6 +31,7 @@ export async function reserveTurn(sessionId: string, clientMessageId: string, me
   return chatDb().transaction(async (tx) => {
     const [session] = await tx.select().from(chatSessions).where(eq(chatSessions.id, sessionId)).for("update");
     if (!session || session.expiresAt <= new Date()) throw new ChatError("SESSION_EXPIRED", 401);
+    if (!session.metricsSynced) { await syncSessionMetrics(tx, sessionId, session.locale); await tx.update(chatSessions).set({ metricsSynced: 1 }).where(eq(chatSessions.id, sessionId)); }
     const previous = await tx.select().from(chatMessages).where(and(eq(chatMessages.sessionId, sessionId), eq(chatMessages.clientMessageId, clientMessageId)));
     const user = previous.find((m) => m.role === "user");
     const assistant = previous.find((m) => m.role === "assistant");
@@ -45,6 +47,13 @@ export async function reserveTurn(sessionId: string, clientMessageId: string, me
     const generationId = randomUUID();
     if (!user) await tx.insert(chatMessages).values({ id: randomUUID(), sessionId, role: "user", content: message,
       status: "completed", clientMessageId, createdAt: new Date(now.getTime() - 1), completedAt: now });
+    if (!user) {
+      const [total] = await tx.select({ total: count() }).from(chatMessages).where(and(eq(chatMessages.sessionId, sessionId), eq(chatMessages.role, "user")));
+      if (total.total === 1) await recordMetric(tx, sessionId, session.locale, "chat_start", "once", now);
+      if (total.total === 2) await recordMetric(tx, sessionId, session.locale, "engaged_session", "once", now);
+      const [visitor] = await tx.select().from(chatMessages).where(and(eq(chatMessages.sessionId, sessionId), eq(chatMessages.clientMessageId, clientMessageId), eq(chatMessages.role, "user")));
+      await recordMetric(tx, sessionId, session.locale, "message_sent", visitor.id, now);
+    }
     if (assistant) await tx.update(chatMessages).set({ content: "", status: "pending", completedAt: null, links: null }).where(eq(chatMessages.id, assistantId));
     else await tx.insert(chatMessages).values({ id: assistantId, sessionId, role: "assistant", content: "", status: "pending", clientMessageId, createdAt: now });
     await tx.update(chatSessions).set({ activeGenerationId: generationId, activeUntil: new Date(now.getTime() + config.timeoutMs + 15000), lastActivityAt: now }).where(eq(chatSessions.id, sessionId));
@@ -55,6 +64,7 @@ export async function finishTurn(sessionId: string, id: string, generationId: st
   await chatDb().transaction(async (tx) => {
     const [session] = await tx.select().from(chatSessions).where(eq(chatSessions.id, sessionId)).for("update");
     if (!session || session.activeGenerationId !== generationId) throw new ChatError("STREAM_ERROR");
+    if (status === "completed" || status === "error") await recordMetric(tx, sessionId, session.locale, status === "completed" ? "response_completed" : "response_error", id);
     await tx.update(chatMessages).set({ content, status, links, completedAt: new Date() }).where(eq(chatMessages.id, id));
     await tx.update(chatSessions).set({ activeGenerationId: null, activeUntil: null, lastActivityAt: new Date() }).where(eq(chatSessions.id, sessionId));
   });

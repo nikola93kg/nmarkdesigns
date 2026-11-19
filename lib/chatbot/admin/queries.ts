@@ -1,10 +1,11 @@
 import "server-only";
-import { and, asc, count, desc, eq, exists, gte, inArray, isNotNull, lt, min, or, sql, type SQL } from "drizzle-orm";
+import { budgetSummary } from "../budget";
+import { and, asc, desc, eq, exists, gte, inArray, isNotNull, lt, or, sql, type SQL } from "drizzle-orm";
 import { z } from "zod";
 import { chatDb } from "../db";
-import { chatLeads, chatMessages, chatSessions, leadNotifications } from "../schema";
+import { chatDailyMetrics, chatLeads, chatMessages, chatSessions, leadNotifications } from "../schema";
 import { requireOwner } from "./access";
-import { dayStart, shiftDay, period, belgradeDay } from "./time";
+import { dayStart, shiftDay, period } from "./time";
 import { idSchema, rangeSchema, listFilters, leadFilters, type ConversationFilters, type LeadFilters } from "./contracts";
 import { ChatError } from "../security";
 
@@ -63,16 +64,10 @@ export async function lead(id: string) {
 }
 export async function metrics(range: "7d" | "30d") {
   await requireOwner(); rangeSchema.parse(range); const db = chatDb(); const bounds = period(range);
-  const starts = db.$with("starts").as(db.select({ sessionId: chatMessages.sessionId, startedAt: min(chatMessages.createdAt).as("started_at"), userCount: count().as("user_count") }).from(chatMessages).where(eq(chatMessages.role, "user")).groupBy(chatMessages.sessionId));
-  const [sessions, submitted, errors, failures] = await Promise.all([
-    db.with(starts).select({ startedAt: starts.startedAt, userCount: starts.userCount }).from(starts).where(and(gte(starts.startedAt, bounds.from), lt(starts.startedAt, bounds.to))),
-    db.select({ createdAt: chatLeads.createdAt }).from(chatLeads).where(and(gte(chatLeads.createdAt, bounds.from), lt(chatLeads.createdAt, bounds.to))),
-    db.select({ total: count() }).from(chatMessages).where(and(eq(chatMessages.role, "assistant"), eq(chatMessages.status, "error"), gte(chatMessages.createdAt, bounds.from), lt(chatMessages.createdAt, bounds.to))),
-    db.select({ total: count() }).from(leadNotifications).where(and(or(inArray(leadNotifications.status, ["failed", "uncertain"]), and(eq(leadNotifications.status, "pending"), isNotNull(leadNotifications.lastErrorCode))), gte(leadNotifications.createdAt, bounds.from), lt(leadNotifications.createdAt, bounds.to))),
-  ]);
-  const daily = bounds.days.map((day) => ({ day, chats: 0, leads: 0 })); const lookup = new Map(daily.map((item) => [item.day, item]));
-  for (const session of sessions) { const day = session.startedAt && lookup.get(belgradeDay(new Date(session.startedAt))); if (day) day.chats++; }
-  for (const item of submitted) { const day = lookup.get(belgradeDay(item.createdAt)); if (day) day.leads++; }
-  return { chatStarts: sessions.length, engagedSessions: sessions.filter((item) => Number(item.userCount) >= 2).length, leadsSubmitted: submitted.length,
-    conversionRate: sessions.length ? submitted.length / sessions.length * 100 : 0, chatErrors: errors[0].total, notificationFailures: failures[0].total, daily };
+  const rows = await db.select().from(chatDailyMetrics).where(and(gte(chatDailyMetrics.day,bounds.days[0]),lt(chatDailyMetrics.day,shiftDay(bounds.days.at(-1)!,1))));
+  const total = (event: string) => rows.filter((r) => r.event === event).reduce((sum,r) => sum+r.total,0);
+  const daily = bounds.days.map((day) => ({ day, chats: rows.filter((r) => r.day===day && r.event==="chat_start").reduce((n,r)=>n+r.total,0), leads: rows.filter((r)=>r.day===day && r.event==="lead_submit_success").reduce((n,r)=>n+r.total,0) }));
+  const chatStarts=total("chat_start"), leadsSubmitted=total("lead_submit_success");
+  return { chatStarts, engagedSessions: total("engaged_session"), leadsSubmitted, conversionRate: chatStarts ? leadsSubmitted/chatStarts*100 : 0,
+    chatErrors: total("response_error"), notificationFailures: total("notification_failure"), daily, budget: await budgetSummary() };
 }

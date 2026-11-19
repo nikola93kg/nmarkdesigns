@@ -1,5 +1,7 @@
 import "server-only";
 
+import { budgetConfig } from "./budget";
+
 export function chatEnabled() {
   return process.env.CHAT_ENABLED === "true" || (process.env.NODE_ENV === "development" && process.env.CHAT_ENABLED !== "false");
 }
@@ -11,6 +13,7 @@ export function positiveInt(value: string | undefined, fallback: number, max: nu
   return Number.isSafeInteger(parsed) && parsed > 0 ? Math.min(parsed, max) : fallback;
 }
 export function chatConfig() {
+  budgetConfig();
   const origin = process.env.CHAT_ORIGIN;
   const secret = process.env.CHAT_IDENTITY_SECRET;
   const model = process.env.OPENAI_MODEL;

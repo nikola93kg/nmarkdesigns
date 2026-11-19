@@ -55,8 +55,10 @@ test("Auth.js consumes email links once, rejects expired/non-owner tokens and pi
 });
 
 test("owner metrics, private lists, audited edits, notification reconciliation and cascade deletion", async ({ playwright }) => {
+  await db.execute("DELETE FROM chat_daily_metrics");
   const client = await api(playwright); const fixture = await seedConversation(db);
   try {
+    const sync = await client.post("/api/chat/cleanup/",{headers:{Authorization:"Bearer local-admin-cron-secret-at-least-32-characters"}}); expect(sync.status()).toBe(200);
     const metricResponse = await client.get("/api/admin/metrics/?range=7d"); expect(metricResponse.status()).toBe(200);
     const metric = (await metricResponse.json()).data;
     expect(metric).toMatchObject({ chatStarts: 1, engagedSessions: 1, leadsSubmitted: 1, conversionRate: 100, chatErrors: 1, notificationFailures: 1 }); expect(metric.daily).toHaveLength(7);
@@ -96,7 +98,9 @@ test("keyset pagination has no duplicate conversations; login POST requires orig
     for (let i = 0; i < 22; i++) ids.push((await seedConversation(db, false)).id);
     const first = (await (await client.get("/api/admin/conversations/")).json()).data; expect(first.items).toHaveLength(20); expect(first.nextCursor).toBeTruthy();
     const second = (await (await client.get(`/api/admin/conversations/?cursor=${first.nextCursor}`)).json()).data;
-    expect(new Set([...first.items, ...second.items].map((row: { id: string }) => row.id)).size).toBe(22);
+    const listed = [...first.items, ...second.items].map((row: { id: string }) => row.id);
+    expect(new Set(listed).size).toBe(listed.length);
+    for (const id of ids) expect(listed).toContain(id);
     expect((await request.post("/api/auth/signin/nodemailer/", { headers: { Origin: "https://evil.example" }, form: { email: ownerEmail } })).status()).toBe(403);
     const denied = await request.post("/api/auth/signin/nodemailer/", { headers: { Origin: baseURL, "X-Auth-Return-Redirect": "1" }, form: { email: ownerEmail, csrfToken: "forged" } });
     expect(JSON.stringify(await denied.json())).toContain("MissingCSRF");
