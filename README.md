@@ -2,8 +2,25 @@
 
 Modern rebuild of [nmarkdesigns.com](https://nmarkdesigns.com/) using the **Next.js App Router**, **React**, **strict TypeScript**, and **Tailwind CSS v4**. The site is bilingual (Serbian and English), statically generated on the server, progressive-enhancement friendly, and SEO-hardened with canonical URLs, hreflang alternates, JSON-LD, and host-aware crawl policy.
 
+## Preview
+
+**Hero section — desktop, Serbian (`/sr/`, default locale):**
+
+![Hero section on desktop, Serbian locale](assets/readme/hero-desktop-sr.png)
+
+**Hero section — desktop, English (`/en/`):**
+
+![Hero section on desktop, English locale](assets/readme/hero-desktop-en.png)
+
+**Hero section — mobile (390 × 844, stacked layout):**
+
+![Hero section on mobile, English locale](assets/readme/hero-mobile-en.png)
+
+> Note: these are design-faithful mockups rendered from the production hero copy (`content/i18n/`), brand colors (`app/globals.css`), and layered artwork assets (`public/images/hero-assets/`). They use fallback system fonts rather than the DM Sans webfont, so typefaces differ slightly from the live site. To capture pixel-exact screenshots yourself, run `npm run build && npm run start` and photograph `http://localhost:3000/sr/`.
+
 ## Contents
 
+- [Preview](#preview)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Getting Started](#getting-started)
