@@ -21,3 +21,21 @@ test("local notice requires explicit development opt-in and never replaces a pro
     env.CHAT_PRIVACY_URL_SR="https://nmarkdesigns.com/sr/approved-policy/";expect(privacyUrl("sr")).toBe(env.CHAT_PRIVACY_URL_SR);
   }finally{for(const key of keys){if(original[key]===undefined)delete env[key];else env[key]=original[key]}}
 });
+
+test("production widget visibility uses CHAT_ENABLED and never CHAT_PREVIEW", async () => {
+  test.skip(!process.env.NODE_OPTIONS?.includes("--conditions=react-server"), "Requires the React server condition.");
+  const env = process.env as Record<string, string | undefined>;
+  const keys = ["NODE_ENV", "CHAT_ENABLED", "CHAT_PREVIEW"];
+  const original = Object.fromEntries(keys.map(key => [key, env[key]]));
+  try {
+    const { chatEnabled, chatPreviewEnabled } = await import("@/lib/chatbot/config");
+    Object.assign(env, { NODE_ENV: "production", CHAT_ENABLED: "false", CHAT_PREVIEW: "true" });
+    expect(chatEnabled()).toBe(false);
+    expect(chatPreviewEnabled()).toBe(false);
+    env.CHAT_ENABLED = "true";
+    expect(chatEnabled()).toBe(true);
+    expect(chatPreviewEnabled()).toBe(false);
+  } finally {
+    for (const key of keys) { if (original[key] === undefined) delete env[key]; else env[key] = original[key]; }
+  }
+});
