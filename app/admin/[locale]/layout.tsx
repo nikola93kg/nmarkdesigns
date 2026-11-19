@@ -8,5 +8,10 @@ export const metadata: Metadata = { title: "NMark Assistant Admin", robots: { in
 export const dynamic = "force-dynamic";
 export default async function Layout({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
   const { locale } = await params; if (!isLocale(locale)) notFound();
-  return <html lang={locale} className={font.variable}><body className="min-h-dvh bg-surface-muted">{children}</body></html>;
+  return (
+    <html lang={locale} className={font.variable}>
+      {/* Browser extensions can add body attributes before React hydrates. */}
+      <body className="min-h-dvh bg-surface-muted" suppressHydrationWarning>{children}</body>
+    </html>
+  );
 }
