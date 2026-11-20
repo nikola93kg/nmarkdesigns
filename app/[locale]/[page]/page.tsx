@@ -1,3 +1,5 @@
+import { TermsPage } from "@/components/privacy/TermsPage";
+import { termsCopy } from "@/content/terms";
 import { PrivacyPage } from "@/components/privacy/PrivacyPage";
 import { privacyCopy, privacyPublication } from "@/content/privacy";
 import { notFound } from "next/navigation";
@@ -38,6 +40,9 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/[page]">
       ...(!privacyPublication.approved ? { robots: { index: false, follow: false } } : {}),
     };
   }
+  if (route === "terms") {
+    return createPageMetadata({ title: copy.navigation.terms, description: termsCopy[locale].description, locale, route });
+  }
   return createPageMetadata({
     ...copy[route].metadata,
     locale,
@@ -53,6 +58,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/[page]">
 export default async function CorePage({ params }: PageProps<"/[locale]/[page]">) {
   const { locale, route, copy } = await resolvePage(params);
   if (route === "privacy") return <PrivacyPage locale={locale} />;
+  if (route === "terms") return <TermsPage locale={locale} navigation={copy.navigation} />;
   if (route === "services") {
     return (
       <>

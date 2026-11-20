@@ -3,6 +3,8 @@ import { NextResponse, type NextRequest } from "next/server";
 import { publicPages } from "@/lib/public-pages";
 import { legacyRedirects } from "@/lib/legacy-redirects";
 import { isIndexableHost } from "@/lib/seo-config";
+import { defaultLocale, isLocale } from "@/lib/i18n";
+import { prefersMarkdown } from "@/lib/markdown-accept";
 
 const publicPaths = new Set(publicPages.map(({ path }) => path));
 
@@ -123,26 +125,44 @@ export function proxy(request: NextRequest) {
     }
     return response;
   };
+  const homeSegment = normalized.slice(1, -1);
+  const homeLocale = path === "/" ? defaultLocale : isLocale(homeSegment) ? homeSegment : null;
+  const homeResponse = (response: NextResponse) => {
+    if (homeLocale) response.headers.append("Vary", "Accept");
+    return protect(addSecurityHeaders(response));
+  };
+  if (
+    homeLocale &&
+    path === normalized &&
+    (request.method === "GET" || request.method === "HEAD") &&
+    prefersMarkdown(request.headers.get("accept"))
+  ) {
+    return homeResponse(NextResponse.rewrite(new URL(`/${homeLocale}/index.md`, request.url)));
+  }
+
   const legacy = Object.hasOwn(legacyRedirects, normalized) ? legacyRedirects[normalized] : undefined;
   if (legacy) {
     const destination = new URL(legacy, request.url);
     destination.search = request.nextUrl.search;
-    return protect(addSecurityHeaders(NextResponse.redirect(destination, 308)));
+    return homeResponse(NextResponse.redirect(destination, 308));
   }
   if (publicPaths.has(normalized)) {
     if (path !== normalized) {
       // NextURL preserves the incoming slash policy when serializing redirects.
       const destination = new URL(request.url);
       destination.pathname = normalized;
-      return protect(addSecurityHeaders(NextResponse.redirect(destination, 308)));
+      return homeResponse(NextResponse.redirect(destination, 308));
     }
-    return protect(addSecurityHeaders(NextResponse.next()));
+    return homeResponse(NextResponse.next());
   }
   if (
     path === "/robots.txt" ||
     path === "/sitemap.xml" ||
     path === "/llms.txt" ||
     path === "/llms-full.txt" ||
+    /^\/(?:sr|en)\/index\.md$/.test(path) ||
+    path === "/mcp" ||
+    path === "/.well-known/mcp/server-card.json" ||
     /^\/(?:about|blog|images|projects|logo)\//.test(path) ||
     /^\/(?:apple-icon\.png|icon\.png|favicon\.ico|manifest\.webmanifest|web-app-manifest-\d+x\d+\.png)$/.test(path)
   ) {

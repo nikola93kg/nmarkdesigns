@@ -19,6 +19,7 @@ const pairs = [
   ["/sr/blog/", "/en/blog/"],
   ["/sr/usluge/", "/en/services/"], ["/sr/o-nama/", "/en/about/"], ["/sr/kontakt/", "/en/contact/"],
   ["/sr/cenovnik/", "/en/pricing/"],
+  ["/sr/uslovi-koriscenja/", "/en/terms-of-use/"],
   ...blogSlugs.map((slug) => [`/sr/blog/${slug}/`, `/en/blog/${slug}/`]),
   ...slugs.map((slug) => [`/sr/portfolio/${slug}/`, `/en/portfolio/${slug}/`]),
   ...servicePairs,
@@ -51,7 +52,7 @@ for (const pair of pairs) {
       await expect(page.locator('meta[name="twitter:description"]')).toHaveAttribute("content", description!);
       const image = await page.locator('meta[property="og:image"]').evaluateAll((elements) => elements[0]?.getAttribute("content") ?? null);
       const isServicesPage = path.startsWith("/sr/usluge/") || path.startsWith("/en/services/");
-      if (isServicesPage) {
+      if (isServicesPage || path.endsWith("/terms-of-use/") || path.endsWith("/uslovi-koriscenja/")) {
         expect(image).toBeNull();
         await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary");
         await expect(page.locator('meta[name="twitter:image"]')).toHaveCount(0);
@@ -95,6 +96,7 @@ for (const pair of pairs) {
       const isServiceDetail = serviceKeys.some((key) => path.endsWith(`/${serviceDefinitions[key].slugs.sr}/`) || path.endsWith(`/${serviceDefinitions[key].slugs.en}/`));
       const expectedCount = path === "/sr/" || path === "/en/" || path === "/sr/o-nama/" || path === "/en/about/" || path === "/sr/usluge/" || path === "/en/services/" || path === "/sr/cenovnik/" || path === "/en/pricing/" || Boolean(project) || Boolean(blogPost) || isServiceDetail ? 1 : 0;
       expect(schema).toHaveLength(expectedCount);
+      const isHome = path === "/sr/" || path === "/en/";
       for (const source of schema) {
         const value: unknown = JSON.parse(source);
         expect(value).toMatchObject({ "@context": "https://schema.org" });
@@ -109,6 +111,8 @@ for (const pair of pairs) {
             { "@type": "BreadcrumbList" },
             { "@type": "FAQPage" },
           ] });
+        } else if (isHome) {
+          expect(source).not.toMatch(/"(streetAddress|postalCode|openingHours|legalName|aggregateRating|review|SearchAction|Product|Article)"/);
         } else {
           expect(source).not.toMatch(/"(address|openingHours|priceRange|legalName|numberOfEmployees|foundingDate|aggregateRating|review|areaServed|SearchAction|FAQPage|Offer|Product|Article)"/);
         }
@@ -116,9 +120,14 @@ for (const pair of pairs) {
           { position: 1, item: `${site.url}/${index === 0 ? "sr" : "en"}/portfolio/` },
           { position: 2, name: project.title, item: site.url + path },
         ] });
-        if (path === "/sr/" || path === "/en/") expect(value).toMatchObject({ "@graph": [
-          { "@type": "Organization", name: "NMark Designs", email: "info@nmarkdesigns.com", telephone: "+381643005654", sameAs: [site.instagramUrl] },
+        if (isHome) expect(value).toMatchObject({ "@graph": [
+          {
+            "@type": "Organization", name: "NMark Designs", email: "info@nmarkdesigns.com",
+            telephone: "+381643005654", sameAs: [site.instagramUrl],
+            address: { "@type": "PostalAddress", addressLocality: "Lazarevac", addressRegion: "Beograd", addressCountry: "RS" },
+          },
           { "@type": "WebSite", name: "NMark Designs" },
+          { "@type": "FAQPage", inLanguage: index === 0 ? "sr" : "en" },
         ] });
         if (path === "/sr/o-nama/" || path === "/en/about/") expect(value).toMatchObject({ "@type": "Person", name: "Nikola Marković", jobTitle: "Frontend developer" });
         if (path === "/sr/usluge/" || path === "/en/services/") {

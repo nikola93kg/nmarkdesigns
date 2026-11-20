@@ -13,7 +13,7 @@ export type JsonValue = string | number | boolean | null | readonly JsonValue[] 
 const organizationId = `${site.url}/#organization`;
 const founderId = `${site.url}/#nikola-markovic`;
 
-export function siteSchema(): JsonValue {
+export function siteSchema(locale: Locale, copy: Dictionary): JsonValue {
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -23,6 +23,12 @@ export function siteSchema(): JsonValue {
         description: "Boutique studio za izradu modernih, brzih web sajtova, e-commerce prodavnica i Next.js aplikacija.",
         logo: { "@type": "ImageObject", url: canonicalUrl("/logo/nmark-seal.png"), width: 1000, height: 1000 },
         email: site.email, telephone: site.phone.href.slice(4),
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: site.contactLocation.locality,
+          addressRegion: site.contactLocation.region,
+          addressCountry: site.contactLocation.country,
+        },
         sameAs: [site.instagramUrl],
         founder: { "@type": "Person", "@id": founderId, name: "Nikola Marković" },
         knowsAbout: [
@@ -44,7 +50,24 @@ export function siteSchema(): JsonValue {
         name: site.name, alternateName: "NMarkDesigns", url: canonicalUrl("/"),
         inLanguage: ["sr", "en"], publisher: { "@id": organizationId },
       },
+      homeFaqSchema(locale, copy),
     ],
+  };
+}
+
+function homeFaqSchema(locale: Locale, copy: Dictionary): JsonValue {
+  return {
+    "@type": "FAQPage",
+    "@id": `${canonicalUrl(localizedPath("home", locale))}#faq`,
+    inLanguage: locale,
+    mainEntity: copy.home.faq.items.map(({ question, paragraphs, list }) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: [...paragraphs, ...(list ?? [])].join("\n\n"),
+      },
+    })),
   };
 }
 

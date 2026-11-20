@@ -10,7 +10,7 @@ export function FAQ({ locale, copy }: { locale: Locale; copy: Dictionary }) {
   const contact = navigationItem("contact", locale, copy.actions.contact);
 
   return (
-    <section aria-labelledby="faq-title" className="py-section lg:py-24">
+    <section id="faq" aria-labelledby="faq-title" className="py-section lg:py-24">
       <Container className="grid gap-8 text-center lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16 lg:text-left">
         <div>
           <p className="mb-4 text-small font-medium text-brand">{content.eyebrow}</p>
