@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, type FormEvent } from "react";
+import { ArrowRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { adminCopy } from "@/content/chatbot/admin-copy";
 import type { Locale } from "@/lib/i18n";
@@ -23,12 +24,20 @@ export function LoginForm({ locale, initialSent, initialError }: { locale: Local
     try { await action("signin/nodemailer", { email, callbackUrl: `/admin/${locale}/` }); setState("sent"); }
     catch { setState("error"); }
   }
-  return <form onSubmit={(event) => void submit(event)} className="mt-6 space-y-4">
-    <label className="block text-small font-medium text-brand" htmlFor="admin-email">{copy.email}</label>
-    <input id="admin-email" name="email" type="email" required autoComplete="email" maxLength={254} className="min-h-12 w-full rounded-control border border-border px-3 py-2" />
-    <Button type="submit" disabled={state === "busy"} className="w-full">{state === "busy" ? copy.loading : copy.sendLink}</Button>
-    {state === "sent" && <p role="status" className="text-small">{copy.sent}</p>}
-    {state === "error" && <p role="alert" className="text-small">{copy.error}</p>}
+  return <form onSubmit={(event) => void submit(event)} className="mt-6 space-y-5">
+    <div className="space-y-2">
+      <label className="block text-small font-semibold text-brand" htmlFor="admin-email">{copy.email}</label>
+      <div className="relative">
+        <Mail aria-hidden="true" className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-muted" />
+        <input id="admin-email" name="email" type="email" required autoComplete="email" maxLength={254} placeholder={copy.emailPlaceholder} className="min-h-12 w-full rounded-control border border-border bg-surface-muted py-2.5 pr-3.5 pl-10 text-body text-brand placeholder:text-muted/75 transition-colors focus:border-focus focus:bg-surface" />
+      </div>
+    </div>
+    <Button type="submit" disabled={state === "busy"} className="w-full">
+      <span>{state === "busy" ? copy.loading : copy.sendLink}</span>
+      <ArrowRight aria-hidden="true" className="size-4 shrink-0" />
+    </Button>
+    {state === "sent" && <p role="status" className="rounded-control border border-focus/25 bg-accent-soft px-4 py-3 text-small font-medium text-brand">{copy.sent}</p>}
+    {state === "error" && <p role="alert" className="rounded-control border border-brand/25 bg-surface-muted px-4 py-3 text-small font-medium text-brand">{copy.error}</p>}
   </form>;
 }
 export function SignOut({ locale }: { locale: Locale }) {

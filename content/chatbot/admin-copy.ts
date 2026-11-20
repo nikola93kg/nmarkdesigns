@@ -1,6 +1,6 @@
 import type { Localized } from "@/lib/i18n";
 interface AdminCopy {
-  title: string; overview: string; conversations: string; leads: string; login: string; signOut: string;
+  title: string; overview: string; conversations: string; leads: string; login: string; loginSubtitle: string; emailPlaceholder: string; backToSite: string; signOut: string;
   email: string; sendLink: string; sent: string; unavailable: string; error: string; loading: string;
   empty: string; period: string; days7: string; days30: string; trend: string; date: string; language: string;
   messages: string; inquiry: string; lastActivity: string; open: string; status: string; delivery: string;
@@ -16,8 +16,8 @@ interface AdminCopy {
 }
 export const adminCopy: Localized<AdminCopy> = {
   sr: {
-    title: "NMark Assistant — administracija", overview: "Pregled", conversations: "Razgovori", leads: "Upiti", login: "Admin prijava", signOut: "Odjavi se",
-    email: "Email adresa", sendLink: "Pošalji link za prijavu", sent: "Proverite inbox. Ako je adresa odobrena, link za prijavu važi 10 minuta.", unavailable: "Admin pristup trenutno nije podešen. Proverite konfiguraciju servera.", error: "Prijava nije uspela ili je link istekao. Pokušajte ponovo.", loading: "Obrada…",
+    title: "NMark Assistant — administracija", overview: "Pregled", conversations: "Razgovori", leads: "Upiti", login: "Admin prijava", loginSubtitle: "Unesite email adresu za pristup administraciji.", emailPlaceholder: "ime@nmarkdesigns.com", backToSite: "Nazad na sajt", signOut: "Odjavi se",
+    email: "Email adresa", sendLink: "Pošalji link za prijavu", sent: "Proverite inbox. Ako je adresa odobrena, link za prijavu važi 10 minuta.", unavailable: "Admin pristup trenutno nije podešen. Proverite konfiguraciju servera.", error: "Neuspešna prijava.", loading: "Obrada…",
     empty: "Nema podataka za izabrane filtere.", period: "Period", days7: "Poslednjih 7 dana", days30: "Poslednjih 30 dana", trend: "Dnevni pregled", date: "Datum", language: "Jezik", messages: "Poruke", inquiry: "Upit", lastActivity: "Poslednja aktivnost", open: "Otvori", status: "Status", delivery: "Email obaveštenje",
     filter: "Primeni filtere", reset: "Ukloni filtere", all: "Svi", withLead: "Sa upitom", withoutLead: "Bez upita", from: "Od datuma", to: "Do datuma", next: "Sledeća strana", first: "Prva strana", back: "Nazad na listu", name: "Ime / email", service: "Usluga", budget: "Budžet", timeframe: "Rok",
     details: "Detalji upita", transcript: "Transkript", consent: "Evidencija saglasnosti", truncated: "Prikazano je prvih 500 poruka.", note: "Interna beleška", save: "Sačuvaj izmene", saved: "Izmene su sačuvane.",
@@ -30,8 +30,8 @@ export const adminCopy: Localized<AdminCopy> = {
     errors: { INVALID_INPUT: "Proverite podatke i potvrdu radnje.", BUSY: "Obrada je u toku. Sačekajte pa pokušajte ponovo.", UNAUTHORIZED: "Prijava je istekla. Prijavite se ponovo.", NOT_FOUND: "Zapis nije pronađen.", FORBIDDEN: "Radnja nije dozvoljena sa ovog porekla.", UNAVAILABLE: "Podaci trenutno nisu dostupni. Pokušajte ponovo." },
   },
   en: {
-    title: "NMark Assistant — administration", overview: "Overview", conversations: "Conversations", leads: "Inquiries", login: "Admin sign in", signOut: "Sign out",
-    email: "Email address", sendLink: "Send sign-in link", sent: "Check your inbox. If the address is approved, the sign-in link expires in 10 minutes.", unavailable: "Admin access is not configured yet. Check the server configuration.", error: "Sign-in failed or the link expired. Please try again.", loading: "Processing…",
+    title: "NMark Assistant — administration", overview: "Overview", conversations: "Conversations", leads: "Inquiries", login: "Admin sign in", loginSubtitle: "Enter your email address to access administration.", emailPlaceholder: "name@nmarkdesigns.com", backToSite: "Back to website", signOut: "Sign out",
+    email: "Email address", sendLink: "Send sign-in link", sent: "Check your inbox. If the address is approved, the sign-in link expires in 10 minutes.", unavailable: "Admin access is not configured yet. Check the server configuration.", error: "Sign-in failed.", loading: "Processing…",
     empty: "No data matches these filters.", period: "Period", days7: "Last 7 days", days30: "Last 30 days", trend: "Daily overview", date: "Date", language: "Language", messages: "Messages", inquiry: "Inquiry", lastActivity: "Last activity", open: "Open", status: "Status", delivery: "Email notification",
     filter: "Apply filters", reset: "Clear filters", all: "All", withLead: "With inquiry", withoutLead: "Without inquiry", from: "From date", to: "To date", next: "Next page", first: "First page", back: "Back to list", name: "Name / email", service: "Service", budget: "Budget", timeframe: "Timeframe",
     details: "Inquiry details", transcript: "Transcript", consent: "Consent record", truncated: "Showing the first 500 messages.", note: "Internal note", save: "Save changes", saved: "Changes saved.",
