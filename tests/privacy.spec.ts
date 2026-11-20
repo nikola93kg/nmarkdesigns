@@ -7,7 +7,7 @@ import { localizedPath } from "@/lib/routes";
 for (const locale of ["sr", "en"] as const) {
   const copy = privacyCopy[locale];
   for (const width of [375, 1440]) {
-    test(`${locale} privacy draft at ${width}px: readable, accessible and excluded from indexing`, async ({ page, request }, testInfo) => {
+    test(`${locale} privacy policy at ${width}px: readable, accessible and indexable only on production`, async ({ page, request }, testInfo) => {
       // Includes axe, full-page capture, consent interaction and locale navigation.
       test.slow();
       await page.setViewportSize({ width, height: 900 });
@@ -16,16 +16,16 @@ for (const locale of ["sr", "en"] as const) {
       expect(response?.status()).toBe(200);
       expect(response?.headers()["x-robots-tag"]).toBe("noindex, nofollow");
       const productionHost = await request.get(path, { headers: { host: "nmarkdesigns.com" } });
-      expect(productionHost.headers()["x-robots-tag"]).toBe("noindex, nofollow");
+      expect(productionHost.headers()["x-robots-tag"]).toBeUndefined();
       await expect(page.locator("h1")).toHaveText(copy.title);
       await expect(page.locator("h1")).toHaveCount(1);
-      await expect(page.locator("[data-privacy-draft]")).toHaveText(copy.draft);
-      await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow");
+      await expect(page.locator("[data-privacy-draft]")).toHaveCount(0);
+      await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "index, follow");
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://nmarkdesigns.com${path}`);
       const target = locale === "sr" ? "en" : "sr";
       await expect(page.locator(`link[hreflang="${target}"]`)).toHaveAttribute("href", `https://nmarkdesigns.com${localizedPath("privacy", target)}`);
       const sitemap = await (await request.get("/sitemap.xml")).text();
-      expect(sitemap).not.toContain(path);
+      expect(sitemap).toContain(path);
       for (const section of copy.sections) {
         await expect(page.getByRole("navigation", { name: copy.contents }).getByRole("link", { name: section.title })).toHaveAttribute("href", `#${section.id}`);
         await expect(page.locator(`#${section.id}`)).toHaveCount(1);

@@ -17,7 +17,7 @@ test("local notice requires explicit development opt-in and never replaces a pro
     for(const origin of ["http://nmarkdesigns.com","https://nmarkdesigns.com","http://localhost.evil.example:3000","http://user:password@localhost:3000","http://localhost:3000/other"]){env.CHAT_ORIGIN=origin;expect(localTestOrigin()).toBeNull()}
     env.CHAT_ORIGIN="http://localhost:3000";env.NODE_ENV="production";
     expect(localTestOrigin()).toBeNull();expect(privacyUrl("sr")).toBeNull();
-    for (const [key,url] of [["CHAT_PRIVACY_URL_SR","https://nmarkdesigns.com/sr/politika-privatnosti/"],["CHAT_PRIVACY_URL_EN","https://nmarkdesigns.com/en/privacy-policy/"]]) { env[key]=url; expect(privacyUrl(key.endsWith("SR")?"sr":"en")).toBeNull(); }
+    for (const [key,url] of [["CHAT_PRIVACY_URL_SR","https://nmarkdesigns.com/sr/politika-privatnosti/"],["CHAT_PRIVACY_URL_EN","https://nmarkdesigns.com/en/privacy-policy/"]]) { env[key]=url; expect(privacyUrl(key.endsWith("SR")?"sr":"en")).toBe(url); }
     env.CHAT_PRIVACY_URL_SR="https://nmarkdesigns.com/sr/approved-policy/";expect(privacyUrl("sr")).toBe(env.CHAT_PRIVACY_URL_SR);
   }finally{for(const key of keys){if(original[key]===undefined)delete env[key];else env[key]=original[key]}}
 });

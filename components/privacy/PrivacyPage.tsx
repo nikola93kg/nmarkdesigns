@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { CookieSettingsButton } from "@/components/layout/CookieSettingsButton";
-import { privacyCopy, privacyPublication, privacyReferences } from "@/content/privacy";
+import { privacyCopy, privacyReferences } from "@/content/privacy";
 import { site } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
 
@@ -12,7 +12,6 @@ export function PrivacyPage({ locale }: { locale: Locale }) {
         <h1 className="text-display font-bold text-brand">{copy.title}</h1>
         <p className="mt-5 text-body text-muted">{copy.description}</p>
         <p className="mt-4 text-small text-muted">{copy.updated}</p>
-        {!privacyPublication.approved && <p className="mt-6 rounded-control border border-border bg-surface-subtle p-5 text-small leading-relaxed text-ink" data-privacy-draft>{copy.draft}</p>}
       </header>
       <div className="mt-12 grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,2.5fr)] lg:gap-20">
         <nav aria-label={copy.contents} className="min-w-0">

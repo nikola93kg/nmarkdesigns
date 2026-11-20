@@ -12,9 +12,9 @@ The owner approved a shorter SR/EN entry flow: no name field, immediate composer
 - Initial predefined-question metrics are recorded only after session creation and remain gated by analytics consent. The regular contact/inquiry form still collects contact details separately.
 - Local preview uses the same immediate composer, keeps its demo disclosure and sends no backend/provider requests.
 
-## Draft or missing policy
+## Missing or unapproved policy
 
-The existing fail-closed policy checks remain intact. The composer is visible and accepts a local draft, but send and predefined-question buttons are disabled, and Enter is guarded. The Privacy link leads to the relevant draft page for inspection. No session restoration is attempted without a valid configured notice URL. This is not production AI enablement, approval of the draft, or permission to merge/deploy main.
+The existing fail-closed policy checks remain intact. Owner publication approval was recorded on 2026-11-20; the approved SR/EN routes are accepted, while missing or invalid configured URLs still block submission. The regression command is now `CHAT_POLICY_MISSING_TEST=true npm run test:chatbot -- first-message.spec.ts`. When URLs are missing, the composer accepts a local draft, but send and predefined-question buttons are disabled, Enter is guarded, and no session restoration is attempted. The Privacy link leads to the relevant policy page. Production configuration, main merge and deployment remain separate operations.
 
 ## Review
 

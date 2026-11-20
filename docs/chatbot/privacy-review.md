@@ -1,6 +1,20 @@
 # Privacy notice review — 2026-11-19
 
-## Prepared routes and current status
+## Owner publication decision — 2026-11-20
+
+This update supersedes the draft status described in the historical review below. The owner approved the remaining content and requested removal of draft labels and business-registration commentary. They confirmed Nikola Markovic as the person operating the site, Lazarevac/Beograd as the contact location, and the existing info@nmarkdesigns.com mailbox for privacy requests (the abbreviated spelling in the reply was interpreted using the established public mailbox).
+
+SR/EN now name the controller and contact location, remove the draft banner and registration commentary, and use a November 20 update date. No street address, company registration, signed provider agreement or active cleanup schedule is invented. Publication status is approved, allowing the existing SR/EN URLs through the chat resolver and including the pages in the sitemap; preview-host noindex protection remains. Unverified retention outside the application is still disclosed, and an active cleanup schedule is not claimed. These operational details still need owner follow-through; approval of the copy is not an assertion of legal or operational compliance.
+
+The change is prepared on feature/chatbot. Main merge, production deployment and runtime environment edits require separate authorization. After deployment, configure the two policy URLs below if not already present, then verify the real session/provider path.
+
+Validation for this update: production build (including TypeScript) and ESLint passed; two configuration tests, six SR/EN privacy-page browser checks at 375/1440px (including accessibility), the missing-policy submission check and the complete sitemap/metadata/preview-robots check passed. Reviewed the generated privacy-page screenshot. No real AI requests, emails, runtime configuration edits or production deployment were performed.
+
+## Owner approval — 2026-11-20
+
+The owner approved the bilingual text, requested removal of the public draft banner and registration commentary, and confirmed Nikola Markovic, Lazarevac/Beograd, and the existing info@nmarkdesigns.com mailbox for privacy requests. The location is published as a contact location, not an invented street address. Publication status is now approved, which makes the configured SR/EN policy URLs eligible for chatbot use and includes the routes in the sitemap. Preview-host indexing safeguards remain active. No production environment, cleanup schedule or provider account setting was changed. The operational review items below remain a record of what must be checked; text approval is not evidence of provider contracts, automated retention enforcement or a legal-compliance certification.
+
+## Original draft review — historical status
 
 - SR: `/sr/politika-privatnosti/`
 - EN: `/en/privacy-policy/`

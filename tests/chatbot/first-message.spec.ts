@@ -5,7 +5,7 @@ const reply = [{type:"delta",text:"Fixture reply"},{type:"done",messageId:"fixtu
 
 for (const locale of ["sr","en"] as const) {
   test(`${locale} first send records consent once, then sends the message`, async ({ page }) => {
-    test.skip(process.env.CHAT_POLICY_DRAFT_TEST === "true");
+    test.skip(process.env.CHAT_POLICY_MISSING_TEST === "true");
     const copy=chatCopy[locale]; let sessions=0; const calls:string[]=[];
     let allowSession=()=>{}; const gate=new Promise<void>(resolve=>{allowSession=resolve});
     await page.route("**/api/chat/session/",async route=>{
@@ -36,7 +36,7 @@ for (const locale of ["sr","en"] as const) {
 }
 
 test("failed consent session retains the draft and retry does not duplicate the first message",async({page})=>{
-  test.skip(process.env.CHAT_POLICY_DRAFT_TEST === "true");
+  test.skip(process.env.CHAT_POLICY_MISSING_TEST === "true");
   const copy=chatCopy.sr;let sessions=0,messages=0;
   await page.route("**/api/chat/session/",async route=>{
     if(route.request().method()==="GET")return route.fulfill({status:401,json:{}});
@@ -52,13 +52,13 @@ test("failed consent session retains the draft and retry does not duplicate the 
   expect(sessions).toBe(2);expect(messages).toBe(1);await expect(panel.locator("article")).toHaveCount(2);
 });
 
-test("draft policy keeps message submission blocked without creating a session",async({page},testInfo)=>{
-  test.skip(process.env.CHAT_POLICY_DRAFT_TEST !== "true");
+test("missing policy keeps message submission blocked without creating a session",async({page},testInfo)=>{
+  test.skip(process.env.CHAT_POLICY_MISSING_TEST !== "true");
   const calls:string[]=[];page.on("request",request=>{if(request.url().includes("/api/chat"))calls.push(request.method())});
   await page.setViewportSize({width:375,height:850});await page.goto("/sr/");await page.locator('[data-consent-banner] button').nth(1).click();await page.getByRole("button",{name:chatCopy.sr.open}).click();
   const panel=page.getByRole("dialog",{name:"NMark Assistant"});await expect(panel.getByLabel(chatCopy.sr.input)).toBeEnabled();
   await panel.getByLabel(chatCopy.sr.input).fill("Local draft only");await expect(panel.getByRole("button",{name:chatCopy.sr.send,exact:true})).toBeDisabled();
   await panel.getByLabel(chatCopy.sr.input).press("Enter");await expect(panel.getByLabel(chatCopy.sr.input)).toHaveValue("Local draft only");
   await expect(panel.getByRole("link",{name:chatCopy.sr.privacy,exact:true})).toHaveAttribute("href","/sr/politika-privatnosti/");
-  expect(calls).toEqual([]);await page.screenshot({path:testInfo.outputPath("draft-policy.png")});
+  expect(calls).toEqual([]);await page.screenshot({path:testInfo.outputPath("missing-policy.png")});
 });
