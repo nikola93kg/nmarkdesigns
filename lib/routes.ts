@@ -3,7 +3,7 @@ import { site, type NavigationItem } from "@/content/site";
 import { serviceDefinitions } from "@/content/services";
 import { defaultLocale, isLocale, type Locale, type Localized } from "@/lib/i18n";
 
-export type RouteKey = "home" | "portfolio" | "blog" | "services" | "about" | "contact" | "pricing" | "privacy";
+export type RouteKey = "home" | "portfolio" | "blog" | "services" | "about" | "contact" | "pricing" | "privacy" | "terms";
 
 interface RouteDefinition {
   paths: Localized<string>;
@@ -34,6 +34,7 @@ export const routes: Record<RouteKey, RouteDefinition> = {
     implemented: true,
   },
   privacy: { paths: privacySegments, implemented: true },
+  terms: { paths: { sr: "uslovi-koriscenja", en: "terms-of-use" }, implemented: true },
   pricing: {
     paths: { sr: "cenovnik", en: "pricing" },
     implemented: true,
@@ -44,7 +45,7 @@ export const navigationOrder: readonly RouteKey[] = [
   "home", "portfolio", "blog", "services", "about", "contact",
 ];
 
-export const corePageRoutes = ["services", "about", "contact", "pricing", "privacy"] as const;
+export const corePageRoutes = ["services", "about", "contact", "pricing", "privacy", "terms"] as const;
 
 export function corePageRoute(segment: string, locale: Locale) {
   return corePageRoutes.find((route) => routes[route].paths[locale] === segment);

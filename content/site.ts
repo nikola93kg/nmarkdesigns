@@ -6,6 +6,7 @@ export interface SiteContent {
     label: string;
     href: `tel:${string}`;
   };
+  contactLocation: { locality: string; region: string; country: string };
   instagramUrl: `https://${string}`;
   whatsappUrl: `https://${string}`;
   hostingerPartnerUrl: string;
@@ -26,6 +27,7 @@ export const site = {
     label: "+381 64 300 5654",
     href: "tel:+381643005654",
   },
+  contactLocation: { locality: "Lazarevac", region: "Beograd", country: "RS" },
   instagramUrl: "https://www.instagram.com/nmarkdesigns/",
   whatsappUrl: "https://wa.me/381643005654",
   hostingerPartnerUrl: "https://www.hostinger.com?REFERRALCODE=JIPMARKOVUSK",

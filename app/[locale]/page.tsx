@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { CTA } from "@/components/home/CTA";
 import { FAQ } from "@/components/home/FAQ";
 import { FeaturedProjects } from "@/components/home/FeaturedProjects";
+import { WebMcpTools } from "@/components/home/WebMcpTools";
+import { discoverPages } from "@/lib/agent-discovery";
 import { Hero } from "@/components/home/Hero";
 import { Services } from "@/components/home/Services";
 import { getDictionary } from "@/content/i18n";
@@ -33,9 +35,12 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   if (!isLocale(locale)) notFound();
   const copy = await getDictionary(locale);
 
+  const [sr, en] = await Promise.all([discoverPages("sr"), discoverPages("en")]);
+
   return (
     <>
-      <JsonLd data={siteSchema()} />
+      <JsonLd data={siteSchema(locale, copy)} />
+      <WebMcpTools locale={locale} pages={{ sr, en }} />
       <Hero locale={locale} copy={copy} />
       <FeaturedProjects locale={locale} copy={copy} />
       <Services locale={locale} copy={copy.home.services} />

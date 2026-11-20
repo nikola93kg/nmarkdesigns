@@ -1,5 +1,5 @@
 import type { Dictionary } from "./types";
-import { getCarePlanStartingPrice, getWebsiteStartingPrice, getAdditionalStartingPrice } from "@/content/pricing";
+import { getCarePlanStartingPrice, getWebsiteStartingPrice, getAdditionalStartingPrice, formatWebsiteStartingPrice } from "@/content/pricing";
 
 const landingStartingPrice = getWebsiteStartingPrice("landing-page");
 
@@ -15,6 +15,7 @@ const aiStartingPrice = getAdditionalStartingPrice("ai-chatbot","sr");
 const sr = {
   navigation: {
     privacy: "Politika privatnosti",
+    terms: "Uslovi korišćenja",
     home: "Početna", portfolio: "Portfolio", services: "Usluge",
     blog: "Blog", about: "O meni", contact: "Kontakt", pricing: "Cenovnik",
   },
@@ -873,7 +874,7 @@ const sr = {
         {
           id: "pricing",
           question: "Koliko košta izrada web sajta?",
-          paragraphs: ["Cena zavisi od tipa projekta i potrebnih mogućnosti. Početne cene su 300 € za landing stranice, 550 € za poslovne sajtove, 900 € za napredne sajtove i 1.200 € za web prodavnice. Za custom web aplikacije i specifične zahteve radim procenu na osnovu specifikacije."],
+          paragraphs: [`Cena zavisi od tipa projekta i potrebnih mogućnosti. Početne cene su ${formatWebsiteStartingPrice("landing-page", "sr")} za landing stranice, ${formatWebsiteStartingPrice("business-website", "sr")} za poslovne sajtove, ${formatWebsiteStartingPrice("advanced-website", "sr")} za napredne sajtove i ${formatWebsiteStartingPrice("ecommerce", "sr")} za web prodavnice. Za custom web aplikacije i specifične zahteve radim procenu na osnovu specifikacije.`],
         },
         {
           id: "services",

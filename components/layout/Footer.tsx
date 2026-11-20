@@ -27,7 +27,7 @@ export function Footer({
   copy: Dictionary;
 }) {
   const footerNavigation = (
-      ["home", "services", "portfolio", "pricing", "contact"] as const
+      ["home", "services", "portfolio", "pricing", "about", "contact"] as const
   ).map((route) =>
       navigationItem(
           route,
@@ -185,6 +185,7 @@ export function Footer({
             </p>
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1">
               <Link href={localizedPath("privacy", locale)} className="inline-flex min-h-11 items-center py-2 text-small text-on-brand-muted underline underline-offset-4 hover:text-on-brand focus-visible:outline-accent">{copy.navigation.privacy}</Link>
+              <Link href={localizedPath("terms", locale)} className="inline-flex min-h-11 items-center py-2 text-small text-on-brand-muted underline underline-offset-4 hover:text-on-brand focus-visible:outline-accent">{copy.navigation.terms}</Link>
               <CookieSettingsButton locale={locale} />
             </div>
           </Container>
